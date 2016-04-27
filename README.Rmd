@@ -1,0 +1,66 @@
+---
+title: "README"
+output:
+  html_document:
+    keep_md: yes
+---
+
+
+# diffr 
+
+A package for using diffr on more than two files
+
+
+**Description**
+
+TBD
+
+
+
+**Status**
+
+*unstable* - in wild developement with furious restructuring and big big poking
+
+[![Travis-CI Build Status](https://travis-ci.org/petermeissner/diffrprojects.svg?branch=master)](https://travis-ci.org/petermeissner/diffrprojects)
+
+
+**Citation**
+
+
+```{r, results='asis'}
+citation("diffrprojects")
+```
+
+<code style="white-space:normal;">
+```{r, results='asis'}
+toBibtex(citation("diffrprojects"))
+```
+</code>
+
+
+
+**Installation**
+
+```{r, eval=FALSE}
+    devtools::install_github("petermeissner/diffrprojects")
+    require(diffrprojects)
+```
+
+
+    
+
+**Example Usage**
+
+TBD
+   
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

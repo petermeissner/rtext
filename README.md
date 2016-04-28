@@ -14,17 +14,13 @@ TBD
 
 **Status**
 
-*unstable* - in wild developement with furious restructuring and big big poking
+*unstable* - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing
 
+[![Travis-CI Build Status](https://travis-ci.org/petermeissner/diffrprojects.svg?branch=master)](https://travis-ci.org/petermeissner/diffrprojects)
 
 
 **Citation**
 
-
-
-```r
-citation("diffrprojects")
-```
 
 
 Meißner P (2016). _diffrprojects: Using diffr for more than two
@@ -37,12 +33,9 @@ Program." _Legislative Studies Quarterly_, *41*(1), pp. 61-88.
 ISSN 1939-9162, <URL: http://doi.org/10.1111/lsq.12106>, <URL:
 http://dx.doi.org/10.1111/lsq.12106>.
 
+**BibTex for citing**
+
 <code style="white-space:normal;">
-
-```r
-toBibtex(citation("diffrprojects"))
-```
-
 @Manual{,
   title = {diffrprojects: Using diffr for more than two texts},
   author = {Peter Meißner},
@@ -81,7 +74,7 @@ toBibtex(citation("diffrprojects"))
 
 **Example Usage**
 
-TBD
+TBD - see status
    
 
     

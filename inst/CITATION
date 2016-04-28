@@ -8,7 +8,8 @@ c(
     author = c(person("Peter", "Mei\u00dfner")),
     year = year,
     note = note,
-    url = "https://github.com/petermeissner/diffrprojects"
+    url = "https://github.com/petermeissner/diffrprojects",
+    key = "Meissner2016"
   ),
   bibentry(
     bibtype = "Article",
@@ -27,7 +28,8 @@ c(
     doi = "10.1111/lsq.12106",
     pages = "61--88",
     year = "2016",
-    abstract = "We outline a comprehensive research program on institutional reforms in European parliaments. Original data show that parliamentary rules in Western European parliaments have been changed frequently and massively during the period from 1945 to 2010 suggesting that actors use institutional reforms as a distinct strategy to pursue their substantive goals. We discuss how institutional instability affects existing theoretical and empirical arguments about institutional effects. Furthermore, we present four ideal-typical approaches to analyzing rule changes, present new software tools for identifying and coding changes in large text corpora, and demonstrate their usefulness for valid measurement of the overall change between subsequent text versions."
+    abstract = "We outline a comprehensive research program on institutional reforms in European parliaments. Original data show that parliamentary rules in Western European parliaments have been changed frequently and massively during the period from 1945 to 2010 suggesting that actors use institutional reforms as a distinct strategy to pursue their substantive goals. We discuss how institutional instability affects existing theoretical and empirical arguments about institutional effects. Furthermore, we present four ideal-typical approaches to analyzing rule changes, present new software tools for identifying and coding changes in large text corpora, and demonstrate their usefulness for valid measurement of the overall change between subsequent text versions.",
+    key = "Sieberer2016"
   )
 )
 

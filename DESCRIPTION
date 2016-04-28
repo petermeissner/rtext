@@ -1,7 +1,7 @@
 Package: diffrprojects
 Title: Using diffr for more than two files
 Date: 2016-04-26
-Version: 0.0.1
+Version: 0.1.0.90000
 Meintainer: Peter Meissner (retep.meissner@gmail.com)
 Authors@R: c(
   person(
@@ -29,10 +29,12 @@ License: MIT + file LICENSE
 LazyData: true
 Imports:
     stringr(>= 0.6.2),
-    diffr(>= 0.1.3)
+    R6(>= 2.1.2)
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 BugReports: https://github.com/petermeissner/diffrprojects/issues
 URL: https://github.com/petermeissner/diffrprojects
 RoxygenNote: 5.0.1
-
+VignetteBuilder: knitr

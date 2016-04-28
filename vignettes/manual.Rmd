@@ -1,0 +1,44 @@
+---
+title: "The diffrprojects manual for the technical interested"
+author: "Peter Meißner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+The *The diffrprojects manual for the technical interested* is a technical documentation of functions and functionality within the *diffrprojects* package. It is not tailored to the needs of the technical uninterested user but for developers and those who might dig deeper into how the package works, can be improved, or hacked. 
+
+
+
+# Preparations
+
+```{r}
+library(diffrprojects)
+```
+
+
+# dp_text
+
+`dp_text` is the diffrprojects text representation.
+
+```{r}
+text_digibib <- 
+  system.file("testfiles/robinson_crusoe_digibib.txt", package="diffrprojects")
+
+text_fullbooks <- 
+  system.file("testfiles/robinson_crusoe_dfullbooks.txt", package="diffrprojects")
+
+text_gutenberg <- 
+  system.file("testfiles/robinson_crusoe_gutenberg.txt", package="diffrprojects")
+
+rc_g <- dp_text$new(file=text_gutenberg)
+
+rc_g$show_text()
+```
+
+

@@ -19,7 +19,7 @@ TBD
 
 **Status**
 
-*unstable* - in wild developement with furious restructuring and big big poking
+*unstable* - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing
 
 [![Travis-CI Build Status](https://travis-ci.org/petermeissner/diffrprojects.svg?branch=master)](https://travis-ci.org/petermeissner/diffrprojects)
 
@@ -27,12 +27,14 @@ TBD
 **Citation**
 
 
-```{r, results='asis'}
+```{r, results='asis', echo=FALSE}
 citation("diffrprojects")
 ```
 
+**BibTex for citing**
+
 <code style="white-space:normal;">
-```{r, results='asis'}
+```{r, results='asis', echo=FALSE}
 toBibtex(citation("diffrprojects"))
 ```
 </code>
@@ -51,7 +53,7 @@ toBibtex(citation("diffrprojects"))
 
 **Example Usage**
 
-TBD
+TBD - see status
    
 
     

@@ -3,7 +3,7 @@
 #'
 #' @docType class
 #'
-#' @name rtext
+#' @name dp_text
 #'
 #' @export
 #' @importFrom R6 R6Class
@@ -52,48 +52,89 @@
 #' }
 #'
 #' @examples
-#' mytext <- rtext$new("Hallo World")
-#' mytext$text
+#' mytext <- dp_text$new("Hallo World")
+#' mytext$show_text()
 #'
-#' mytext <- rtext$new(c("Hallo","World"))
-#' mytext$text
+#' mytext <- dp_text$new(c("Hallo","World"))
+#' mytext$show_text()
 #'
-rtext <-
+dp_text <-
   R6::R6Class(
 
   #### class name ==============================================================
-    "rtext",
+  "dp_text",
 
   #### public ==================================================================
-    public = list(
+  public = list(
 
-      #### puplic data fields ==================================================
-      text       = NA,
-      file       = NA,
-      tokens     = NA,
-      encoding   = NA,
-      sourcetype = list(text=NA, file=NA),
-      #### startup function ====================================================
-      initialize = function( text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8" )
-      {
-        stopifnot( (is.null(text) & !is.null(file)) | (!is.null(text) &  is.null(file)) )
-        # check input
-        if( is.null(text) ){
-          self$text <- NULL
-        }else{
-          self$text <- paste0( text, collapse = "\n")
-        }
-        self$file <- file
-        self$sourcetype$text <- ifelse( !is.null(text), TRUE, FALSE )
-        self$sourcetype$file <- ifelse( !is.null(file), TRUE, FALSE )
-      },
-      # methods
-      # checking bot permissions
-      hallo_world = function(paths="/", bot="*", permission=self$permissions){
-        paths_allowed(permissions=permission, paths=paths, bot=bot)
+    #### puplic data fields ==================================================
+    text       = NA,
+    file       = NA,
+    tokens     = NA,
+    encoding   = NA,
+    sourcetype = NA,
+
+    #### startup function ====================================================
+    initialize =
+      function( text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8" )
+    {
+
+      # read in text
+      if(is.null(text) & is.null(file)){
+        self$text <- ""
+        self$sourcetype <- "empty"
+      }else if(is.null(text) & !is.null(file)){
+        self$text <- text_read(file, tokenize = NULL, encoding = encoding)
+        self$sourcetype <- "file"
+      }else{
+        self$text <- paste0(text, collapse = "\n")
+        self$sourcetype <- "text"
       }
-    )
+      # set field: file
+      if( !is.null(file) ){
+        self$file <- file
+      }
+      # Encoding
+      Encoding(self$text) <- encoding
+      iconv(self$text, from = encoding, to = "UTF-8")
+    }
+      ,
+
+    # methods
+    show_text = function(text=self$text, length=500, from=NULL, to=NULL){
+
+    }
   )
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

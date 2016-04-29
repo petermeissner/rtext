@@ -101,6 +101,12 @@ text_show = function(x, length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
 
 
 
+#' function to tokenize text
+#'
+#' data: token | from | to | length | type
+text_tokenize <- function(x, tokenize, ){
+
+}
 
 
 

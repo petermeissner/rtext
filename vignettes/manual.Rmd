@@ -27,18 +27,11 @@ library(diffrprojects)
 `dp_text` is the diffrprojects text representation.
 
 ```{r}
-text_digibib <- 
-  system.file("testfiles/robinson_crusoe_digibib.txt", package="diffrprojects")
+robinson_crusoe_file <- tf("robinson_crusoe_gutenberg.txt")
+robinson_crusoe_text <- text_read(robinson_crusoe_file)
 
-text_fullbooks <- 
-  system.file("testfiles/robinson_crusoe_dfullbooks.txt", package="diffrprojects")
-
-text_gutenberg <- 
-  system.file("testfiles/robinson_crusoe_gutenberg.txt", package="diffrprojects")
-
-rc_g <- dp_text$new(file=text_gutenberg)
-
-rc_g$show_text()
+robinson_crusoe <- dp_text$new(robinson_crusoe_file)
+robinson_crusoe$show_text()
 ```
 
 

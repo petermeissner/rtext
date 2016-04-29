@@ -39,7 +39,7 @@
 #' \describe{
 #'  \item{
 #'    \code{
-#'    initialize(text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8", id=NULL)
+#'    new(text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8", id=NULL)
 #'  }}{
 #'    Method called when initialising object via
 #'    \code{robotstxt$new()}. Needs either \code{text} or \code{domain} to be

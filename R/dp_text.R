@@ -69,16 +69,17 @@ dp_text <-
     #### puplic data fields ==================================================
     text       = NA,
     file       = NA,
-    tokens     = NA,
+    tokenize   = NA,
     encoding   = NA,
     sourcetype = NA,
+    token = data.frame(),
 
     #### startup function ====================================================
     initialize =
-      function( text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8" )
+      function( text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8", id=NULL)
     {
 
-      # read in text
+      # read in text // set field: sourcetype
       if(is.null(text) & is.null(file)){
         self$text <- ""
         self$sourcetype <- "empty"
@@ -96,12 +97,36 @@ dp_text <-
       # Encoding
       Encoding(self$text) <- encoding
       iconv(self$text, from = encoding, to = "UTF-8")
+      self$encoding <- "UTF-8"
+      # tokenize
+
+      # id
+      if( is.null(id) ){
+        print("olahhh")
+        id <- digest::digest(self)
+      }
     }
       ,
 
-    # methods
-    show_text = function(text=self$text, length=500, from=NULL, to=NULL){
-
+    #### methods ============================================================
+    # info
+    info = function(){
+      res <-
+        list(
+          file       = self$file,
+          character  = nchar(self$text),
+          token      = dim(self$token),
+          encoding   = self$encoding,
+          sourcetype = self$sourcetype
+        )
+      },
+    # show text
+    show_text = function(length=500, from=NULL, to=NULL, wrap=FALSE){
+      show_text(self$text, length, from, to, wrap)
+    },
+    # get_text
+    get_text = function(length=nchar(self$text), from=NULL, to=NULL){
+      text_snippet(self$text, length, from, to)
     }
   )
 )

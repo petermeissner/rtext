@@ -111,9 +111,7 @@ text_show = function(x, length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
 #'    length: length of the token;
 #'    type: type of the token, either its matched by regular expression used for tokenization or not matched
 text_tokenize <- function(x, regex){
-
 }
-
 
 
 

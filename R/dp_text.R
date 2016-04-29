@@ -6,7 +6,6 @@
 #' @name dp_text
 #'
 #' @export
-#' @importFrom R6 R6Class
 #'
 #' @keywords data
 #'

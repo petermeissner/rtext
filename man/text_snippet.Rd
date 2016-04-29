@@ -14,6 +14,9 @@ text_snippet(x, length = 500, from = NULL, to = NULL, coll = FALSE)
 \item{from}{starting character}
 
 \item{to}{last character}
+
+\item{coll}{should a possible vector x with length > 1 collapsed with newline
+character as separator?}
 }
 \description{
 function will give back snippets of length length for length-from or

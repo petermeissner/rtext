@@ -34,6 +34,8 @@ text_read <- function(file, tokenize=NULL, encoding="UTF-8")
   }
 }
 
+
+
 #' helper function: retrieving text snippet
 #'
 #' function will give back snippets of length length for length-from or
@@ -43,8 +45,9 @@ text_read <- function(file, tokenize=NULL, encoding="UTF-8")
 #' @param length length of snippet
 #' @param from starting character
 #' @param to last character
+#' @param coll should a possible vector x with length > 1 collapsed with newline
+#'    character as separator?
 #' @export
-
 text_snippet <-function(x, length=500, from=NULL, to=NULL, coll=FALSE){
   # input check
   stopifnot( length(length)!=0 | (length(from)!=0 & length(to)!=0) ) # any input
@@ -67,6 +70,8 @@ text_snippet <-function(x, length=500, from=NULL, to=NULL, coll=FALSE){
     return(substring(x, 0, length))
   }
 }
+
+
 
 #' text function: wrapper for system.file() to access test files
 #' @export

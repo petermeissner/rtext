@@ -102,6 +102,7 @@ text_show = function(x, length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
 
 
 #' function to tokenize text
+<<<<<<< HEAD
 #' @param x character vector to be tokenized
 #' @param regex regex to use for tokenization
 #' @return data.frame,
@@ -111,6 +112,11 @@ text_show = function(x, length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
 #'    length: length of the token;
 #'    type: type of the token, either its matched by regular expression used for tokenization or not matched
 text_tokenize <- function(x, regex){
+=======
+#'
+#' data: token | from | to | length | type
+text_tokenize <- function(x, tokenize, ){
+>>>>>>> e69cbfb6ab3c5ee596e6ba3025cde2fc5af31f4a
 
 }
 

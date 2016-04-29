@@ -121,8 +121,8 @@ dp_text <-
         )
       },
     # show text
-    show_text = function(length=500, from=NULL, to=NULL, wrap=FALSE){
-      show_text(self$text, length, from, to, wrap)
+    show_text = function(length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
+      text_show(x=self$text, length=length, from=from, to=to, coll=coll, wrap=wrap)
     },
     # get_text
     get_text = function(length=nchar(self$text), from=NULL, to=NULL){

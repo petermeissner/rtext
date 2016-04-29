@@ -38,15 +38,15 @@ text_read <- function(file, tokenize=NULL, encoding="UTF-8")
 
 #' helper function: retrieving text snippet
 #'
-#' function will give back snippets of length length for length-from or
-#' length-to combinations but will give snippets of to-from length for parameter
-#' from-to-combinations
+#' function will give back snippets of text via using length,
+#' length and from, length and to, or from and to to specify the snippet
 #' @param x character vector to be snipped
 #' @param length length of snippet
 #' @param from starting character
 #' @param to last character
 #' @param coll should a possible vector x with length > 1 collapsed with newline
 #'    character as separator?
+#' @describeIn text_snippet retrieving text snippet
 #' @export
 text_snippet <-function(x, length=500, from=NULL, to=NULL, coll=FALSE){
   # input check
@@ -72,21 +72,30 @@ text_snippet <-function(x, length=500, from=NULL, to=NULL, coll=FALSE){
 }
 
 
-
-#' text function: wrapper for system.file() to access test files
+#' function for showing text
+#'
+#' shows text or portions of the text via cat and the usage of text_snippet()
+#' @param x text to be shown
+#' @param length number of characters to be shown
+#' @param from show from ith character
+#' @param to show up to ith character
+#' @param coll should x be collapsed using newline character as binding?
+#' @param wrap should text be wrapped, or wrapped to certain width, or wrapped
+#'    by certain function
 #' @export
-#' @param x name of the file
-tf <- function(x=NULL){
-  if(is.null(x)){
-    return(list.files(system.file("testfiles", package = "diffrprojects")))
-  }else if(x==""){
-    return(list.files(system.file("testfiles", package = "diffrprojects")))
+text_show = function(x, length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
+  tmp       <- text_snippet(x, length, from, to, coll)
+  diff_char <- sum(nchar(x)) - sum(nchar(tmp)) > 0
+  diff_sum  <- sum(nchar(x)) - sum(nchar(tmp))
+  diff_note <- ifelse(diff_char, paste0(" [... ", format(diff_sum, big.mark = " "), " characters not shown]"),"")
+  if(wrap==FALSE){
+    cat( tmp, diff_note)
+  }else if(is.function(wrap)){
+    cat(wrap(tmp), diff_note)
   }else{
-    return(system.file(paste("testfiles", x, sep="/"), package = "diffrprojects") )
+    cat(unlist(strsplit(tmp, " ")), diff_note, fill=wrap)
   }
 }
-
-
 
 
 

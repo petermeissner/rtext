@@ -9,7 +9,7 @@
 dp_text
 }
 \value{
-Object of \code{\link{R6Class}} with method(s) for bot permission checking.
+Object of \code{\link{R6Class}}
 }
 \description{
 text class
@@ -17,7 +17,7 @@ text class
 \section{Fields}{
 
 \describe{
-\item{\code{text}}{a single character string / character  vector of length one}
+\item{\code{text}}{a single character string / character vector of length one}
 
 \item{\code{tokens}}{a data frame with a character vector representing the the text as tokens,
 and two integer vectors capturing the span of the token measured in
@@ -25,17 +25,21 @@ characters starting from beginning of text}
 
 \item{\code{file}}{path to a file from which text was read in}
 
-\item{\code{encoding}}{encoding to be assumed for the text}
+\item{\code{encoding}}{encoding to be assumed for the text (will always be UTF-8, because.)}
 
-\item{\code{soourcetype}}{list of logicals that captures where the text came from when
-initializing object: text or file}
+\item{\code{sourcetype}}{list of logicals that capture where the text came from when
+initializing object: text or file.
+(text=NULL, file=NULL) : "empty";
+(text="", file=NULL | file="") : "text";
+(text=NULL, file="") : "file"}
 }}
 \section{Methods}{
 
 \describe{
  \item{
    \code{
-   initialize(domain, text) }}{
+   initialize(text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8", id=NULL)
+ }}{
    Method called when initialising object via
    \code{robotstxt$new()}. Needs either \code{text} or \code{domain} to be
    present at initialization. If only domain is supplied -- should be seen as
@@ -44,16 +48,20 @@ initializing object: text or file}
    \code{text} is supplied than domain is set to '???'.
  }
  \item{\code{
-   check( path="/", bot="*" ) }}{
-   Method for checking whether or not paths are allowed to be accessed by a bot
+   dummy(buuh)
+ }}{
+   TBD
  }
 }
 }
 \examples{
 mytext <- dp_text$new("Hallo World")
+mytext$text
 mytext$show_text()
 
+# dings
 mytext <- dp_text$new(c("Hallo","World"))
+mytext$text
 mytext$show_text()
 
 }

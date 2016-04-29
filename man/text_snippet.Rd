@@ -2,7 +2,7 @@
 % Please edit documentation in R/text_tools.R
 \name{text_snippet}
 \alias{text_snippet}
-\title{helper function: retrieving text snippet}
+\title{retrieving text snippet}
 \usage{
 text_snippet(x, length = 500, from = NULL, to = NULL, coll = FALSE)
 }

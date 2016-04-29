@@ -1,4 +1,4 @@
-#' helper function: to read in text
+#' read in text
 #'
 #' a wrapper to readLines() to make things more ordered and convenient
 #'
@@ -36,7 +36,7 @@ text_read <- function(file, tokenize=NULL, encoding="UTF-8")
 
 
 
-#' helper function: retrieving text snippet
+#' retrieving text snippet
 #'
 #' function will give back snippets of text via using length,
 #' length and from, length and to, or from and to to specify the snippet
@@ -96,8 +96,6 @@ text_show = function(x, length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
     cat(unlist(strsplit(tmp, " ")), diff_note, fill=wrap)
   }
 }
-
-
 
 
 

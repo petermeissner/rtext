@@ -6,3 +6,7 @@ dings$get_text(10)
 dings$id
 dings$info()
 
+
+dings <- dp_text$new(file=tf(1))
+dings$id
+dings$info()

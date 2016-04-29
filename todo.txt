@@ -1,0 +1,3 @@
+- document methods of dp_text
+- write tokenize text method
+

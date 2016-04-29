@@ -2,7 +2,7 @@
 % Please edit documentation in R/text_tools.R
 \name{text_read}
 \alias{text_read}
-\title{helper function: to read in text}
+\title{read in text}
 \usage{
 text_read(file, tokenize = NULL, encoding = "UTF-8")
 }

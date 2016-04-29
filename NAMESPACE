@@ -2,6 +2,7 @@
 
 export(dp_text)
 export(text_read)
+export(text_show)
 export(text_snippet)
 export(tf)
 importFrom(R6,R6Class)

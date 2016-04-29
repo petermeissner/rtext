@@ -1,0 +1,17 @@
+---
+title: "The diffrprojects manual for the hands on folk"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction to the introduction
+
+# The workflow of diffrprojects
+
+# hacking diffrprojects
+

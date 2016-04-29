@@ -42,3 +42,11 @@ rc_g$show_text()
 ```
 
 
+# tools
+
+## text sni
+
+```{r}
+
+```
+

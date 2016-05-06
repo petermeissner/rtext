@@ -8,7 +8,7 @@
 #' @param invert Whether or not the default shift directions
 #'    should be inverted.
 #' @param default The value that should be inserted by default.
-shift <- function(x, n, invert=FALSE, default=NA){
+shift <- function(x, n=0, invert=FALSE, default=NA){
   stopifnot(length(x)>=n)
   if(n==0){
     return(x)

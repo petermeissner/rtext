@@ -27,17 +27,49 @@ library(diffrprojects)
 `dp_text` is the diffrprojects text representation.
 
 ```{r}
-robinson_crusoe_file <- tf("robinson_crusoe_gutenberg.txt")
+robinson_crusoe_file <- dp_tf("robinson_crusoe_gutenberg.txt")
 robinson_crusoe_text <- text_read(robinson_crusoe_file)
-
-robinson_crusoe <- dp_text$new(robinson_crusoe_file)
-robinson_crusoe$show_text()
 ```
+
+A dp_text instance can be filled either by using a character vector:
+
+```{r}
+robinson_crusoe <- dp_text$new(robinson_crusoe_text)
+robinson_crusoe$show_text()
+robinson_crusoe$info()
+```
+
+... or a file from which to read in the text.
+
+```{r}
+robinson_crusoe <- dp_text$new(file=robinson_crusoe_file)
+robinson_crusoe$show_text()
+robinson_crusoe$info()
+```
+
+
+
+
+
+# test and dev tools
+
+In need of files for testing? dp_df() is your friend.
+
+```{r}
+dp_tf()
+```
+
+In need of an extended ls() function, dp_ls() will help. 
+
+```{r}
+dp_ls(robinson_crusoe)
+```
+
 
 
 # tools
 
-## text sni
+## text snippet
 
 ```{r}
 

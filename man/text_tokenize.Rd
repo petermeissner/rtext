@@ -4,12 +4,21 @@
 \alias{text_tokenize}
 \title{function to tokenize text}
 \usage{
-text_tokenize(x, regex)
+text_tokenize(x, regex = NULL, ignore.case = FALSE, fixed = FALSE,
+  useBytes = FALSE, group = c("words", "lines", "paragraphs"))
 }
 \arguments{
 \item{x}{character vector to be tokenized}
 
 \item{regex}{regex to use for tokenization}
+
+\item{ignore.case}{see \link{grep}, interanlly passed through to gregexpr()}
+
+\item{fixed}{see \link{grep}, interanlly passed through to gregexpr()}
+
+\item{useBytes}{see \link{grep}, interanlly passed through to gregexpr()}
+
+\item{group}{predefined regular expressions}
 }
 \value{
 data.frame,

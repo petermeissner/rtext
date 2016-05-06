@@ -2,18 +2,18 @@
 context("tools")
 
 test_that("text_read", {
-  expect_true( Encoding(text_read(tf("test_latin1.txt"))) == "UTF-8")
-  expect_true( Encoding(text_read(tf("test_utf8.txt"))) == "UTF-8")
-  expect_true( Encoding(text_read(tf("test_latin1.txt"), encoding="latin1")) == "UTF-8")
-  expect_true( Encoding(text_read(tf("test_utf8.txt"), encoding="latin1")) == "UTF-8")
+  expect_true( Encoding(text_read(dp_tf("test_latin1.txt"))) == "UTF-8")
+  expect_true( Encoding(text_read(dp_tf("test_utf8.txt"))) == "UTF-8")
+  expect_true( Encoding(text_read(dp_tf("test_latin1.txt"), encoding="latin1")) == "UTF-8")
+  expect_true( Encoding(text_read(dp_tf("test_utf8.txt"), encoding="latin1")) == "UTF-8")
   expect_true(
-    nchar(text_read(tf("test_utf8.txt"), encoding="UTF-8")) ==
-      nchar(text_read(tf("test_latin1.txt"), encoding="latin1"))
+    nchar(text_read(dp_tf("test_utf8.txt"), encoding="UTF-8")) ==
+      nchar(text_read(dp_tf("test_latin1.txt"), encoding="latin1"))
   )
-  expect_true( length(text_read(tf("test_utf8.txt"), encoding="latin1"))==1 )
-  expect_true( length(text_read(tf("test_utf8.txt"), tokenize = "\n"))>1 )
-  expect_true( length(text_read(tf("test_utf8.txt"), tokenize = " "))>1 )
-  expect_true( length(text_read(tf("test_utf8.txt"), tokenize = function(x){strsplit(x,"")} ))>1 )
+  expect_true( length(text_read(dp_tf("test_utf8.txt"), encoding="latin1"))==1 )
+  expect_true( length(text_read(dp_tf("test_utf8.txt"), tokenize = "\n"))>1 )
+  expect_true( length(text_read(dp_tf("test_utf8.txt"), tokenize = " "))>1 )
+  expect_true( length(text_read(dp_tf("test_utf8.txt"), tokenize = function(x){strsplit(x,"")} ))>1 )
 })
 
 test_that("text_snippet", {
@@ -48,4 +48,9 @@ test_that("text_snippet", {
 })
 
 
-
+test_that("text_tokenize", {
+  expect_true(
+    text_tokenize(" ", regex="")$from[1]==1 &
+    text_tokenize(" ", regex="")$to[1]==1
+  )
+})

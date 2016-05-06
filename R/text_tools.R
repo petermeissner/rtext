@@ -97,21 +97,85 @@ text_show = function(x, length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
   }
 }
 
+#' wrapper around nchar to return text length
+#' @param x see \link{nchar}
+#' @param type see \link{nchar}
+#' @param allowNA see \link{nchar}
+#' @param keepNA see \link{nchar}
+#' @export
+text_nchar <- function(x, type = "chars", allowNA = FALSE, keepNA = TRUE){
+  nchar(x, type, allowNA, keepNA)
+}
 
-
+#' wrapper around nchar to return text length
+#' @param x see \link{nchar}
+#' @param type see \link{nchar}
+#' @param allowNA see \link{nchar}
+#' @param keepNA see \link{nchar}
+#' @param na.rm see \link{nchar}
+#' @export
+text_length <- function(x, type = "chars", allowNA = FALSE, keepNA = TRUE, na.rm=FALSE){
+  sum(text_nchar(x, type, allowNA, keepNA), na.rm=na.rm)
+}
 
 
 #' function to tokenize text
 #' @param x character vector to be tokenized
 #' @param regex regex to use for tokenization
+#' @param ignore.case see \link{grep}, interanlly passed through to gregexpr()
+#' @param fixed see \link{grep}, interanlly passed through to gregexpr()
+#' @param useBytes see \link{grep}, interanlly passed through to gregexpr()
+#' @param group predefined regular expressions
 #' @return data.frame,
 #'    token: string of the token;
 #'    from: position in text at which token starts;
 #'    to: position in text at which the token ends
 #'    length: length of the token;
 #'    type: type of the token, either its matched by regular expression used for tokenization or not matched
-text_tokenize <- function(x, regex){
+#' @export
+text_tokenize <- function(x, regex=NULL, ignore.case=FALSE, fixed=FALSE, useBytes=FALSE, group=c("words", "lines", "paragraphs")){
+  tlength <- text_length(x)
 
+  if( is.null(regex) ){
+    regex <-
+      switch(
+        group[1],
+        words = "\\w+",
+        lines = "\n",
+        paragraphs = "\n\n"
+      )
+  }
+
+  found        <- gregexpr(regex, x, ignore.case, fixed, useBytes)
+  found_from   <- found[[1]]
+  found_length <- attributes(found[[1]])$match.length
+  found_to     <- found_length+found_from-1
+
+  token <-
+    do.call(
+      rbind,
+      mapply(
+        function(x, from, to){ data.frame(from, to, token = substring(x, from, to)) },
+        from=found_from,
+        to=found_to,
+        MoreArgs = list(x      = x),
+        SIMPLIFY = FALSE
+      )
+    )
+  token$is_token <- TRUE
+
+  non_token <-
+    data.frame(
+      from=c(1,token$to+1),
+      to=c(token$from-1, tlength)
+    )
+  non_token <- non_token[non_token$from<=non_token$to,]
+  non_token$token <- mapply(substring, first=non_token$from, last=non_token$to, MoreArgs = list(text=x))
+  non_token$is_token=FALSE
+
+  res <- rbind(token, non_token)
+  res <- res[order(res$from),]
+  res
 }
 
 

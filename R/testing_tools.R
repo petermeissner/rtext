@@ -17,6 +17,7 @@ dp_tf <- function(x=NULL){
 
 #' have a look at environments
 #' @param env environment list objects
+#' @param filter filter for classes to be returned
 #' @export
 dp_ls <- function(env = globalenv(), filter=FALSE){
   names <- as.list(ls(env))

@@ -133,7 +133,7 @@ text_length <- function(x, type = "chars", allowNA = FALSE, keepNA = TRUE, na.rm
 #'    length: length of the token;
 #'    type: type of the token, either its matched by regular expression used for tokenization or not matched
 #' @export
-text_tokenize <- function(x, regex=NULL, ignore.case=FALSE, fixed=FALSE, useBytes=FALSE, group=c("words", "lines", "paragraphs")){
+text_tokenize_old <- function(x, regex=NULL, ignore.case=FALSE, fixed=FALSE, useBytes=FALSE, group=c("words", "lines", "paragraphs")){
   tlength <- text_length(x)
 
   if( is.null(regex) ){

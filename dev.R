@@ -16,4 +16,6 @@ x      <- ".Meine Mudder, schneidet Spargelsuppe."
 regex  <- "[^[:alnum:]]+"
 invert <- FALSE
 
-text_tokenize( text_read(dp_tf(1)) , "")
+regex= ""
+
+text_tokenize_old()

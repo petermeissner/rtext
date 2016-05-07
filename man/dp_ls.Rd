@@ -8,6 +8,8 @@ dp_ls(env = globalenv(), filter = FALSE)
 }
 \arguments{
 \item{env}{environment list objects}
+
+\item{filter}{filter for classes to be returned}
 }
 \description{
 have a look at environments

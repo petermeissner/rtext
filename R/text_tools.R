@@ -125,7 +125,7 @@ text_length <- function(x, type = "chars", allowNA = FALSE, keepNA = TRUE, na.rm
 #' @param ignore.case see \link{grep}, interanlly passed through to gregexpr()
 #' @param fixed see \link{grep}, interanlly passed through to gregexpr()
 #' @param useBytes see \link{grep}, interanlly passed through to gregexpr()
-#' @param group predefined regular expressions
+#' @param non_token whether or not to return non-tokens as well
 #' @return data.frame,
 #'    token: string of the token;
 #'    from: position in text at which token starts;
@@ -193,7 +193,7 @@ text_tokenize <-
         )
 
       token <-
-        subset(token, !(from %in% char_splitter | to %in% char_splitter))
+        subset(token, !(token$from %in% char_splitter | token$to %in% char_splitter))
 
       # handling special cases
       if( tlength>0 & dim(token)[1]==0 & !all(found_splitter[[1]]>0) ){

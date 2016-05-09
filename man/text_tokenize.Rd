@@ -18,7 +18,7 @@ text_tokenize(x, regex = NULL, ignore.case = FALSE, fixed = FALSE,
 
 \item{useBytes}{see \link{grep}, interanlly passed through to gregexpr()}
 
-\item{group}{predefined regular expressions}
+\item{non_token}{whether or not to return non-tokens as well}
 }
 \value{
 data.frame,

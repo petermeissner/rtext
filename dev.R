@@ -12,10 +12,4 @@ dings$id
 dings$info()
 
 
-x      <- ".Meine Mudder, schneidet Spargelsuppe."
-regex  <- "[^[:alnum:]]+"
-invert <- FALSE
-
-regex= ""
-
 text_tokenize_old()

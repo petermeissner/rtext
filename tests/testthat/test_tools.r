@@ -50,7 +50,18 @@ test_that("text_snippet", {
 
 test_that("text_tokenize", {
   expect_true(
-    text_tokenize(" ", regex="")$from[1]==1 &
-    text_tokenize(" ", regex="")$to[1]==1
+    dim(text_tokenize("abcdefg", regex="\\W+"))[1]==1
   )
+  expect_true({
+    text_tokenize(" ", regex=""); TRUE
+  })
+  expect_true({
+    text_tokenize("", regex=""); TRUE
+   })
+  expect_true({
+    text_tokenize("  ", regex=" "); TRUE
+  })
 })
+
+
+

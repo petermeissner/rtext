@@ -4,20 +4,20 @@
 \alias{shift}
 \title{function that shifts vector values to right or left}
 \usage{
-shift(x, n = 0, invert = FALSE, default = NA)
+shift(x, n = 0, default = NA, invert = FALSE)
 }
 \arguments{
-\item{x}{Vector for ehich to shift values}
+\item{x}{Vector for which to shift values}
 
 \item{n}{Number of places to be shifted.
 Positive numbers will shift to the right by default.
 Negative numbers will shift to the left by default.
 The direction can be inverted by the invert parameter.}
 
+\item{default}{The value that should be inserted by default.}
+
 \item{invert}{Whether or not the default shift directions
 should be inverted.}
-
-\item{default}{The value that should be inserted by default.}
 }
 \description{
 function that shifts vector values to right or left

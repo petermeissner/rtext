@@ -180,8 +180,8 @@ text_tokenize <-
           )
         )
 
-      char_token <-
-        sort(unique(seq_len(tlength)[!(seq_len(tlength) %in% char_splitter)]))
+      #char_token <-
+        #sort(unique(seq_len(tlength)[!(seq_len(tlength) %in% char_splitter)]))
 
       char_token_from     <- c(1,found_splitter_to+1)
       char_token_to       <- c(ifelse(found_splitter[[1]]==1, 1, found_splitter[[1]]-1),tlength)
@@ -228,7 +228,7 @@ text_tokenize <-
       }
 
       # return
-      return(token)
+      return(token[order(token$from),])
     }
   }
 
@@ -254,7 +254,7 @@ text_tokenize_words <-
       tmp$is_token <- rep(FALSE, dim(tmp)[1])
       res <- rbind(res, tmp)
     }
-    return(res)
+    return(res[order(res$from), ])
   }
 
 

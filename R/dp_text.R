@@ -84,33 +84,75 @@ dp_text <-
     id         = NULL,
 
     #### startup function ====================================================
+
     initialize =
-      function( text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8", id=NULL)
+      function(
+        text     = NULL,
+        file     = NULL,
+        tokenize = c("words", "lines", "paragraphs", "character"),
+        encoding = "UTF-8",
+        id       = NULL
+      )
     {
 
-      # read in text // set field: sourcetype
-      if(is.null(text) & is.null(file)){
+      ##### read in text // set field: sourcetype
+      if(is.null(text) & is.null(file)){ # nothing at all
         self$text <- ""
         self$sourcetype <- "empty"
-      }else if(is.null(text) & !is.null(file)){
+      }else if(is.null(text) & !is.null(file)){ # read from file
         self$text <- text_read(file, tokenize = NULL, encoding = encoding)
         self$sourcetype <- "file"
-      }else{
+      }else{ # take text as supplied
         self$text <- paste0(text, collapse = "\n")
         self$sourcetype <- "text"
       }
-      # set field: file
+
+      ##### set field: file
       if( !is.null(file) ){
         self$file <- file
       }
-      # Encoding
+
+      ##### Encoding
       Encoding(self$text) <- encoding
       iconv(self$text, from = encoding, to = "UTF-8")
       self$encoding <- "UTF-8"
-      # tokenize
+
+      #### tokenize
       self$tokenize <- tokenize
-      #self$token <- data.frame(token)
-      # id
+      # special pre-made tokenization functions?
+      stopifnot(
+        is.character(tokenize) | is.numeric(tokenize) | is.function(tokenize)
+      )
+      if( !is.function(tokenize) ) {
+        tokenize <-
+          switch(
+            tokenize[1],
+            words =
+              function(x){
+                text_tokenize_words(x, non_token = TRUE)
+              },
+            lines =
+              function(x){
+                text_tokenize(x, regex="\n", non_token = TRUE)
+              }              ,
+            paragraphs =
+              function(x){
+                text_tokenize(x, regex="\n[\n\\s]*", non_token = TRUE)
+              }
+          )
+      }
+      # test tokenization function before applying
+      tmp <- tokenize(substr("text",0,0))
+      stopifnot(
+        is.data.frame(tmp)
+      )
+      stopifnot(
+        names(tmp)==c("from", "to", "token", "is_token")
+      )
+      # apply tokenization
+      self$token <- tokenize(self$text)
+
+      ##### id
       if( is.null(id) ){
         self$id <- digest::digest(self)
       }

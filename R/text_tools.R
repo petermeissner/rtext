@@ -154,6 +154,7 @@ text_tokenize <-
         non_token   = non_token
       )
     }else{
+      # special cases
       if( any(grepl(regex, "")==TRUE) ){
         tmp <- strsplit(x, regex)[[1]]
         token <- data.frame(
@@ -164,7 +165,9 @@ text_tokenize <-
         )
         return(token)
       }
-
+      if( is.null(regex) ){
+        regex <- ".*"
+      }
       # finding characters spans where to split
       tlength <- text_length(x)
       found_splitter        <- gregexpr(regex, x, ignore.case, fixed, useBytes)
@@ -180,8 +183,8 @@ text_tokenize <-
           )
         )
 
-      #char_token <-
-        #sort(unique(seq_len(tlength)[!(seq_len(tlength) %in% char_splitter)]))
+      char_token <-
+        sort(unique(seq_len(tlength)[!(seq_len(tlength) %in% char_splitter)]))
 
       char_token_from     <- c(1,found_splitter_to+1)
       char_token_to       <- c(ifelse(found_splitter[[1]]==1, 1, found_splitter[[1]]-1),tlength)
@@ -228,7 +231,7 @@ text_tokenize <-
       }
 
       # return
-      return(token[order(token$from),])
+      return(token)
     }
   }
 
@@ -254,7 +257,7 @@ text_tokenize_words <-
       tmp$is_token <- rep(FALSE, dim(tmp)[1])
       res <- rbind(res, tmp)
     }
-    return(res[order(res$from), ])
+    return(res)
   }
 
 

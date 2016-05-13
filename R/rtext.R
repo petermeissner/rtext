@@ -3,7 +3,7 @@
 #'
 #' @docType class
 #'
-#' @name dp_text
+#' @name rtext
 #'
 #' @export
 #'
@@ -56,28 +56,29 @@
 #' }
 #'
 #' @examples
-#' mytext <- dp_text$new("Hallo World")
+#' mytext <- rtext$new("Hallo World")
 #' mytext$text
 #' mytext$show_text()
 #'
 #' # dings
-#' mytext <- dp_text$new(c("Hallo","World"))
+#' mytext <- rtext$new(c("Hallo","World"))
 #' mytext$text
 #' mytext$show_text()
 #'
-dp_text <-
+rtext <-
   R6::R6Class(
 
   #### class name ==============================================================
-  "dp_text",
+  "rtext",
 
   #### public ==================================================================
   public = list(
 
+
     #### puplic data fields ==================================================
     text       = NA,
     file       = NA,
-    tokenize   = NA,
+    tokenizer  = NA,
     encoding   = NA,
     sourcetype = NA,
     token      = data.frame(),
@@ -87,11 +88,12 @@ dp_text <-
 
     initialize =
       function(
-        text     = NULL,
-        file     = NULL,
-        tokenize = c("words", "lines", "paragraphs", "character"),
-        encoding = "UTF-8",
-        id       = NULL
+        text       = NULL,
+        file       = NULL,
+        tokenizer  = function(x){text_tokenize_words(x, non_token = TRUE)},
+        encoding   = "UTF-8",
+        id         = NULL,
+        tokenize_by= NULL
       )
     {
 
@@ -118,39 +120,14 @@ dp_text <-
       self$encoding <- "UTF-8"
 
       #### tokenize
-      self$tokenize <- tokenize
-      # special pre-made tokenization functions?
-      stopifnot(
-        is.character(tokenize) | is.numeric(tokenize) | is.function(tokenize)
-      )
-      if( !is.function(tokenize) ) {
-        tokenize <-
-          switch(
-            tokenize[1],
-            words =
-              function(x){
-                text_tokenize_words(x, non_token = TRUE)
-              },
-            lines =
-              function(x){
-                text_tokenize(x, regex="\n", non_token = TRUE)
-              }              ,
-            paragraphs =
-              function(x){
-                text_tokenize(x, regex="\n[\n\\s]*", non_token = TRUE)
-              }
-          )
+      self$tokenizer <- tokenizer
+      if( !is.null(tokenize_by) ){
+        self$tokenizer <<-
+          function(x){
+            text_tokenize(x, regex = tokenize_by, non_token = TRUE)
+          }
       }
-      # test tokenization function before applying
-      tmp <- tokenize(substr("text",0,0))
-      stopifnot(
-        is.data.frame(tmp)
-      )
-      stopifnot(
-        names(tmp)==c("from", "to", "token", "is_token")
-      )
-      # apply tokenization
-      self$token <- tokenize(self$text)
+      self$token     <- self$tokenize()
 
       ##### id
       if( is.null(id) ){
@@ -166,9 +143,7 @@ dp_text <-
         list(
           file       = self$file,
           character  = nchar(self$text),
-          token      = dim(self$token)[1],
-          tokendata  = dim(self$token)[2],
-          tokenize   = self$tokenize,
+          token      = dim(self$token),
           encoding   = self$encoding,
           sourcetype = self$sourcetype
         )
@@ -181,9 +156,43 @@ dp_text <-
     # get_text
     get_text = function(length=nchar(self$text), from=NULL, to=NULL, coll=FALSE){
       text_snippet(self$text, length, from, to, coll)
+    },
+    # tokenize
+    tokenize = function(){
+        self$token <- self$tokenizer(self$text)
+    },
+    # insert
+    insert = function(){
+
+    },
+    # delete
+    delete = function(){
+
+    },
+    # replace
+    replace = function(from, to, replacement, regex){
+
+    },
+    # save
+    save = function(){
+
+    },
+    # reload
+    reload = function(){
+
+    },
+    # save_as
+    save_as = function(){
+
     }
   )
 )
+
+
+
+#' storage for internals
+dp_storage <- new.env(parent = emptyenv())
+
 
 
 

@@ -1,12 +1,24 @@
 NEWS diffrprojects
 ==========================================================================
 
+version 0.3.4 // 2016-05-13 ... 
+--------------------------------------------------------------------------
+
+* BUGFIXES
+    - rtext : getting tokenization on init right
+    
+* FEATURE
+    - dp_text : !!! rename to rtext :-) !!!
+
 
 version 0.3.3 // 2016-05-09 ... 
 --------------------------------------------------------------------------
 
 * BUGFIXES
     - fixing documentation and minor build check complaints 
+    
+* FEATURE
+    - dp_text() : add tokenization to initializetion stage
     
 
 version 0.3.2 // 2016-05-09 ... 
@@ -24,6 +36,7 @@ version 0.2.0 // 2016-04-28 ...
     - dp_text : show_text()
     - dp_text : info()
     - dp_text : get_text()
+
 
 version 0.1.0 // 2016-04-27 ... 
 --------------------------------------------------------------------------

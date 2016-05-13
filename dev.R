@@ -1,15 +1,34 @@
 library(diffrprojects)
 
-dings <- dp_text$new(file=dp_tf(1))
+system.time(dings <- rtext$new(file=dp_tf(1)))
 dings$show_text(wrap = 10)
 dings$get_text(10)
 dings$id
 dings$info()
 
 
-dings <- dp_text$new(file=dp_tf(1))
-dings$id
+# dev
+
+dings$tokenize()
 dings$info()
 
 
-text_tokenize_old()
+
+
+
+
+
+# get_token()
+
+# deleting text
+# insert text
+# replace text
+
+# entering data
+# char data to token data
+# token data to char data
+
+# token_aliases?
+
+# plot text - polygons?
+

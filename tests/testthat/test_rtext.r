@@ -60,14 +60,3 @@ test_that("get_text works also with junk input", {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-

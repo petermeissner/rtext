@@ -74,10 +74,16 @@ rtext <-
   #### private =================================================================
   private = list(
     text = function(){
-      paste0(self$chars, collapse = "")
+      paste0(private$chars, collapse = "")
     },
     tokenize = function(){
       self$token <- self$tokenizer(private$text())
+    },
+    chars      = character(0),
+    chars_data = data.frame(),
+    token      = data.frame(),
+    hash_text  = function(){
+      self$hash <- digest::digest(private$chars)
     }
   ),
 
@@ -91,10 +97,8 @@ rtext <-
     tokenizer  = NA,
     encoding   = NA,
     sourcetype = NA,
-    token      = data.frame(),
     id         = NULL,
-    chars      = NULL,
-    chars_data = data.frame(),
+    hash       = NULL,
 
     #### startup function ====================================================
 
@@ -111,16 +115,17 @@ rtext <-
 
       ##### read in text // set field: sourcetype
       if(is.null(text) & is.null(file)){ # nothing at all
-        self$chars <- ""
+        private$chars <- ""
         self$sourcetype <- "empty"
       }else if(is.null(text) & !is.null(file)){ # read from file
-        self$chars <- text_read(file, tokenize = "", encoding = encoding)
+        private$chars <- text_read(file, tokenize = "", encoding = encoding)
         self$sourcetype <- "file"
       }else{ # take text as supplied
-        self$chars <-
+        private$chars <-
           unlist(strsplit(paste0(iconv(text, encoding, "UTF-8"), collapse = "\n"),""))
         self$sourcetype <- "text"
       }
+      self$hash <- private$hash_text()
 
       ##### set field: file
       if( !is.null(file) ){
@@ -128,7 +133,7 @@ rtext <-
       }
 
       ##### Encoding
-      Encoding(self$chars) <- encoding
+      Encoding(private$chars) <- encoding
       self$encoding <- "UTF-8"
 
       #### tokenize
@@ -153,7 +158,7 @@ rtext <-
       res <-
         list(
           file       = self$file,
-          character  = length(self$chars),
+          character  = length(private$chars),
           token      = dim(self$token),
           encoding   = self$encoding,
           sourcetype = self$sourcetype
@@ -162,85 +167,41 @@ rtext <-
       },
     # show text
     show_text = function(length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
-      # text_show(x=self$text(), length=length, from=from, to=to, coll=coll, wrap=wrap)
+      text_show(x=self$get_text(Inf), length=length, from=from, to=to, coll=coll, wrap=wrap)
     },
-    # get_text
     get_text = function(length=100, from=NULL, to=NULL, split=NULL){
-      # helper functions
-      bind_to_charrange <- function(x){bind_between(x, 1, length(self$chars))}
-      bind_length       <- function(x){bind_between(x, 0, length(self$chars))}
-      return_from_to    <- function(from, to, split){
-        res  <- paste0( self$chars[seq(from=from, to=to)], collapse = "")
+      hash <- paste(self$text_hash(), deparse(match.call()))
+      if( !(hash %in% ls(dp_storage)) ){
+        res <- rtext_get_character(chars=private$chars, length=length, from=from, to=to)
+        res <- paste0(res, collapse = "")
         if( !is.null(split) ){
           res <- unlist(strsplit(res, split = split))
         }
+        assign(hash, res, envir = dp_storage)
         return(res)
+      }else{
+        return(get(hash, envir = dp_storage))
       }
-      # only length
-      if( !is.null(length) & ( is.null(from) & is.null(to) ) ){
-        length <- max(0, min(length, length(self$chars)))
-        length <- bind_length(length)
-        if(length==0){
-          return("")
-        }
-        from   <- 1
-        to     <- length
-        return(return_from_to(from, to, split))
-      }
-      # from and to (--> ignores length argument)
-      if( !is.null(from) & !is.null(to) ){
-        from <- bind_to_charrange(from)
-        to   <- bind_to_charrange(to)
-        return(return_from_to(from, to, split))
-      }
-      # length + from
-      if( !is.null(length) & !is.null(from) ){
-        if( length<=0 | from + length <=0 ){
-          return("")
-        }
-        to   <- from + length-1
-        if((to < 1 & from < 1) | (to > length(self$chars) & from > length(self$chars) )){
-          return("")
-        }
-        to   <- bind_to_charrange(to)
-        from <- bind_to_charrange(from)
-        return(return_from_to(from, to, split))
-      }
-      # length + to
-      if( !is.null(length) & !is.null(to) ){
-        if( length<=0 | to - (length-1) > length(self$chars) ){
-          return("")
-        }
-        from <- to - length + 1
-        if((to < 1 & from < 1) | (to > length(self$chars) & from > length(self$chars) )){
-          return("")
-        }
-        from <- bind_to_charrange(from)
-        to   <- bind_to_charrange(to)
-        return(return_from_to(from, to, split))
-      }
-      stop("rtext$get_text() : I do not know how to make sense of given length, from, to argument values passed")
     },
-    # insert
-    insert = function(what=NULL, after=text_length(self$text())){
-      # stopifnot( after >= 0 & after <= text_length(self$text()) )
-      # after <- paste0(what, collapse="\n")
-      # what_length <- text_length(what)
-      # if( what_length == 0){
-      #   return(TRUE)
-      # }
-      # if( after==0 ){
-      #   self$text() <- paste0(what, self$text())
-      #   return(TRUE)
-      # }
-      # if( after==text_length(self$text()) ){
-      #   self$text() <- paste0(self$text(), what)
-      #   return(TRUE)
-      # }
-      # FALSE
+    # get_character
+    get_character = function(length=100, from=NULL, to=NULL){
+      rtext_get_character(chars=private$chars, length=length, from=from, to=to)
+    },
+    # add
+    add = function(what=NULL, after=NULL){
+      if(is.null(after)){
+        after <- length(private$chars)
+      }
+      index  <- seq_along(private)
+      part1  <- index[index <= after]
+      part2  <- index[index >  after]
+      private$chars <-
+        c( part1, unlist(strsplit(what,"")), part2)
+      private$hash_text()
+      invisible(self)
     },
     # delete
-    delete = function(){
+    delete = function(from, to){
 
     },
     # replace
@@ -260,7 +221,7 @@ rtext <-
 
     },
     text_hash = function(){
-      digest::digest(chars)
+      self$hash
     }
   )
 )
@@ -271,12 +232,6 @@ rtext <-
 dp_storage <- new.env(parent = emptyenv())
 
 
-
-
-
-
-
-
 #' list of ready to use functions for rtext initialization and tokenization
 #' @export
 rtext_tokenizer <- list(
@@ -284,11 +239,66 @@ rtext_tokenizer <- list(
 )
 
 
-
-
-
-
-
+#' function to get text from rtext object
+#'
+#' @param chars the chars field
+#' @param length number of characters to be returned
+#' @param from first character to be returned
+#' @param to last character to be returned
+#' @export
+rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
+  # helper functions
+  bind_to_charrange <- function(x){bind_between(x, 1, length(chars))}
+  bind_length       <- function(x){bind_between(x, 0, length(chars))}
+  return_from_to    <- function(from, to, split){
+    res  <- chars[seq(from=from, to=to)]
+    return(res)
+  }
+  # only length
+  if( !is.null(length) & ( is.null(from) & is.null(to) ) ){
+    length <- max(0, min(length, length(chars)))
+    length <- bind_length(length)
+    if(length==0){
+      return("")
+    }
+    from   <- 1
+    to     <- length
+    return(return_from_to(from, to, split))
+  }
+  # from and to (--> ignores length argument)
+  if( !is.null(from) & !is.null(to) ){
+    from <- bind_to_charrange(from)
+    to   <- bind_to_charrange(to)
+    return(return_from_to(from, to, split))
+  }
+  # length + from
+  if( !is.null(length) & !is.null(from) ){
+    if( length<=0 | from + length <=0 ){
+      return("")
+    }
+    to   <- from + length-1
+    if((to < 1 & from < 1) | (to > length(chars) & from > length(chars) )){
+      return("")
+    }
+    to   <- bind_to_charrange(to)
+    from <- bind_to_charrange(from)
+    return(return_from_to(from, to, split))
+  }
+  # length + to
+  if( !is.null(length) & !is.null(to) ){
+    if( length<=0 | to - (length-1) > length(chars) ){
+      return("")
+    }
+    from <- to - length + 1
+    if((to < 1 & from < 1) | (to > length(chars) & from > length(chars) )){
+      return("")
+    }
+    from <- bind_to_charrange(from)
+    to   <- bind_to_charrange(to)
+    return(return_from_to(from, to, split))
+  }
+  stop("rtext$get_character() : I do not know how to make sense of given length, from, to argument values passed")
+}
 
 
 

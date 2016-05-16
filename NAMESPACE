@@ -3,6 +3,7 @@
 export(dp_ls)
 export(dp_tf)
 export(rtext)
+export(rtext_get_character)
 export(rtext_tokenizer)
 export(shift)
 export(text_extract)

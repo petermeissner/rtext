@@ -1,6 +1,23 @@
 NEWS diffrprojects
 ==========================================================================
 
+version 0.4.0 // 2016-05-14 ... 
+--------------------------------------------------------------------------
+
+* BUGFIXES
+    - 
+    
+* FEATURE
+    - rtext : text is tokenized into characters and then stored in characters
+    - rtext : insert()
+    - rtext : insert()
+    - rtext : delete()
+    - rtext : replace()
+    - rtext : save()
+    - rtext : reload()
+    - rtext : save_as()
+    
+
 version 0.3.4 // 2016-05-13 ... 
 --------------------------------------------------------------------------
 

@@ -40,3 +40,12 @@ shift <- function(x, n=0, default=NA, invert=FALSE){
   }
 }
 
+#' function forcing value to fall between min and max
+#' @param x the values to be bound
+#' @param max upper boundary
+#' @param min lower boundary
+bind_between <- function(x, min, max){
+  x[x<min] <- min
+  x[x>max] <- max
+  x
+}

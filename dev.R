@@ -1,18 +1,14 @@
 library(diffrprojects)
 
 system.time(dings <- rtext$new(file=dp_tf(1)))
-dings$show_text(wrap = 10)
-dings$get_text(10)
-dings$id
-dings$info()
 
 
-# dev
+dings <- rtext$new(text="1234567890")
 
-dings$tokenize()
-dings$info()
-
-
+dings$get_text()
+dings$get_text(from = 1, to=5)
+dings$get_text(from=200)
+dings$get_text(to=200)
 
 
 

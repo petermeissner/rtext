@@ -1,3 +1,5 @@
-- document methods of dp_text
+- document methods of rtext
+- add function to rtext_tokenizer
+
 
 

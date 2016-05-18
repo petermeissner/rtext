@@ -1,5 +1,5 @@
 #### tools ==============================================================================
-context("tools")
+context("text_tools")
 
 test_that("text_read", {
   expect_true( Encoding(text_read(dp_tf("test_latin1.txt"))) == "UTF-8")

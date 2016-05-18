@@ -2,6 +2,7 @@
 
 export(dp_ls)
 export(dp_tf)
+export(rbind_fill)
 export(rtext)
 export(rtext_get_character)
 export(rtext_tokenizer)

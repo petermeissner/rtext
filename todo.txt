@@ -1,5 +1,6 @@
+- add data to rtext
 - document methods of rtext
-- add function to rtext_tokenizer
+- have a look at rite again for text editor example
 
 
 

@@ -9,14 +9,12 @@ version 0.4.0 // 2016-05-14 ...
     
 * FEATURE
     - rtext : text is tokenized into characters and then stored in characters
-    - rtext : insert()
-    - rtext : insert()
-    - rtext : delete()
-    - rtext : replace()
-    - rtext : save()
-    - rtext : reload()
-    - rtext : save_as()
-    
+    - rtext : char_add()
+    - rtext : char_delete()
+    - rtext : char_replace()
+    - rtext : text_hash()
+    - rtext : hash_text()
+
 
 version 0.3.4 // 2016-05-13 ... 
 --------------------------------------------------------------------------

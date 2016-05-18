@@ -74,16 +74,25 @@ rtext <-
   #### private =================================================================
   private = list(
     text = function(){
-      paste0(private$chars, collapse = "")
+      paste0(private$char, collapse = "")
     },
     tokenize = function(){
       self$token <- self$tokenizer(private$text())
     },
-    chars      = character(0),
-    chars_data = data.frame(),
+    char       = character(0),
+    char_data  = data.frame(),
     token      = data.frame(),
+    token_data = data.frame(),
+    hash       = character(),
+    hasht      = character(),
+    hashd      = character(),
     hash_text  = function(){
-      self$hash <- digest::digest(private$chars)
+      private$hasht <- digest::digest(private$char)
+      private$hash  <- digest::digest(list(private$hashd, private$hasht))
+    },
+    hash_data  = function(){
+      private$hashd <- digest::digest(private$char_data)
+      private$hash  <- digest::digest(list(private$hashd, private$hasht))
     }
   ),
 
@@ -98,7 +107,6 @@ rtext <-
     encoding   = NA,
     sourcetype = NA,
     id         = NULL,
-    hash       = NULL,
 
     #### startup function ====================================================
 
@@ -115,17 +123,17 @@ rtext <-
 
       ##### read in text // set field: sourcetype
       if(is.null(text) & is.null(file)){ # nothing at all
-        private$chars <- ""
+        private$char <- ""
         self$sourcetype <- "empty"
       }else if(is.null(text) & !is.null(file)){ # read from file
-        private$chars <- text_read(file, tokenize = "", encoding = encoding)
+        private$char <- text_read(file, tokenize = "", encoding = encoding)
         self$sourcetype <- "file"
       }else{ # take text as supplied
-        private$chars <-
+        private$char <-
           unlist(strsplit(paste0(iconv(text, encoding, "UTF-8"), collapse = "\n"),""))
         self$sourcetype <- "text"
       }
-      self$hash <- private$hash_text()
+      private$hash <- private$hash_text()
 
       ##### set field: file
       if( !is.null(file) ){
@@ -133,7 +141,7 @@ rtext <-
       }
 
       ##### Encoding
-      Encoding(private$chars) <- encoding
+      Encoding(private$char) <- encoding
       self$encoding <- "UTF-8"
 
       #### tokenize
@@ -158,7 +166,7 @@ rtext <-
       res <-
         list(
           file       = self$file,
-          character  = length(private$chars),
+          character  = length(private$char),
           token      = dim(self$token),
           encoding   = self$encoding,
           sourcetype = self$sourcetype
@@ -166,13 +174,13 @@ rtext <-
       return(res)
       },
     # show text
-    show_text = function(length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
-      text_show(x=self$get_text(Inf), length=length, from=from, to=to, coll=coll, wrap=wrap)
+    text_show = function(length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
+      text_show(x=self$text_get(Inf), length=length, from=from, to=to, coll=coll, wrap=wrap)
     },
-    get_text = function(length=100, from=NULL, to=NULL, split=NULL){
+    text_get = function(length=100, from=NULL, to=NULL, split=NULL){
       hash <- paste(self$text_hash(), deparse(match.call()))
       if( !(hash %in% ls(dp_storage)) ){
-        res <- rtext_get_character(chars=private$chars, length=length, from=from, to=to)
+        res <- rtext_get_character(chars=private$char, length=length, from=from, to=to)
         res <- paste0(res, collapse = "")
         if( !is.null(split) ){
           res <- unlist(strsplit(res, split = split))
@@ -183,129 +191,135 @@ rtext <-
         return(get(hash, envir = dp_storage))
       }
     },
-    # get_character
-    get_character = function(length=100, from=NULL, to=NULL){
-      rtext_get_character(chars=private$chars, length=length, from=from, to=to)
+    # char_get
+    char_get = function(length=100, from=NULL, to=NULL){
+      rtext_get_character(chars=private$char, length=length, from=from, to=to)
     },
     # add
-    add = function(what=NULL, after=NULL){
-      if(is.null(after)){
-        after <- length(private$chars)
+    char_add = function(what=NULL, after=NULL){
+      if( is.null(after) ) {
+        private$char <- c(private$char, unlist(strsplit(what,"")))
+      }else if ( after==0 ) {
+        private$char <- c(unlist(strsplit(what,"")), private$char)
+      }else{
+        index  <- seq_along(private$char)
+        part1  <- private$char[index <= after]
+        part2  <- private$char[index >  after]
+        private$char <- c( part1, unlist(strsplit(what, "")), part2)
       }
-      index  <- seq_along(private)
-      part1  <- index[index <= after]
-      part2  <- index[index >  after]
-      private$chars <-
-        c( part1, unlist(strsplit(what,"")), part2)
+      # necessary updates
       private$hash_text()
+      # return for piping
       invisible(self)
     },
     # delete
-    delete = function(from, to){
+    char_delete = function(n=NULL, from=NULL, to=NULL){
+      between <- function(x,y,z){x>=y & x<=z}
+      if( is.null(from) & is.null(to)  & !is.null(n)){ # only n
+        iffer <- private$char[seq_along(private$char) <= length(private$char)-n]
 
+        private$char <-
+          private$char[iffer]
+      }else if( !is.null(from) & is.null(to)  & is.null(n)){ # only from
+        iffer <-
+            seq_along(private$char) < from
+
+        private$char <-
+          private$char[iffer]
+      }else if( is.null(from) & !is.null(to) & is.null(n) ){ # only to
+        iffer <-
+          seq_along(private$char) > to
+
+        private$char <-
+          private$char[iffer]
+      }else if( !is.null(from) & !is.null(to)  & is.null(n)){ # from + to
+        iffer <- seq_along(private$char) > to | seq_along(private$char) < from
+
+        private$char <-
+          private$char[iffer]
+      }else if( !is.null(from) & is.null(to)  & !is.null(n) ){ # from + n
+        if( n > 0 ){
+          n     <-
+            bind_between(n-1, 0, length(private$char))
+
+          iffer <-
+            seq_along(private$char) > from+n | seq_along(private$char) < from
+
+          private$char <-
+            private$char[iffer]
+        }
+      }else if( is.null(from) & !is.null(to)  & !is.null(n) ){ # to + n
+        if( n > 0 ){
+          n     <-
+            bind_between(n-1, 0, length(private$char))
+
+          iffer <-
+            seq_along(private$char) > to | seq_along(private$char) < to-n
+
+          private$char <-
+            private$char[iffer]
+        }
+      }
+      # necessary updates
+      private$hash_text()
+      # return for piping
+      invisible(self)
     },
     # replace
-    replace = function(from, to, replacement, regex){
-
+    char_replace = function(from=NULL, to=NULL, by=NULL){
+      # check input
+      stopifnot( !is.null(from), !is.null(to), !is.null(by) )
+      # doing-duty-to-do
+      index <- seq_along(private$char)
+      private$char <-
+        c(
+          private$char[index < from],
+          unlist(strsplit(by, "")),
+          private$char[index > to]
+        )
+      # necessary updates
+      private$has_text()
+      # return for piping
+      invisible(self)
+    },
+    # code characters
+    char_code = function(x=NULL, val=NULL, from=NULL, to=NULL){
+      # update data already in self$char_data
+      iffer <- char_data$i > 1
+      private$char_data[iffer, x] <- rep(val, sum(iffer))
+      # add data not already in self$char_data
+      index        <- seq(from, to)
+      index        <- index[ !(index %in% private$char_data) ]
+      add_df       <- data.frame(i=index)
+      add_df[[x]]  <- val
+      private$char <- rbind_fill(private$char, add_df)
+      # necessary updates
+      private$hash_data()
+      # return for piping
+      invisible(self)
     },
     # save
     save = function(){
-
+      message("TBD")
     },
     # reload
-    reload = function(){
-
+    load = function(){
+      message("TBD")
     },
     # save_as
     save_as = function(){
-
+      message("TBD")
     },
+    # text_hash
     text_hash = function(){
-      self$hash
+      private$hash
+    },
+    # data_hash
+    data_hash = function(){
+      private$hash
     }
   )
 )
-
-
-
-#' storage for internals
-dp_storage <- new.env(parent = emptyenv())
-
-
-#' list of ready to use functions for rtext initialization and tokenization
-#' @export
-rtext_tokenizer <- list(
-  words = function(x){text_tokenize_words(x, non_token = TRUE)}
-)
-
-
-#' function to get text from rtext object
-#'
-#' @param chars the chars field
-#' @param length number of characters to be returned
-#' @param from first character to be returned
-#' @param to last character to be returned
-#' @export
-rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
-  # helper functions
-  bind_to_charrange <- function(x){bind_between(x, 1, length(chars))}
-  bind_length       <- function(x){bind_between(x, 0, length(chars))}
-  return_from_to    <- function(from, to, split){
-    res  <- chars[seq(from=from, to=to)]
-    return(res)
-  }
-  # only length
-  if( !is.null(length) & ( is.null(from) & is.null(to) ) ){
-    length <- max(0, min(length, length(chars)))
-    length <- bind_length(length)
-    if(length==0){
-      return("")
-    }
-    from   <- 1
-    to     <- length
-    return(return_from_to(from, to, split))
-  }
-  # from and to (--> ignores length argument)
-  if( !is.null(from) & !is.null(to) ){
-    from <- bind_to_charrange(from)
-    to   <- bind_to_charrange(to)
-    return(return_from_to(from, to, split))
-  }
-  # length + from
-  if( !is.null(length) & !is.null(from) ){
-    if( length<=0 | from + length <=0 ){
-      return("")
-    }
-    to   <- from + length-1
-    if((to < 1 & from < 1) | (to > length(chars) & from > length(chars) )){
-      return("")
-    }
-    to   <- bind_to_charrange(to)
-    from <- bind_to_charrange(from)
-    return(return_from_to(from, to, split))
-  }
-  # length + to
-  if( !is.null(length) & !is.null(to) ){
-    if( length<=0 | to - (length-1) > length(chars) ){
-      return("")
-    }
-    from <- to - length + 1
-    if((to < 1 & from < 1) | (to > length(chars) & from > length(chars) )){
-      return("")
-    }
-    from <- bind_to_charrange(from)
-    to   <- bind_to_charrange(to)
-    return(return_from_to(from, to, split))
-  }
-  stop("rtext$get_character() : I do not know how to make sense of given length, from, to argument values passed")
-}
-
-
-
-
-
-
-
 
 
 

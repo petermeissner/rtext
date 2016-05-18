@@ -49,3 +49,32 @@ bind_between <- function(x, min, max){
   x[x>max] <- max
   x
 }
+
+
+#' function for binding data.frames even if names do not match
+#' @param df1 first data.frame to rbind
+#' @param df2 second data.frame to rbind
+#' @export
+rbind_fill <- function(df1=data.frame(), df2=data.frame()){
+  names_df <- c(names(df1), names(df2))
+  df1[, names_df[!(names_df %in% names(df1))]] <- rep(NA, dim(df1)[1])
+  df2[, names_df[!(names_df %in% names(df2))]] <- rep(NA, dim(df2)[1])
+  rbind(df1, df2)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -63,6 +63,12 @@ rbind_fill <- function(df1=data.frame(), df2=data.frame()){
 }
 
 
+#' function to get hash for R objects
+#' @export
+dp_hash <- function(x){
+  digest::digest(x, algo="xxhash32")
+}
+
 
 
 

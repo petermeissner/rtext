@@ -113,5 +113,37 @@ vector_delete <- function(x, n=NULL, from=NULL, to=NULL){
 
 
 
+#' function that loads saved rtext
+#' @param save_file a saved rtext object in Rdata format
+#' @export
+load_into <- function(save_file){
+  tmp_env <- new.env(parent = emptyenv())
+  load(save_file, envir = tmp_env)
+  lapply(tmp_env, I)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

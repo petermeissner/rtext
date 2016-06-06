@@ -15,8 +15,6 @@ res_x <-
     times = 10
   )
 
-res_x
-
 
 y <- list()
 for (i in 1:100) {
@@ -38,9 +36,6 @@ res_y <-
     times = 10
   )
 
-res_y
-
-
 z <- sample(letters, 10^6, replace = TRUE)
 res_z <-
   microbenchmark::microbenchmark(
@@ -52,10 +47,12 @@ res_z <-
     digest::digest(z, "xxhash32"),
     digest::digest(z, "xxhash64"),
     digest::digest(z, "murmur32"),
-    dp_hash(x),
+    dp_hash(z),
     times = 10
   )
 
+res_x
+res_y
 res_z
 
 

@@ -1,9 +1,106 @@
 #### rtext ==============================================================================
+context("rtext save and load")
+test_that("rtext save", {
+  expect_error({
+    dings <- rtext$new(
+      text="1234567890"
+    )
+    dings$save()
+  })
+  expect_error({
+    dings <- rtext$new(
+      text="1234567890",
+      save_file=tempfile()
+    )
+    dings$save()
+  }, NA)
+  expect_error({
+    dings <-
+      rtext$new(
+        text_file=dp_tf(5),
+        save_file=tempfile()
+      )
+    dings$save()
+  }, NA)
+  expect_error({
+    dings <-
+      rtext$new(
+        text="1234567890",
+        text_file=dp_tf(1),
+        save_file=tempfile()
+      )
+    dings$save()
+  }, NA)
+})
 
+test_that("rtext load is same as save", {
+  expect_error({
+    save_file <- tempfile(fileext = "Rdata")
+    dings <-
+      rtext$new( text="1234567890" )
+    dings$save(file = save_file)
+    dings$load()
+  })
 
-context("rtext char_code")
-test_that("rtext char_code", {
-  expect_true(TRUE)
+  expect_error({
+    save_file <- tempfile(fileext = "Rdata")
+    dings <-
+      rtext$new( text="1234567890" )
+    dings$save(file = save_file)
+    dings$load(save_file)
+  },NA)
+
+  expect_error({
+    save_file <- tempfile(fileext = "Rdata")
+    dings <-
+      rtext$new( text="1234567890" )
+    dings$save(file = save_file)
+    dings$load(file = save_file)
+  },NA)
+
+  expect_true({
+    save_file <- tempfile(fileext = "Rdata")
+    dings <-
+      rtext$new(
+        text      = "1234567890",
+        text_file = dp_tf(5),
+        tokenizer = function(x){strsplit(x,"\n")},
+        encoding  = "latin1",
+        id        = "bollocks",
+        save_file = tempfile()
+      )
+
+    dongs <- dings$clone()
+    dongs$save(file = save_file)
+
+    dings <- rtext$new( text="" )
+    dings$load(save_file)
+
+    all(
+      dings$encoding             == dongs$encoding,
+      dings$id                   == dongs$id,
+      dings$sourcetype           == dongs$sourcetype,
+      as.character(dings$info()) == as.character(dongs$info()),
+      identical(dings$save_file, dongs$save_file),
+      identical(dings$text_file, dongs$text_file),
+      deparse(dings$tokenizer)   == deparse(dongs$tokenizer),
+      dings$text_get(Inf)        == dongs$text_get(Inf),
+      dings$char_get(Inf)        == dongs$char_get(Inf)
+    )
+  })
+
+  expect_true({
+    save_file <- tempfile(fileext = "Rdata")
+    dings     <- rtext$new(save_file=save_file)
+    dings$save()
+    tmp_env   <-  new.env(parent = emptyenv())
+    tmp <- load_into(save_file)
+
+    all(
+      !is.null(tmp[[1]]$session_info$dp_version),
+      !is.null(tmp[[1]]$session_info$r_version)
+    )
+  })
 })
 
 
@@ -53,6 +150,9 @@ test_that("rtext initialization", {
   expect_error( rtext$new(), NA)
   expect_error( rtext$new(NULL), NA)
   expect_error( rtext$new(""), NA)
+  expect_error( rtext$new(text_file=dp_tf(1)), NA)
+  expect_error( rtext$new(text="", text_file=dp_tf(1)), NA)
+  expect_error( rtext$new(text=readLines(dp_tf(1))), NA)
 })
 
 

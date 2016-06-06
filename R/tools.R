@@ -47,7 +47,7 @@ shift <- function(x, n=0, default=NA, invert=FALSE){
 bind_between <- function(x, min, max){
   x[x<min] <- min
   x[x>max] <- max
-  x
+  return(x)
 }
 
 
@@ -66,16 +66,20 @@ rbind_fill <- function(df1=data.frame(), df2=data.frame()){
 #' function to get hash for R objects
 #' @export
 dp_hash <- function(x){
-  digest::digest(x, algo="xxhash32")
+  digest::digest(x, algo="xxhash64")
 }
 
 
 
 
-
-
-
-
+#' function that checks is values are in between values
+#' @export
+#' @param x input vector
+#' @param y lower bound
+#' @param z upper bound
+is_between <- function(x,y,z){
+  return(x>=y & x<=z)
+}
 
 
 

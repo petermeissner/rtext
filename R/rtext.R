@@ -79,20 +79,30 @@ rtext <-
     tokenize = function(){
       self$token <- self$tokenizer(private$text())
     },
-    char       = character(0),
-    char_data  = data.frame(),
-    token      = data.frame(),
-    token_data = data.frame(),
-    hash       = character(),
-    hasht      = character(),
-    hashd      = character(),
-    hash_text  = function(){
-      private$hasht <- digest::digest(private$char)
-      private$hash  <- digest::digest(list(private$hashd, private$hasht))
+
+    char        = character(0),
+    char_data   = data.frame(),
+    token       = data.frame(),
+    token_data  = data.frame(),
+
+    hashed_all  = character(),
+    hashed_text = character(),
+    hashed_data = character(),
+
+    hash_text   = function(){
+      private$hashed_text <- dp_hash(private$char)
+      private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
     },
+
     hash_data  = function(){
-      private$hashd <- digest::digest(private$char_data)
-      private$hash  <- digest::digest(list(private$hashd, private$hasht))
+      private$hashed_data <- dp_hash(private$char_data)
+      private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
+    },
+
+    hash_all  = function(){
+      private$hashed_data <- dp_hash(private$char_data)
+      private$hashed_text <- dp_hash(private$char)
+      private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
     }
   ),
 
@@ -102,42 +112,48 @@ rtext <-
 
 
     #### puplic data fields ====================================================
-    file       = NA,
+    text_file  = NA,
     tokenizer  = NA,
     encoding   = NA,
     sourcetype = NA,
     id         = NULL,
+    save_file  = NULL,
 
     #### startup function ====================================================
 
     initialize =
       function(
-        text       = NULL,
-        file       = NULL,
-        tokenizer  = rtext_tokenizer$words,
-        encoding   = "UTF-8",
-        id         = NULL,
-        tokenize_by= NULL
+        text        = NULL,
+        text_file   = NULL,
+        tokenizer   = rtext_tokenizer$words,
+        encoding    = "UTF-8",
+        id          = NULL,
+        tokenize_by = NULL,
+        save_file   = NULL
       )
     {
 
       ##### read in text // set field: sourcetype
-      if(is.null(text) & is.null(file)){ # nothing at all
+      if(is.null(text) & is.null(text_file)){ # nothing at all
         private$char <- ""
         self$sourcetype <- "empty"
-      }else if(is.null(text) & !is.null(file)){ # read from file
-        private$char <- text_read(file, tokenize = "", encoding = encoding)
-        self$sourcetype <- "file"
+      }else if(is.null(text) & !is.null(text_file)){ # read from text_file
+        private$char <- text_read(text_file, tokenize = "", encoding = encoding)
+        self$sourcetype <- "text_file"
       }else{ # take text as supplied
         private$char <-
           unlist(strsplit(paste0(iconv(text, encoding, "UTF-8"), collapse = "\n"),""))
         self$sourcetype <- "text"
       }
-      private$hash <- private$hash_text()
 
-      ##### set field: file
-      if( !is.null(file) ){
-        self$file <- file
+      ##### set field: text_file
+      if( !is.null(text_file) ){
+        self$text_file <- text_file
+      }
+
+      ##### set field: save_file
+      if( !is.null(save_file) ){
+        self$save_file <- save_file
       }
 
       ##### Encoding
@@ -155,8 +171,10 @@ rtext <-
 
       ##### id
       if( is.null(id) ){
-        self$id <- digest::digest(self)
+        self$id <- dp_hash(self)
       }
+
+      private$hash_all()
     }
       ,
 
@@ -165,7 +183,7 @@ rtext <-
     info = function(){
       res <-
         list(
-          file       = self$file,
+          text_file  = self$text_file,
           character  = length(private$char),
           token      = dim(self$token),
           encoding   = self$encoding,
@@ -192,7 +210,10 @@ rtext <-
       }
     },
     # char_get
-    char_get = function(length=100, from=NULL, to=NULL){
+    char_get = function(length=100, from=NULL, to=NULL, raw=FALSE){
+      if(raw | identical(length, TRUE) ){
+        return(private$char)
+      }
       rtext_get_character(chars=private$char, length=length, from=from, to=to)
     },
     # add
@@ -214,52 +235,7 @@ rtext <-
     },
     # delete
     char_delete = function(n=NULL, from=NULL, to=NULL){
-      between <- function(x,y,z){x>=y & x<=z}
-      if( is.null(from) & is.null(to)  & !is.null(n)){ # only n
-        iffer <- private$char[seq_along(private$char) <= length(private$char)-n]
-
-        private$char <-
-          private$char[iffer]
-      }else if( !is.null(from) & is.null(to)  & is.null(n)){ # only from
-        iffer <-
-            seq_along(private$char) < from
-
-        private$char <-
-          private$char[iffer]
-      }else if( is.null(from) & !is.null(to) & is.null(n) ){ # only to
-        iffer <-
-          seq_along(private$char) > to
-
-        private$char <-
-          private$char[iffer]
-      }else if( !is.null(from) & !is.null(to)  & is.null(n)){ # from + to
-        iffer <- seq_along(private$char) > to | seq_along(private$char) < from
-
-        private$char <-
-          private$char[iffer]
-      }else if( !is.null(from) & is.null(to)  & !is.null(n) ){ # from + n
-        if( n > 0 ){
-          n     <-
-            bind_between(n-1, 0, length(private$char))
-
-          iffer <-
-            seq_along(private$char) > from+n | seq_along(private$char) < from
-
-          private$char <-
-            private$char[iffer]
-        }
-      }else if( is.null(from) & !is.null(to)  & !is.null(n) ){ # to + n
-        if( n > 0 ){
-          n     <-
-            bind_between(n-1, 0, length(private$char))
-
-          iffer <-
-            seq_along(private$char) > to | seq_along(private$char) < to-n
-
-          private$char <-
-            private$char[iffer]
-        }
-      }
+      private$char <- vector_delete(x = private$char, n=n, from=from, to=to)
       # necessary updates
       private$hash_text()
       # return for piping
@@ -299,24 +275,95 @@ rtext <-
       invisible(self)
     },
     # save
-    save = function(){
-      message("TBD")
+    save = function(file=NULL, id=c("self_id", "hash")){
+      # gather information
+      tb_saved <-
+        list(
+          id           = self$id,
+          char         = private$char,
+          char_data    = private$char_data,
+          text_file         = self$text_file,
+          encoding     = self$encoding,
+          save_file    = self$save_file,
+          tokenizer    = self$tokenizer,
+          sourcetype   = self$sourcetype,
+          token        = private$token,
+          token_data   = private$token_data,
+          session_info = list(
+            dp_version=packageVersion("diffrprojects"),
+            r_version=paste(version$major, version$minor, sep="."),
+            version=version
+          )
+        )
+      class(tb_saved) <- c("rtext_save","list")
+      # handle id option
+      if( id[1] == "self_id"){
+        id <- self$id
+      }else if( id[1] == "hash"){
+        id <- self$hash()
+      }else{
+        id <- id[1]
+      }
+      id <- paste0("rtext_", id, collapse = "_")
+      # handle file option
+      if( is.null(self$save_file) & is.null(file) ){
+        stop("rtext$save() : Neither file nor save_file given, do not know where to store file.")
+      }else if( !is.null(file) ){
+        file <- file
+      }else if( !is.null(self$save_file) ){
+        file <- self$save_file
+      }
+      # save to file
+      assign(id, tb_saved)
+      base::save(list = id, file = file)
+      # return for piping
+      invisible(self)
     },
-    # reload
-    load = function(){
-      message("TBD")
+    # (re)load
+    load = function(file=NULL){
+      # handle file option
+      if( is.null(file) ){
+        stop("rtext$load() : file is not given, do not know where to load file from.")
+      }else{
+        file <- file
+      }
+      tmp <- load_into(file)[[1]]
+
+      # setting public
+      self$id         <- tmp$id
+      self$text_file  <- tmp$text_file
+      self$tokenizer  <- tmp$tokenizer
+      self$encoding   <- tmp$encoding
+      self$sourcetype <- tmp$sourcetype
+      self$save_file  <- tmp$save_file
+
+      # setting private
+      private$char       <- tmp$char
+      private$char_data  <- tmp$char_data
+      private$token      <- tmp$token
+      private$token_data <- tmp$token_data
+
+      # updating rest
+      private$hash_all()
+
+      # return for piping
+      invisible(self)
     },
     # save_as
-    save_as = function(){
+    export = function(){
       message("TBD")
     },
     # text_hash
     text_hash = function(){
-      private$hash
+      private$hashed_text
     },
     # data_hash
     data_hash = function(){
-      private$hash
+      private$hashed_data
+    },
+    # hash
+    hash = function(){
+      private$hashed_all
     }
   )
 )

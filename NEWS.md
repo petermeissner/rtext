@@ -5,9 +5,11 @@ version 0.4.0 // 2016-05-14 ...
 --------------------------------------------------------------------------
 
 * BUGFIXES
-    - 
+    
     
 * FEATURE
+    - rtext : save()
+    - rtext : load()
     - rtext : text is tokenized into characters and then stored in characters
     - rtext : char_add()
     - rtext : char_delete()

@@ -30,7 +30,6 @@ Depends:
 License: MIT + file LICENSE
 LazyData: true
 Imports:
-    stringr(>= 0.6.2),
     R6(>= 2.1.2)
 Suggests:
     testthat,

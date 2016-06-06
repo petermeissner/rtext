@@ -331,6 +331,54 @@ text_extract_all <-
 
 
 
+#' function for collapsing text vectors
+#' @param x object to be collapsed
+#' @param sep separator between text parts
+#' @export
+text_collapse <- function (x, sep) {
+  UseMethod("text_collapse")
+}
+
+#' default method for text_collapse()
+#' @rdname text_collapse
+#' @method text_collapse default
+#' @export
+text_collapse.default <- function(x, sep=""){
+  paste0(x, sep="", collapse = sep)
+}
+
+#' text_collapse() method for lists
+#' @export
+#' @rdname text_collapse
+#' @method text_collapse list
+text_collapse.list <- function(x, sep=""){
+  if(is.list(x)){
+    x <- lapply(x, text_collapse, sep=sep)
+    x <- unlist(x, recursive = FALSE)
+  }
+  text_collapse(x, sep=sep)
+}
+
+
+#' text_collapse() method for data.frames
+#' @export
+#' @rdname text_collapse
+#' @method text_collapse data.frame
+text_collapse.data.frame <- function(x, sep=""){
+  if(is.data.frame(x)){
+    x <- apply(x, 1, text_collapse, sep=sep)
+    x <- unlist(x, recursive = FALSE)
+  }else{
+    if(length(sep)>1){
+      sep <- sep[2]
+    }
+  }
+  text_collapse(x, sep=sep)
+}
+
+
+
+
 
 
 

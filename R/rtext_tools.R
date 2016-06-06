@@ -71,3 +71,47 @@ rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
   stop("rtext$get_character() : I do not know how to make sense of given length, from, to argument values passed")
 }
 
+#' function used to delete parts from a vector
+#' @param x input vector
+#' @param n number of items to be deleted
+#' @param from from which position onwards elements should be deleted
+#' @param to up to which positions elements should be deleted
+#' @export
+vector_delete <- function(x, n=NULL, from=NULL, to=NULL){
+  # shortcuts
+  if( is.null(n) ){
+    if(is.null(from) & is.null(to)){
+      return(x)
+    }
+  }else{
+    if( n==0){
+      return(x)
+    }
+  }
+  # iffer
+  iffer <- TRUE
+  if( is.null(from) & is.null(to)  & !is.null(n) ){ # only n
+    iffer <- seq_along(x) > length(x) | seq_along(x) <= length(x)-n
+  }else if( !is.null(from) & is.null(to)  & is.null(n) ){ # only from
+    iffer   <- seq_along(x) < from
+  }else if( is.null(from) & !is.null(to) & is.null(n) ){ # only to
+    iffer   <- seq_along(x) > to
+  }else if( !is.null(from) & !is.null(to)  & is.null(n) ){ # from + to
+    iffer   <- seq_along(x) > to | seq_along(x) < from
+  }else if( !is.null(from) & is.null(to)  & !is.null(n) ){ # from + n
+    if( n > 0 ){
+      n     <- bind_between(n-1, 0, length(x))
+      iffer <- seq_along(x) > from+n | seq_along(x) < from
+    }
+  }else if( is.null(from) & !is.null(to)  & !is.null(n) ){ # to + n
+      iffer <- seq_along(x) > to | seq_along(x) <= to-n
+  }
+  # return
+  return( x[iffer] )
+}
+
+
+
+
+
+

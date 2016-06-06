@@ -101,6 +101,14 @@ test_that("rtext load is same as save", {
       !is.null(tmp[[1]]$session_info$r_version)
     )
   })
+  expect_true({
+    save_file <- tempfile(fileext = "Rdata")
+    dings     <- rtext$new(text_file=dp_tf(4), encoding="latin1")
+    dings$save(save_file)
+    dongs <- rtext$new()$load(save_file)
+
+    all(dings$text_get() == dongs$text_get())
+  })
 })
 
 

@@ -1,6 +1,19 @@
 NEWS diffrprojects
 ==========================================================================
 
+
+
+version 0.4.1 // 2016-06-06 ... 
+--------------------------------------------------------------------------
+
+* BUGFIXES
+    - rtext : text_get() and char_get() would return text decently encoded as UTF-8 nut fail to tell Windows about that
+    
+* FEATURE
+
+
+
+
 version 0.4.0 // 2016-05-14 ... 
 --------------------------------------------------------------------------
 
@@ -18,6 +31,8 @@ version 0.4.0 // 2016-05-14 ...
     - rtext : hash_text()
 
 
+
+
 version 0.3.4 // 2016-05-13 ... 
 --------------------------------------------------------------------------
 
@@ -28,6 +43,8 @@ version 0.3.4 // 2016-05-13 ...
     - dp_text : !!! rename to rtext :-) !!!
 
 
+
+
 version 0.3.3 // 2016-05-09 ... 
 --------------------------------------------------------------------------
 
@@ -36,6 +53,8 @@ version 0.3.3 // 2016-05-09 ...
     
 * FEATURE
     - dp_text() : add tokenization to initializetion stage
+ 
+ 
     
 
 version 0.3.2 // 2016-05-09 ... 
@@ -46,6 +65,8 @@ version 0.3.2 // 2016-05-09 ...
     - tools : text_tokenize_words()
     
 
+
+
 version 0.2.0 // 2016-04-28 ... 
 --------------------------------------------------------------------------
 
@@ -55,6 +76,8 @@ version 0.2.0 // 2016-04-28 ...
     - dp_text : get_text()
 
 
+
+
 version 0.1.0 // 2016-04-27 ... 
 --------------------------------------------------------------------------
 
@@ -62,6 +85,8 @@ version 0.1.0 // 2016-04-27 ...
     - dp_text : an object for text (basic layout)
     - tools : text_read() function for reading text
     - tools : text_snippet() function for getting snippet of text
+
+
 
 
 version 0.0.1 // 2016-04-26 ... 

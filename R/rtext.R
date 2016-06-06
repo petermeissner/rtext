@@ -200,21 +200,29 @@ rtext <-
       if( !(hash %in% ls(dp_storage)) ){
         res <- rtext_get_character(chars=private$char, length=length, from=from, to=to)
         res <- paste0(res, collapse = "")
+        Encoding(res) <- self$encoding
         if( !is.null(split) ){
           res <- unlist(strsplit(res, split = split))
+          Encoding(res) <- self$encoding
         }
         assign(hash, res, envir = dp_storage)
         return(res)
       }else{
-        return(get(hash, envir = dp_storage))
+        res           <- get(hash, envir = dp_storage)
+        Encoding(res) <- self$encoding
+        return(res)
       }
     },
     # char_get
     char_get = function(length=100, from=NULL, to=NULL, raw=FALSE){
       if(raw | identical(length, TRUE) ){
-        return(private$char)
+        res <- private$char
+        Encoding(res) <- self$encoding
+        return(res)
       }
-      rtext_get_character(chars=private$char, length=length, from=from, to=to)
+      res <- rtext_get_character(chars=private$char, length=length, from=from, to=to)
+      Encoding(res) <- self$encoding
+      return(res)
     },
     # add
     char_add = function(what=NULL, after=NULL){

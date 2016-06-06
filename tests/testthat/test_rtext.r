@@ -1,5 +1,53 @@
 #### rtext ==============================================================================
 
+
+context("rtext char_code")
+test_that("rtext char_code", {
+  expect_true(TRUE)
+})
+
+
+context("rtext hash")
+test_that("rtext data_hash does not change on char manipulation", {
+  expect_true({
+    dings <- rtext$new(text="1234567890")
+    hash1 <- dings$data_hash()
+    hash2 <- dings$data_hash()
+    dings$char_add("a")
+    hash3 <- dings$data_hash()
+    dings$char_delete(1)
+    hash4 <- dings$data_hash()
+    all.equal(hash1, hash2, hash3, hash4)
+  })
+})
+test_that("rtext text_hash does not change on subsequent calls", {
+  expect_true({
+    dings <- rtext$new(text="1234567890")
+    hash1 <- dings$text_hash()
+    char1 <- dings$char_get(raw=TRUE)
+    dings$char_add("")
+    hash2 <- dings$text_hash()
+    char2 <- dings$char_get(raw=TRUE)
+    hash1 == hash2
+  })
+})
+test_that("rtext text_hash does change on char manipulation", {
+  expect_true({
+    dings <- rtext$new(text="1234567890")
+    hash1 <- dings$text_hash()
+    char1 <- dings$char_get(raw=TRUE)
+    dings$char_add("a")
+    hash2 <- dings$text_hash()
+    dings$char_delete(1)
+    char3 <- dings$char_get(raw=TRUE)
+    hash3 <- dings$text_hash()
+    hash1 != hash2 & hash2 != hash3 & hash3 == hash1
+  })
+})
+
+
+
+
 context("rtext init")
 test_that("rtext initialization", {
   expect_error( rtext$new(), NA)
@@ -9,7 +57,7 @@ test_that("rtext initialization", {
 
 
 
-context("rtext add")
+context("rtext char_add")
 test_that("rtext add", {
   expect_true( rtext$new(text="----")$char_add("///"   )$text_get()=="----///" )
   expect_true( rtext$new(text="----")$char_add("///", 0)$text_get()=="///----" )
@@ -19,8 +67,8 @@ test_that("rtext add", {
 
 
 
-context("rtext delete")
-test_that("rtext delete", {
+context("rtext char_delete")
+test_that("rtext char_delete", {
  expect_true( rtext$new(text="12345")$char_delete(from= 1)$text_get()=="")
  expect_true( rtext$new(text="12345")$char_delete(from=-2)$text_get()=="")
  expect_true( rtext$new(text="12345")$char_delete(from= 3)$text_get()=="12")
@@ -48,6 +96,15 @@ test_that("rtext delete", {
  expect_true( rtext$new(text="12345")$char_delete(from =  1, to = 5)$text_get()=="")
  expect_true( rtext$new(text="12345")$char_delete(from =  4, to = 4)$text_get()=="1235")
  expect_true( rtext$new(text="12345")$char_delete(from =  5, to = 4)$text_get()=="12345")
+
+ expect_true(
+   rtext$new(text="12345")$char_delete(n = 0, to   = 5)$text_get()==
+     rtext$new(text="12345")$char_delete(0)$text_get()
+  )
+ expect_true(
+   rtext$new(text="12345")$char_delete(n = 3, to   = 5)$text_get()==
+     rtext$new(text="12345")$char_delete(3)$text_get()
+ )
 })
 
 
@@ -163,6 +220,25 @@ test_that("get_text works also with junk input", {
       rtext$new(text="1\n2")$text_get(split="\n")==c("1","2")
     )
   )
+  expect_true(
+    rtext$new(text="12345")$char_delete(n = 1)$text_get() != "NANANANA"
+  )
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

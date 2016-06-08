@@ -1,4 +1,57 @@
 #### rtext ==============================================================================
+context("rtext code")
+test_that("rtext code", {
+  expect_error({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1:4)
+  })
+  expect_error({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1:4, 1)
+  })
+  expect_error({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 0, 1)
+  })
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1)
+    dings$char_code("var2", 3, 1)
+    res <- dings$char_get_code()
+    all(
+      dim(res)==c(2,4),
+      c("var1", "var2") %in% names(res)
+    )
+  })
+})
+
+test_that("rtext code updates on char changes", {
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1)
+    dings$char_delete(1, from = 1)
+    res <- dings$char_get_code()
+    dim(res)[1]==0
+  })
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1)
+    dings$char_add("a",0)
+    dings$char_get()
+    res <- dings$char_get_code()
+    identical(res, data.frame(char="1", i=2, var1=1))
+  })
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1)
+    dings$char_replace(1,1,"a")
+    dings$char_get()
+    res <- dings$char_get_code()
+    identical(res, data.frame(char="a", i=1, var1=1))
+  })
+})
+
+
 context("rtext save and load")
 test_that("rtext save", {
   expect_error({
@@ -171,6 +224,18 @@ test_that("rtext add", {
   expect_true( rtext$new(text="----")$char_add("///", 0)$text_get()=="///----" )
   expect_true( rtext$new(text="----")$char_add("///", 2)$text_get()=="--///--" )
   expect_true( rtext$new(text="----")$char_add("/")$char_add("/")$text_get()=="----//" )
+  expect_true( rtext$new(text="----")$char_add("ä", Inf)$text_get()=="----ä" )
+})
+
+context("rtext char_replace")
+test_that("rtext add", {
+  expect_true( rtext$new(text="12345")$char_replace(1,1,"///" )$text_get()=="///2345" )
+  expect_true( rtext$new(text="12345")$char_replace(5,5,"///" )$text_get()=="1234///" )
+  expect_true( rtext$new(text="12345")$char_replace(3,3,"///" )$text_get()=="12///45" )
+  expect_true( rtext$new(text="12345")$char_replace(1,5,"///" )$text_get()=="///"     )
+  expect_true( rtext$new(text="12345")$char_replace(0,9,"///" )$text_get()=="///"     )
+  expect_true( rtext$new(text="12345")$char_replace(0,0,"///" )$text_get()=="///12345")
+  expect_true( rtext$new(text="12345")$char_replace(0,0,"ä" )$text_get()=="ä12345")
 })
 
 

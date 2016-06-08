@@ -1,13 +1,8 @@
 library(diffrprojects)
 
-dongs <- rtext$new(text_file=dp_tf(1), save_file="save_file_test.Rdata")
-dongs <- rtext$new(text_file=dp_tf(1))
-dongs$save()
-
-dings <- rtext$new(text="1234567890", save_file="save_file_test.Rdata")
-dings$save()
-
-
+dings <- rtext$new(text_file=dp_tf(1))
+dings$char_get_code()
+dings$char_get_code()
 
 
 # get_token()

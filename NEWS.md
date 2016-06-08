@@ -11,7 +11,7 @@ version 0.4.2 // 2016-06-07 ...
     
 * FEATURE
     - rtext : char_code()
-    - rtext : token_code()
+    - rtext : char_length()
 
 
 version 0.4.1 // 2016-06-06 ... 

@@ -224,17 +224,33 @@ rtext <-
       Encoding(res) <- self$encoding
       return(res)
     },
+    # char_get_code
+    char_get_code = function(from=1, to=Inf){
+      iffer <- private$char_data$i >= from & private$char_data$i <= to
+      return(
+        data.frame(
+          char = private$char[private$char_data[iffer, "i"]],
+          private$char_data[iffer, ]
+        )
+      )
+    },
     # add
     char_add = function(what=NULL, after=NULL){
+      what        <- enc2utf8(what)
       if( is.null(after) ) {
         private$char <- c(private$char, unlist(strsplit(what,"")))
       }else if ( after==0 ) {
         private$char <- c(unlist(strsplit(what,"")), private$char)
+        # update char_data$i
+        private$char_data$i <- private$char_data$i + length(what)
       }else{
         index  <- seq_along(private$char)
         part1  <- private$char[index <= after]
         part2  <- private$char[index >  after]
         private$char <- c( part1, unlist(strsplit(what, "")), part2)
+        iffer <- private$char_data$i > after
+        # update char_data$i
+        private$char_data$i[iffer] <- private$char_data$i[iffer] + length(what)
       }
       # necessary updates
       private$hash_text()
@@ -243,7 +259,12 @@ rtext <-
     },
     # delete
     char_delete = function(n=NULL, from=NULL, to=NULL){
+      non_deleted  <- vector_delete(x = seq_along(private$char), n=n, from=from, to=to)
       private$char <- vector_delete(x = private$char, n=n, from=from, to=to)
+      # update char_data$i (drop deletd data, update index)
+      new_index           <- seq_along(non_deleted)
+      private$char_data   <- private$char_data[private$char_data$i %in% non_deleted,]
+      private$char_data$i <- new_index[match(private$char_data$i, non_deleted)]
       # necessary updates
       private$hash_text()
       # return for piping
@@ -253,6 +274,7 @@ rtext <-
     char_replace = function(from=NULL, to=NULL, by=NULL){
       # check input
       stopifnot( !is.null(from), !is.null(to), !is.null(by) )
+      by <- enc2utf8(by)
       # doing-duty-to-do
       index <- seq_along(private$char)
       private$char <-
@@ -261,22 +283,46 @@ rtext <-
           unlist(strsplit(by, "")),
           private$char[index > to]
         )
+      # updata char_data
+      private$char_data <- private$char_data[private$char_data$i < from | private$char_data$i > to,]
+      # update char_data$i
+      iffer <- private$char_data$i > max(from, to)
+      private$char_data$i[iffer] <- private$char_data$i[iffer] + (max(from, to) - min(from, to) +1) - nchar(by)
       # necessary updates
-      private$has_text()
+      private$hash_text()
       # return for piping
       invisible(self)
     },
+    char_length = function(){
+      length(private$char)
+    },
     # code characters
-    char_code = function(x=NULL, val=NULL, from=NULL, to=NULL){
-      # update data already in self$char_data
-      iffer <- char_data$i > 1
-      private$char_data[iffer, x] <- rep(val, sum(iffer))
-      # add data not already in self$char_data
-      index        <- seq(from, to)
-      index        <- index[ !(index %in% private$char_data) ]
-      add_df       <- data.frame(i=index)
-      add_df[[x]]  <- val
-      private$char <- rbind_fill(private$char, add_df)
+    char_code = function(x=NULL, i=NULL, val=NA){
+      # prepare input
+      if( is.null(x) | is.null(i) ){
+        warning("char_code : no sufficient information passed for x, i - nothing coded")
+        invisible(self)
+      }
+      if( any( i > self$char_length() | any( i < 1)) ){
+        stop("char_code : i out of bounds")
+      }
+      if( length(val)==1 ){
+        val <- rep(val, length(i))
+      }
+
+      # make indecies
+      iffer <- i %in% private$char_data$i
+      in_char_data     <- i[iffer]
+      not_in_char_data <- i[!iffer]
+
+      # code for i already in char_data
+      private$char_data[in_char_data, x] <- val[iffer]
+
+      # code for i not already in char_data
+      add_df            <- data.frame(i=not_in_char_data)
+      add_df[[x]]       <- val[!iffer]
+      private$char_data <- rbind_fill(private$char_data, add_df)
+
       # necessary updates
       private$hash_data()
       # return for piping

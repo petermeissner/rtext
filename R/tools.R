@@ -70,8 +70,6 @@ dp_hash <- function(x){
 }
 
 
-
-
 #' function that checks is values are in between values
 #' @export
 #' @param x input vector

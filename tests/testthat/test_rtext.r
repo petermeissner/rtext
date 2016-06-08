@@ -1,5 +1,90 @@
 #### rtext ==============================================================================
-context("rtext save and load")
+
+context("rtext code") # ========================================================
+
+test_that("rtext code", {
+  expect_error({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1:4)
+  })
+  expect_error({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1:4, 1)
+  })
+  expect_error({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 0, 1)
+  })
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1)
+    dings$char_code("var2", 3, 1)
+    res <- dings$char_get_code()
+    all(
+      dim(res)==c(2,4),
+      c("var1", "var2") %in% names(res)
+    )
+  })
+})
+
+test_that("rtext code updates on char_delete", {
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_get()
+    dings$char_code("var1", 1, 1)
+    dings$char_get_code()
+    dings$char_delete(1, from = 1)
+    identical(
+      unlist(dings$char_get_code()),
+      unlist(data.frame(char="a",i=1L, var1=1)[NULL,])
+    )
+  })
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 3, 1)
+
+    dings$char_get_code()
+    dings$char_get()
+
+    dings$char_delete(1, from = 1)
+    identical(
+      unlist(dings$char_get_code()),
+      unlist(data.frame(char="3", i=2, var1=1))
+    )
+  })
+})
+
+test_that("rtext code updates on char_add", {
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1)
+    dings$char_add("a",0)
+    dings$char_get()
+    identical(
+      dings$char_get_code(),
+      data.frame(char="1", i=2, var1=1)
+    )
+  })
+})
+
+test_that("rtext code updates on char_replace", {
+  expect_true({
+    dings <- rtext$new("abcdefg")
+    dings$char_code("var1", 3, 1)
+    dings$char_replace(from=2,to=6,by="/")
+    dings$char_get()
+    identical(
+      unlist(dings$char_get_code()),
+      numeric(0)
+    )
+  })
+})
+
+
+
+
+
+context("rtext save and load") # ===============================================
 test_that("rtext save", {
   expect_error({
     dings <- rtext$new(
@@ -112,7 +197,7 @@ test_that("rtext load is same as save", {
 })
 
 
-context("rtext hash")
+context("rtext hash") # ========================================================
 test_that("rtext data_hash does not change on char manipulation", {
   expect_true({
     dings <- rtext$new(text="1234567890")
@@ -153,7 +238,7 @@ test_that("rtext text_hash does change on char manipulation", {
 
 
 
-context("rtext init")
+context("rtext init") # ========================================================
 test_that("rtext initialization", {
   expect_error( rtext$new(), NA)
   expect_error( rtext$new(NULL), NA)
@@ -165,17 +250,29 @@ test_that("rtext initialization", {
 
 
 
-context("rtext char_add")
+context("rtext char_add") # ====================================================
 test_that("rtext add", {
   expect_true( rtext$new(text="----")$char_add("///"   )$text_get()=="----///" )
   expect_true( rtext$new(text="----")$char_add("///", 0)$text_get()=="///----" )
   expect_true( rtext$new(text="----")$char_add("///", 2)$text_get()=="--///--" )
   expect_true( rtext$new(text="----")$char_add("/")$char_add("/")$text_get()=="----//" )
+  expect_true( rtext$new(text="----")$char_add("ä", Inf)$text_get()=="----ä" )
+})
+
+context("rtext char_replace") # ================================================
+test_that("rtext add", {
+  expect_true( rtext$new(text="12345")$char_replace(1,1,"///" )$text_get()=="///2345" )
+  expect_true( rtext$new(text="12345")$char_replace(5,5,"///" )$text_get()=="1234///" )
+  expect_true( rtext$new(text="12345")$char_replace(3,3,"///" )$text_get()=="12///45" )
+  expect_true( rtext$new(text="12345")$char_replace(1,5,"///" )$text_get()=="///"     )
+  expect_true( rtext$new(text="12345")$char_replace(0,9,"///" )$text_get()=="///"     )
+  expect_true( rtext$new(text="12345")$char_replace(0,0,"///" )$text_get()=="///12345")
+  expect_true( rtext$new(text="12345")$char_replace(0,0,"ä" )$text_get()=="ä12345")
 })
 
 
 
-context("rtext char_delete")
+context("rtext char_delete") # =================================================
 test_that("rtext char_delete", {
  expect_true( rtext$new(text="12345")$char_delete(from= 1)$text_get()=="")
  expect_true( rtext$new(text="12345")$char_delete(from=-2)$text_get()=="")
@@ -216,7 +313,7 @@ test_that("rtext char_delete", {
 })
 
 
-context("rtext hash_text")
+context("rtext hash_text") # ===================================================
 test_that("rtext hash_text works", {
   expect_true({
     dings <- rtext$new(paste0(sample(letters, 100, replace = TRUE), collapse = ""))
@@ -277,7 +374,7 @@ test_that("rtext hash_text works", {
 
 
 
-context("rtext text_get")
+context("rtext text_get") # ====================================================
 test_that("get_text works also with junk input", {
   expect_true( # general
     all(

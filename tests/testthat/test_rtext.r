@@ -1,7 +1,5 @@
 #### rtext ==============================================================================
-
 context("rtext code") # ========================================================
-
 test_that("rtext code", {
   expect_error({
     dings <- rtext$new("123")
@@ -77,8 +75,19 @@ test_that("rtext code updates on char_replace", {
       unlist(dings$char_get_code()),
       numeric(0)
     )
+    res <- dings$char_get_code()
+    identical(res, data.frame(char="1", i=2, var1=1))
+  })
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_code("var1", 1, 1)
+    dings$char_replace(1,1,"a")
+    dings$char_get()
+    res <- dings$char_get_code()
+    identical(res, data.frame(char="a", i=1, var1=1))
   })
 })
+
 
 
 
@@ -259,7 +268,11 @@ test_that("rtext add", {
   expect_true( rtext$new(text="----")$char_add("ä", Inf)$text_get()=="----ä" )
 })
 
+<<<<<<< HEAD
 context("rtext char_replace") # ================================================
+=======
+context("rtext char_replace")
+>>>>>>> eb0640512d37af473e775345ebe4f7c900e38bd0
 test_that("rtext add", {
   expect_true( rtext$new(text="12345")$char_replace(1,1,"///" )$text_get()=="///2345" )
   expect_true( rtext$new(text="12345")$char_replace(5,5,"///" )$text_get()=="1234///" )

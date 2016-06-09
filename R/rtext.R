@@ -286,8 +286,8 @@ rtext <-
       # updata char_data
       private$char_data <- private$char_data[private$char_data$i < from | private$char_data$i > to,]
       # update char_data$i
-      iffer <- private$char_data$i > max(from, to)
-      private$char_data$i[iffer] <- private$char_data$i[iffer] + (max(from, to) - min(from, to) +1) - nchar(by)
+      iffer <- private$char_data$i > to
+      private$char_data$i[iffer] <- private$char_data$i[iffer] + nchar(by) - to - from + 1
       # necessary updates
       private$hash_text()
       # return for piping

@@ -80,6 +80,69 @@ is_between <- function(x,y,z){
 }
 
 
+#' function that extracts elements from vector
+#'
+#' @param vec the chars field
+#' @param length number of elements to be returned
+#' @param from first element to be returned
+#' @param to last element to be returned
+#'
+#' @export
+#'
+get_vector_element <-
+  function(vec, length=100, from=NULL, to=NULL){
+    # helper functions
+    bind_to_vecrange <- function(x){bind_between(x, 1, length(vec))}
+    bind_length       <- function(x){bind_between(x, 0, length(vec))}
+    return_from_to    <- function(from, to, split){
+      res  <- vec[seq(from=from, to=to)]
+      return(res)
+    }
+    # only length
+    if( !is.null(length) & ( is.null(from) & is.null(to) ) ){
+      length <- max(0, min(length, length(vec)))
+      length <- bind_length(length)
+      if(length==0){
+        return("")
+      }
+      from   <- 1
+      to     <- length
+      return(return_from_to(from, to, split))
+    }
+    # from and to (--> ignores length argument)
+    if( !is.null(from) & !is.null(to) ){
+      from <- bind_to_vecrange(from)
+      to   <- bind_to_vecrange(to)
+      return(return_from_to(from, to, split))
+    }
+    # length + from
+    if( !is.null(length) & !is.null(from) ){
+      if( length<=0 | from + length <=0 ){
+        return("")
+      }
+      to   <- from + length-1
+      if((to < 1 & from < 1) | (to > length(vec) & from > length(vec) )){
+        return("")
+      }
+      to   <- bind_to_vecrange(to)
+      from <- bind_to_vecrange(from)
+      return(return_from_to(from, to, split))
+    }
+    # length + to
+    if( !is.null(length) & !is.null(to) ){
+      if( length<=0 | to - (length-1) > length(vec) ){
+        return("")
+      }
+      from <- to - length + 1
+      if((to < 1 & from < 1) | (to > length(vec) & from > length(vec) )){
+        return("")
+      }
+      from <- bind_to_vecrange(from)
+      to   <- bind_to_vecrange(to)
+      return(return_from_to(from, to, split))
+    }
+    stop("get_vector_element() : I do not know how to make sense of given length, from, to argument values passed")
+  }
 
 
 

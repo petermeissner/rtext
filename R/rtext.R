@@ -76,18 +76,15 @@ rtext <-
     text = function(){
       paste0(private$char, collapse = "")
     },
-    tokenize = function(){
-      self$token <- self$tokenizer(private$text())
-    },
 
     char        = character(0),
     char_data   = data.frame(),
     token       = data.frame(),
     token_data  = data.frame(),
 
-    hashed_all  = character(),
-    hashed_text = character(),
-    hashed_data = character(),
+    hashed_all  = character(0),
+    hashed_text = character(0),
+    hashed_data = character(0),
 
     hash_text   = function(){
       private$hashed_text <- dp_hash(private$char)
@@ -103,6 +100,15 @@ rtext <-
       private$hashed_data <- dp_hash(private$char_data)
       private$hashed_text <- dp_hash(private$char)
       private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
+    },
+
+    token_store = list(hashed_data=character(0), hashed_text=character(0)),
+    tokenize = function(){
+      if(length(private$hashed_text)==0 | length(private$token_store$hashed_text) ){
+        private$token <- self$tokenizer(private$text())
+      }else if( private$hashed_text != private$token_store$hashed_text | identical(private$hashed_text, character(0)) ){
+        private$token <- self$tokenizer(private$text())
+      }
     }
   ),
 
@@ -160,7 +166,7 @@ rtext <-
       Encoding(private$char) <- encoding
       self$encoding <- "UTF-8"
 
-      #### tokenize
+      #### tokenizer
       self$tokenizer <- tokenizer
       if( !is.null(tokenize_by) ){
         self$tokenizer <-
@@ -168,6 +174,8 @@ rtext <-
             text_tokenize(x, regex = tokenize_by, non_token = TRUE)
           }
       }
+      #### tokenize
+      private$tokenize()
 
       ##### id
       if( is.null(id) ){
@@ -185,7 +193,7 @@ rtext <-
         list(
           text_file  = self$text_file,
           character  = length(private$char),
-          token      = dim(self$token),
+          token      = dim(private$token),
           encoding   = self$encoding,
           sourcetype = self$sourcetype
         )
@@ -220,12 +228,12 @@ rtext <-
         Encoding(res) <- self$encoding
         return(res)
       }
-      res <- rtext_get_character(chars=private$char, length=length, from=from, to=to)
+      res <- get_vector_element(vec=private$char, length=length, from=from, to=to)
       Encoding(res) <- self$encoding
       return(res)
     },
     # char_get_code
-    char_get_code = function(from=1, to=Inf){
+    char_data_get = function(from=1, to=Inf){
       iffer <- private$char_data$i >= from & private$char_data$i <= to
       return(
         data.frame(
@@ -297,14 +305,14 @@ rtext <-
       length(private$char)
     },
     # code characters
-    char_code = function(x=NULL, i=NULL, val=NA){
+    char_data_set = function(x=NULL, i=NULL, val=NA){
       # prepare input
       if( is.null(x) | is.null(i) ){
-        warning("char_code : no sufficient information passed for x, i - nothing coded")
+        warning("char_data_set : no sufficient information passed for x, i - nothing coded")
         invisible(self)
       }
       if( any( i > self$char_length() | any( i < 1)) ){
-        stop("char_code : i out of bounds")
+        stop("char_data_set : i out of bounds")
       }
       if( length(val)==1 ){
         val <- rep(val, length(i))
@@ -402,6 +410,16 @@ rtext <-
 
       # return for piping
       invisible(self)
+    },
+    # token_get
+    token_get = function(){
+      private$tokenize()
+      private$token
+    },
+    # token_data_get
+    token_data_get = function(){
+      private$tokenize()
+      private$token_data
     },
     # save_as
     export = function(){

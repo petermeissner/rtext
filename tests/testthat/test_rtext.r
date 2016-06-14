@@ -3,21 +3,21 @@ context("rtext code") # ========================================================
 test_that("rtext code", {
   expect_error({
     dings <- rtext$new("123")
-    dings$char_code("var1", 1, 1:4)
+    dings$char_data_set("var1", 1, 1:4)
   })
   expect_error({
     dings <- rtext$new("123")
-    dings$char_code("var1", 1:4, 1)
+    dings$char_data_set("var1", 1:4, 1)
   })
   expect_error({
     dings <- rtext$new("123")
-    dings$char_code("var1", 0, 1)
+    dings$char_data_set("var1", 0, 1)
   })
   expect_true({
     dings <- rtext$new("123")
-    dings$char_code("var1", 1, 1)
-    dings$char_code("var2", 3, 1)
-    res <- dings$char_get_code()
+    dings$char_data_set("var1", 1, 1)
+    dings$char_data_set("var2", 3, 1)
+    res <- dings$char_data_get()
     all(
       dim(res)==c(2,4),
       c("var1", "var2") %in% names(res)
@@ -29,24 +29,24 @@ test_that("rtext code updates on char_delete", {
   expect_true({
     dings <- rtext$new("123")
     dings$char_get()
-    dings$char_code("var1", 1, 1)
-    dings$char_get_code()
+    dings$char_data_set("var1", 1, 1)
+    dings$char_data_get()
     dings$char_delete(1, from = 1)
     identical(
-      unlist(dings$char_get_code()),
+      unlist(dings$char_data_get()),
       unlist(data.frame(char="a",i=1L, var1=1)[NULL,])
     )
   })
   expect_true({
     dings <- rtext$new("123")
-    dings$char_code("var1", 3, 1)
+    dings$char_data_set("var1", 3, 1)
 
-    dings$char_get_code()
+    dings$char_data_get()
     dings$char_get()
 
     dings$char_delete(1, from = 1)
     identical(
-      unlist(dings$char_get_code()),
+      unlist(dings$char_data_get()),
       unlist(data.frame(char="3", i=2, var1=1))
     )
   })
@@ -55,11 +55,11 @@ test_that("rtext code updates on char_delete", {
 test_that("rtext code updates on char_add", {
   expect_true({
     dings <- rtext$new("123")
-    dings$char_code("var1", 1, 1)
+    dings$char_data_set("var1", 1, 1)
     dings$char_add("a",0)
     dings$char_get()
     identical(
-      dings$char_get_code(),
+      dings$char_data_get(),
       data.frame(char="1", i=2, var1=1)
     )
   })
@@ -68,32 +68,32 @@ test_that("rtext code updates on char_add", {
 test_that("rtext code updates on char_replace", {
   expect_true({
     dings <- rtext$new("abcdefg")
-    dings$char_code("var1", 3, 1)
+    dings$char_data_set("var1", 3, 1)
     dings$char_replace(from=2,to=6,by="/")
     dings$char_get()
     identical(
-      unlist(dings$char_get_code()),
+      unlist(dings$char_data_get()),
       character(0)
     )
   })
   expect_true({
     dings <- rtext$new("123")
-    dings$char_code("var1", 1, 1)
+    dings$char_data_set("var1", 1, 1)
     dings$char_replace(1,1,"a")
     dings$char_get()
     identical(
-      unlist(dings$char_get_code()),
+      unlist(dings$char_data_get()),
       character(0)
     )
   })
   expect_true({
     dings <- rtext$new("123")
-    dings$char_code("var1", 3, 1)
+    dings$char_data_set("var1", 3, 1)
     dings$char_replace(1,2,"")
     dings$char_get()
-    dings$char_get_code()
+    dings$char_data_get()
     identical(
-      unlist(dings$char_get_code(), use.names = FALSE),
+      unlist(dings$char_data_get(), use.names = FALSE),
       c("3",1,1)
     )
   })

@@ -1,6 +1,17 @@
 NEWS diffrprojects
 ==========================================================================
 
+version 0.4.3 // 2016-06-09 ... 
+--------------------------------------------------------------------------
+
+* BUGFIXES
+
+    
+* FEATURE
+    - rtext : char_code()     -> char_data_set()
+    - rtext : char_get_code() -> char_data_get()
+    - rtext : token 
+
 
 
 version 0.4.2 // 2016-06-07 ... 

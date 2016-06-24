@@ -30,8 +30,10 @@ Depends:
 License: MIT + file LICENSE
 LazyData: true
 Imports:
-    R6(>= 2.1.2),
-    hellno (>= 0.0.1)
+    R6 (>= 2.1.2),
+    hellno (>= 0.0.1),
+    dplyr (>= 0.4.3),
+    magrittr (>= 1.5)
 Suggests:
     testthat,
     knitr,

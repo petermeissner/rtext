@@ -77,6 +77,7 @@ rtext <-
       paste0(private$char, collapse = "")
     },
 
+    tmp         = NULL,
     char        = character(0),
     char_data   = data.frame(),
     token       = data.frame(),
@@ -102,13 +103,37 @@ rtext <-
       private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
     },
 
-    token_store = list(hashed_data=character(0), hashed_text=character(0)),
+    token_store =
+      list(
+        tok_hashed_text     = character(0),
+        tok_dat_hashed_text = character(0),
+        tok_dat_hashed_data = character(0)
+      ),
     tokenize = function(){
-      if(length(private$hashed_text)==0 | length(private$token_store$hashed_text) ){
-        private$token <- self$tokenizer(private$text())
-      }else if( private$hashed_text != private$token_store$hashed_text | identical(private$hashed_text, character(0)) ){
-        private$token <- self$tokenizer(private$text())
+      # helper functions
+      update_token <- function(){
+        private$token                       <- # tokenize
+          self$tokenizer(private$text()) %>%
+          dplyr::arrange_("from","to")
+        private$token_store$tok_hashed_text <- private$hashed_text            # store text hash
       }
+      # deciding when to re-tokenize
+      if(       # no tokenization done so far
+        length(private$hashed_text)==0 |
+        length(private$token_store$tok_hashed_text)==0
+      ){
+        self$message("tokenizing")
+        update_token()
+      }else if( # text has changed
+        private$hashed_text != private$token_store$tok_hashed_text |
+        identical(private$hashed_text, character(0))
+      ){
+        self$message("tokenizing")
+        update_token()
+      }
+    },
+    tokenize_data = function(){
+      self$token_get
     }
   ),
 
@@ -124,6 +149,7 @@ rtext <-
     sourcetype = NA,
     id         = NULL,
     save_file  = NULL,
+    verbose    = NULL,
 
     #### startup function ====================================================
 
@@ -131,13 +157,20 @@ rtext <-
       function(
         text        = NULL,
         text_file   = NULL,
-        tokenizer   = rtext_tokenizer$words,
+        tokenizer   = rtext_tokenizer$words2,
         encoding    = "UTF-8",
         id          = NULL,
         tokenize_by = NULL,
-        save_file   = NULL
+        save_file   = NULL,
+        verbose     = TRUE
       )
     {
+
+      ##### Saving verbose option
+      self$verbose <- verbose
+
+      ##### Stating what is done
+      self$message("initializing")
 
       ##### read in text // set field: sourcetype
       if(is.null(text) & is.null(text_file)){ # nothing at all
@@ -166,7 +199,7 @@ rtext <-
       Encoding(private$char) <- encoding
       self$encoding <- "UTF-8"
 
-      #### tokenizer
+      #### Tokenizer
       self$tokenizer <- tokenizer
       if( !is.null(tokenize_by) ){
         self$tokenizer <-
@@ -174,19 +207,43 @@ rtext <-
             text_tokenize(x, regex = tokenize_by, non_token = TRUE)
           }
       }
-      #### tokenize
-      private$tokenize()
 
-      ##### id
+      ##### ID
       if( is.null(id) ){
         self$id <- dp_hash(self)
       }
 
+      ##### Hashing again
       private$hash_all()
     }
       ,
 
     #### methods ============================================================
+    # universal getter
+    get = function(name){
+      if(name=="private"){
+        return(private)
+      }
+      if( name %in% names(self) ){
+        return(get(name, envir=self))
+      }else if( name %in% names(private) ){
+        return(get(name, envir=private))
+      }else{
+        return(NULL)
+      }
+    },
+
+    # messages and reporting depending on verbose==TRUE / or not
+    message = function(x, ...){
+      xname <- as.character(as.list(match.call()))[-1]
+      if(self$verbose){
+        if(is.character(x)){
+          message("rtext : ", x, ...)
+        }else{
+          message("rtext : ", xname, " : \n", x, ...)
+        }
+      }
+    },
     # info
     info = function(){
       res <-
@@ -235,11 +292,13 @@ rtext <-
     # char_get_code
     char_data_get = function(from=1, to=Inf){
       iffer <- private$char_data$i >= from & private$char_data$i <= to
-      return(
+      tmp <-
         data.frame(
           char = private$char[private$char_data[iffer, "i"]],
           private$char_data[iffer, ]
         )
+      return(
+        tmp[order(tmp$i),]
       )
     },
     # add
@@ -317,22 +376,30 @@ rtext <-
       if( length(val)==1 ){
         val <- rep(val, length(i))
       }
+      stopifnot( length(i) == length(val) )
 
-      # make indecies
-      iffer <- i %in% private$char_data$i
-      in_char_data     <- i[iffer]
-      not_in_char_data <- i[!iffer]
+      # split data
+      i_in_char_data         <- i %in% private$char_data$i
+      i_not_in_char_data     <- !(i %in% private$char_data$i)
 
-      # code for i already in char_data
-      private$char_data[in_char_data, x] <- val[iffer]
+      # assign data with i already in char_data$i
+      input_to_data_matcher <-
+        match(i[i_in_char_data], private$char_data$i)
+
+      private$char_data[input_to_data_matcher, "i"] <-
+        i[i_in_char_data]
+
+      private$char_data[input_to_data_matcher, x]   <-
+        val[i_in_char_data]
 
       # code for i not already in char_data
-      add_df            <- data.frame(i=not_in_char_data)
-      add_df[[x]]       <- val[!iffer]
-      private$char_data <- rbind_fill(private$char_data, add_df)
+      add_df            <- data.frame(i=i[i_not_in_char_data])
+      add_df[[x]]       <- val[i_not_in_char_data]
+      private$char_data <- rbind_fill(private$char_data, add_df) %>% dplyr::arrange_("i")
 
       # necessary updates
       private$hash_data()
+
       # return for piping
       invisible(self)
     },
@@ -418,8 +485,9 @@ rtext <-
     },
     # token_data_get
     token_data_get = function(){
-      private$tokenize()
+      private$tokenize_data()
       private$token_data
+
     },
     # save_as
     export = function(){

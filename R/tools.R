@@ -57,8 +57,16 @@ bind_between <- function(x, min, max){
 #' @export
 rbind_fill <- function(df1=data.frame(), df2=data.frame()){
   names_df <- c(names(df1), names(df2))
-  df1[, names_df[!(names_df %in% names(df1))]] <- rep(NA, dim(df1)[1])
-  df2[, names_df[!(names_df %in% names(df2))]] <- rep(NA, dim(df2)[1])
+  if( dim1(df1) > 0 ){
+    df1[, names_df[!(names_df %in% names(df1))]] <- rep(NA, dim1(df1))
+  }else{
+    df1 <- data.frame()
+  }
+  if( dim1(df2) > 0 ){
+    df2[, names_df[!(names_df %in% names(df2))]] <- rep(NA, dim1(df2))
+  }else{
+    df2 <- data.frame()
+  }
   rbind(df1, df2)
 }
 
@@ -146,6 +154,25 @@ get_vector_element <-
 
 
 
+#' get first dimension or length of object
+#' @param x object, matrix, vector, data.frame, ...
+#' @export
+dim1 <- function(x){
+  ifelse(is.null(dim(x)[1]), length(x), dim(x)[1])
+}
 
 
+#' get first dimension or length of object
+#' @param x object, matrix, vector, data.frame, ...
+#' @export
+dim2 <- function(x){
+  dim(x)[2]
+}
 
+
+#' seq along first dimension / length
+#' @param x x
+#' @export
+seq_dim1 <- function(x){
+  seq_len(dim1(x))
+}

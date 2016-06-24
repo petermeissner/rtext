@@ -4,7 +4,7 @@
 \name{rtext_tokenizer}
 \alias{rtext_tokenizer}
 \title{list of ready to use functions for rtext initialization and tokenization}
-\format{An object of class \code{list} of length 1.}
+\format{An object of class \code{list} of length 2.}
 \usage{
 rtext_tokenizer
 }

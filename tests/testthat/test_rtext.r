@@ -23,6 +23,15 @@ test_that("rtext code", {
       c("var1", "var2") %in% names(res)
     )
   })
+  expect_true({
+    dings <- rtext$new("abcdefghijklmnopqrstuvw")
+    dings$char_data_set("pimpf", c(1,2,6,7) , 1)
+    dings$char_data_set("pompf", c(1:4,7:10), 1)
+    identical(
+      dings$char_data_get(),
+      structure(list(char = c("a", "b", "c", "d", "f", "g", "h", "i",  "j"), i = c(1, 2, 3, 4, 6, 7, 8, 9, 10), pimpf = c(1, 1, NA,  NA, 1, 1, NA, NA, NA), pompf = c(1, 1, 1, 1, NA, 1, 1, 1, 1)), .Names = c("char",  "i", "pimpf", "pompf"), row.names = c(NA, 9L), class = "data.frame")
+    )
+  })
 })
 
 test_that("rtext code updates on char_delete", {

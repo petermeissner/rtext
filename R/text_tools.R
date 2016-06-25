@@ -87,7 +87,7 @@ text_show = function(x, length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
   tmp       <- text_snippet(x, length, from, to, coll)
   diff_char <- sum(nchar(x)) - sum(nchar(tmp)) > 0
   diff_sum  <- sum(nchar(x)) - sum(nchar(tmp))
-  diff_note <- ifelse(diff_char, paste0(" [... ", format(diff_sum, big.mark = " "), " characters not shown]"),"")
+  diff_note <- ifelse(diff_char, paste0("\n[... ", format(diff_sum, big.mark = " "), " characters not shown]"),"")
   if(wrap==FALSE){
     cat( tmp, diff_note)
   }else if(is.function(wrap)){

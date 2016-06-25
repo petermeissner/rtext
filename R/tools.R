@@ -176,3 +176,38 @@ dim2 <- function(x){
 seq_dim1 <- function(x){
   seq_len(dim1(x))
 }
+
+
+#' function returning index of spans that entail x
+#' @param x position of the character
+#' @param y1 start position of the token
+#' @param y2 end position of the token
+#' @export
+which_token <- function(x, y1, y2){
+  # how to order x and y?
+  order_x <- order(x,  method="radix")
+  order_y <- order(y1, method="radix")
+  # order x and y!
+  ordered_x  <- x[order_x]
+  ordered_y1 <- y1[order_y]
+  ordered_y2 <- y1[order_y]
+  # doing-duty-to-do
+  if( nchar(length(x)) + nchar(length(y1)) < 9 ){
+    index <- which_token_worker(ordered_x, ordered_y1, ordered_y2)
+  }else{
+    index <- which_token_worker_user_interrupt(ordered_x, ordered_y1, ordered_y2)
+  }
+  # ordering back to input ordering
+  index <- order_y[index[order(order_x)]]
+  # return
+  index
+}
+
+
+
+
+
+
+
+
+

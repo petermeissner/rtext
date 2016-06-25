@@ -28,12 +28,13 @@ Description: This is a description still to be done but to
 Depends:
     R (>= 3.0.0)
 License: MIT + file LICENSE
-LazyData: true
+LazyData: TRUE
 Imports:
     R6 (>= 2.1.2),
     hellno (>= 0.0.1),
     dplyr (>= 0.4.3),
-    magrittr (>= 1.5)
+    magrittr (>= 1.5),
+    Rcpp (>= 0.12.5)
 Suggests:
     testthat,
     knitr,
@@ -42,3 +43,6 @@ BugReports: https://github.com/petermeissner/diffrprojects/issues
 URL: https://github.com/petermeissner/diffrprojects
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
+LinkingTo:
+    Rcpp
+

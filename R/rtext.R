@@ -157,7 +157,7 @@ rtext <-
       function(
         text        = NULL,
         text_file   = NULL,
-        tokenizer   = rtext_tokenizer$words2,
+        tokenizer   = rtext_tokenizer$words,
         encoding    = "UTF-8",
         id          = NULL,
         tokenize_by = NULL,

@@ -6,4 +6,7 @@ dummyimport <- function(){
   R6::R6Class()
   1 %>% add(1)
 }
-#
+
+#' @useDynLib diffrprojects
+#' @importFrom Rcpp sourceCpp
+NULL

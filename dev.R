@@ -17,13 +17,18 @@ names(char_data) <- c("char_i", "from", "to", "char", char_data_names)
 token <- data.frame(token_i=seq_dim1(token), token)
 
 
-merge_spans(char_data, token)
+merger <- merge_spans(char_data, token)
+
+merger %>% left_join(char_data)
+
+
+dummy <- function(x, y1, y2) which(y1 <= x & x <= y2)
+
+which_token(char_data$char_i, token$from, token$to)
 
 
 
-
-
-
+dings$text_show()
 
 
 # get_token()

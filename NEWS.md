@@ -6,6 +6,7 @@ version 0.5.0 // 2016-06-09 ...
 
 * BUGFIXES
     - ficxing which_token supressing results error
+
     
 * FEATURE
     - rtext : char_code()     -> char_data_set()

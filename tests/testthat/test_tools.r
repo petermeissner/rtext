@@ -1,5 +1,6 @@
 #### tools ==============================================================================
-context("tools")
+
+context("tools vector_delete()")
 
 test_that("vector_delete works with only n as argument", {
   x <- 1L:10L
@@ -49,8 +50,22 @@ test_that("vector_delete works with various arguments", {
 })
 
 
+context("tools which_token()")
 
-context("text_tools")
+test_that("", {
+  expect_true( which_token(1,1,1)==1 )
+  expect_true( which_token(2,c(2,1),c(2,1))==1 )
+  expect_true( which_token(1,c(2,1),c(2,1))==2 )
+  expect_equal( which_token(1:2,c(2,1),c(2,1)), c(2,1) )
+}
+)
+
+
+
+
+#### text tools ================================================================
+
+context("text_tools text_read()")
 
 test_that("text_read", {
   expect_true( Encoding(text_read(dp_tf("test_latin1.txt"))) == "UTF-8")
@@ -66,6 +81,9 @@ test_that("text_read", {
   expect_true( length(text_read(dp_tf("test_utf8.txt"), tokenize = " "))>1 )
   expect_true( length(text_read(dp_tf("test_utf8.txt"), tokenize = function(x){strsplit(x,"")} ))>1 )
 })
+
+
+context("text_tools text_snippet()")
 
 test_that("text_snippet", {
   tt500 <- paste(rep(0:9,50), collapse = "")
@@ -98,6 +116,8 @@ test_that("text_snippet", {
   expect_true( all(nchar(text_snippet(ttvec, 10))==c(10,10)) )
 })
 
+
+context("text_tools text_tokenize()")
 
 test_that("text_tokenize", {
   expect_true(

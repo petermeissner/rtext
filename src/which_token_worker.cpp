@@ -15,7 +15,7 @@ IntegerVector which_token_worker(
     NumericVector y2
 )
 {
-  IntegerVector res(x.length()) ;
+  IntegerVector res(x.length(), NA_INTEGER) ;
   int last_j = 0;
   for( int i = 0; i < x.length(); i++ ){
     if( i % 10000 == 0 ){

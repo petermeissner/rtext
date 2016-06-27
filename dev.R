@@ -17,18 +17,30 @@ names(char_data) <- c("char_i", "from", "to", "char", char_data_names)
 token <- data.frame(token_i=seq_dim1(token), token)
 
 
-merger <- merge_spans(char_data, token)
+x  <- sample(char_data$char_i)
+y1 <- token$from
+y2 <- token$to
 
-merger %>% left_join(char_data)
+which_token <- function(x, y1, y2){
+  # how to order x and y?
+  order_x <- order(x)
+  order_y <- order(y1)
+  # order x and y! - which_token_worker expects inputs to be ordered
+  ordered_x  <- x[order_x]
+  ordered_y1 <- y1[order_y]
+  ordered_y2 <- y2[order_y]
+  # doing-duty-to-do
+  index <- which_token_worker(ordered_x, ordered_y1, ordered_y2)
+  # ordering back to input ordering
+  index <- order_y[index[order(order_x)]]
+  # return
+  index
+}
 
 
-dummy <- function(x, y1, y2) which(y1 <= x & x <= y2)
 
 which_token(char_data$char_i, token$from, token$to)
 
-
-
-dings$text_show()
 
 
 # get_token()

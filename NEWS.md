@@ -5,15 +5,14 @@ version 0.5.0 // 2016-06-09 ...
 --------------------------------------------------------------------------
 
 * BUGFIXES
-    - ficxing which_token supressing results error
+    - fixing which_token supressing results error
 
     
 * FEATURE
     - rtext : char_code()     -> char_data_set()
     - rtext : char_get_code() -> char_data_get()
     - rtext : introducing tokens and token_data
-    - introducing Rcpp
-    - tools : which_token_worker, which_token
+    - introducing Rcpp to speed up: which_token_worker, which_token
 
 
 

@@ -13,15 +13,18 @@ IntegerVector which_token_worker(
     NumericVector x,
     NumericVector y1,
     NumericVector y2
-) {
+)
+{
   IntegerVector res(x.length()) ;
   int last_j = 0;
-  for( int i=0; i < x.length(); i++ ){
-    res[i] = NA_INTEGER;
-    for( int j=last_j; j < y1.length(); j++ ){
+  for( int i = 0; i < x.length(); i++ ){
+    if( i % 10000 == 0 ){
+      Rcpp::checkUserInterrupt();
+    }
+    for( int j=0+last_j; j < y1.length(); j++ ){
       if( x[i] >= y1[j] &&  x[i] <= y2[j] ){
         res[i] = j+1;
-        last_j = j;
+        last_j = j-1;
         break;
       }
     }

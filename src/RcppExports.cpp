@@ -18,16 +18,3 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// which_token_worker_user_interrupt
-IntegerVector which_token_worker_user_interrupt(NumericVector x, NumericVector y1, NumericVector y2);
-RcppExport SEXP diffrprojects_which_token_worker_user_interrupt(SEXP xSEXP, SEXP y1SEXP, SEXP y2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y1(y1SEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y2(y2SEXP);
-    __result = Rcpp::wrap(which_token_worker_user_interrupt(x, y1, y2));
-    return __result;
-END_RCPP
-}

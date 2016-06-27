@@ -192,11 +192,7 @@ which_token <- function(x, y1, y2){
   ordered_y1 <- y1[order_y]
   ordered_y2 <- y1[order_y]
   # doing-duty-to-do
-  if( nchar(length(x)) + nchar(length(y1)) < 9 ){
-    index <- which_token_worker(ordered_x, ordered_y1, ordered_y2)
-  }else{
-    index <- which_token_worker_user_interrupt(ordered_x, ordered_y1, ordered_y2)
-  }
+  index <- which_token_worker(ordered_x, ordered_y1, ordered_y2)
   # ordering back to input ordering
   index <- order_y[index[order(order_x)]]
   # return

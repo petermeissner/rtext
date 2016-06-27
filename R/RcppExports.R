@@ -13,14 +13,3 @@ which_token_worker <- function(x, y1, y2) {
     .Call('diffrprojects_which_token_worker', PACKAGE = 'diffrprojects', x, y1, y2)
 }
 
-#' function to check which chars belong to which token
-#' takes a vector of xs to check if these lie between pairs of ys and if so
-#' returning their index; assumes xs and ys are sorted; returns only the first
-#' span index which enclosing the x
-#' @param x whatever
-#' @param y1 whatever
-#' @param y2 whatever
-which_token_worker_user_interrupt <- function(x, y1, y2) {
-    .Call('diffrprojects_which_token_worker_user_interrupt', PACKAGE = 'diffrprojects', x, y1, y2)
-}
-

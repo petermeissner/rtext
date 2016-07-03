@@ -483,12 +483,20 @@ rtext <-
       private$tokenize()
       private$token
     },
-    # token_data_get
-    token_data_get = function(){
+    token_data_get = function(FUN="modus", multimodal = NA, warn = FALSE, ...){
+      # tokenize text
       private$tokenize_data()
+      # datanize tokens
+      if(FUN=="modus"){
+        char_data[,-c(1:4)] %>%
+          aggregate(by=list(token_i), FUN="modus", multimodal=multimodal, warn=warn)
+      }else{
+        char_data[,-c(1:4)] %>%
+          aggregate(by=list(token_i), FUN=FUN, ...)
+      }
+      # return tokens
       private$token_data
-
-    },
+    }
     # save_as
     export = function(){
       message("TBD")

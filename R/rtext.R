@@ -133,7 +133,30 @@ rtext <-
       }
     },
     tokenize_data = function(){
-      self$token_get
+      # datanize tokens
+      update_token_data <- function(){
+        if(FUN=="modus"){
+          private$char_data[,-1] %>%
+            aggregate(by=list(token_i), FUN="modus", multimodal=multimodal, warn=warn)
+        }else{
+          char_data[,-c(1:4)] %>%
+            aggregate(by=list(token_i), FUN=FUN, ...)
+        }
+      }
+      # deciding when to re-datanize tokens
+      if(       # no tokenization done so far
+        length(private$hashed_text)==0 |
+        length(private$token_store$tok_hashed_text)==0
+      ){
+        self$message("tokenizing")
+        update_token_data()
+      }else if( # text has changed
+        private$hashed_text != private$token_store$tok_hashed_text |
+        identical(private$hashed_text, character(0))
+      ){
+        self$message("tokenizing")
+        update_token()
+      }
     }
   ),
 
@@ -480,14 +503,16 @@ rtext <-
     },
     # token_get
     token_get = function(){
+      # tokenize text if necessary else take cache
       private$tokenize()
+      # return tokens
       private$token
     },
-    # token_data_get
-    token_data_get = function(){
+    token_data_get = function(FUN="modus", multimodal = NA, warn = FALSE, ...){
+      # tokenize text / gen token data if necessary else take cache
       private$tokenize_data()
+      # return token data
       private$token_data
-
     },
     # save_as
     export = function(){

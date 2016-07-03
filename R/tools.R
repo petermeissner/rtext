@@ -202,6 +202,60 @@ which_token <- function(x, y1, y2){
 
 
 
+#' function giving back the mode
+#' @export
+#' @param x vector to get mode for
+#' @param multimodal wether or not all modes should be returned in case of more than one
+modus <- function(x, multimodal=FALSE, warn=TRUE) {
+  x_unique <- unique(x)
+  tab_x    <- tabulate(match(x, x_unique))
+  res      <- x_unique[which(tab_x==max(tab_x))]
+  if( identical(multimodal, TRUE) ){
+    return(res)
+  }else{
+    if( warn & length(res) > 1 ){
+      warning("modus : multimodal but only one value returned (use warn=FALSE to turn this off)")
+    }
+    if( !identical(multimodal, FALSE) ){
+      return(multimodal)
+    }else{
+      return(res[1])
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

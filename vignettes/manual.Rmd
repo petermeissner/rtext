@@ -35,15 +35,15 @@ A rtext instance can be filled either by using a character vector:
 
 ```{r}
 robinson_crusoe <- rtext$new(robinson_crusoe_text)
-robinson_crusoe$show_text()
+robinson_crusoe$text_show()
 robinson_crusoe$info()
 ```
 
 ... or a file from which to read in the text.
 
 ```{r}
-robinson_crusoe <- rtext$new(file=robinson_crusoe_file)
-robinson_crusoe$show_text()
+robinson_crusoe <- rtext$new(text_file=robinson_crusoe_file)
+robinson_crusoe$text_show()
 robinson_crusoe$info()
 ```
 

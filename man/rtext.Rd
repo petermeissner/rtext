@@ -56,13 +56,14 @@ initializing object: text or file.
 }
 \examples{
 mytext <- rtext$new("Hallo World")
-mytext$text
-mytext$show_text()
+mytext$text_get()
+mytext$char_get()
+mytext$text_show()
 
-# dings
 mytext <- rtext$new(c("Hallo","World"))
-mytext$text
-mytext$show_text()
+mytext$text_get()
+mytext$text_show()
+
 
 }
 \keyword{data}

@@ -72,6 +72,7 @@ rbind_fill <- function(df1=data.frame(), df2=data.frame()){
 
 
 #' function to get hash for R objects
+#' @param x the thing to hash
 #' @export
 dp_hash <- function(x){
   digest::digest(x, algo="xxhash64")
@@ -206,6 +207,7 @@ which_token <- function(x, y1, y2){
 #' @export
 #' @param x vector to get mode for
 #' @param multimodal wether or not all modes should be returned in case of more than one
+#' @param warn should the function warn about multimodal outcomes?
 modus <- function(x, multimodal=FALSE, warn=TRUE) {
   x_unique <- unique(x)
   tab_x    <- tabulate(match(x, x_unique))

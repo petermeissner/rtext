@@ -6,6 +6,9 @@
 \usage{
 dp_hash(x)
 }
+\arguments{
+\item{x}{the thing to hash}
+}
 \description{
 function to get hash for R objects
 }

@@ -10,6 +10,8 @@ modus(x, multimodal = FALSE, warn = TRUE)
 \item{x}{vector to get mode for}
 
 \item{multimodal}{wether or not all modes should be returned in case of more than one}
+
+\item{warn}{should the function warn about multimodal outcomes?}
 }
 \description{
 function giving back the mode

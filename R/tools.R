@@ -216,19 +216,13 @@ modus <- function(x, multimodal=FALSE, warn=TRUE) {
     if( warn & length(res) > 1 ){
       warning("modus : multimodal but only one value returned (use warn=FALSE to turn this off)")
     }
-    if( !identical(multimodal, FALSE) ){
+    if( !identical(multimodal, FALSE) & length(res) > 1 ){
       return(multimodal)
     }else{
       return(res[1])
     }
   }
 }
-
-
-
-
-
-
 
 
 

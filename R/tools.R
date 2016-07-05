@@ -228,7 +228,13 @@ modus <- function(x, multimodal=FALSE, warn=TRUE) {
 
 
 
-
+#' function to get classes from e.g. lists
+#' @export
+#' @param x list to get classes for
+classes <- function(x){
+  tmp <- lapply(x, class)
+  data.frame(name=names(tmp), class=unlist(tmp) , row.names = NULL)
+}
 
 
 

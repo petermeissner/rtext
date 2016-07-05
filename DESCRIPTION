@@ -1,7 +1,7 @@
 Package: diffrprojects
 Title: Using diffr for more than two files
 Date: 2016-04-26
-Version: 0.4.3.90000
+Version: 0.4.4.90000
 Meintainer: Peter Meissner (retep.meissner@gmail.com)
 Authors@R: c(
   person(

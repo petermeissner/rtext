@@ -7,6 +7,7 @@ using namespace Rcpp;
 //' @param x whatever
 //' @param y1 whatever
 //' @param y2 whatever
+//' @export
 // [[Rcpp::export]]
 IntegerVector which_token_worker(
     NumericVector x,
@@ -30,3 +31,5 @@ IntegerVector which_token_worker(
   }
   return res;
 }
+
+

@@ -34,7 +34,9 @@ Imports:
     hellno (>= 0.0.1),
     dplyr (>= 0.4.3),
     magrittr (>= 1.5),
-    Rcpp (>= 0.12.5)
+    Rcpp (>= 0.12.5),
+    digest (>= 0.6.9),
+    stats
 Suggests:
     testthat,
     knitr,

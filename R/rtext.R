@@ -57,12 +57,12 @@
 #'
 #' @examples
 #' mytext <- rtext$new("Hallo World")
-#' mytext$text_get()
+#' mytext$text_get(100)
 #' mytext$char_get()
 #' mytext$text_show()
 #'
 #' mytext <- rtext$new(c("Hallo","World"))
-#' mytext$text_get()
+#' mytext$text_get(100)
 #' mytext$text_show()
 #'
 #'
@@ -311,7 +311,7 @@ rtext <-
     text_show = function(length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
       text_show(x=self$text_get(Inf), length=length, from=from, to=to, coll=coll, wrap=wrap)
     },
-    text_get = function(length=100, from=NULL, to=NULL, split=NULL){
+    text_get = function(length=Inf, from=NULL, to=NULL, split=NULL){
       hash <- paste(self$text_hash(), deparse(match.call()))
       if( !(hash %in% ls(dp_storage)) ){
         res <- rtext_get_character(chars=private$char, length=length, from=from, to=to)

@@ -343,14 +343,18 @@ rtext <-
     # char_get_code
     char_data_get = function(from=1, to=Inf){
       iffer <- private$char_data$i >= from & private$char_data$i <= to
-      tmp <-
-        data.frame(
-          char = private$char[private$char_data[iffer, "i"]],
-          private$char_data[iffer, ]
+      if( length(iffer) > 0 ){
+        tmp <-
+          data.frame(
+            char = private$char[private$char_data[iffer, "i"]],
+            private$char_data[iffer, ]
+          )
+        return(
+          tmp[order(tmp$i),]
         )
-      return(
-        tmp[order(tmp$i),]
-      )
+      }else{
+        return(data.frame())
+      }
     },
     # add
     char_add = function(what=NULL, after=NULL){

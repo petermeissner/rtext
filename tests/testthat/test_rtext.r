@@ -1,5 +1,5 @@
 #### rtext ==============================================================================
-
+context("\nrtext") # =================================================
 
 context("rtext token_data_get") # ========================================================
 
@@ -61,6 +61,20 @@ test_that("rtext token_data_get() user supplied functions work", {
 })
 
 
+context("rtext char_data_get()") # =================================================================
+
+test_that("rtext char_data_get() works", {
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_data_get()
+    TRUE
+  })
+  expect_true({
+    dings <- rtext$new("123")
+    dings$char_data_set("data",1,1)
+    all(names(dings$char_data_get()) == c("char", "i", "data"))
+  })
+})
 
 context("rtext code") # ========================================================
 
@@ -106,8 +120,8 @@ test_that("rtext code updates on char_delete", {
     dings$char_data_get()
     dings$char_delete(1, from = 1)
     identical(
-      unlist(dings$char_data_get()),
-      unlist(data.frame(char="a",i=1L, var1=1)[NULL,])
+      dings$char_data_get(),
+      data.frame()
     )
   })
   expect_true({
@@ -145,8 +159,8 @@ test_that("rtext code updates on char_replace", {
     dings$char_replace(from=2,to=6,by="/")
     dings$char_get()
     identical(
-      unlist(dings$char_data_get()),
-      character(0)
+      dings$char_data_get(),
+      data.frame()
     )
   })
   expect_true({
@@ -155,8 +169,8 @@ test_that("rtext code updates on char_replace", {
     dings$char_replace(1,1,"a")
     dings$char_get()
     identical(
-      unlist(dings$char_data_get()),
-      character(0)
+      dings$char_data_get(),
+      data.frame()
     )
   })
   expect_true({

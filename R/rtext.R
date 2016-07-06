@@ -330,7 +330,7 @@ rtext <-
       }
     },
     # char_get
-    char_get = function(length=100, from=NULL, to=NULL, raw=FALSE){
+    char_get = function(length=Inf, from=NULL, to=NULL, raw=FALSE){
       if(raw | identical(length, TRUE) ){
         res <- private$char
         Encoding(res) <- self$encoding

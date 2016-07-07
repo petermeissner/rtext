@@ -56,12 +56,12 @@ initializing object: text or file.
 }
 \examples{
 mytext <- rtext$new("Hallo World")
-mytext$text_get()
+mytext$text_get(100)
 mytext$char_get()
 mytext$text_show()
 
 mytext <- rtext$new(c("Hallo","World"))
-mytext$text_get()
+mytext$text_get(100)
 mytext$text_show()
 
 

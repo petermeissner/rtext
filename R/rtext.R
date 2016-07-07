@@ -311,9 +311,8 @@ rtext <-
     text_show = function(length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
       text_show(x=self$text_get(Inf), length=length, from=from, to=to, coll=coll, wrap=wrap)
     },
+    # get text
     text_get = function(length=Inf, from=NULL, to=NULL, split=NULL){
-      hash <- paste(self$text_hash(), deparse(match.call()))
-      if( !(hash %in% ls(dp_storage)) ){
         res <- rtext_get_character(chars=private$char, length=length, from=from, to=to)
         res <- paste0(res, collapse = "")
         Encoding(res) <- self$encoding
@@ -321,13 +320,30 @@ rtext <-
           res <- unlist(strsplit(res, split = split))
           Encoding(res) <- self$encoding
         }
-        assign(hash, res, envir = dp_storage)
         return(res)
-      }else{
-        res           <- get(hash, envir = dp_storage)
-        Encoding(res) <- self$encoding
-        return(res)
+    },
+    # get text line information
+    text_lines = function(){
+      lengths <- nchar(self$text_get(split="\n"))+1
+      lengths[length(lengths)] <- lengths[length(lengths)]-1
+      res <-
+        data.frame(
+          line_i = seq_along(lengths),
+          from   = c(0, cumsum(lengths)[seq_len(length(lengths)-1)] )+1,
+          to     = cumsum(lengths),
+          nchar  = lengths
+        )
+      return(res)
+    },
+    text_lines_get = function(lines, nl=FALSE){
+      res   <- character(length(lines))
+      lines <- self$text_lines()[lines,]
+      from  <- lines$from
+      to    <- lines$to
+      for( i in seq_along(from) ){
+        res[i] <- self$text_get(from=from[i], to=to[i] - ifelse(!nl&from[i]<to[i],1,0))
       }
+      return(res)
     },
     # char_get
     char_get = function(length=Inf, from=NULL, to=NULL, raw=FALSE){

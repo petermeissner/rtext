@@ -2,28 +2,63 @@ library(diffrprojects)
 library(magrittr)
 library(dplyr)
 
-#dings <- rtext$new(text_file=dp_tf(1))
-dings <- rtext$new(text=text_snippet(text_read(dp_tf(1))))
-dings$char_data_set("pimpf", 1:30, 2)
-dings$char_data_set("pompf", 1:30, 1:30)
 
-dings$token_data_get(FUN="modus")
-dings$token_data_get(FUN="mean")
-dings$token_data_get(FUN="modus", multimodal=NA, warn = FALSE)
-
-dings$token_data_get()
+dp <- diffrproject$new()
+dp
 
 
 
-# get_token()
+self <- rtext$new(text_file=dp_tf(1))
+self$char_data_set("var1", sample(1:10000, 300), 1)
 
-# entering data
-# char data to token data
-# token data to char data
 
-# token_aliases?
+lines <- c(1,1,1)
+
+res   <- character(length(lines))
+lines <- self$text_lines()[lines,]
+from  <- lines$from
+to    <- lines$to
+for( i in seq_along(from) ){
+  res[i] <- self$text_get(from=from[i], to=to[i])
+}
+
+
+
+
+tmp <- self$text_lines()
+self$text_lines_get(1)
+self$text_lines_get(4)
+self$text_lines_get(1:4, TRUE)
+self$text_lines_get(1:4, FALSE)
+
+
+
+
+
+x         <- nchar(dings$text_get(split = "\n"))+1
+char_data <- dings$char_data_get()
+lines     <- data.frame(from=)
+y <- seq_along(x)
+plot(
+  x,y,
+  pch=".",
+  type = "l",
+  col="grey",
+  ylab="line",
+  xlab="char",
+  asp = 10,
+  xlim = c(0, (ceiling(max(x)/10^nchar(max(x))))*10^nchar(max(x)) )
+)
+
+
+
+
+# create rtext$lines method
+# add line information to char_data / to char??
+
+
 
 # plot text - polygons?
 
-# extensive testing on init!!!
+
 

@@ -126,7 +126,56 @@ load_into <- function(save_file){
 
 
 
-
+#' function for plotting rtext
+#' @export
+#' @param x
+#' @param y
+#' @param char_data
+plot.rtext <-
+  function(
+    rtext,
+    char_data = NULL,
+    lines     = NULL,
+    col       = "#ED4C4CA0",
+    xlim      = c(0, (ceiling(max(x)/10^nchar(max(x))*10))*(10^nchar(max(x))/10) ),
+    ylim      = c(0, max(y)+1 ),
+    ...
+  ){
+    f <- function(name, lines){
+      if(is.null(lines)){
+        rtext$text_lines()[, name]
+      }else{
+        rtext$text_lines()[lines, name]
+      }
+    }
+    x <- f("nchar",  lines)
+    y <- f("line_i", lines)
+    maxy <- max(y)
+    y    <- abs(y-maxy)+1
+    plot(
+      x    = x,
+      y    = y,
+      type = "n",
+      ylab = "line",
+      xlab = "char",
+      xlim = xlim,
+      ylim = ylim,
+      ...,
+      axes=FALSE
+    )
+    axis(1)
+    axis(2,c(max(y),1),c(1,max(y)))
+    box()
+    rect(xleft=0, xright=x, ybottom=y-0.5, ytop=y+0.5, col = "grey", border = "grey", lty=0)
+    if ( !is.null(char_data) ){
+      dat <- rtext$char_data_get()[, c("i",char_data)]
+      lin <- rtext$text_lines()
+      dat_extra <- lin[which_token(dat$i, lin$from, lin$to),]
+      x <- dat$i - dat_extra$from
+      y <- abs(dat_extra$line_i-maxy)+1
+      rect(xleft=x, xright=x+1, ybottom=y-0.5, ytop=y+0.5, col = col, border = col, lty=0)
+    }
+  }
 
 
 

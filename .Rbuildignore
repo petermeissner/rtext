@@ -7,3 +7,4 @@ README.Rmd
 todo.txt
 dev.R
 benchmarks/*
+meta.R

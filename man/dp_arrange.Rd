@@ -6,6 +6,11 @@
 \usage{
 dp_arrange(df, ...)
 }
+\arguments{
+\item{df}{data.frame to be sorted}
+
+\item{...}{column names to use for sorting}
+}
 \description{
 function to sort df by variables
 }

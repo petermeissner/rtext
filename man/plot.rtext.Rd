@@ -4,22 +4,19 @@
 \alias{plot.rtext}
 \title{function for plotting rtext}
 \usage{
-\method{plot}{rtext}(rtext, char_data = NULL, lines = NULL,
-  col = "#ED4C4CA0", xlim = c(0, (ceiling(max(x)/10^nchar(max(x)) * 10)) *
-  (10^nchar(max(x))/10)), ylim = c(0, max(y) + 1), ...)
+\method{plot}{rtext}(x, y = NULL, lines = NULL, char_data = y,
+  col = "#ED4C4CA0", ...)
 }
 \arguments{
-\item{rtext}{object of class rtext}
+\item{x}{object of class rtext}
 
-\item{char_data}{name of a variable/column to be marked}
+\item{y}{name of a variable/column to be marked}
 
 \item{lines}{vector of integer listing the lines to be plottted}
 
+\item{char_data}{name of a variable/column to be marked}
+
 \item{col}{color of the char_data variable to be highlighted}
-
-\item{xlim}{xlim passed through to initial plot}
-
-\item{ylim}{ylim passed through to initial plot}
 
 \item{...}{further parameters passed through to initial plot}
 }

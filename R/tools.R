@@ -238,6 +238,8 @@ classes <- function(x){
 
 
 #' function to sort df by variables
+#' @param df data.frame to be sorted
+#' @param ... column names to use for sorting
 dp_arrange <- function(df, ...){
   sorters    <- as.character(as.list(match.call()))
   if( length(sorters)>2 ){

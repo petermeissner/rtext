@@ -116,7 +116,7 @@ rtext <-
         # tokenize
         private$token <-
           self$tokenizer(private$text()) %>%
-          dplyr::arrange_("from","to")
+          dp_arrange_("from","to")
         # store text hash
         private$token_store$tok_hashed_text <- private$hashed_text
       }
@@ -466,7 +466,7 @@ rtext <-
       # code for i not already in char_data
       add_df            <- data.frame(i=i[i_not_in_char_data])
       add_df[[x]]       <- val[i_not_in_char_data]
-      private$char_data <- rbind_fill(private$char_data, add_df) %>% dplyr::arrange_("i")
+      private$char_data <- rbind_fill(private$char_data, add_df) %>% dp_arrange_("i")
 
       # necessary updates
       private$hash_data()

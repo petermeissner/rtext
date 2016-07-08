@@ -71,12 +71,6 @@ rbind_fill <- function(df1=data.frame(), df2=data.frame()){
 }
 
 
-#' function to get hash for R objects
-#' @param x the thing to hash
-#' @export
-dp_hash <- function(x){
-  digest::digest(x, algo="xxhash64")
-}
 
 
 #' function that checks is values are in between values
@@ -240,6 +234,21 @@ classes <- function(x){
 
 
 
+
+
+
+#' function to sort df by variables
+dp_arrange <- function(df, ...){
+  sorters    <- as.character(as.list(match.call()))
+  if( length(sorters)>2 ){
+    sorters    <- sorters[-c(1:2)]
+    sorters    <- paste0("df['",sorters,"']", collapse = ", ")
+    order_call <- paste0("order(",sorters,")")
+    return(df[eval(parse(text=order_call)), ])
+  }else{
+    return(df)
+  }
+}
 
 
 

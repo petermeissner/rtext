@@ -117,7 +117,7 @@ rtext <-
         private$token <-
           self$tokenizer(private$text()) %>%
           dp_arrange("from","to")
-        Encoding(private$token$token) <- "UTF-8"
+        #Encoding(private$token$token) <- "UTF-8"
         # store text hash
         private$token_store$tok_hashed_text <- private$hashed_text
       }
@@ -248,7 +248,7 @@ rtext <-
       }
 
       ##### Encoding
-      Encoding(private$char) <- encoding
+      Encoding(private$char) <- "UTF-8"
       self$encoding <- "UTF-8"
 
       #### Tokenizer

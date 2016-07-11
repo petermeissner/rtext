@@ -1,6 +1,21 @@
 #### rtext ==============================================================================
 context("\nrtext") # =================================================
 
+
+context("rtext token_get")
+
+test_that("token_get() does not gets confused by Encoding", {
+  expect_true({
+  dings <- rtext$new(text_file=dp_tf(4), encoding="latin1")
+    all(
+      text_collapse(dings$token_get()$token) ==
+        text_read(dp_tf(4), encoding = "latin1")
+    )
+  })
+})
+
+
+
 context("rtext token_data_get") # ========================================================
 
 test_that("rtext token_data_get default behaviour makes sense", {

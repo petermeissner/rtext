@@ -30,18 +30,32 @@ diffrproject <-
 
     #### public ================================================================
     public = list(
+
+
       #### data ================================================================
       meta     = list(),
       options  = list(),
       tracks   = list(),
       linkage  = list(),
       distance = list(),
+      texts    = list(),
+
+
       #### methods =============================================================
       # add text
-      text_add = function(){"TBD"},
+      text_add = function( rtext, name = NULL ){
+          stopifnot("rtext"  %in% class(rtext))
+          self$texts[[name]] <- rtext
+          # return self for piping
+          return(invisible(self))
+      },
 
       # delete text
-      text_delete = function(){"TBD"},
+      text_delete = function(name){
+        self$texts[[name]] <- NULL
+        # return self for piping
+        return(invisible(self))
+      },
 
       # universal getter
       get = function(name){

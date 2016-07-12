@@ -302,7 +302,7 @@ rtext <-
         list(
           text_file  = self$text_file,
           character  = length(private$char),
-          token      = dim(private$token),
+          token      = sum(self$token_get()$is_token),
           encoding   = self$encoding,
           sourcetype = self$sourcetype
         )

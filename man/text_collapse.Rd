@@ -7,13 +7,13 @@
 \alias{text_collapse.list}
 \title{function for collapsing text vectors}
 \usage{
-text_collapse(x, sep)
+text_collapse(x, ..., sep)
 
-\method{text_collapse}{default}(x, sep = "")
+\method{text_collapse}{default}(x, ..., sep = "")
 
-\method{text_collapse}{list}(x, sep = "")
+\method{text_collapse}{list}(x, ..., sep = c("", ""))
 
-\method{text_collapse}{data.frame}(x, sep = "")
+\method{text_collapse}{data.frame}(x, ..., sep = c("", "\\n"))
 }
 \arguments{
 \item{x}{object to be collapsed}

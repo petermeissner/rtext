@@ -335,7 +335,7 @@ text_extract_all <-
 #' @param x object to be collapsed
 #' @param sep separator between text parts
 #' @export
-text_collapse <- function (x, sep) {
+text_collapse <- function (x, ..., sep) {
   UseMethod("text_collapse")
 }
 
@@ -343,18 +343,21 @@ text_collapse <- function (x, sep) {
 #' @rdname text_collapse
 #' @method text_collapse default
 #' @export
-text_collapse.default <- function(x, sep=""){
-  paste0(x, sep="", collapse = sep)
+text_collapse.default <- function(x, ..., sep=""){
+  paste0(x, ..., sep="", collapse = sep)
 }
 
 #' text_collapse() method for lists
 #' @export
 #' @rdname text_collapse
 #' @method text_collapse list
-text_collapse.list <- function(x, sep=""){
+text_collapse.list <- function(x, ..., sep=c("","")){
   if(is.list(x)){
     x <- lapply(x, text_collapse, sep=sep)
     x <- unlist(x, recursive = FALSE)
+  }
+  if(length(sep)>1){
+    sep <- sep[2]
   }
   text_collapse(x, sep=sep)
 }
@@ -364,21 +367,31 @@ text_collapse.list <- function(x, sep=""){
 #' @export
 #' @rdname text_collapse
 #' @method text_collapse data.frame
-text_collapse.data.frame <- function(x, sep=""){
+text_collapse.data.frame <- function(x, ..., sep=c("", "\n")){
   if(is.data.frame(x)){
-    x <- apply(x, 1, text_collapse, sep=sep)
+    x <- apply(x, 1, text_collapse, sep=sep[1])
     x <- unlist(x, recursive = FALSE)
-  }else{
-    if(length(sep)>1){
-      sep <- sep[2]
-    }
+  }
+  if(length(sep)>1){
+    sep <- sep[2]
   }
   text_collapse(x, sep=sep)
 }
 
 
 
-
+#' wrapper function of eval() and parse() to evaluate character vector
+#' @param x character vector to be parsed and evaluated
+#' @param envir where to evaluate character vector
+#' @param ... arguments passed through to eval()
+#' @export
+text_eval <- function(x, envir=parent.frame(), ...){
+  eval(
+    parse(text = x),
+    envir = envir,
+    ...
+  )
+}
 
 
 

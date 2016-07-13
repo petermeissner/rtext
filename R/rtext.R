@@ -209,7 +209,7 @@ rtext <-
       function(
         text        = NULL,
         text_file   = NULL,
-        tokenizer   = rtext_tokenizer$words,
+        tokenizer   = function(x){text_tokenize(x, "\n", non_token = TRUE)},
         encoding    = "UTF-8",
         id          = NULL,
         tokenize_by = NULL,

@@ -7,7 +7,8 @@ dp_storage <- new.env(parent = emptyenv())
 #' @export
 rtext_tokenizer <- list(
   words  = function(x){text_tokenize_words(x, non_token = TRUE )},
-  words2 = function(x){text_tokenize_words(x, non_token = FALSE)}
+  words2 = function(x){text_tokenize_words(x, non_token = FALSE)},
+  lines  = function(x){text_tokenize(x, "\n", non_token = TRUE)}
 )
 
 

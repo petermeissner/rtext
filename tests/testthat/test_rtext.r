@@ -272,7 +272,7 @@ test_that("rtext load is same as save", {
       rtext$new(
         text      = "1234567890",
         text_file = dp_tf("test_utf8.txt"),
-        tokenizer = function(x){strsplit(x,"\n")},
+        tokenizer = function(x){text_tokenize(x,"\n", non_token = TRUE)},
         encoding  = "latin1",
         id        = "bollocks",
         save_file = tempfile()
@@ -366,9 +366,9 @@ test_that("rtext initialization", {
   expect_error( rtext$new(), NA)
   expect_error( rtext$new(NULL), NA)
   expect_error( rtext$new(""), NA)
-  expect_error( rtext$new(text_file=dp_tf("rc_1.txt")), NA)
-  expect_error( rtext$new(text="", text_file=dp_tf("rc_1.txt")), NA)
-  expect_error( rtext$new(text=readLines(dp_tf("rc_1.txt"))), NA)
+  expect_error( rtext$new(text_file=dp_tf("rc_1_ch1.txt")), NA)
+  expect_error( rtext$new(text="", text_file=dp_tf("rc_1_ch1.txt")), NA)
+  expect_error( rtext$new(text=readLines(dp_tf("rc_1_ch1.txt"))), NA)
   expect_true({
     !is.null(rtext$new("")$id)
   })

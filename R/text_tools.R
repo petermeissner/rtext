@@ -334,6 +334,7 @@ text_extract_all <-
 #' function for collapsing text vectors
 #' @param x object to be collapsed
 #' @param sep separator between text parts
+#' @param ... additional passed on to specific methods (e.g. to paste within text_collapse.default())
 #' @export
 text_collapse <- function (x, ..., sep) {
   UseMethod("text_collapse")

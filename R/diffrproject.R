@@ -45,12 +45,26 @@ diffrproject <-
       #### methods =============================================================
       # add text
       text_add = function( rtext, name = NULL ){
+
         # input check
         stopifnot("rtext"  %in% class(rtext))
+
+        # connecting text with other text
+        if( length(self$texts)>0 ){
+          next_item <- length(self$texts_connected)+1
+          last_item <- length(self$texts)
+          self$texts_connected[[next_item]] <-
+            list(
+              self$texts[[last_item]],
+              rtext
+            )
+        }
+
         # working variable creation
         names <- names(self$texts)
         ids   <- vapply(self$texts, `[[`, "", "id")
         id    <- rtext$id
+
         # doing-duty-to-do
         if( is.null(name) ){
           next_num <- max(c(as.numeric(text_extract(names, "\\d+")),0))+1
@@ -62,6 +76,7 @@ diffrproject <-
           rtext$id <- text_collapse(id, "_", i)
           i <- i+1
         }
+
         # return self for piping
         return(invisible(self))
       },

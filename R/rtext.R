@@ -252,6 +252,7 @@ rtext <-
       self$encoding <- "UTF-8"
 
       #### Tokenizer
+      # assign tokenizer
       self$tokenizer <- tokenizer
       if( !is.null(tokenize_by) ){
         self$tokenizer <-
@@ -259,6 +260,10 @@ rtext <-
             text_tokenize(x, regex = tokenize_by, non_token = TRUE)
           }
       }
+      # check if tokenizer is valid
+      stopifnot( "data.frame" %in% class(self$tokenizer("")) )
+      stopifnot( dim2(self$tokenizer(""))==4 )
+
 
       #### Tokenize
       private$tokenize()

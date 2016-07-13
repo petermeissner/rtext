@@ -18,6 +18,8 @@ text_collapse(x, ..., sep)
 \arguments{
 \item{x}{object to be collapsed}
 
+\item{...}{additional passed on to specific methods (e.g. to paste within text_collapse.default())}
+
 \item{sep}{separator between text parts}
 }
 \description{

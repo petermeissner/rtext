@@ -260,6 +260,10 @@ rtext <-
           }
       }
 
+      #### Tokenize
+      private$tokenize()
+
+
       ##### ID
       if( is.null(id) ){
         self$id <- dp_hash(self)

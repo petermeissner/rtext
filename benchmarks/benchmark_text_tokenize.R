@@ -7,7 +7,7 @@ library(diffrprojects)
 x1 <- "Daniel Defoe: Robinson Crusoe\n\n* Quelle"
 x2 <- "Daniel Defoe: Robinson Crusoe\n\n* Quelle: "
 x3 <- " Daniel Defoe: Robinson Crusoe\n\n* Quelle: "
-xfull <- text_read(dp_tf(1))
+xfull <- text_read(dp_tf("rc_1.txt"))
 
 x <- x3
 regex <- "\\W+"
@@ -113,7 +113,7 @@ text_tokenize_5 <-
 x1 <- "Daniel Defoe: Robinson Crusoe\n\n* Quelle"
 x2 <- "Daniel Defoe: Robinson Crusoe\n\n* Quelle: "
 x3 <- " Daniel Defoe: Robinson Crusoe\n\n* Quelle: "
-xfull <- text_read(dp_tf(1))
+xfull <- text_read(dp_tf("rc_1.txt"))
 
 x <- xfull
 regex <- "\\W+"
@@ -236,7 +236,7 @@ fixed=FALSE
 useBytes=FALSE
 group=c("words", "lines", "paragraphs")
 
-xfull <- text_read(dp_tf(1))
+xfull <- text_read(dp_tf("rc_1.txt"))
 RES   <- list()
 stime <- Sys.time()
 

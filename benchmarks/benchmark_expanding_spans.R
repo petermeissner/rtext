@@ -2,7 +2,7 @@ library(diffrprojects)
 library(magrittr)
 library(microbenchmark)
 
-dings <- rtext$new(text_file=dp_tf(1), verbose=TRUE)
+dings <- rtext$new(text_file=dp_tf("rc_1.txt"), verbose=TRUE)
 dings$get("char_data")
 
 dings$char_data_set("pimpf", 1, 1)

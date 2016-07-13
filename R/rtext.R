@@ -263,6 +263,8 @@ rtext <-
       ##### ID
       if( is.null(id) ){
         self$id <- dp_hash(self)
+      }else{
+        self$id <- id
       }
 
       ##### Hashing again

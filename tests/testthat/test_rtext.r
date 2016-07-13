@@ -369,6 +369,12 @@ test_that("rtext initialization", {
   expect_error( rtext$new(text_file=dp_tf(1)), NA)
   expect_error( rtext$new(text="", text_file=dp_tf(1)), NA)
   expect_error( rtext$new(text=readLines(dp_tf(1))), NA)
+  expect_true({
+    !is.null(rtext$new("")$id)
+  })
+  expect_true({
+    identical(rtext$new("", id="mänämüdderschnüdetspück")$id, "mänämüdderschnüdetspück")
+  })
 })
 
 

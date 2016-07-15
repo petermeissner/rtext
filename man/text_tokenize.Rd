@@ -2,12 +2,30 @@
 % Please edit documentation in R/text_tools.R
 \name{text_tokenize}
 \alias{text_tokenize}
-\title{function to tokenize text}
+\alias{text_tokenize.default}
+\title{generic for gregexpr wrappers to tokenize text}
 \usage{
 text_tokenize(x, regex = NULL, ignore.case = FALSE, fixed = FALSE,
-  useBytes = FALSE, non_token = FALSE)
+  perl = FALSE, useBytes = FALSE, non_token = FALSE)
+
+\method{text_tokenize}{default}(x, regex = NULL, ignore.case = FALSE,
+  fixed = FALSE, perl = FALSE, useBytes = FALSE, non_token = FALSE)
 }
 \arguments{
+\item{x}{x object to be tokenized}
+
+\item{regex}{regex expressing where to cut see (see \link[base]{gregexpr})}
+
+\item{ignore.case}{whether or not reges should be case sensitive (see \link[base]{gregexpr})}
+
+\item{fixed}{whether or not regex should be interpreted as is or as regular expression (see \link[base]{gregexpr})}
+
+\item{perl}{whether or not Perl compatible regex should be used (see \link[base]{gregexpr})}
+
+\item{useBytes}{byte-by-byte matching of regex or character-by-character (see \link[base]{gregexpr})}
+
+\item{non_token}{whether or not to return non-tokens as well}
+
 \item{x}{character vector to be tokenized}
 
 \item{regex}{regex to use for tokenization}
@@ -17,8 +35,6 @@ text_tokenize(x, regex = NULL, ignore.case = FALSE, fixed = FALSE,
 \item{fixed}{see \link{grep}, interanlly passed through to gregexpr()}
 
 \item{useBytes}{see \link{grep}, interanlly passed through to gregexpr()}
-
-\item{non_token}{whether or not to return non-tokens as well}
 }
 \value{
 data.frame,
@@ -29,6 +45,8 @@ data.frame,
    type: type of the token, either its matched by regular expression used for tokenization or not matched
 }
 \description{
-function to tokenize text
+generic for gregexpr wrappers to tokenize text
+
+default method for text_tokenize generic
 }
 

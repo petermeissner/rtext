@@ -81,8 +81,6 @@ rtext <-
     tmp         = NULL,
     char        = character(0),
     char_data   = data.frame(),
-    token       = data.frame(),
-    token_data  = data.frame(),
 
     hashed_all  = character(0),
     hashed_text = character(0),
@@ -102,93 +100,8 @@ rtext <-
       private$hashed_data <- dp_hash(private$char_data)
       private$hashed_text <- dp_hash(private$char)
       private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
-    },
-
-    token_store =
-      list(
-        tok_hashed_text = character(0),
-        tok_hashed_data = character(0),
-        tok_hashed_call = character(0)
-      ),
-    tokenize = function(){
-      # helper functions
-      update_token <- function(){
-        # tokenize
-        private$token <-
-          self$tokenizer(private$text()) %>%
-          dp_arrange("from","to")
-        #Encoding(private$token$token) <- "UTF-8"
-        # store text hash
-        private$token_store$tok_hashed_text <- private$hashed_text
-      }
-      # deciding when to re-tokenize
-      if(       # no tokenization done so far
-        length(private$hashed_text)==0 |
-        length(private$token_store$tok_hashed_text)==0
-      ){
-        self$message("tokenizing")
-        update_token()
-      }else if( # text has changed
-        private$hashed_text != private$token_store$tok_hashed_text |
-        identical(private$hashed_text, character(0))
-      ){
-        self$message("tokenizing")
-        update_token()
-      }
-    },
-    tokenize_data = function(...){
-      # datanize tokens
-      update_token_data <- function(...){
-        # tokenize if necessary
-        private$tokenize()
-        if( !is.null(private$char_data$i) ){
-          # datanize tokens
-          token_i <- which_token( private$char_data$i, private$token$from, private$token$to )
-          if( "FUN"  %in% names(as.list(match.call())) ){
-            # user supplied functions and otpions
-            private$token_data <-
-              private$char_data[,-1] %>%
-              stats::aggregate(by = list( token_i=token_i ), ... )
-          }else{
-            # standard
-            private$token_data <-
-              private$char_data[,-1] %>%
-              stats::aggregate(
-                by = list( token_i=token_i ),
-                FUN="modus",
-                multimodal=NA,
-                warn=FALSE
-              )
-          }
-          names(private$token_data)[-1] <- names(private$char_data)[-1]
-        }
-        # store hashes
-        private$token_store$tok_hashed_data <- private$hashed_data
-        private$token_store$tok_hashed_call <- dp_hash(as.list(match.call()))
-      }
-      # deciding when to re-datanize tokens
-      if(       # no datanization has been done so far
-        length(private$hashed_text)==0 |
-        length(private$token_store$tok_hashed_text)==0 |
-        length(private$hashed_data)==0 |
-        length(private$token_store$tok_hashed_data)==0 |
-        length(private$token_store$tok_hashed_call)==0
-      ){
-        self$message("datanizing tokens")
-        update_token_data(...)
-      }else if( # text / data / call has changed
-        private$hashed_text != private$token_store$tok_hashed_text |
-        identical(private$hashed_text, character(0)) |
-        private$hashed_text != private$token_store$tok_hashed_data |
-        identical(private$hashed_data, character(0)) |
-        dp_hash(as.list(match.call())) != private$token_store$tok_hashed_call
-      ){
-        self$message("datanizing tokens")
-        update_token_data(...)
-      }
     }
   ),
-
 
   #### public ==================================================================
   public = list(
@@ -209,10 +122,8 @@ rtext <-
       function(
         text        = NULL,
         text_file   = NULL,
-        tokenizer   = function(x){text_tokenize(x, "\n", non_token = TRUE)},
         encoding    = "UTF-8",
         id          = NULL,
-        tokenize_by = NULL,
         save_file   = NULL,
         verbose     = TRUE
       )
@@ -250,24 +161,6 @@ rtext <-
       ##### Encoding
       Encoding(private$char) <- "UTF-8"
       self$encoding <- "UTF-8"
-
-      #### Tokenizer
-      # assign tokenizer
-      self$tokenizer <- tokenizer
-      if( !is.null(tokenize_by) ){
-        self$tokenizer <-
-          function(x){
-            text_tokenize(x, regex = tokenize_by, non_token = TRUE)
-          }
-      }
-      # check if tokenizer is valid
-      stopifnot( "data.frame" %in% class(self$tokenizer("")) )
-      stopifnot( dim2(self$tokenizer(""))==4 )
-
-
-      #### Tokenize
-      private$tokenize()
-
 
       ##### ID
       if( is.null(id) ){
@@ -313,7 +206,6 @@ rtext <-
         list(
           text_file  = self$text_file,
           character  = length(private$char),
-          token      = sum(self$token_get()$is_token),
           encoding   = self$encoding,
           sourcetype = self$sourcetype
         )
@@ -333,29 +225,6 @@ rtext <-
           Encoding(res) <- self$encoding
         }
         return(res)
-    },
-    # get text line information
-    text_lines = function(){
-      lengths <- nchar(self$text_get(split="\n"))+1
-      lengths[length(lengths)] <- lengths[length(lengths)]-1
-      res <-
-        data.frame(
-          line_i = seq_along(lengths),
-          from   = c(0, cumsum(lengths)[seq_len(length(lengths)-1)] )+1,
-          to     = cumsum(lengths),
-          nchar  = lengths
-        )
-      return(res)
-    },
-    text_lines_get = function(lines, nl=FALSE){
-      res   <- character(length(lines))
-      lines <- self$text_lines()[lines,]
-      from  <- lines$from
-      to    <- lines$to
-      for( i in seq_along(from) ){
-        res[i] <- self$text_get(from=from[i], to=to[i] - ifelse(!nl&from[i]<to[i],1,0))
-      }
-      return(res)
     },
     # char_get
     char_get = function(length=Inf, from=NULL, to=NULL, raw=FALSE){
@@ -497,10 +366,7 @@ rtext <-
           text_file         = self$text_file,
           encoding     = self$encoding,
           save_file    = self$save_file,
-          tokenizer    = self$tokenizer,
           sourcetype   = self$sourcetype,
-          token        = private$token,
-          token_data   = private$token_data,
           session_info = list(
             dp_version=packageVersion("diffrprojects"),
             r_version=paste(version$major, version$minor, sep="."),
@@ -544,7 +410,6 @@ rtext <-
       # setting public
       self$id         <- tmp$id
       self$text_file  <- tmp$text_file
-      self$tokenizer  <- tmp$tokenizer
       self$encoding   <- tmp$encoding
       self$sourcetype <- tmp$sourcetype
       self$save_file  <- tmp$save_file
@@ -552,27 +417,12 @@ rtext <-
       # setting private
       private$char       <- tmp$char
       private$char_data  <- tmp$char_data
-      private$token      <- tmp$token
-      private$token_data <- tmp$token_data
 
       # updating rest
       private$hash_all()
 
       # return for piping
       invisible(self)
-    },
-    # token_get
-    token_get = function(){
-      # tokenize text if necessary else take cache
-      private$tokenize()
-      # return tokens
-      data.frame( private$token, token_i=seq_len(dim1(private$token)) )
-    },
-    token_data_get = function(...){
-      # tokenize text / gen token data if necessary else take cache
-      private$tokenize_data(...)
-      # return token data
-      private$token_data
     },
     # save_as
     export = function(){

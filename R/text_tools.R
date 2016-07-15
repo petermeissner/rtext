@@ -119,7 +119,29 @@ text_length <- function(x, type = "chars", allowNA = FALSE, keepNA = TRUE, na.rm
 }
 
 
-#' function to tokenize text
+#' generic for gregexpr wrappers to tokenize text
+#' @param x x object to be tokenized
+#' @param regex regex expressing where to cut see (see \link[base]{gregexpr})
+#' @param ignore.case whether or not reges should be case sensitive (see \link[base]{gregexpr})
+#' @param fixed whether or not regex should be interpreted as is or as regular expression (see \link[base]{gregexpr})
+#' @param perl whether or not Perl compatible regex should be used (see \link[base]{gregexpr})
+#' @param useBytes byte-by-byte matching of regex or character-by-character (see \link[base]{gregexpr})
+#' @export
+text_tokenize <- function (
+   x,
+   regex       = NULL,
+   ignore.case = FALSE,
+   fixed       = FALSE,
+   perl        = FALSE,
+   useBytes    = FALSE,
+   non_token   = FALSE
+ ){
+  UseMethod("text_tokenize")
+}
+
+#' default method for text_tokenize generic
+#' @rdname text_tokenize
+#' @method text_tokenize default
 #' @param x character vector to be tokenized
 #' @param regex regex to use for tokenization
 #' @param ignore.case see \link{grep}, interanlly passed through to gregexpr()
@@ -133,12 +155,13 @@ text_length <- function(x, type = "chars", allowNA = FALSE, keepNA = TRUE, na.rm
 #'    length: length of the token;
 #'    type: type of the token, either its matched by regular expression used for tokenization or not matched
 #' @export
-text_tokenize <-
+text_tokenize.default <-
   function(
     x,
     regex       = NULL,
     ignore.case = FALSE,
     fixed       = FALSE,
+    perl        = FALSE,
     useBytes    = FALSE,
     non_token   = FALSE
   ){
@@ -150,6 +173,7 @@ text_tokenize <-
         regex       = regex,
         ignore.case = ignore.case,
         fixed       = fixed,
+        perl        = perl,
         useBytes    = useBytes,
         non_token   = non_token
       )
@@ -163,7 +187,7 @@ text_tokenize <-
           token    = tmp,
           is_token = rep(TRUE, length(tmp))
         )
-        return(token)
+        return(dp_arrange(token, "from", "to"))
       }
       if( is.null(regex) ){
         regex <- ".*"
@@ -231,9 +255,33 @@ text_tokenize <-
       }
 
       # return
-      return(token)
+      return(dp_arrange(token))
     }
   }
+
+#' function tokenizing rtext objects
+#' @export
+text_tokenize.rtext <-   function(
+  x,
+  regex       = NULL,
+  ignore.case = FALSE,
+  fixed       = FALSE,
+  perl        = FALSE,
+  useBytes    = FALSE,
+  non_token   = FALSE
+){
+  x$text_get() %>%
+    text_tokenize(
+      regex       = regex,
+      ignore.case = ignore.case,
+      fixed       = fixed,
+      perl        = perl,
+      useBytes    = useBytes,
+      non_token   = non_token
+    ) %>%
+    dp_arrange("from","to") %>%
+    return()
+}
 
 
 #' tokenize text into words
@@ -257,7 +305,7 @@ text_tokenize_words <-
       tmp$is_token <- rep(FALSE, dim(tmp)[1])
       res <- rbind(res, tmp)
     }
-    return(res)
+    return(dp_arrange(res))
   }
 
 

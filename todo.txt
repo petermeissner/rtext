@@ -1,5 +1,3 @@
-- add data to rtext
-- document methods of rtext
 - have a look at rite again for text editor example
 - have a look at ace / shiny ace for text editor // web-interface
 

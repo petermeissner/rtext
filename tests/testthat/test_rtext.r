@@ -8,7 +8,7 @@ test_that("token_get() does not gets confused by Encoding", {
   expect_true({
   dings <- rtext$new(text_file=dp_tf("test_latin1.txt"), encoding="latin1")
     all(
-      text_collapse(dings$token_get()$token) ==
+      text_collapse(text_tokenize(dings, "")$token) ==
         text_read(dp_tf("test_latin1.txt"), encoding = "latin1")
     )
   })

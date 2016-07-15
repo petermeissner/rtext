@@ -1,7 +1,7 @@
 # README
 
 
-# diffr 
+# diffrprojects
 
 A package for using diffr on more than two files
 
@@ -24,27 +24,28 @@ TBD
 
 
 Meißner P (2016). _diffrprojects: Using diffr for more than two
-texts_. R package version 0.0.1, <URL:
+texts_. R package version 0.5.1.90000, <URL:
 https://github.com/petermeissner/diffrprojects>.
 
 Sieberer U, Meißner P, Keh J and Müller W (2016). "Mapping and
 Explaining Parliamentary Rule Changes in Europe: A Research
 Program." _Legislative Studies Quarterly_, *41*(1), pp. 61-88.
-ISSN 1939-9162, <URL: http://doi.org/10.1111/lsq.12106>, <URL:
+ISSN 1939-9162, doi: 10.1111/lsq.12106 (URL:
+http://doi.org/10.1111/lsq.12106), <URL:
 http://dx.doi.org/10.1111/lsq.12106>.
 
 **BibTex for citing**
 
 <code style="white-space:normal;">
-@Manual{,
+@Manual{Meissner2016,
   title = {diffrprojects: Using diffr for more than two texts},
   author = {Peter Meißner},
   year = {2016},
-  note = {R package version 0.0.1},
+  note = {R package version 0.5.1.90000},
   url = {https://github.com/petermeissner/diffrprojects},
 }
 
-@Article{,
+@Article{Sieberer2016,
   title = {Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program},
   author = {Ulrich Sieberer and Peter Meißner and Julia F. Keh and Wolfgang C. Müller},
   journal = {Legislative Studies Quarterly},

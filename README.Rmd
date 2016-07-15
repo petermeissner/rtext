@@ -6,7 +6,7 @@ output:
 ---
 
 
-# diffr 
+# diffrprojects
 
 A package for using diffr on more than two files
 

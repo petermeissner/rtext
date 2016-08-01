@@ -6,5 +6,8 @@ sudo: required
 
 r_github_packages:
   - petermeissner/stringb
+  - jimhester/covr
 
+after_success:
+  - Rscript -e 'covr::codecov()'
 

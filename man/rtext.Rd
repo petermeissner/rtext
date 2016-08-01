@@ -19,10 +19,6 @@ text class
 \describe{
 \item{\code{text}}{a single character string / character vector of length one}
 
-\item{\code{tokens}}{a data frame with a character vector representing the the text as tokens,
-and two integer vectors capturing the span of the token measured in
-characters starting from beginning of text}
-
 \item{\code{file}}{path to a file from which text was read in}
 
 \item{\code{encoding}}{encoding to be assumed for the text (will always be UTF-8, because.)}
@@ -33,27 +29,6 @@ initializing object: text or file.
 (text="", file=NULL | file="") : "text";
 (text=NULL, file="") : "file"}
 }}
-\section{Methods}{
-
-\describe{
- \item{
-   \code{
-   new(text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8", id=NULL)
- }}{
-   Method called when initialising object via
-   \code{robotstxt$new()}. Needs either \code{text} or \code{domain} to be
-   present at initialization. If only domain is supplied -- should be seen as
-   default -- than the robots.txt file for that domain will be downloaded. If
-   \code{text} is supplied as well, nothing will be downloaded. If only
-   \code{text} is supplied than domain is set to '???'.
- }
- \item{\code{
-   dummy(buuh)
- }}{
-   TBD
- }
-}
-}
 \examples{
 mytext <- rtext$new("Hallo World")
 mytext$text_get(100)

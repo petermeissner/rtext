@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 inst/doc
+rtext_tokenize_data.R

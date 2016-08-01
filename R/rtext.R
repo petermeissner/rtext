@@ -16,10 +16,6 @@
 #' @field text
 #'  a single character string / character vector of length one
 #'
-#' @field tokens
-#'  a data frame with a character vector representing the the text as tokens,
-#'  and two integer vectors capturing the span of the token measured in
-#'  characters starting from beginning of text
 #'
 #' @field file
 #'  path to a file from which text was read in
@@ -35,25 +31,6 @@
 #'  (text=NULL, file="") : "file"
 #'
 #'
-#' @section Methods:
-#' \describe{
-#'  \item{
-#'    \code{
-#'    new(text=NULL, file=NULL, tokenize = "\n", encoding="UTF-8", id=NULL)
-#'  }}{
-#'    Method called when initialising object via
-#'    \code{robotstxt$new()}. Needs either \code{text} or \code{domain} to be
-#'    present at initialization. If only domain is supplied -- should be seen as
-#'    default -- than the robots.txt file for that domain will be downloaded. If
-#'    \code{text} is supplied as well, nothing will be downloaded. If only
-#'    \code{text} is supplied than domain is set to '???'.
-#'  }
-#'  \item{\code{
-#'    dummy(buuh)
-#'  }}{
-#'    TBD
-#'  }
-#' }
 #'
 #' @examples
 #' mytext <- rtext$new("Hallo World")
@@ -109,7 +86,6 @@ rtext <-
 
     #### puplic data fields ====================================================
     text_file  = NA,
-    tokenizer  = NA,
     encoding   = NA,
     sourcetype = NA,
     id         = NULL,
@@ -140,7 +116,7 @@ rtext <-
         private$char <- ""
         self$sourcetype <- "empty"
       }else if(is.null(text) & !is.null(text_file)){ # read from text_file
-        private$char <- text_read(text_file, tokenize = "", encoding = encoding)
+        private$char <- text_read(text_file, encoding = encoding)
         self$sourcetype <- "text_file"
       }else{ # take text as supplied
         private$char <-
@@ -256,17 +232,18 @@ rtext <-
     # add
     char_add = function(what=NULL, after=NULL){
       what        <- enc2utf8(what)
+      what        <- unlist(strsplit(what,""))
       if( is.null(after) ) {
-        private$char <- c(private$char, unlist(strsplit(what,"")))
+        private$char <- c(private$char, what)
       }else if ( after==0 ) {
-        private$char <- c(unlist(strsplit(what,"")), private$char)
+        private$char <- c(what, private$char)
         # update char_data$i
         private$char_data$i <- private$char_data$i + length(what)
       }else{
         index  <- seq_along(private$char)
         part1  <- private$char[index <= after]
         part2  <- private$char[index >  after]
-        private$char <- c( part1, unlist(strsplit(what, "")), part2)
+        private$char <- c( part1, what, part2)
         iffer <- private$char_data$i > after
         # update char_data$i
         private$char_data$i[iffer] <- private$char_data$i[iffer] + length(what)
@@ -354,6 +331,23 @@ rtext <-
 
       # return for piping
       invisible(self)
+    },
+    char_data_set_regex = function(x=NULL, regex=NULL, val=NA, ...){
+      found_spans <- text_locate_all(private$text(), regex, ...)[[1]]
+      found_is    <- unique(as.integer(unlist(mapply(seq, found_spans$start, found_spans$end))))
+      self$char_data_set(x, found_is, val)
+    },
+    tokenize_data_regex = function(regex = NULL, ..., non_token = FALSE){
+      # tokenie text
+      token <- text_tokenize(private$text(), ..., non_token = non_token)
+      # datanize tokens
+      token_i <- which_token( private$char_data$i, token$from, token$to )
+    },
+    tokenize_data_words = function(non_token=FALSE){
+
+    },
+    tokenize_data_lines = function(non_token=FALSE){
+
     },
     # save
     save = function(file=NULL, id=c("self_id", "hash")){
@@ -444,10 +438,6 @@ rtext <-
 )
 
 
-#' rtext : token_data_get (rtext$method)
-#' @name token_data_get
-#' @param ... three dots passed through to aggregate
-NULL
 
 
 

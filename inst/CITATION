@@ -4,11 +4,11 @@ note <- sprintf("R package version %s", meta$Version)
 c(
   bibentry(
     bibtype = "Manual",
-    title = "diffrprojects: Using diffr for more than two texts",
+    title = "rtext",
     author = c(person("Peter", "Mei\u00dfner")),
     year = year,
     note = note,
-    url = "https://github.com/petermeissner/diffrprojects",
+    url = "https://github.com/petermeissner/rtext",
     key = "Meissner2016"
   ),
   bibentry(

@@ -3,13 +3,13 @@
 dp_storage <- new.env(parent = emptyenv())
 
 
-#' list of ready to use functions for rtext initialization and tokenization
-#' @export
-rtext_tokenizer_list <- list(
-  words  = function(x){text_tokenize_words(x, non_token = TRUE )},
-  words2 = function(x){text_tokenize_words(x, non_token = FALSE)},
-  lines  = function(x){text_tokenize(x, "\n", non_token = TRUE)}
-)
+# #' list of ready to use functions for rtext initialization and tokenization
+# #' @export
+# rtext_tokenizer_list <- list(
+#   words  = function(x){text_tokenize_words(x, non_token = TRUE )},
+#   words2 = function(x){text_tokenize_words(x, non_token = FALSE)},
+#   lines  = function(x){text_tokenize(x, "\n", non_token = TRUE)}
+# )
 
 
 #' function to get text from rtext object
@@ -18,7 +18,7 @@ rtext_tokenizer_list <- list(
 #' @param length number of characters to be returned
 #' @param from first character to be returned
 #' @param to last character to be returned
-#' @export
+# #' @export
 rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
   # helper functions
   bind_to_charrange <- function(x){bind_between(x, 1, length(chars))}
@@ -73,61 +73,9 @@ rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
   stop("rtext$get_character() : I do not know how to make sense of given length, from, to argument values passed")
 }
 
-#' function used to delete parts from a vector
-#' @param x input vector
-#' @param n number of items to be deleted
-#' @param from from which position onwards elements should be deleted
-#' @param to up to which positions elements should be deleted
-#' @export
-vector_delete <- function(x, n=NULL, from=NULL, to=NULL){
-  # shortcuts
-  if( is.null(n) ){
-    if(is.null(from) & is.null(to)){
-      return(x)
-    }
-  }else{
-    if( n==0){
-      return(x)
-    }
-  }
-  # iffer
-  iffer <- TRUE
-  if( is.null(from) & is.null(to)  & !is.null(n) ){ # only n
-    iffer <- seq_along(x) > length(x) | seq_along(x) <= length(x)-n
-  }else if( !is.null(from) & is.null(to)  & is.null(n) ){ # only from
-    iffer   <- seq_along(x) < from
-  }else if( is.null(from) & !is.null(to) & is.null(n) ){ # only to
-    iffer   <- seq_along(x) > to
-  }else if( !is.null(from) & !is.null(to)  & is.null(n) ){ # from + to
-    iffer   <- seq_along(x) > to | seq_along(x) < from
-  }else if( !is.null(from) & is.null(to)  & !is.null(n) ){ # from + n
-    if( n > 0 ){
-      n     <- bind_between(n-1, 0, length(x))
-      iffer <- seq_along(x) > from+n | seq_along(x) < from
-    }
-  }else if( is.null(from) & !is.null(to)  & !is.null(n) ){ # to + n
-      iffer <- seq_along(x) > to | seq_along(x) <= to-n
-  }
-  # return
-  return( x[iffer] )
-}
-
-
-
-
-#' function that loads saved rtext
-#' @param save_file a saved rtext object in Rdata format
-#' @export
-load_into <- function(save_file){
-  tmp_env <- new.env(parent = emptyenv())
-  load(save_file, envir = tmp_env)
-  lapply(tmp_env, I)
-}
-
-
 #' function to get hash for R objects
 #' @param x the thing to hash
-#' @export
+# #' @export
 dp_hash <- function(x){
   digest::digest(x, algo="xxhash64")
 }

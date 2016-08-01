@@ -1,3 +1,55 @@
+#' function used to delete parts from a vector
+#' @param x input vector
+#' @param n number of items to be deleted
+#' @param from from which position onwards elements should be deleted
+#' @param to up to which positions elements should be deleted
+# #' @export
+vector_delete <- function(x, n=NULL, from=NULL, to=NULL){
+  # shortcuts
+  if( is.null(n) ){
+    if(is.null(from) & is.null(to)){
+      return(x)
+    }
+  }else{
+    if( n==0){
+      return(x)
+    }
+  }
+  # iffer
+  iffer <- TRUE
+  if( is.null(from) & is.null(to)  & !is.null(n) ){ # only n
+    iffer <- seq_along(x) > length(x) | seq_along(x) <= length(x)-n
+  }else if( !is.null(from) & is.null(to)  & is.null(n) ){ # only from
+    iffer   <- seq_along(x) < from
+  }else if( is.null(from) & !is.null(to) & is.null(n) ){ # only to
+    iffer   <- seq_along(x) > to
+  }else if( !is.null(from) & !is.null(to)  & is.null(n) ){ # from + to
+    iffer   <- seq_along(x) > to | seq_along(x) < from
+  }else if( !is.null(from) & is.null(to)  & !is.null(n) ){ # from + n
+    if( n > 0 ){
+      n     <- bind_between(n-1, 0, length(x))
+      iffer <- seq_along(x) > from+n | seq_along(x) < from
+    }
+  }else if( is.null(from) & !is.null(to)  & !is.null(n) ){ # to + n
+    iffer <- seq_along(x) > to | seq_along(x) <= to-n
+  }
+  # return
+  return( x[iffer] )
+}
+
+
+
+
+#' function that loads saved rtext
+#' @param save_file a saved rtext object in Rdata format
+# #' @export
+load_into <- function(save_file){
+  tmp_env <- new.env(parent = emptyenv())
+  load(save_file, envir = tmp_env)
+  lapply(tmp_env, I)
+}
+
+
 #' function that shifts vector values to right or left
 #'
 #' @param x Vector for which to shift values
@@ -8,7 +60,7 @@
 #' @param default The value that should be inserted by default.
 #' @param invert Whether or not the default shift directions
 #'    should be inverted.
-#' @export
+# #' @export
 shift <- function(x, n=0, default=NA, invert=FALSE){
   n <-
     switch (
@@ -54,7 +106,7 @@ bind_between <- function(x, min, max){
 #' function for binding data.frames even if names do not match
 #' @param df1 first data.frame to rbind
 #' @param df2 second data.frame to rbind
-#' @export
+# #' @export
 rbind_fill <- function(df1=data.frame(), df2=data.frame()){
   names_df <- c(names(df1), names(df2))
   if( dim1(df1) > 0 ){
@@ -74,7 +126,7 @@ rbind_fill <- function(df1=data.frame(), df2=data.frame()){
 
 
 #' function that checks is values are in between values
-#' @export
+# #' @export
 #' @param x input vector
 #' @param y lower bound
 #' @param z upper bound
@@ -90,10 +142,10 @@ is_between <- function(x,y,z){
 #' @param from first element to be returned
 #' @param to last element to be returned
 #'
-#' @export
+# #' @export
 #'
 get_vector_element <-
-  function(vec, length=100, from=NULL, to=NULL){
+  function(vec, length=length(vec) , from=NULL, to=NULL){
     # helper functions
     bind_to_vecrange <- function(x){bind_between(x, 1, length(vec))}
     bind_length       <- function(x){bind_between(x, 0, length(vec))}
@@ -151,7 +203,7 @@ get_vector_element <-
 
 #' get first dimension or length of object
 #' @param x object, matrix, vector, data.frame, ...
-#' @export
+# #' @export
 dim1 <- function(x){
   ifelse(is.null(dim(x)[1]), length(x), dim(x)[1])
 }
@@ -159,7 +211,7 @@ dim1 <- function(x){
 
 #' get first dimension or length of object
 #' @param x object, matrix, vector, data.frame, ...
-#' @export
+# #' @export
 dim2 <- function(x){
   dim(x)[2]
 }
@@ -167,7 +219,7 @@ dim2 <- function(x){
 
 #' seq along first dimension / length
 #' @param x x
-#' @export
+# #' @export
 seq_dim1 <- function(x){
   seq_len(dim1(x))
 }
@@ -177,7 +229,7 @@ seq_dim1 <- function(x){
 #' @param x position of the character
 #' @param y1 start position of the token
 #' @param y2 end position of the token
-#' @export
+# #' @export
 which_token <- function(x, y1, y2){
   # how to order x and y?
   order_x <- order(x)
@@ -198,7 +250,7 @@ which_token <- function(x, y1, y2){
 
 
 #' function giving back the mode
-#' @export
+# #' @export
 #' @param x vector to get mode for
 #' @param multimodal wether or not all modes should be returned in case of more than one
 #' @param warn should the function warn about multimodal outcomes?
@@ -225,7 +277,7 @@ modus <- function(x, multimodal=FALSE, warn=TRUE) {
 
 
 #' function to get classes from e.g. lists
-#' @export
+# #' @export
 #' @param x list to get classes for
 classes <- function(x){
   tmp <- lapply(x, class)

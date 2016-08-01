@@ -34,7 +34,7 @@ Imports:
     magrittr (>= 1.5),
     Rcpp (>= 0.12.5),
     digest (>= 0.6.9),
-    stringb,
+    stringb (>= 0.1.0),
     stats,
     graphics
 Suggests:

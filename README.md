@@ -1,9 +1,9 @@
 # README
 
 
-# diffrprojects
+# rtext
 
-A package for using diffr on more than two files
+A package with R6 object definitions for handling text and data
 
 
 **Description**
@@ -16,15 +16,14 @@ TBD
 
 *unstable* - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing
 
-[![Travis-CI Build Status](https://travis-ci.org/petermeissner/diffrprojects.svg?branch=master)](https://travis-ci.org/petermeissner/diffrprojects)
+[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
 
 
 **Citation**
 
 
 
-Meißner P (2016). _diffrprojects: Using diffr for more than two
-texts_. R package version 0.5.1.90000, <URL:
+Meißner P (2016). _rtext_. R package version 0.1.0.90000, <URL:
 https://github.com/petermeissner/diffrprojects>.
 
 Sieberer U, Meißner P, Keh J and Müller W (2016). "Mapping and
@@ -38,10 +37,10 @@ http://dx.doi.org/10.1111/lsq.12106>.
 
 <code style="white-space:normal;">
 @Manual{Meissner2016,
-  title = {diffrprojects: Using diffr for more than two texts},
+  title = {rtext},
   author = {Peter Meißner},
   year = {2016},
-  note = {R package version 0.5.1.90000},
+  note = {R package version 0.1.0.90000},
   url = {https://github.com/petermeissner/diffrprojects},
 }
 
@@ -66,8 +65,9 @@ http://dx.doi.org/10.1111/lsq.12106>.
 
 
 ```r
-    devtools::install_github("petermeissner/diffrprojects")
-    require(diffrprojects)
+  devtools::install_github("petermeissner/stringb")    
+  devtools::install_github("petermeissner/rtext")
+  library(rtext)
 ```
 
 
@@ -75,7 +75,58 @@ http://dx.doi.org/10.1111/lsq.12106>.
 
 **Example Usage**
 
-TBD - see status
+
+```r
+library(rtext)
+library(stringb)
+
+
+# initialize (with text or file)
+quote <- rtext$new(text=
+"Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.")
+```
+
+```
+## rtext : initializing
+```
+
+```r
+# add some data
+quote$char_data_set("start", 1, TRUE)
+quote$char_data_set("end", quote$char_length(), TRUE)
+
+# get the data
+quote$char_data_get()
+```
+
+```
+##   char  i start  end
+## 1    O  1  TRUE   NA
+## 2    . 85    NA TRUE
+```
+
+```r
+# transform text
+quote$char_add("[this is an insertion] ", 47)
+
+# get the data again (see, the data moved along with the text)
+quote$text_get()
+```
+
+```
+## [1] "Outside of a dog, a book is man's best friend. [this is an insertion] Inside of a dog it's too dark to read."
+```
+
+```r
+quote$char_data_get()
+```
+
+```
+##   char   i start  end
+## 1    O   1  TRUE   NA
+## 2    . 108    NA TRUE
+```
+
    
 
     

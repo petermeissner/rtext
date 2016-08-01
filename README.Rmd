@@ -6,9 +6,9 @@ output:
 ---
 
 
-# diffrprojects
+# rtext
 
-A package for using diffr on more than two files
+A package with R6 object definitions for handling text and data
 
 
 **Description**
@@ -21,21 +21,21 @@ TBD
 
 *unstable* - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing
 
-[![Travis-CI Build Status](https://travis-ci.org/petermeissner/diffrprojects.svg?branch=master)](https://travis-ci.org/petermeissner/diffrprojects)
+[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
 
 
 **Citation**
 
 
 ```{r, results='asis', echo=FALSE}
-citation("diffrprojects")
+citation("rtext")
 ```
 
 **BibTex for citing**
 
 <code style="white-space:normal;">
 ```{r, results='asis', echo=FALSE}
-toBibtex(citation("diffrprojects"))
+toBibtex(citation("rtext"))
 ```
 </code>
 
@@ -44,8 +44,9 @@ toBibtex(citation("diffrprojects"))
 **Installation**
 
 ```{r, eval=FALSE}
-    devtools::install_github("petermeissner/diffrprojects")
-    require(diffrprojects)
+  devtools::install_github("petermeissner/stringb")    
+  devtools::install_github("petermeissner/rtext")
+  library(rtext)
 ```
 
 
@@ -53,7 +54,38 @@ toBibtex(citation("diffrprojects"))
 
 **Example Usage**
 
-TBD - see status
+```{r}
+library(rtext)
+library(stringb)
+
+
+# initialize (with text or file)
+quote <- rtext$new(text=
+"Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.")
+
+# add some data
+quote$char_data_set("start", 1, TRUE)
+quote$char_data_set("end", quote$char_length(), TRUE)
+
+# get the data
+quote$char_data_get()
+
+# transform text
+quote$char_add("[this is an insertion] ", 47)
+
+# get the data again (see, the data moved along with the text)
+quote$text_get()
+quote$char_data_get()
+
+# do some convenience coding (via regular expressions)
+quote$char_data_set_regex("dog_friend", "dog", "dog")
+quote$char_data_set_regex("dog_friend", "friend", "friend")
+quote$char_data_get()
+
+# and now some useful aggregation
+
+```
+
    
 
     

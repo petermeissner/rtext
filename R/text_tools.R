@@ -1,4 +1,6 @@
 #' function tokenizing rtext objects
+#' @inheritParams stringb::text_tokenize
+#' @method text_tokenize rtext
 #' @export
 text_tokenize.rtext <-   function(
   x,

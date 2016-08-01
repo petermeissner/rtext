@@ -1,79 +1,80 @@
-#### rtext ==============================================================================
-context("\nrtext") # =================================================
-
-
-context("rtext token_get")
-
-test_that("token_get() does not gets confused by Encoding", {
-  expect_true({
-  dings <- rtext$new(text_file=dp_tf("test_latin1.txt"), encoding="latin1")
-    all(
-      text_collapse(text_tokenize(dings, "")$token) ==
-        text_read(dp_tf("test_latin1.txt"), encoding = "latin1")
-    )
-  })
-})
-
-
-
-context("rtext token_data_get") # ========================================================
-
-test_that("rtext token_data_get default behaviour makes sense", {
-  expect_true({
-      dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-      dings$token_data_get()
-      TRUE
-  })
-  expect_true({
-    dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-    dings$char_data_set("pimpf", 1:30, 2)
-    dings$char_data_set("pompf", 1:30, 1:30)
-    dings$token_data_get()
-    TRUE
-  })
-  expect_true({
-    dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-    dings$char_data_set("pimpf", 1:30, 2)
-    all(names(dings$token_data_get()) == c("token_i", "pimpf"))
-  })
-  expect_true({
-    dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-    dings$char_data_set("pimpf", 1:30, 2)
-    dings$char_data_set("pompf", 1:30, 1:30)
-    all(names(dings$token_data_get()) == c("token_i", "pimpf", "pompf"))
-  })
-  expect_true({
-    dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-    dings$char_data_set("pimpf", 1:30, 2)
-    dings$char_data_set("pompf", 1:30, 1:30)
-    dings$char_data_set("pimpf", 31, 4)
-    all(names(dings$token_data_get()) == c("token_i", "pimpf", "pompf"))
-  })
-})
-
-test_that("rtext token_data_get() user supplied functions work", {
-  expect_true({
-    dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-    dings$token_data_get(FUN="mean")
-    TRUE
-  })
-  expect_true({
-    dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-    dings$char_data_set("pimpf", 1:30, 2)
-    all(names(dings$token_data_get(FUN="mean")) == c("token_i", "pimpf"))
-    TRUE
-  })
-  expect_true({
-    dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-    dings$char_data_set("pimpf", 1:30, 2)
-    all(dings$token_data_get(FUN="min")$pimpf==2)
-  })
-  expect_true({
-    dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
-    dings$char_data_set("pimpf", 1:30, 1:30)
-    all(dings$token_data_get(FUN="mean")$pimpf!=2)
-  })
-})
+# #### rtext ==============================================================================
+# context("\nrtext") # =================================================
+#
+#
+# context("rtext token_get")
+# library(stringb)
+#
+# test_that("token_get() does not gets confused by Encoding", {
+#   expect_true({
+#   dings <- rtext$new(text_file=dp_tf("test_latin1.txt"), encoding="latin1")
+#     all(
+#       text_collapse(text_tokenize(dings, "")$token) ==
+#         text_read(dp_tf("test_latin1.txt"), encoding = "latin1", tokenize = NULL)
+#     )
+#   })
+# })
+#
+#
+#
+# context("rtext token_data_get") # ========================================================
+#
+# test_that("rtext token_data_get default behaviour makes sense", {
+#   expect_true({
+#       dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#       dings$token_data_get()
+#       TRUE
+#   })
+#   expect_true({
+#     dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#     dings$char_data_set("pimpf", 1:30, 2)
+#     dings$char_data_set("pompf", 1:30, 1:30)
+#     dings$token_data_get()
+#     TRUE
+#   })
+#   expect_true({
+#     dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#     dings$char_data_set("pimpf", 1:30, 2)
+#     all(names(dings$token_data_get()) == c("token_i", "pimpf"))
+#   })
+#   expect_true({
+#     dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#     dings$char_data_set("pimpf", 1:30, 2)
+#     dings$char_data_set("pompf", 1:30, 1:30)
+#     all(names(dings$token_data_get()) == c("token_i", "pimpf", "pompf"))
+#   })
+#   expect_true({
+#     dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#     dings$char_data_set("pimpf", 1:30, 2)
+#     dings$char_data_set("pompf", 1:30, 1:30)
+#     dings$char_data_set("pimpf", 31, 4)
+#     all(names(dings$token_data_get()) == c("token_i", "pimpf", "pompf"))
+#   })
+# })
+#
+# test_that("rtext token_data_get() user supplied functions work", {
+#   expect_true({
+#     dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#     dings$token_data_get(FUN="mean")
+#     TRUE
+#   })
+#   expect_true({
+#     dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#     dings$char_data_set("pimpf", 1:30, 2)
+#     all(names(dings$token_data_get(FUN="mean")) == c("token_i", "pimpf"))
+#     TRUE
+#   })
+#   expect_true({
+#     dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#     dings$char_data_set("pimpf", 1:30, 2)
+#     all(dings$token_data_get(FUN="min")$pimpf==2)
+#   })
+#   expect_true({
+#     dings <- rtext$new(text=text_snippet(text_read(dp_tf("rc_1.txt"))))
+#     dings$char_data_set("pimpf", 1:30, 1:30)
+#     all(dings$token_data_get(FUN="mean")$pimpf!=2)
+#   })
+# })
 
 
 context("rtext char_data_get()") # =================================================================
@@ -272,7 +273,6 @@ test_that("rtext load is same as save", {
       rtext$new(
         text      = "1234567890",
         text_file = dp_tf("test_utf8.txt"),
-        tokenizer = function(x){text_tokenize(x,"\n", non_token = TRUE)},
         encoding  = "latin1",
         id        = "bollocks",
         save_file = tempfile()
@@ -291,7 +291,6 @@ test_that("rtext load is same as save", {
       as.character(dings$info()) == as.character(dongs$info()),
       identical(dings$save_file, dongs$save_file),
       identical(dings$text_file, dongs$text_file),
-      deparse(dings$tokenizer)   == deparse(dongs$tokenizer),
       dings$text_get(Inf)        == dongs$text_get(Inf),
       dings$char_get(Inf)        == dongs$char_get(Inf)
     )

@@ -1,2 +1,2 @@
 library(testthat)
-test_check("diffrprojects")
+test_check("rtext")

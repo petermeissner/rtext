@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // which_token_worker
 IntegerVector which_token_worker(NumericVector x, NumericVector y1, NumericVector y2);
-RcppExport SEXP diffrprojects_which_token_worker(SEXP xSEXP, SEXP y1SEXP, SEXP y2SEXP) {
+RcppExport SEXP rtext_which_token_worker(SEXP xSEXP, SEXP y1SEXP, SEXP y2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;

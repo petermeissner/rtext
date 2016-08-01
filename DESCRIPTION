@@ -1,7 +1,7 @@
-Package: diffrprojects
-Title: Using diffr for more than two files
-Date: 2016-07-06
-Version: 0.6.0.90000
+Package: rtext
+Title: R6 Objects for Text and Data
+Date: 2016-08-01
+Version: 0.1.0.90000
 Authors@R: c(
   person(
     "Peter", "Meissner",
@@ -34,14 +34,15 @@ Imports:
     magrittr (>= 1.5),
     Rcpp (>= 0.12.5),
     digest (>= 0.6.9),
+    stringb,
     stats,
     graphics
 Suggests:
     testthat,
     knitr,
     rmarkdown
-BugReports: https://github.com/petermeissner/diffrprojects/issues
-URL: https://github.com/petermeissner/diffrprojects
+BugReports: https://github.com/petermeissner/rtext/issues
+URL: https://github.com/petermeissner/rtext
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 LinkingTo:

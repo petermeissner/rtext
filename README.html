@@ -122,49 +122,145 @@ $(document).ready(function () {
 <div id="rtext" class="section level1">
 <h1>rtext</h1>
 <p>A package with R6 object definitions for handling text and data</p>
-<p><strong>Description</strong></p>
+<p><br><br><strong>Description</strong></p>
 <p>TBD</p>
-<p><strong>Status</strong></p>
+<p><br><br><strong>Status</strong></p>
 <p><em>unstable</em> - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing</p>
-<p><a href="https://travis-ci.org/petermeissner/rtext"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MSIgaGVpZ2h0PSIyMCI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgcng9IjMiIHdpZHRoPSI4MSIgaGVpZ2h0PSIyMCIgZmlsbD0iIzU1NSIvPjxyZWN0IHJ4PSIzIiB4PSIzNyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjIwIiBmaWxsPSIjZTA1ZDQ0Ii8+PHBhdGggZmlsbD0iI2UwNWQ0NCIgZD0iTTM3IDBoNHYyMGgtNHoiLz48cmVjdCByeD0iMyIgd2lkdGg9IjgxIiBoZWlnaHQ9IjIwIiBmaWxsPSJ1cmwoI2EpIi8+PGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zLFZlcmRhbmEsR2VuZXZhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPjx0ZXh0IHg9IjE5LjUiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5idWlsZDwvdGV4dD48dGV4dCB4PSIxOS41IiB5PSIxNCI+YnVpbGQ8L3RleHQ+PHRleHQgeD0iNTgiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5mYWlsaW5nPC90ZXh0Pjx0ZXh0IHg9IjU4IiB5PSIxNCI+ZmFpbGluZzwvdGV4dD48L2c+PC9zdmc+" alt="Travis-CI Build Status" /></a></p>
-<p><strong>Citation</strong></p>
-<p>Meißner P (2016). <em>rtext</em>. R package version 0.1.0.90000, &lt;URL: <a href="https://github.com/petermeissner/diffrprojects" class="uri">https://github.com/petermeissner/diffrprojects</a>&gt;.</p>
+<p><a href="https://travis-ci.org/petermeissner/rtext"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MCIgaGVpZ2h0PSIyMCI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgcng9IjMiIHdpZHRoPSI5MCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzU1NSIvPjxyZWN0IHJ4PSIzIiB4PSIzNyIgd2lkdGg9IjUzIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNGMxIi8+PHBhdGggZmlsbD0iIzRjMSIgZD0iTTM3IDBoNHYyMGgtNHoiLz48cmVjdCByeD0iMyIgd2lkdGg9IjkwIiBoZWlnaHQ9IjIwIiBmaWxsPSJ1cmwoI2EpIi8+PGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zLFZlcmRhbmEsR2VuZXZhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPjx0ZXh0IHg9IjE5LjUiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5idWlsZDwvdGV4dD48dGV4dCB4PSIxOS41IiB5PSIxNCI+YnVpbGQ8L3RleHQ+PHRleHQgeD0iNjIuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPnBhc3Npbmc8L3RleHQ+PHRleHQgeD0iNjIuNSIgeT0iMTQiPnBhc3Npbmc8L3RleHQ+PC9nPjwvc3ZnPg==" alt="Travis-CI Build Status" /></a> <a href="https://codecov.io/gh/petermeissner/rtext/tree/master/R"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NiIgaGVpZ2h0PSIyMCI+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImIiIHgyPSIwIiB5Mj0iMTAwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYmJiIiBzdG9wLW9wYWNpdHk9Ii4xIiAvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bWFzayBpZD0iYSI+CiAgICAgICAgPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIgLz4KICAgIDwvbWFzaz4KICAgIDxnIG1hc2s9InVybCgjYSkiPgogICAgICAgIDxwYXRoIGZpbGw9IiM1NTUiIGQ9Ik0wIDBoNjB2MjBIMHoiIC8+CiAgICAgICAgPHBhdGggZmlsbD0iI2UwNWQ0NCIgZD0iTTYwIDBoMzZ2MjBINjB6IiAvPgogICAgICAgIDxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0wIDBoOTZ2MjBIMHoiIC8+CiAgICA8L2c+CiAgICA8ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMsVmVyZGFuYSxHZW5ldmEsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+CiAgICAgICAgPHRleHQgeD0iMzAiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5jb2RlY292PC90ZXh0PgogICAgICAgIDx0ZXh0IHg9IjMwIiB5PSIxNCI+Y29kZWNvdjwvdGV4dD4KICAgICAgICA8dGV4dCB4PSI3NyIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPjU3JTwvdGV4dD4KICAgICAgICA8dGV4dCB4PSI3NyIgeT0iMTQiPjU3JTwvdGV4dD4KICAgIDwvZz4KPC9zdmc+" alt="codecov" /></a> <a href="https://cran.r-project.org/package=rtext"><img src="data:image/svg+xml; charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQiIGhlaWdodD0iMjAiPgogIDxsaW5lYXJHcmFkaWVudCBpZD0iYiIgeDI9IjAiIHkyPSIxMDAlIj4KICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLW9wYWNpdHk9Ii4xIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8bWFzayBpZD0iYSI+CiAgICA8cmVjdCB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPgogIDwvbWFzaz4KICA8ZyBtYXNrPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9IiM1NTUiIGQ9Ik0wIDBoNDN2MjBIMHoiLz4KICAgIDxwYXRoIGZpbGw9IiNlMDVkNDQiIGQ9Ik00MyAwaDEyN3YyMEg0M3oiLz4KICAgIDxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0wIDBoMTQ0djIwSDB6Ii8+CiAgPC9nPgogIDxnIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiCiAgICAgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zLFZlcmRhbmEsR2VuZXZhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPgogICAgPHRleHQgeD0iMjEuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPgogICAgICBDUkFOCiAgICA8L3RleHQ+CiAgICA8dGV4dCB4PSIyMS41IiB5PSIxNCI+CiAgICAgIENSQU4KICAgIDwvdGV4dD4KICAgIDx0ZXh0IHg9IjkyLjUiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj4KICAgICAgbm90IHB1Ymxpc2hlZAogICAgPC90ZXh0PgogICAgPHRleHQgeD0iOTIuNSIgeT0iMTQiPgogICAgICBub3QgcHVibGlzaGVkCiAgICA8L3RleHQ+CiAgPC9nPgo8L3N2Zz4=" alt="CRAN version" /></a></p>
+<p><br><br><strong>Citation</strong></p>
+<p>Meißner P (2016). <em>rtext</em>. R package version 0.1.10.90000, &lt;URL: <a href="https://github.com/petermeissner/rtext" class="uri">https://github.com/petermeissner/rtext</a>&gt;.</p>
 <p>Sieberer U, Meißner P, Keh J and Müller W (2016). “Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program.” <em>Legislative Studies Quarterly</em>, <em>41</em>(1), pp. 61-88. ISSN 1939-9162, doi: 10.1111/lsq.12106 (URL: <a href="http://doi.org/10.1111/lsq.12106" class="uri">http://doi.org/10.1111/lsq.12106</a>), &lt;URL: <a href="http://dx.doi.org/10.1111/lsq.12106" class="uri">http://dx.doi.org/10.1111/lsq.12106</a>&gt;.</p>
-<p><strong>BibTex for citing</strong></p>
-<p><code style="white-space:normal;"> <span class="citation">@Manual</span>{Meissner2016, title = {rtext}, author = {Peter Meißner}, year = {2016}, note = {R package version 0.1.0.90000}, url = {<a href="https://github.com/petermeissner/diffrprojects" class="uri">https://github.com/petermeissner/diffrprojects</a>}, }</p>
+<p><br><br><strong>BibTex for citing</strong></p>
+<p><code style="white-space:normal;"> <span class="citation">@Manual</span>{Meissner2016, title = {rtext}, author = {Peter Meißner}, year = {2016}, note = {R package version 0.1.10.90000}, url = {<a href="https://github.com/petermeissner/rtext" class="uri">https://github.com/petermeissner/rtext</a>}, }</p>
 <p><span class="citation">@Article</span>{Sieberer2016, title = {Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer and Peter Meißner and Julia F. Keh and Wolfgang C. Müller}, journal = {Legislative Studies Quarterly}, volume = {41}, number = {1}, issn = {1939-9162}, url = {<a href="http://dx.doi.org/10.1111/lsq.12106" class="uri">http://dx.doi.org/10.1111/lsq.12106</a>}, doi = {10.1111/lsq.12106}, pages = {61–88}, year = {2016}, abstract = {We outline a comprehensive research program on institutional reforms in European parliaments. Original data show that parliamentary rules in Western European parliaments have been changed frequently and massively during the period from 1945 to 2010 suggesting that actors use institutional reforms as a distinct strategy to pursue their substantive goals. We discuss how institutional instability affects existing theoretical and empirical arguments about institutional effects. Furthermore, we present four ideal-typical approaches to analyzing rule changes, present new software tools for identifying and coding changes in large text corpora, and demonstrate their usefulness for valid measurement of the overall change between subsequent text versions.}, } </code></p>
-<p><strong>Installation</strong></p>
+<p><br><br><strong>Installation</strong></p>
 <pre class="r"><code>  devtools::install_github(&quot;petermeissner/stringb&quot;)    
   devtools::install_github(&quot;petermeissner/rtext&quot;)
   library(rtext)</code></pre>
-<p><strong>Example Usage</strong></p>
-<pre class="r"><code>library(rtext)
-library(stringb)
-
-
-# initialize (with text or file)
-quote &lt;- rtext$new(text=
-&quot;Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.&quot;)</code></pre>
+<p><br><br><strong>Example Usage</strong></p>
+<p><br><br><em>… starting up …</em></p>
+<pre class="r"><code>library(stringb)
+library(rtext)
+options(&quot;width&quot;=120)</code></pre>
+<p><br><br><em>… creating a text object …</em></p>
+<pre class="r"><code># initialize (with text or file)
+quote &lt;- 
+  rtext$new(
+    text = &quot;Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.&quot;
+  )</code></pre>
 <pre><code>## rtext : initializing</code></pre>
+<p><br><br><em>… setting and getting data …</em></p>
 <pre class="r"><code># add some data
-quote$char_data_set(&quot;start&quot;, 1, TRUE)
-quote$char_data_set(&quot;end&quot;, quote$char_length(), TRUE)
+quote$char_data_set(&quot;first&quot;, 1, TRUE)
+quote$char_data_set(&quot;last&quot;, quote$char_length(), TRUE)
 
 # get the data
 quote$char_data_get()</code></pre>
-<pre><code>##   char  i start  end
+<pre><code>##   char  i first last
 ## 1    O  1  TRUE   NA
 ## 2    . 85    NA TRUE</code></pre>
+<p><br><br><em>… text transformation and data update …</em></p>
 <pre class="r"><code># transform text
-quote$char_add(&quot;[this is an insertion] &quot;, 47)
+quote$char_add(&quot;[this is an insertion] \n&quot;, 47)
 
 # get the data again (see, the data moved along with the text)
 quote$text_get()</code></pre>
-<pre><code>## [1] &quot;Outside of a dog, a book is man's best friend. [this is an insertion] Inside of a dog it's too dark to read.&quot;</code></pre>
+<pre><code>## [1] &quot;Outside of a dog, a book is man's best friend. [this is an insertion] \nInside of a dog it's too dark to read.&quot;</code></pre>
 <pre class="r"><code>quote$char_data_get()</code></pre>
-<pre><code>##   char   i start  end
+<pre><code>##   char   i first last
 ## 1    O   1  TRUE   NA
-## 2    . 108    NA TRUE</code></pre>
+## 2    . 109    NA TRUE</code></pre>
+<p><br><br><em>… using regular expression for setting data …</em></p>
+<pre class="r"><code># do some convenience coding (via regular expressions)
+quote$char_data_set_regex(&quot;dog_friend&quot;, &quot;dog&quot;, &quot;dog&quot;)
+quote$char_data_set_regex(&quot;dog_friend&quot;, &quot;friend&quot;, &quot;friend&quot;)
+quote$char_data_get()</code></pre>
+<pre><code>##    char   i first last dog_friend
+## 1     O   1  TRUE   NA       &lt;NA&gt;
+## 3     d  14    NA   NA        dog
+## 4     o  15    NA   NA        dog
+## 5     g  16    NA   NA        dog
+## 11    f  40    NA   NA     friend
+## 21    r  41    NA   NA     friend
+## 31    i  42    NA   NA     friend
+## 41    e  43    NA   NA     friend
+## 51    n  44    NA   NA     friend
+## 61    d  45    NA   NA     friend
+## 6     d  84    NA   NA        dog
+## 7     o  85    NA   NA        dog
+## 8     g  86    NA   NA        dog
+## 2     . 109    NA TRUE       &lt;NA&gt;</code></pre>
+<p><br><br><em>… data aggregation via regex …</em></p>
+<pre class="r"><code>quote$tokenize_data_regex(regex=&quot;(dog)|(friend)&quot;, non_token = TRUE, join = &quot;full&quot;)</code></pre>
+<pre><code>##   token_i from  to                                   token is_token first last dog_friend
+## 1       1    1  13                           Outside of a      TRUE  TRUE   NA       &lt;NA&gt;
+## 2       2   14  16                                     dog    FALSE    NA   NA        dog
+## 3       3   17  39                 , a book is man's best      TRUE    NA   NA       &lt;NA&gt;
+## 4       4   40  45                                  friend    FALSE    NA   NA     friend
+## 5       5   46  83 . [this is an insertion] \nInside of a      TRUE    NA   NA       &lt;NA&gt;
+## 6       6   84  86                                     dog    FALSE    NA   NA        dog
+## 7       7   87 109                  it's too dark to read.     TRUE    NA TRUE       &lt;NA&gt;</code></pre>
+<p><br><br><em>… data aggregation by words …</em></p>
+<pre class="r"><code>quote$tokenize_data_words(non_token = TRUE, join=&quot;full&quot;)</code></pre>
+<pre><code>##    token_i from  to     token is_token first last dog_friend
+## 1        1    1   7   Outside     TRUE  TRUE   NA       &lt;NA&gt;
+## 2        2    8   8              FALSE    NA   NA       &lt;NA&gt;
+## 3        3    9  10        of     TRUE    NA   NA       &lt;NA&gt;
+## 4        4   11  11              FALSE    NA   NA       &lt;NA&gt;
+## 5        5   12  12         a     TRUE    NA   NA       &lt;NA&gt;
+## 6        6   13  13              FALSE    NA   NA       &lt;NA&gt;
+## 7        7   14  16       dog     TRUE    NA   NA        dog
+## 8        8   17  18        ,     FALSE    NA   NA       &lt;NA&gt;
+## 9        9   19  19         a     TRUE    NA   NA       &lt;NA&gt;
+## 10      10   20  20              FALSE    NA   NA       &lt;NA&gt;
+## 11      11   21  24      book     TRUE    NA   NA       &lt;NA&gt;
+## 12      12   25  25              FALSE    NA   NA       &lt;NA&gt;
+## 13      13   26  27        is     TRUE    NA   NA       &lt;NA&gt;
+## 14      14   28  28              FALSE    NA   NA       &lt;NA&gt;
+## 15      15   29  31       man     TRUE    NA   NA       &lt;NA&gt;
+## 16      16   32  32         '    FALSE    NA   NA       &lt;NA&gt;
+## 17      17   33  33         s     TRUE    NA   NA       &lt;NA&gt;
+## 18      18   34  34              FALSE    NA   NA       &lt;NA&gt;
+## 19      19   35  38      best     TRUE    NA   NA       &lt;NA&gt;
+## 20      20   39  39              FALSE    NA   NA       &lt;NA&gt;
+## 21      21   40  45    friend     TRUE    NA   NA     friend
+## 22      22   46  48       . [    FALSE    NA   NA       &lt;NA&gt;
+## 23      23   49  52      this     TRUE    NA   NA       &lt;NA&gt;
+## 24      24   53  53              FALSE    NA   NA       &lt;NA&gt;
+## 25      25   54  55        is     TRUE    NA   NA       &lt;NA&gt;
+## 26      26   56  56              FALSE    NA   NA       &lt;NA&gt;
+## 27      27   57  58        an     TRUE    NA   NA       &lt;NA&gt;
+## 28      28   59  59              FALSE    NA   NA       &lt;NA&gt;
+## 29      29   60  68 insertion     TRUE    NA   NA       &lt;NA&gt;
+## 30      30   69  71      ] \n    FALSE    NA   NA       &lt;NA&gt;
+## 31      31   72  77    Inside     TRUE    NA   NA       &lt;NA&gt;
+## 32      32   78  78              FALSE    NA   NA       &lt;NA&gt;
+## 33      33   79  80        of     TRUE    NA   NA       &lt;NA&gt;
+## 34      34   81  81              FALSE    NA   NA       &lt;NA&gt;
+## 35      35   82  82         a     TRUE    NA   NA       &lt;NA&gt;
+## 36      36   83  83              FALSE    NA   NA       &lt;NA&gt;
+## 37      37   84  86       dog     TRUE    NA   NA        dog
+## 38      38   87  87              FALSE    NA   NA       &lt;NA&gt;
+## 39      39   88  89        it     TRUE    NA   NA       &lt;NA&gt;
+## 40      40   90  90         '    FALSE    NA   NA       &lt;NA&gt;
+## 41      41   91  91         s     TRUE    NA   NA       &lt;NA&gt;
+## 42      42   92  92              FALSE    NA   NA       &lt;NA&gt;
+## 43      43   93  95       too     TRUE    NA   NA       &lt;NA&gt;
+## 44      44   96  96              FALSE    NA   NA       &lt;NA&gt;
+## 45      45   97 100      dark     TRUE    NA   NA       &lt;NA&gt;
+## 46      46  101 101              FALSE    NA   NA       &lt;NA&gt;
+## 47      47  102 103        to     TRUE    NA   NA       &lt;NA&gt;
+## 48      48  104 104              FALSE    NA   NA       &lt;NA&gt;
+## 49      49  105 108      read     TRUE    NA   NA       &lt;NA&gt;
+## 50      50  109 109         .    FALSE    NA TRUE       &lt;NA&gt;</code></pre>
+<p><br><br><em>… data aggregation by lines …</em></p>
+<pre class="r"><code>quote$tokenize_data_lines()</code></pre>
+<pre><code>##   token_i from  to                                                                  token is_token first last
+## 1       1    1  70 Outside of a dog, a book is man's best friend. [this is an insertion]      TRUE    NA   NA
+## 2       2   72 109                                 Inside of a dog it's too dark to read.     TRUE    NA   NA
+##   dog_friend
+## 1     friend
+## 2        dog</code></pre>
 </div>
 
 

@@ -337,18 +337,195 @@ rtext <-
       found_is    <- unique(as.integer(unlist(mapply(seq, found_spans$start, found_spans$end))))
       self$char_data_set(x, found_is, val)
     },
-    tokenize_data_regex = function(regex = NULL, ..., non_token = FALSE){
-      # tokenie text
-      token <- text_tokenize(private$text(), ..., non_token = non_token)
-      # datanize tokens
-      token_i <- which_token( private$char_data$i, token$from, token$to )
-    },
-    tokenize_data_words = function(non_token=FALSE){
+    tokenize_data_regex =
+      function(
+        regex       = NULL,
+        ignore.case = FALSE,
+        fixed       = FALSE,
+        perl        = FALSE,
+        useBytes    = FALSE,
+        non_token   = FALSE,
+        join        = c("full", "left", "right", ""),
+        aggregate_function = NULL,
+        ...
+      ){
+        join <- ifelse(is.numeric(join), c("full", "left", "right", "")[join], join[1])
+        # tokenize text
+        token <-
+          text_tokenize(
+            private$text(),
+            regex       = regex,
+            ignore.case = ignore.case,
+            fixed       = fixed,
+            perl        = perl,
+            useBytes    = useBytes,
+            non_token   = non_token
+          )
+        token$token_i <- seq_dim1(token)
 
-    },
-    tokenize_data_lines = function(non_token=FALSE){
+        # tokenize data and aggegation
+        token_data <-
+          data.frame(token_i=NULL, start=NULL, end=NULL)
+        if( !is.null(private$char_data$i) ){
+          # datanize tokens
+          token_i <-
+            which_token(
+              private$char_data$i,
+              token$from,
+              token$to
+            )
+          # aggregate data
+          if( !is.null(aggregate_function) ){
+            # user supplied functions and otpions
+            token_data <-
+              private$char_data[,-1] %>%
+              stats::aggregate(by = list( token_i=token_i ), FUN=aggregate_function, ... )
+          }else{
+            # standard
+            token_data <-
+              stats::aggregate(
+                private$char_data[,-1],
+                by = list( token_i=token_i ),
+                FUN="modus",
+                multimodal=NA,
+                warn=FALSE
+              )
+          }
+          #      names(private$token_data)[-1] <- names(private$char_data)[-1]
+        }
+        # join token and data
+        if( join=="full" ){
+          res <- merge(token, token_data, all = TRUE)
+        }else if( join=="left" ){
+          res <- merge(token, token_data, all.x = TRUE)
+        }else if( join=="right" ){
+          res <- merge(token, token_data, all.y = TRUE)
+        }else{
+          res <- merge(token, token_data)
+        }
+        # return
+        return(res)
+      },
+    tokenize_data_words =
+      function(
+        non_token          = FALSE,
+        join               = c("","full", "left", "right"),
+        aggregate_function = NULL,
+        ...
+    ){
+        join <- join[1]
+        # tokenize text
+        token <-
+          text_tokenize(
+            private$text(),
+            regex = "\\W+",
+            non_token   = non_token
+          )
+        token$token_i <- seq_dim1(token)
 
+        # tokenize data and aggegation
+        token_data <-
+          data.frame(token_i=NULL, start=NULL, end=NULL)
+        if( !is.null(private$char_data$i) ){
+          # datanize tokens
+          token_i <-
+            which_token(
+              private$char_data$i,
+              token$from,
+              token$to
+            )
+          # aggregate data
+          if( !is.null(aggregate_function) ){
+            # user supplied functions and otpions
+            token_data <-
+              private$char_data[,-1] %>%
+              stats::aggregate(by = list( token_i=token_i ), FUN=aggregate_function, ... )
+          }else{
+            # standard
+            token_data <-
+              stats::aggregate(
+                private$char_data[,-1],
+                by = list( token_i=token_i ),
+                FUN="modus",
+                multimodal=NA,
+                warn=FALSE
+              )
+          }
+          #      names(private$token_data)[-1] <- names(private$char_data)[-1]
+        }
+        # join token and data
+        if( join=="full" ){
+          res <- merge(token, token_data, all = TRUE)
+        }else if( join=="left" ){
+          res <- merge(token, token_data, all.x = TRUE)
+        }else if( join=="right" ){
+          res <- merge(token, token_data, all.y = TRUE)
+        }else{
+          res <- merge(token, token_data)
+        }
+        # return
+        return(res)
     },
+    tokenize_data_lines =
+      function(
+        non_token          = FALSE,
+        join               = c("","full", "left", "right"),
+        aggregate_function = NULL,
+        ...
+      ){
+        join <- join[1]
+        # tokenize text
+        token <-
+          text_tokenize(
+            private$text(),
+            regex = "\n",
+            non_token   = non_token
+          )
+        token$token_i <- seq_dim1(token)
+
+        # tokenize data and aggegation
+        token_data <-
+          data.frame(token_i=NULL, start=NULL, end=NULL)
+        if( !is.null(private$char_data$i) ){
+          # datanize tokens
+          token_i <-
+            which_token(
+              private$char_data$i,
+              token$from,
+              token$to
+            )
+          # aggregate data
+          if( !is.null(aggregate_function) ){
+            # user supplied functions and otpions
+            token_data <-
+              private$char_data[,-1] %>%
+              stats::aggregate(by = list( token_i=token_i ), FUN=aggregate_function, ... )
+          }else{
+            # standard
+            token_data <-
+              stats::aggregate(
+                private$char_data[,-1],
+                by = list( token_i=token_i ),
+                FUN="modus",
+                multimodal=NA,
+                warn=FALSE
+              )
+          }
+          #      names(private$token_data)[-1] <- names(private$char_data)[-1]
+        }
+        # join token and data
+        if( join=="full" ){
+          res <- merge(token, token_data, all = TRUE)
+        }else if( join=="left" ){
+          res <- merge(token, token_data, all.x = TRUE)
+        }else if( join=="right" ){
+          res <- merge(token, token_data, all.y = TRUE)
+        }else{
+          res <- merge(token, token_data)
+        }
+        # return
+        return(res)
+      },
     # save
     save = function(file=NULL, id=c("self_id", "hash")){
       # gather information

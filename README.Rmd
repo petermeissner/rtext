@@ -11,27 +11,29 @@ output:
 A package with R6 object definitions for handling text and data
 
 
-**Description**
+<br><br>**Description**
 
 TBD
 
 
 
-**Status**
+<br><br>**Status**
 
 *unstable* - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing
 
 [![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
+[![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
+[![CRAN version](http://www.r-pkg.org/badges/version/stringb)](https://cran.r-project.org/package=rtext)
 
 
-**Citation**
+<br><br>**Citation**
 
 
 ```{r, results='asis', echo=FALSE}
 citation("rtext")
 ```
 
-**BibTex for citing**
+<br><br>**BibTex for citing**
 
 <code style="white-space:normal;">
 ```{r, results='asis', echo=FALSE}
@@ -41,7 +43,7 @@ toBibtex(citation("rtext"))
 
 
 
-**Installation**
+<br><br>**Installation**
 
 ```{r, eval=FALSE}
   devtools::install_github("petermeissner/stringb")    
@@ -52,38 +54,69 @@ toBibtex(citation("rtext"))
 
     
 
-**Example Usage**
+<br><br>**Example Usage**
+
+<br><br>*... starting up ...*
 
 ```{r}
-library(rtext)
 library(stringb)
+library(rtext)
+options("width"=120)
+```
 
 
+<br><br>*... creating a text object ...*
+```{r}
 # initialize (with text or file)
-quote <- rtext$new(text=
-"Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.")
+quote <- 
+  rtext$new(
+    text = "Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read."
+  )
+```
 
+<br><br>*... setting and getting data ...*
+```{r}
 # add some data
-quote$char_data_set("start", 1, TRUE)
-quote$char_data_set("end", quote$char_length(), TRUE)
+quote$char_data_set("first", 1, TRUE)
+quote$char_data_set("last", quote$char_length(), TRUE)
 
 # get the data
 quote$char_data_get()
+```
 
+
+<br><br>*... text transformation and data update ...*
+```{r}
 # transform text
-quote$char_add("[this is an insertion] ", 47)
+quote$char_add("[this is an insertion] \n", 47)
 
 # get the data again (see, the data moved along with the text)
 quote$text_get()
 quote$char_data_get()
+```
 
+
+<br><br>*... using regular expression for setting data ...*
+```{r}
 # do some convenience coding (via regular expressions)
 quote$char_data_set_regex("dog_friend", "dog", "dog")
 quote$char_data_set_regex("dog_friend", "friend", "friend")
 quote$char_data_get()
+```
 
-# and now some useful aggregation
+<br><br>*... data aggregation via regex ...*
+```{r}
+quote$tokenize_data_regex(regex="(dog)|(friend)", non_token = TRUE, join = "full")
+```
 
+<br><br>*... data aggregation by words ...*
+```{r}
+quote$tokenize_data_words(non_token = TRUE, join="full")
+```
+
+<br><br>*... data aggregation by lines ...*
+```{r}
+quote$tokenize_data_lines()
 ```
 
    

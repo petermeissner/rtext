@@ -6,34 +6,61 @@ output:
 ---
 
 
-# rtext
 
-A package with R6 object definitions for handling text and data
+```{r, include=FALSE}
+options("width"=108)
+tmp <- packageDescription("rtext")
+```
+
+```{r, results='asis', echo=FALSE}
+cat("#", tmp$Title)
+```
 
 
-<br><br>**Description**
+<br><br>
+**Status**
 
-TBD
-
-
-
-<br><br>**Status**
-
-*unstable* - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing
+*getting stable*
 
 [![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
 [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
 [![CRAN version](http://www.r-pkg.org/badges/version/stringb)](https://cran.r-project.org/package=rtext)
 
 
-<br><br>**Citation**
+<br><br>
+**Version**
+
+```{r, results='asis', echo=FALSE}
+cat(tmp$Version)
+```
+
+
+<br><br>
+**Description**
+
+```{r, results='asis', echo=FALSE}
+cat(tmp$Description)
+```
+
+
+<br><br>
+**License**
+
+```{r, results='asis', echo=FALSE}
+cat(tmp$License)
+```
+
+
+<br><br>
+**Citation**
 
 
 ```{r, results='asis', echo=FALSE}
 citation("rtext")
 ```
 
-<br><br>**BibTex for citing**
+<br><br>
+**BibTex for citing**
 
 <code style="white-space:normal;">
 ```{r, results='asis', echo=FALSE}
@@ -43,7 +70,11 @@ toBibtex(citation("rtext"))
 
 
 
-<br><br>**Installation**
+<br><br>
+**Installation**
+
+
+(stable) development version
 
 ```{r, eval=FALSE}
 install.packages("stringb", repos="https://petermeissner.github.io/drat")    
@@ -54,14 +85,15 @@ library(rtext)
 
     
 
-<br><br>**Example Usage**
+<br><br>
+**Example Usage**
 
-<br><br>*... starting up ...*
+<br><br>
+*... starting up ...*
 
 ```{r}
 library(stringb)
 library(rtext)
-options("width"=110)
 ```
 
 

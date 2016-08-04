@@ -119,29 +119,32 @@ $(document).ready(function () {
 </div>
 
 
-<div id="rtext" class="section level1">
-<h1>rtext</h1>
-<p>A package with R6 object definitions for handling text and data</p>
-<p><br><br><strong>Description</strong></p>
-<p>TBD</p>
-<p><br><br><strong>Status</strong></p>
-<p><em>unstable</em> - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing</p>
+<div id="r6-objects-for-text-and-data" class="section level1">
+<h1>R6 Objects for Text and Data</h1>
+<p><br><br> <strong>Status</strong></p>
+<p><em>getting stable</em></p>
 <p><a href="https://travis-ci.org/petermeissner/rtext"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MSIgaGVpZ2h0PSIyMCI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgcng9IjMiIHdpZHRoPSI4MSIgaGVpZ2h0PSIyMCIgZmlsbD0iIzU1NSIvPjxyZWN0IHJ4PSIzIiB4PSIzNyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjIwIiBmaWxsPSIjZTA1ZDQ0Ii8+PHBhdGggZmlsbD0iI2UwNWQ0NCIgZD0iTTM3IDBoNHYyMGgtNHoiLz48cmVjdCByeD0iMyIgd2lkdGg9IjgxIiBoZWlnaHQ9IjIwIiBmaWxsPSJ1cmwoI2EpIi8+PGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zLFZlcmRhbmEsR2VuZXZhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPjx0ZXh0IHg9IjE5LjUiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5idWlsZDwvdGV4dD48dGV4dCB4PSIxOS41IiB5PSIxNCI+YnVpbGQ8L3RleHQ+PHRleHQgeD0iNTgiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5mYWlsaW5nPC90ZXh0Pjx0ZXh0IHg9IjU4IiB5PSIxNCI+ZmFpbGluZzwvdGV4dD48L2c+PC9zdmc+" alt="Travis-CI Build Status" /></a> <a href="https://codecov.io/gh/petermeissner/rtext/tree/master/R"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NiIgaGVpZ2h0PSIyMCI+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImIiIHgyPSIwIiB5Mj0iMTAwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYmJiIiBzdG9wLW9wYWNpdHk9Ii4xIiAvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bWFzayBpZD0iYSI+CiAgICAgICAgPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIgLz4KICAgIDwvbWFzaz4KICAgIDxnIG1hc2s9InVybCgjYSkiPgogICAgICAgIDxwYXRoIGZpbGw9IiM1NTUiIGQ9Ik0wIDBoNjB2MjBIMHoiIC8+CiAgICAgICAgPHBhdGggZmlsbD0iI2UwNWQ0NCIgZD0iTTYwIDBoMzZ2MjBINjB6IiAvPgogICAgICAgIDxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0wIDBoOTZ2MjBIMHoiIC8+CiAgICA8L2c+CiAgICA8ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMsVmVyZGFuYSxHZW5ldmEsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+CiAgICAgICAgPHRleHQgeD0iMzAiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5jb2RlY292PC90ZXh0PgogICAgICAgIDx0ZXh0IHg9IjMwIiB5PSIxNCI+Y29kZWNvdjwvdGV4dD4KICAgICAgICA8dGV4dCB4PSI3NyIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPjQ1JTwvdGV4dD4KICAgICAgICA8dGV4dCB4PSI3NyIgeT0iMTQiPjQ1JTwvdGV4dD4KICAgIDwvZz4KPC9zdmc+" alt="codecov" /></a> <a href="https://cran.r-project.org/package=rtext"><img src="data:image/svg+xml; charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQiIGhlaWdodD0iMjAiPgogIDxsaW5lYXJHcmFkaWVudCBpZD0iYiIgeDI9IjAiIHkyPSIxMDAlIj4KICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLW9wYWNpdHk9Ii4xIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8bWFzayBpZD0iYSI+CiAgICA8cmVjdCB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPgogIDwvbWFzaz4KICA8ZyBtYXNrPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9IiM1NTUiIGQ9Ik0wIDBoNDN2MjBIMHoiLz4KICAgIDxwYXRoIGZpbGw9IiNlMDVkNDQiIGQ9Ik00MyAwaDEyN3YyMEg0M3oiLz4KICAgIDxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0wIDBoMTQ0djIwSDB6Ii8+CiAgPC9nPgogIDxnIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiCiAgICAgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zLFZlcmRhbmEsR2VuZXZhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPgogICAgPHRleHQgeD0iMjEuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPgogICAgICBDUkFOCiAgICA8L3RleHQ+CiAgICA8dGV4dCB4PSIyMS41IiB5PSIxNCI+CiAgICAgIENSQU4KICAgIDwvdGV4dD4KICAgIDx0ZXh0IHg9IjkyLjUiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj4KICAgICAgbm90IHB1Ymxpc2hlZAogICAgPC90ZXh0PgogICAgPHRleHQgeD0iOTIuNSIgeT0iMTQiPgogICAgICBub3QgcHVibGlzaGVkCiAgICA8L3RleHQ+CiAgPC9nPgo8L3N2Zz4=" alt="CRAN version" /></a></p>
-<p><br><br><strong>Citation</strong></p>
+<p><br><br> <strong>Version</strong></p>
+<p>0.1.11.90000</p>
+<p><br><br> <strong>Description</strong></p>
+<p>This is a description still to be done but to prevent checks about complaining about to short descriptions this does not simply read TBD.</p>
+<p><br><br> <strong>License</strong></p>
+<p>MIT + file LICENSE</p>
+<p><br><br> <strong>Citation</strong></p>
 <p>Meißner P (2016). <em>rtext</em>. R package version 0.1.11.90000, &lt;URL: <a href="https://github.com/petermeissner/rtext" class="uri">https://github.com/petermeissner/rtext</a>&gt;.</p>
 <p>Sieberer U, Meißner P, Keh J and Müller W (2016). “Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program.” <em>Legislative Studies Quarterly</em>, <em>41</em>(1), pp. 61-88. ISSN 1939-9162, doi: 10.1111/lsq.12106 (URL: <a href="http://doi.org/10.1111/lsq.12106" class="uri">http://doi.org/10.1111/lsq.12106</a>), &lt;URL: <a href="http://dx.doi.org/10.1111/lsq.12106" class="uri">http://dx.doi.org/10.1111/lsq.12106</a>&gt;.</p>
-<p><br><br><strong>BibTex for citing</strong></p>
+<p><br><br> <strong>BibTex for citing</strong></p>
 <p><code style="white-space:normal;"> <span class="citation">@Manual</span>{Meissner2016, title = {rtext}, author = {Peter Meißner}, year = {2016}, note = {R package version 0.1.11.90000}, url = {<a href="https://github.com/petermeissner/rtext" class="uri">https://github.com/petermeissner/rtext</a>}, }</p>
 <p><span class="citation">@Article</span>{Sieberer2016, title = {Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer and Peter Meißner and Julia F. Keh and Wolfgang C. Müller}, journal = {Legislative Studies Quarterly}, volume = {41}, number = {1}, issn = {1939-9162}, url = {<a href="http://dx.doi.org/10.1111/lsq.12106" class="uri">http://dx.doi.org/10.1111/lsq.12106</a>}, doi = {10.1111/lsq.12106}, pages = {61–88}, year = {2016}, abstract = {We outline a comprehensive research program on institutional reforms in European parliaments. Original data show that parliamentary rules in Western European parliaments have been changed frequently and massively during the period from 1945 to 2010 suggesting that actors use institutional reforms as a distinct strategy to pursue their substantive goals. We discuss how institutional instability affects existing theoretical and empirical arguments about institutional effects. Furthermore, we present four ideal-typical approaches to analyzing rule changes, present new software tools for identifying and coding changes in large text corpora, and demonstrate their usefulness for valid measurement of the overall change between subsequent text versions.}, } </code></p>
-<p><br><br><strong>Installation</strong></p>
-<pre class="r"><code>  devtools::install_github(&quot;petermeissner/stringb&quot;)    
-  devtools::install_github(&quot;petermeissner/rtext&quot;)
-  library(rtext)</code></pre>
-<p><br><br><strong>Example Usage</strong></p>
-<p><br><br><em>… starting up …</em></p>
+<p><br><br> <strong>Installation</strong></p>
+<p>(stable) development version</p>
+<pre class="r"><code>install.packages(&quot;stringb&quot;, repos=&quot;https://petermeissner.github.io/drat&quot;)    
+install.packages(&quot;rtext&quot;,   repos=&quot;https://petermeissner.github.io/drat&quot;)    
+library(rtext)</code></pre>
+<p><br><br> <strong>Example Usage</strong></p>
+<p><br><br> <em>… starting up …</em></p>
 <pre class="r"><code>library(stringb)
-library(rtext)
-options(&quot;width&quot;=120)</code></pre>
+library(rtext)</code></pre>
 <p><br><br><em>… creating a text object …</em></p>
 <pre class="r"><code># initialize (with text or file)
 quote &lt;- 
@@ -255,12 +258,12 @@ quote$char_data_get()</code></pre>
 ## 50      50  109 109         .    FALSE    NA TRUE       &lt;NA&gt;</code></pre>
 <p><br><br><em>… data aggregation by lines …</em></p>
 <pre class="r"><code>quote$tokenize_data_lines()</code></pre>
-<pre><code>##   token_i from  to                                                                  token is_token first last
-## 1       1    1  70 Outside of a dog, a book is man's best friend. [this is an insertion]      TRUE    NA   NA
-## 2       2   72 109                                 Inside of a dog it's too dark to read.     TRUE    NA   NA
-##   dog_friend
-## 1     friend
-## 2        dog</code></pre>
+<pre><code>##   token_i from  to                                                                  token is_token first
+## 1       1    1  70 Outside of a dog, a book is man's best friend. [this is an insertion]      TRUE    NA
+## 2       2   72 109                                 Inside of a dog it's too dark to read.     TRUE    NA
+##   last dog_friend
+## 1   NA     friend
+## 2   NA        dog</code></pre>
 </div>
 
 

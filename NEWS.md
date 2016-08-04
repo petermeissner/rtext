@@ -6,6 +6,7 @@ version 0.1.11 // 2016-08-04 ...
 
 * BUGFIXES
     - fixing non-split char bug
+    - fixing minor issues: unnecessary exports, un-documented, ...
 
     
 * FEATURE

@@ -1,41 +1,57 @@
 # README
 
 
-# rtext
-
-A package with R6 object definitions for handling text and data
-
-
-<br><br>**Description**
-
-TBD
 
 
 
-<br><br>**Status**
+# R6 Objects for Text and Data
 
-*unstable* - in wild developement with fuRiouS rEstRucturINg and biG biG pOKing
+
+<br><br>
+**Status**
+
+*getting stable*
 
 [![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
 [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
 [![CRAN version](http://www.r-pkg.org/badges/version/stringb)](https://cran.r-project.org/package=rtext)
 
 
-<br><br>**Citation**
+<br><br>
+**Version**
+
+0.1.11.90000
+
+
+<br><br>
+**Description**
+
+This is a description still to be done but to
+    prevent checks about complaining about to short descriptions
+    this does not simply read TBD.
+
+
+<br><br>
+**License**
+
+MIT + file LICENSE
+
+
+<br><br>
+**Citation**
 
 
 
 Meißner P (2016). _rtext_. R package version 0.1.11.90000, <URL:
 https://github.com/petermeissner/rtext>.
 
-Sieberer U, Meißner P, Keh J and Müller W (2016). "Mapping and
-Explaining Parliamentary Rule Changes in Europe: A Research
-Program." _Legislative Studies Quarterly_, *41*(1), pp. 61-88.
-ISSN 1939-9162, doi: 10.1111/lsq.12106 (URL:
-http://doi.org/10.1111/lsq.12106), <URL:
+Sieberer U, Meißner P, Keh J and Müller W (2016). "Mapping and Explaining Parliamentary Rule
+Changes in Europe: A Research Program." _Legislative Studies Quarterly_, *41*(1), pp. 61-88.
+ISSN 1939-9162, doi: 10.1111/lsq.12106 (URL: http://doi.org/10.1111/lsq.12106), <URL:
 http://dx.doi.org/10.1111/lsq.12106>.
 
-<br><br>**BibTex for citing**
+<br><br>
+**BibTex for citing**
 
 <code style="white-space:normal;">
 @Manual{Meissner2016,
@@ -63,27 +79,32 @@ http://dx.doi.org/10.1111/lsq.12106>.
 
 
 
-<br><br>**Installation**
+<br><br>
+**Installation**
+
+
+(stable) development version
 
 
 ```r
-  devtools::install_github("petermeissner/stringb")    
-  devtools::install_github("petermeissner/rtext")
-  library(rtext)
+install.packages("stringb", repos="https://petermeissner.github.io/drat")    
+install.packages("rtext",   repos="https://petermeissner.github.io/drat")    
+library(rtext)
 ```
 
 
     
 
-<br><br>**Example Usage**
+<br><br>
+**Example Usage**
 
-<br><br>*... starting up ...*
+<br><br>
+*... starting up ...*
 
 
 ```r
 library(stringb)
 library(rtext)
-options("width"=120)
 ```
 
 
@@ -255,12 +276,12 @@ quote$tokenize_data_lines()
 ```
 
 ```
-##   token_i from  to                                                                  token is_token first last
-## 1       1    1  70 Outside of a dog, a book is man's best friend. [this is an insertion]      TRUE    NA   NA
-## 2       2   72 109                                 Inside of a dog it's too dark to read.     TRUE    NA   NA
-##   dog_friend
-## 1     friend
-## 2        dog
+##   token_i from  to                                                                  token is_token first
+## 1       1    1  70 Outside of a dog, a book is man's best friend. [this is an insertion]      TRUE    NA
+## 2       2   72 109                                 Inside of a dog it's too dark to read.     TRUE    NA
+##   last dog_friend
+## 1   NA     friend
+## 2   NA        dog
 ```
 
    

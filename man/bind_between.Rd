@@ -16,4 +16,5 @@ bind_between(x, min, max)
 \description{
 function forcing value to fall between min and max
 }
+\keyword{internal}
 

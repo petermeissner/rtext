@@ -150,7 +150,7 @@ if(!any(grepl("test-all.R", commandArgs()))){
       expect_error({
         dings <-
           rtext$new(
-            text_file=dp_tf("test_utf8.txt"),
+            text_file=test_file("test_utf8.txt"),
             save_file=base::tempfile()
           )
         dings$save()
@@ -159,7 +159,7 @@ if(!any(grepl("test-all.R", commandArgs()))){
         dings <-
           rtext$new(
             text="1234567890",
-            text_file=dp_tf("rc_1.txt"),
+            text_file=test_file("rc_1.txt"),
             save_file=base::tempfile()
           )
         dings$save()
@@ -200,7 +200,7 @@ test_that("rtext load is same as save", {
     dings <-
       rtext$new(
         text      = "1234567890",
-        text_file = dp_tf("test_utf8.txt"),
+        text_file = test_file("test_utf8.txt"),
         encoding  = "latin1",
         id        = "bollocks",
         save_file = base::tempfile()
@@ -238,7 +238,7 @@ test_that("rtext load is same as save", {
   })
   expect_true({
     save_file <- base::tempfile(fileext = "Rdata")
-    dings     <- rtext$new(text_file=dp_tf("test_latin1.txt"), encoding="latin1")
+    dings     <- rtext$new(text_file=test_file("test_latin1.txt"), encoding="latin1")
     dings$save(save_file)
     dongs <- rtext$new()$load(save_file)
 
@@ -295,9 +295,9 @@ test_that("rtext initialization", {
   expect_error( rtext$new(), NA)
   expect_error( rtext$new(NULL), NA)
   expect_error( rtext$new(""), NA)
-  expect_error( rtext$new(text_file=dp_tf("rc_1_ch1.txt")), NA)
-  expect_error( rtext$new(text="", text_file=dp_tf("rc_1_ch1.txt")), NA)
-  expect_error( rtext$new(text=readLines(dp_tf("rc_1_ch1.txt"))), NA)
+  expect_error( rtext$new(text_file=test_file("rc_1_ch1.txt")), NA)
+  expect_error( rtext$new(text="", text_file=test_file("rc_1_ch1.txt")), NA)
+  expect_error( rtext$new(text=readLines(test_file("rc_1_ch1.txt"))), NA)
   expect_true({
     !is.null(rtext$new("")$id)
   })
@@ -307,7 +307,7 @@ test_that("rtext initialization", {
   expect_true({
     all(
       nchar(
-        rtext$new(text_file=dp_tf("test_init1.txt"))$char_get()
+        rtext$new(text_file=test_file("test_init1.txt"))$char_get()
       )==1
     )
   })

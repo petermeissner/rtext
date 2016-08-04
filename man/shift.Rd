@@ -22,4 +22,5 @@ should be inverted.}
 \description{
 function that shifts vector values to right or left
 }
+\keyword{internal}
 

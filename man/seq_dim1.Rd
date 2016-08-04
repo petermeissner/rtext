@@ -12,4 +12,5 @@ seq_dim1(x)
 \description{
 seq along first dimension / length
 }
+\keyword{internal}
 

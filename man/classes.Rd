@@ -12,4 +12,5 @@ classes(x)
 \description{
 function to get classes from e.g. lists
 }
+\keyword{internal}
 

@@ -14,4 +14,5 @@ rbind_fill(df1 = data.frame(), df2 = data.frame())
 \description{
 function for binding data.frames even if names do not match
 }
+\keyword{internal}
 

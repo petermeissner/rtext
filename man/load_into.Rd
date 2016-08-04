@@ -12,4 +12,5 @@ load_into(save_file)
 \description{
 function that loads saved rtext
 }
+\keyword{internal}
 

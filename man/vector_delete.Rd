@@ -18,4 +18,5 @@ vector_delete(x, n = NULL, from = NULL, to = NULL)
 \description{
 function used to delete parts from a vector
 }
+\keyword{internal}
 

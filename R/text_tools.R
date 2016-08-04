@@ -3,7 +3,7 @@
 #' @method text_tokenize rtext
 #' @export
 text_tokenize.rtext <-   function(
-  x,
+  string,
   regex       = NULL,
   ignore.case = FALSE,
   fixed       = FALSE,
@@ -11,7 +11,7 @@ text_tokenize.rtext <-   function(
   useBytes    = FALSE,
   non_token   = FALSE
 ){
-  x$text_get() %>%
+  string$text_get() %>%
     text_tokenize(
       regex       = regex,
       ignore.case = ignore.case,

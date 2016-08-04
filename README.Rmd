@@ -46,9 +46,9 @@ toBibtex(citation("rtext"))
 <br><br>**Installation**
 
 ```{r, eval=FALSE}
-  devtools::install_github("petermeissner/stringb")    
-  devtools::install_github("petermeissner/rtext")
-  library(rtext)
+install.packages("stringb", repos="https://petermeissner.github.io/drat")    
+install.packages("rtext",   repos="https://petermeissner.github.io/drat")    
+library(rtext)
 ```
 
 
@@ -61,7 +61,7 @@ toBibtex(citation("rtext"))
 ```{r}
 library(stringb)
 library(rtext)
-options("width"=120)
+options("width"=110)
 ```
 
 

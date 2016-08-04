@@ -16,4 +16,5 @@ which_token(x, y1, y2)
 \description{
 function returning index of spans that entail x
 }
+\keyword{internal}
 

@@ -25,7 +25,7 @@ TBD
 
 
 
-Meißner P (2016). _rtext_. R package version 0.1.10.90000, <URL:
+Meißner P (2016). _rtext_. R package version 0.1.11.90000, <URL:
 https://github.com/petermeissner/rtext>.
 
 Sieberer U, Meißner P, Keh J and Müller W (2016). "Mapping and
@@ -42,7 +42,7 @@ http://dx.doi.org/10.1111/lsq.12106>.
   title = {rtext},
   author = {Peter Meißner},
   year = {2016},
-  note = {R package version 0.1.10.90000},
+  note = {R package version 0.1.11.90000},
   url = {https://github.com/petermeissner/rtext},
 }
 

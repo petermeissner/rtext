@@ -16,4 +16,7 @@ is_between(x, y, z)
 \description{
 function that checks is values are in between values
 }
+\keyword{#'}
+\keyword{@export}
+\keyword{internal}
 

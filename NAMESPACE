@@ -2,8 +2,6 @@
 
 S3method(plot,rtext)
 S3method(text_tokenize,rtext)
-export(dp_ls)
-export(dp_tf)
 export(rtext)
 export(which_token_worker)
 import(hellno)

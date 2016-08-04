@@ -12,4 +12,5 @@ dim2(x)
 \description{
 get first dimension or length of object
 }
+\keyword{internal}
 

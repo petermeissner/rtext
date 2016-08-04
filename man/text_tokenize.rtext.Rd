@@ -4,10 +4,12 @@
 \alias{text_tokenize.rtext}
 \title{function tokenizing rtext objects}
 \usage{
-\method{text_tokenize}{rtext}(x, regex = NULL, ignore.case = FALSE,
+\method{text_tokenize}{rtext}(string, regex = NULL, ignore.case = FALSE,
   fixed = FALSE, perl = FALSE, useBytes = FALSE, non_token = FALSE)
 }
 \arguments{
+\item{string}{text to be tokenized}
+
 \item{regex}{regex expressing where to cut see (see \link[base]{gregexpr})}
 
 \item{ignore.case}{whether or not reges should be case sensitive

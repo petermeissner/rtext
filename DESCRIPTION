@@ -1,6 +1,6 @@
 Package: rtext
 Title: R6 Objects for Text and Data
-Date: 2016-08-01
+Date: 2016-08-04
 Version: 0.1.11.90000
 Authors@R: c(
   person(

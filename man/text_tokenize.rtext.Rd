@@ -8,8 +8,6 @@
   fixed = FALSE, perl = FALSE, useBytes = FALSE, non_token = FALSE)
 }
 \arguments{
-\item{x}{x object to be tokenized}
-
 \item{regex}{regex expressing where to cut see (see \link[base]{gregexpr})}
 
 \item{ignore.case}{whether or not reges should be case sensitive

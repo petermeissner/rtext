@@ -85,9 +85,9 @@ rtext <-
 
 
     #### puplic data fields ====================================================
-    text_file  = NA,
-    encoding   = NA,
-    sourcetype = NA,
+    text_file  = as.character(NA),
+    encoding   = as.character(NA),
+    sourcetype = as.character(NA),
     id         = NULL,
     save_file  = NULL,
     verbose    = NULL,
@@ -116,7 +116,7 @@ rtext <-
         private$char <- ""
         self$sourcetype <- "empty"
       }else if(is.null(text) & !is.null(text_file)){ # read from text_file
-        private$char <- text_read(text_file, encoding = encoding)
+        private$char <- text_read(text_file, encoding = encoding, tokenize = "")
         self$sourcetype <- "text_file"
       }else{ # take text as supplied
         private$char <-

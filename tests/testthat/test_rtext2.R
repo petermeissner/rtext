@@ -304,6 +304,13 @@ test_that("rtext initialization", {
   expect_true({
     identical(rtext$new("", id="mänämüdderschnüdetspück")$id, "mänämüdderschnüdetspück")
   })
+  expect_true({
+    all(
+      nchar(
+        rtext$new(text_file=dp_tf("test_init1.txt"))$char_get()
+      )==1
+    )
+  })
 })
 
 

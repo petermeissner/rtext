@@ -25,7 +25,8 @@ Description: This is a description still to be done but to
     prevent checks about complaining about to short descriptions
     this does not simply read TBD.
 Depends:
-    R (>= 3.0.0)
+    R (>= 3.0.0),
+    stringb (>= 0.1.0)
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
@@ -34,7 +35,6 @@ Imports:
     magrittr (>= 1.5),
     Rcpp (>= 0.12.5),
     digest (>= 0.6.9),
-    stringb (>= 0.1.0),
     stats,
     graphics
 Suggests:

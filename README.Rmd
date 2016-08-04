@@ -1,20 +1,6 @@
 ---
-title: "README"
-output:
-  html_document:
-    keep_md: yes
+output: github_document
 ---
-
-
-
-```{r, include=FALSE}
-options("width"=108)
-tmp <- packageDescription("rtext")
-```
-
-```{r, results='asis', echo=FALSE}
-cat("#", tmp$Title)
-```
 
 
 <br><br>
@@ -24,14 +10,26 @@ cat("#", tmp$Title)
 
 [![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
 [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
-[![CRAN version](http://www.r-pkg.org/badges/version/stringb)](https://cran.r-project.org/package=rtext)
+[![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
+
+
+```{r, include=FALSE}
+options("width"=108)
+tmp  <- packageDescription(basename(getwd()))
+date <- as.Date(file.info("R")$mtime)
+```
+
+```{r, results='asis', echo=FALSE}
+cat("#", tmp$Title)
+```
+
 
 
 <br><br>
 **Version**
 
 ```{r, results='asis', echo=FALSE}
-cat(tmp$Version)
+cat(tmp$Version, "<br>\n", as.character(date))  
 ```
 
 
@@ -92,7 +90,6 @@ library(rtext)
 *... starting up ...*
 
 ```{r}
-library(stringb)
 library(rtext)
 ```
 
@@ -100,10 +97,8 @@ library(rtext)
 <br><br>*... creating a text object ...*
 ```{r}
 # initialize (with text or file)
-quote <- 
-  rtext$new(
-    text = "Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read."
-  )
+quote_text <- "Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read."
+quote <- rtext$new(text = quote_text)
 ```
 
 <br><br>*... setting and getting data ...*

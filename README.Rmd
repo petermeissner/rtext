@@ -45,7 +45,8 @@ cat(tmp$Description)
 **License**
 
 ```{r, results='asis', echo=FALSE}
-cat(tmp$License)
+cat(tmp$License, "<br>")
+cat(tmp$Author)
 ```
 
 

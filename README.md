@@ -18,7 +18,7 @@ For natural language procesing and analysis or qualitative text coding structure
 
 <br><br> **License**
 
-MIT + file LICENSE
+MIT + file LICENSE <br>Peter Meissner \[aut, cre\], Ulrich Sieberer \[cph\], University of Konstanz \[cph\]
 
 <br><br> **Citation**
 

@@ -1,3 +1,6 @@
+
+
+
 #' text class
 #'
 #'
@@ -55,28 +58,53 @@ rtext <-
       paste0(private$char, collapse = "")
     },
 
-    tmp         = NULL,
-    char        = character(0),
-    char_data   = data.frame(),
+    tmp                 = NULL,
+    char                = character(0),
+    char_data           = data.frame(),
+    char_data_inherited = data.frame(),
 
-    hashed_all  = character(0),
-    hashed_text = character(0),
-    hashed_data = character(0),
+    hashes = list(
+      all  = character(0),
+      text = character(0),
+      data = character(0)
+    ),
 
-    hash_text   = function(){
-      private$hashed_text <- dp_hash(private$char)
-      private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
-    },
-
-    hash_data  = function(){
-      private$hashed_data <- dp_hash(private$char_data)
-      private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
-    },
-
-    hash_all  = function(){
-      private$hashed_data <- dp_hash(private$char_data)
-      private$hashed_text <- dp_hash(private$char)
-      private$hashed_all  <- dp_hash(list(private$hashed_data, private$hashed_text))
+    hash = function( what=c("all", "data", "text") ){
+      # preparations
+      hash_names      <- names(private$hashes)
+      if( "all" %in% what ){
+        what <- hash_names
+      }
+      # doing-duty-to-do
+        # hash text
+      if("text" %in% what){
+        private$hashes$text <-
+          dp_hash(
+            private$char
+          )
+      }
+        # hash data
+      if("data" %in% what){
+        private$hashes$data <-
+          dp_hash(
+            list(
+              dp_hash(private$char_data),
+              dp_hash(private$char_data_inherited)
+            )
+          )
+      }
+      # update hashes$all
+      private$hashes$all <-
+        dp_hash(
+          list(
+            dp_hash(private$hashes$text),
+            dp_hash(private$hashes$data)
+          )
+        )
+      # return
+      return(
+        private$hashes
+      )
     }
   ),
 
@@ -146,7 +174,7 @@ rtext <-
       }
 
       ##### Hashing again
-      private$hash_all()
+      private$hash()
     }
       ,
 
@@ -215,7 +243,8 @@ rtext <-
     },
     # char_get_code
     char_data_get = function(from=1, to=Inf){
-      iffer <- private$char_data$i >= from & private$char_data$i <= to
+      iffer  <- private$char_data$i >= from & private$char_data$i <= to
+      iffer2 <- private$char_data_inherited$i >= from & private$char_data_inherited$i <= to
       if( length(iffer) > 0 ){
         tmp <-
           data.frame(
@@ -249,7 +278,7 @@ rtext <-
         private$char_data$i[iffer] <- private$char_data$i[iffer] + length(what)
       }
       # necessary updates
-      private$hash_text()
+      private$hash("text")
       # return for piping
       invisible(self)
     },
@@ -262,7 +291,7 @@ rtext <-
       private$char_data   <- private$char_data[private$char_data$i %in% non_deleted,]
       private$char_data$i <- new_index[match(private$char_data$i, non_deleted)]
       # necessary updates
-      private$hash_text()
+      private$hash("text")
       # return for piping
       invisible(self)
     },
@@ -285,7 +314,7 @@ rtext <-
       iffer <- private$char_data$i > to
       private$char_data$i[iffer] <- private$char_data$i[iffer] + nchar(by) - to - from + 1
       # necessary updates
-      private$hash_text()
+      private$hash("text")
       # return for piping
       invisible(self)
     },
@@ -327,7 +356,7 @@ rtext <-
       private$char_data <- rbind_fill(private$char_data, add_df) %>% dp_arrange("i")
 
       # necessary updates
-      private$hash_data()
+      private$hash("data")
 
       # return for piping
       invisible(self)
@@ -590,7 +619,7 @@ rtext <-
       private$char_data  <- tmp$char_data
 
       # updating rest
-      private$hash_all()
+      private$hash("all")
 
       # return for piping
       invisible(self)
@@ -599,17 +628,9 @@ rtext <-
     export = function(){
       message("TBD")
     },
-    # text_hash
-    text_hash = function(){
-      private$hashed_text
-    },
-    # data_hash
-    data_hash = function(){
-      private$hashed_data
-    },
     # hash
-    hash = function(){
-      private$hashed_all
+    hash_get = function(what=c("all","data","text")){
+      private$hashes[names(private$hashes) %in% what]
     }
   )
 )

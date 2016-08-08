@@ -10,11 +10,11 @@ R6 Objects for Text and Data
 
 <br><br> **Version**
 
-0.1.11.90000 <br> 2016-08-04
+0.1.12.90000 <br> 2016-08-08
 
 <br><br> **Description**
 
-This is a description still to be done but to prevent checks about complaining about to short descriptions this does not simply read TBD.
+For natural language procesing and analysis or qualitative text coding structures which provide a way to bind together text and text data are fundamental. The package provides such a structure and accompanying methods in form of R6 objects. The 'rtext' class allows for text handling and text coding (character or regex based) including data updates on text transformations. Furthermore, the usage of R6 enables inheritance and passing by reference which should enable 'rtext' instances to be used as backend for R based graphical text editors or text coding GUIs.
 
 <br><br> **License**
 
@@ -22,13 +22,13 @@ MIT + file LICENSE
 
 <br><br> **Citation**
 
-Meißner P (2016). *rtext*. R package version 0.1.11.90000, &lt;URL: <https://github.com/petermeissner/rtext>&gt;.
+Meißner P (2016). *rtext*. R package version 0.1.12.90000, &lt;URL: <https://github.com/petermeissner/rtext>&gt;.
 
 Sieberer U, Meißner P, Keh J and Müller W (2016). "Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program." *Legislative Studies Quarterly*, *41*(1), pp. 61-88. ISSN 1939-9162, doi: 10.1111/lsq.12106 (URL: <http://doi.org/10.1111/lsq.12106>), &lt;URL: <http://dx.doi.org/10.1111/lsq.12106>&gt;.
 
 <br><br> **BibTex for citing**
 
-<code style="white-space:normal;"> @Manual{Meissner2016, title = {rtext}, author = {Peter Meißner}, year = {2016}, note = {R package version 0.1.11.90000}, url = {<https://github.com/petermeissner/rtext>}, }
+<code style="white-space:normal;"> @Manual{Meissner2016, title = {rtext}, author = {Peter Meißner}, year = {2016}, note = {R package version 0.1.12.90000}, url = {<https://github.com/petermeissner/rtext>}, }
 
 @Article{Sieberer2016, title = {Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer and Peter Meißner and Julia F. Keh and Wolfgang C. Müller}, journal = {Legislative Studies Quarterly}, volume = {41}, number = {1}, issn = {1939-9162}, url = {<http://dx.doi.org/10.1111/lsq.12106>}, doi = {10.1111/lsq.12106}, pages = {61--88}, year = {2016}, abstract = {We outline a comprehensive research program on institutional reforms in European parliaments. Original data show that parliamentary rules in Western European parliaments have been changed frequently and massively during the period from 1945 to 2010 suggesting that actors use institutional reforms as a distinct strategy to pursue their substantive goals. We discuss how institutional instability affects existing theoretical and empirical arguments about institutional effects. Furthermore, we present four ideal-typical approaches to analyzing rule changes, present new software tools for identifying and coding changes in large text corpora, and demonstrate their usefulness for valid measurement of the overall change between subsequent text versions.}, } </code>
 
@@ -49,6 +49,8 @@ library(rtext)
 ``` r
 library(rtext)
 ```
+
+    ## Loading required package: stringb
 
 <br><br>*... creating a text object ...*
 

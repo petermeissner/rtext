@@ -1,6 +1,21 @@
 NEWS rtext
 ==========================================================================
 
+
+version 0.1.12 // 2016-08-08 ... 
+--------------------------------------------------------------------------
+
+* BUGFIXES
+    
+
+    
+* FEATURE
+    
+    
+* Development
+    - restructuring internal hashing functions and data to be more streamlined
+
+
 version 0.1.11 // 2016-08-04 ... 
 --------------------------------------------------------------------------
 
@@ -10,6 +25,9 @@ version 0.1.11 // 2016-08-04 ...
 
     
 * FEATURE
+
+
+* Development
 
 
 
@@ -26,6 +44,9 @@ version 0.1.10 // 2016-08-01 ...
     - rtext : tokenize_data_words()
     
     
+* Development
+
+
 
 version 0.1.9 // 2016-06-09 ... 
 --------------------------------------------------------------------------
@@ -41,6 +62,9 @@ version 0.1.9 // 2016-06-09 ...
     - introducing Rcpp to speed up: which_token_worker, which_token
 
 
+* Development
+
+
 
 version 0.1.8 // 2016-06-07 ... 
 --------------------------------------------------------------------------
@@ -53,6 +77,10 @@ version 0.1.8 // 2016-06-07 ...
     - rtext : char_length()
 
 
+* Development
+
+
+
 version 0.1.7 // 2016-06-06 ... 
 --------------------------------------------------------------------------
 
@@ -61,6 +89,9 @@ version 0.1.7 // 2016-06-06 ...
     
 * FEATURE
 
+
+
+* Development
 
 
 
@@ -82,6 +113,9 @@ version 0.1.6 // 2016-05-14 ...
 
 
 
+* Development
+
+
 
 version 0.1.5 // 2016-05-13 ... 
 --------------------------------------------------------------------------
@@ -92,6 +126,9 @@ version 0.1.5 // 2016-05-13 ...
 * FEATURE
     - dp_text : !!! rename to rtext :-) !!!
 
+
+
+* Development
 
 
 
@@ -106,25 +143,42 @@ version 0.1.4 // 2016-05-09 ...
  
  
     
+* Development
+
+
 
 version 0.1.3 // 2016-05-09 ... 
 --------------------------------------------------------------------------
+
+
+* BUGFIXES
+
+
 
 * FEATURES
     - tools : text_tokenize()
     - tools : text_tokenize_words()
     
 
+* Development
+
+
 
 
 version 0.2.2 // 2016-04-28 ... 
 --------------------------------------------------------------------------
+
+
+* BUGFIXES
+
 
 * FEATURES
     - dp_text : show_text()
     - dp_text : info()
     - dp_text : get_text()
 
+
+* Development
 
 
 
@@ -136,6 +190,8 @@ version 0.1.1 // 2016-04-27 ...
     - tools : text_read() function for reading text
     - tools : text_snippet() function for getting snippet of text
 
+
+* Development
 
 
 

@@ -1,4 +1,5 @@
 
+
 #' storage for internals
 dp_storage <- new.env(parent = emptyenv())
 
@@ -18,6 +19,7 @@ dp_storage <- new.env(parent = emptyenv())
 #' @param length number of characters to be returned
 #' @param from first character to be returned
 #' @param to last character to be returned
+#' @keywords internal
 # #' @export
 rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
   # helper functions
@@ -73,12 +75,6 @@ rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
   stop("rtext$get_character() : I do not know how to make sense of given length, from, to argument values passed")
 }
 
-#' function to get hash for R objects
-#' @param x the thing to hash
-# #' @export
-dp_hash <- function(x){
-  digest::digest(x, algo="xxhash64")
-}
 
 
 #' function for plotting rtext

@@ -8,7 +8,6 @@
 #' @param x whatever
 #' @param y1 whatever
 #' @param y2 whatever
-#' @export
 which_token_worker <- function(x, y1, y2) {
     .Call('rtext_which_token_worker', PACKAGE = 'rtext', x, y1, y2)
 }

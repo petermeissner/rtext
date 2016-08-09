@@ -1,3 +1,10 @@
+#' function to get hash for R objects
+#' @param x the thing to hash
+#' @keywords internal
+rtext_hash <- function(x){
+  digest::digest(x, algo="xxhash64")
+}
+
 #' text function: wrapper for system.file() to access test files
 #' @param x name of the file
 #' @param pattern pattern of file name
@@ -44,7 +51,7 @@ test_file <- function(x=NULL, pattern=NULL, full.names=FALSE){
 #' @param from from which position onwards elements should be deleted
 #' @param to up to which positions elements should be deleted
 #' @keywords internal
-# #' @export
+
 vector_delete <- function(x, n=NULL, from=NULL, to=NULL){
   # shortcuts
   if( is.null(n) ){
@@ -84,7 +91,7 @@ vector_delete <- function(x, n=NULL, from=NULL, to=NULL){
 #' function that loads saved rtext
 #' @param save_file a saved rtext object in Rdata format
 #' @keywords internal
-# #' @export
+
 load_into <- function(save_file){
   tmp_env <- new.env(parent = emptyenv())
   load(save_file, envir = tmp_env)
@@ -103,7 +110,7 @@ load_into <- function(save_file){
 #' @param invert Whether or not the default shift directions
 #'    should be inverted.
 #' @keywords internal
-# #' @export
+
 shift <- function(x, n=0, default=NA, invert=FALSE){
   n <-
     switch (
@@ -151,7 +158,7 @@ bind_between <- function(x, min, max){
 #' @param df1 first data.frame to rbind
 #' @param df2 second data.frame to rbind
 #' @keywords internal
-# #' @export
+
 rbind_fill <- function(df1=data.frame(), df2=data.frame()){
   names_df <- c(names(df1), names(df2))
   if( dim1(df1) > 0 ){
@@ -188,7 +195,7 @@ is_between <- function(x,y,z){
 #' @param from first element to be returned
 #' @param to last element to be returned
 #'
-# #' @export
+
 #' @keywords internal
 get_vector_element <-
   function(vec, length=length(vec) , from=NULL, to=NULL){
@@ -249,7 +256,7 @@ get_vector_element <-
 
 #' get first dimension or length of object
 #' @param x object, matrix, vector, data.frame, ...
-# #' @export
+
 #' @keywords internal
 dim1 <- function(x){
   ifelse(is.null(dim(x)[1]), length(x), dim(x)[1])
@@ -259,7 +266,7 @@ dim1 <- function(x){
 #' get first dimension or length of object
 #' @param x object, matrix, vector, data.frame, ...
 #' @keywords internal
-# #' @export
+
 dim2 <- function(x){
   dim(x)[2]
 }
@@ -268,7 +275,7 @@ dim2 <- function(x){
 #' seq along first dimension / length
 #' @param x x
 #' @keywords internal
-# #' @export
+
 seq_dim1 <- function(x){
   seq_len(dim1(x))
 }
@@ -279,7 +286,7 @@ seq_dim1 <- function(x){
 #' @param y1 start position of the token
 #' @param y2 end position of the token
 #' @keywords internal
-# #' @export
+
 which_token <- function(x, y1, y2){
   # how to order x and y?
   order_x <- order(x)
@@ -300,7 +307,7 @@ which_token <- function(x, y1, y2){
 
 
 #' function giving back the mode
-# #' @export
+
 #' @param x vector to get mode for
 #' @param multimodal wether or not all modes should be returned in case of more than one
 #' @param warn should the function warn about multimodal outcomes?
@@ -328,7 +335,6 @@ modus <- function(x, multimodal=FALSE, warn=TRUE) {
 
 
 #' function to get classes from e.g. lists
-# #' @export
 #' @param x list to get classes for
 #' @keywords internal
 classes <- function(x){

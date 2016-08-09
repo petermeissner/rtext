@@ -2,6 +2,29 @@ NEWS rtext
 ==========================================================================
 
 
+version 0.1.13 // 2016-08-08 ... 
+--------------------------------------------------------------------------
+
+* BUGFIXES
+    
+
+    
+* FEATURE
+    - R6_rtext_extended : ls()
+    - R6_rtext_extended : hash(), hashed(), hashes
+    - R6_rtext_extended : get()
+    - adding second order data (data that is less important than first order 
+      data) to allow for inheritance of data while not overriding first class 
+      data
+    
+    
+* Development
+    - splitting rtext class into R6_rtext_extended, rtext_base and rtext and 
+      using inheritance 
+
+
+
+
 version 0.1.12 // 2016-08-08 ... 
 --------------------------------------------------------------------------
 

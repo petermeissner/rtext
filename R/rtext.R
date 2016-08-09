@@ -1,6 +1,3 @@
-
-
-
 #' text class
 #'
 #'
@@ -49,323 +46,30 @@
 rtext <-
   R6::R6Class(
 
-  #### class name ==============================================================
-  "rtext",
-
-  #### private =================================================================
-  private = list(
-    text = function(){
-      paste0(private$char, collapse = "")
-    },
-
-    tmp                 = NULL,
-    char                = character(0),
-    char_data           = data.frame(),
-    char_data_inherited = data.frame(),
-
-    hashes = list(
-      all  = character(0),
-      text = character(0),
-      data = character(0)
-    ),
-
-    hash = function( what=c("all", "data", "text") ){
-      # preparations
-      hash_names      <- names(private$hashes)
-      if( "all" %in% what ){
-        what <- hash_names
-      }
-      # doing-duty-to-do
-        # hash text
-      if("text" %in% what){
-        private$hashes$text <-
-          dp_hash(
-            private$char
-          )
-      }
-        # hash data
-      if("data" %in% what){
-        private$hashes$data <-
-          dp_hash(
-            list(
-              dp_hash(private$char_data),
-              dp_hash(private$char_data_inherited)
-            )
-          )
-      }
-      # update hashes$all
-      private$hashes$all <-
-        dp_hash(
-          list(
-            dp_hash(private$hashes$text),
-            dp_hash(private$hashes$data)
-          )
-        )
-      # return
-      return(
-        private$hashes
-      )
-    }
-  ),
-
-  #### public ==================================================================
-  public = list(
+    #### misc ====================================================================
+    classname    = "rtext",
+    active       = NULL,
+    inherit      = rtext_base,
+    lock_objects = TRUE,
+    class        = TRUE,
+    portable     = TRUE,
+    lock_class   = FALSE,
+    cloneable    = TRUE,
+    parent_env   = asNamespace('rtext'),
 
 
-    #### puplic data fields ====================================================
-    text_file  = as.character(NA),
-    encoding   = as.character(NA),
-    sourcetype = as.character(NA),
-    id         = NULL,
-    save_file  = NULL,
-    verbose    = NULL,
 
-    #### startup function ====================================================
+    #### private =================================================================
+    private = list(),
 
-    initialize =
-      function(
-        text        = NULL,
-        text_file   = NULL,
-        encoding    = "UTF-8",
-        id          = NULL,
-        save_file   = NULL,
-        verbose     = TRUE
-      )
-    {
 
-      ##### Saving verbose option
-      self$verbose <- verbose
 
-      ##### Stating what is done
-      self$message("initializing")
+    #### public ==================================================================
+    public = list(
 
-      ##### read in text // set field: sourcetype
-      if(is.null(text) & is.null(text_file)){ # nothing at all
-        private$char <- ""
-        self$sourcetype <- "empty"
-      }else if(is.null(text) & !is.null(text_file)){ # read from text_file
-        private$char <- text_read(text_file, encoding = encoding, tokenize = "")
-        self$sourcetype <- "text_file"
-      }else{ # take text as supplied
-        private$char <-
-          unlist(strsplit(paste0(iconv(text, encoding, "UTF-8"), collapse = "\n"),""))
-        self$sourcetype <- "text"
-      }
 
-      ##### set field: text_file
-      if( !is.null(text_file) ){
-        self$text_file <- text_file
-      }
 
-      ##### set field: save_file
-      if( !is.null(save_file) ){
-        self$save_file <- save_file
-      }
-
-      ##### Encoding
-      Encoding(private$char) <- "UTF-8"
-      self$encoding <- "UTF-8"
-
-      ##### ID
-      if( is.null(id) ){
-        self$id <- dp_hash(self)
-      }else{
-        self$id <- id
-      }
-
-      ##### Hashing again
-      private$hash()
-    }
-      ,
-
-    #### methods ============================================================
-    # universal getter
-    get = function(name){
-      if(name=="private"){
-        return(private)
-      }
-      if( name %in% names(self) ){
-        return(get(name, envir=self))
-      }else if( name %in% names(private) ){
-        return(get(name, envir=private))
-      }else{
-        return(NULL)
-      }
-    },
-
-    # messages and reporting depending on verbose==TRUE / or not
-    message = function(x, ...){
-      xname <- as.character(as.list(match.call()))[-1]
-      if(self$verbose){
-        if(is.character(x)){
-          message("rtext : ", x, ...)
-        }else{
-          message("rtext : ", xname, " : \n", x, ...)
-        }
-      }
-    },
-    # info
-    info = function(){
-      res <-
-        list(
-          text_file  = self$text_file,
-          character  = length(private$char),
-          encoding   = self$encoding,
-          sourcetype = self$sourcetype
-        )
-      return(res)
-      },
-    # show text
-    text_show = function(length=500, from=NULL, to=NULL, coll=FALSE, wrap=FALSE){
-      text_show(x=self$text_get(Inf), length=length, from=from, to=to, coll=coll, wrap=wrap)
-    },
-    # get text
-    text_get = function(length=Inf, from=NULL, to=NULL, split=NULL){
-        res <- rtext_get_character(chars=private$char, length=length, from=from, to=to)
-        res <- paste0(res, collapse = "")
-        Encoding(res) <- self$encoding
-        if( !is.null(split) ){
-          res <- unlist(strsplit(res, split = split))
-          Encoding(res) <- self$encoding
-        }
-        return(res)
-    },
-    # char_get
-    char_get = function(length=Inf, from=NULL, to=NULL, raw=FALSE){
-      if(raw | identical(length, TRUE) ){
-        res <- private$char
-        Encoding(res) <- self$encoding
-        return(res)
-      }
-      res <- get_vector_element(vec=private$char, length=length, from=from, to=to)
-      Encoding(res) <- self$encoding
-      return(res)
-    },
-    # char_get_code
-    char_data_get = function(from=1, to=Inf){
-      iffer  <- private$char_data$i >= from & private$char_data$i <= to
-      iffer2 <- private$char_data_inherited$i >= from & private$char_data_inherited$i <= to
-      if( length(iffer) > 0 ){
-        tmp <-
-          data.frame(
-            char = private$char[private$char_data[iffer, "i"]],
-            private$char_data[iffer, ]
-          )
-        return(
-          tmp[order(tmp$i),]
-        )
-      }else{
-        return(data.frame())
-      }
-    },
-    # add
-    char_add = function(what=NULL, after=NULL){
-      what        <- enc2utf8(what)
-      what        <- unlist(strsplit(what,""))
-      if( is.null(after) ) {
-        private$char <- c(private$char, what)
-      }else if ( after==0 ) {
-        private$char <- c(what, private$char)
-        # update char_data$i
-        private$char_data$i <- private$char_data$i + length(what)
-      }else{
-        index  <- seq_along(private$char)
-        part1  <- private$char[index <= after]
-        part2  <- private$char[index >  after]
-        private$char <- c( part1, what, part2)
-        iffer <- private$char_data$i > after
-        # update char_data$i
-        private$char_data$i[iffer] <- private$char_data$i[iffer] + length(what)
-      }
-      # necessary updates
-      private$hash("text")
-      # return for piping
-      invisible(self)
-    },
-    # delete
-    char_delete = function(n=NULL, from=NULL, to=NULL){
-      non_deleted  <- vector_delete(x = seq_along(private$char), n=n, from=from, to=to)
-      private$char <- vector_delete(x = private$char, n=n, from=from, to=to)
-      # update char_data$i (drop deletd data, update index)
-      new_index           <- seq_along(non_deleted)
-      private$char_data   <- private$char_data[private$char_data$i %in% non_deleted,]
-      private$char_data$i <- new_index[match(private$char_data$i, non_deleted)]
-      # necessary updates
-      private$hash("text")
-      # return for piping
-      invisible(self)
-    },
-    # replace
-    char_replace = function(from=NULL, to=NULL, by=NULL){
-      # check input
-      stopifnot( !is.null(from), !is.null(to), !is.null(by) )
-      by <- enc2utf8(by)
-      # doing-duty-to-do
-      index <- seq_along(private$char)
-      private$char <-
-        c(
-          private$char[index < from],
-          unlist(strsplit(by, "")),
-          private$char[index > to]
-        )
-      # updata char_data
-      private$char_data <- private$char_data[private$char_data$i < from | private$char_data$i > to,]
-      # update char_data$i
-      iffer <- private$char_data$i > to
-      private$char_data$i[iffer] <- private$char_data$i[iffer] + nchar(by) - to - from + 1
-      # necessary updates
-      private$hash("text")
-      # return for piping
-      invisible(self)
-    },
-    char_length = function(){
-      length(private$char)
-    },
-    # code characters
-    char_data_set = function(x=NULL, i=NULL, val=NA){
-      # prepare input
-      if( is.null(x) | is.null(i) ){
-        warning("char_data_set : no sufficient information passed for x, i - nothing coded")
-        invisible(self)
-      }
-      if( any( i > self$char_length() | any( i < 1)) ){
-        stop("char_data_set : i out of bounds")
-      }
-      if( length(val)==1 ){
-        val <- rep(val, length(i))
-      }
-      stopifnot( length(i) == length(val) )
-
-      # split data
-      i_in_char_data         <- i %in% private$char_data$i
-      i_not_in_char_data     <- !(i %in% private$char_data$i)
-
-      # assign data with i already in char_data$i
-      input_to_data_matcher <-
-        match(i[i_in_char_data], private$char_data$i)
-
-      private$char_data[input_to_data_matcher, "i"] <-
-        i[i_in_char_data]
-
-      private$char_data[input_to_data_matcher, x]   <-
-        val[i_in_char_data]
-
-      # code for i not already in char_data
-      add_df            <- data.frame(i=i[i_not_in_char_data])
-      add_df[[x]]       <- val[i_not_in_char_data]
-      private$char_data <- rbind_fill(private$char_data, add_df) %>% dp_arrange("i")
-
-      # necessary updates
-      private$hash("data")
-
-      # return for piping
-      invisible(self)
-    },
-    char_data_set_regex = function(x=NULL, regex=NULL, val=NA, ...){
-      found_spans <- text_locate_all(private$text(), regex, ...)[[1]]
-      found_is    <- unique(as.integer(unlist(mapply(seq, found_spans$start, found_spans$end))))
-      self$char_data_set(x, found_is, val)
-    },
+    #### [ tokenize_data_regex ] #### ..........................................
     tokenize_data_regex =
       function(
         regex       = NULL,
@@ -435,13 +139,15 @@ rtext <-
         # return
         return(res)
       },
+
+    #### [ tokenize_data_words ] #### ..........................................
     tokenize_data_words =
       function(
         non_token          = FALSE,
         join               = c("","full", "left", "right"),
         aggregate_function = NULL,
         ...
-    ){
+      ){
         join <- join[1]
         # tokenize text
         token <-
@@ -494,7 +200,9 @@ rtext <-
         }
         # return
         return(res)
-    },
+      },
+
+    #### [ tokenize_data_lines ] #### ..........................................
     tokenize_data_lines =
       function(
         non_token          = FALSE,
@@ -554,91 +262,9 @@ rtext <-
         }
         # return
         return(res)
-      },
-    # save
-    save = function(file=NULL, id=c("self_id", "hash")){
-      # gather information
-      tb_saved <-
-        list(
-          id           = self$id,
-          char         = private$char,
-          char_data    = private$char_data,
-          text_file         = self$text_file,
-          encoding     = self$encoding,
-          save_file    = self$save_file,
-          sourcetype   = self$sourcetype,
-          session_info = list(
-            dp_version=packageVersion("diffrprojects"),
-            r_version=paste(version$major, version$minor, sep="."),
-            version=version
-          )
-        )
-      class(tb_saved) <- c("rtext_save","list")
-      # handle id option
-      if( id[1] == "self_id"){
-        id <- self$id
-      }else if( id[1] == "hash"){
-        id <- self$hash()
-      }else{
-        id <- id[1]
       }
-      id <- paste0("rtext_", id, collapse = "_")
-      # handle file option
-      if( is.null(self$save_file) & is.null(file) ){
-        stop("rtext$save() : Neither file nor save_file given, do not know where to store file.")
-      }else if( !is.null(file) ){
-        file <- file
-      }else if( !is.null(self$save_file) ){
-        file <- self$save_file
-      }
-      # save to file
-      assign(id, tb_saved)
-      base::save(list = id, file = file)
-      # return for piping
-      invisible(self)
-    },
-    # (re)load
-    load = function(file=NULL){
-      # handle file option
-      if( is.null(file) ){
-        stop("rtext$load() : file is not given, do not know where to load file from.")
-      }else{
-        file <- file
-      }
-      tmp <- load_into(file)[[1]]
-
-      # setting public
-      self$id         <- tmp$id
-      self$text_file  <- tmp$text_file
-      self$encoding   <- tmp$encoding
-      self$sourcetype <- tmp$sourcetype
-      self$save_file  <- tmp$save_file
-
-      # setting private
-      private$char       <- tmp$char
-      private$char_data  <- tmp$char_data
-
-      # updating rest
-      private$hash("all")
-
-      # return for piping
-      invisible(self)
-    },
-    # save_as
-    export = function(){
-      message("TBD")
-    },
-    # hash
-    hash_get = function(what=c("all","data","text")){
-      private$hashes[names(private$hashes) %in% what]
-    }
-  )
+    )
 )
-
-
-
-
-
 
 
 

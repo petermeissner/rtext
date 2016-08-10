@@ -1,39 +1,31 @@
-R6ext <-
-  R6::R6Class(
-    #### class name ==============================================================
-    "R6ext",
-    private = list(
+library(rtext)
+dings     <- rtext_base$new("meine mudder schneidet speck du spack")
+private   <- dings$get("private")
+self   <- dings$get("self")
+char_data <- dings$get("char_data")
 
-    ),
-    public = list(
-      #### [ verbose ] #### ....................................................
-      verbose = TRUE,
-      #### [ get() ] #### ......................................................
-      get = function(name){
-        if(name=="private"){
-          return(private)
-        }
-        if( name %in% names(self) ){
-          return(get(name, envir=self))
-        }else if( name %in% names(private) ){
-          return(get(name, envir=private))
-        }else{
-          return(NULL)
-        }
-      },
+##
 
-      #### [ message() ] #### ..................................................
-      message = function(x, ...){
-        xname <- as.character(as.list(match.call()))[-1]
-        if(self$verbose){
-          if(is.character(x)){
-            message(class(self)[1], " : ", x, ...)
-          }else{
-            message(class(self)[1], " : ", xname, " : \n", x, ...)
-          }
-        }
-      }
-    )
-  )
+dings$char_data_set("x1", 1:3, 1)
+dings$char_data_set("x1", 1)
+dings$char_data_set("x2", 1:5, 2)
+dings$char_data_set("x3", 10:5, 3)
+dings$char_data_set("x4", 10:5, 4)
+dings$char_data_set("x5", 17, 5)
 
 
+dings$char_data_get()
+res <- dings$char_data_get(x="x1", full=TRUE)
+
+sm <- sum(names(res) %in% c("i","char"))
+ln <- sum(!(names(res) %in% c("i","char")))
+seq_len(ln)+sm
+res[seq_len(ln)+sm]
+
+
+
+
+dings <- rtext$new("123")
+private   <- dings$get("private")
+self   <- dings$get("self")
+char_data <- dings$get("char_data")

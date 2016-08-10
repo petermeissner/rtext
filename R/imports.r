@@ -12,3 +12,11 @@ dummyimport <- function(){
 #' @importFrom Rcpp sourceCpp
 NULL
 
+#' Pipe operator
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @export
+#' @importFrom magrittr %>%
+NULL

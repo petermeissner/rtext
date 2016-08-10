@@ -191,18 +191,24 @@ rtext_base <-
         }else if ( after==0 ) {
           private$char <- c(what, private$char)
           # update char_data$i
-          private$char_data$i <- private$char_data$i + length(what)
+          for( name_i in seq_along(names(private$char_data)) ){
+            name <- names(private$char_data)[name_i]
+            private$char_data[[name]]$i <- private$char_data[[name]]$i + length(what)
+          }
         }else{
           index  <- seq_along(private$char)
           part1  <- private$char[index <= after]
           part2  <- private$char[index >  after]
           private$char <- c( part1, what, part2)
-          iffer <- private$char_data$i > after
           # update char_data$i
-          private$char_data$i[iffer] <- private$char_data$i[iffer] + length(what)
+          for( name_i in seq_along(names(private$char_data)) ){
+            name <- names(private$char_data)[name_i]
+            iffer <- private$char_data[[name]]$i > after
+            private$char_data[[name]]$i[iffer] <- private$char_data[[name]]$i[iffer] + length(what)
+          }
         }
         # necessary updates
-        private$hash("text")
+        private$hash("char")
         # return for piping
         invisible(self)
       },
@@ -216,8 +222,8 @@ rtext_base <-
         for( name_i in seq_along(names(private$char_data)) ){
           name <- names(private$char_data)[name_i]
           private$char_data[[name]] <-
-            private$char_data[[name]][ private$char_data[[name]]$i %in% non_deleted , ]
-          private$char_data$i <- new_index[match(private$char_data[[name]]$i, non_deleted)]
+            subset(private$char_data[[name]], private$char_data[[name]]$i %in% non_deleted)
+          private$char_data[[name]]$i <- new_index[match(private$char_data[[name]]$i, non_deleted)]
         }
         # necessary updates
         private$hash(c("char", "char_data"))
@@ -239,12 +245,20 @@ rtext_base <-
             private$char[index > to]
           )
         # updata char_data
-        private$char_data <- private$char_data[private$char_data$i < from | private$char_data$i > to,]
-        # update char_data$i
-        iffer <- private$char_data$i > to
-        private$char_data$i[iffer] <- private$char_data$i[iffer] + nchar(by) - to - from + 1
+        for( name_i in seq_along(names(private$char_data)) ){
+          name <- names(private$char_data)[name_i]
+          private$char_data[[name]] <-
+            subset(
+              private$char_data[[name]],
+              private$char_data[[name]]$i < from | private$char_data[[name]]$i > to
+            )
+          iffer <-
+            private$char_data[[name]]$i > to
+          private$char_data[[name]]$i[iffer] <-
+            private$char_data[[name]]$i[iffer] + nchar(by) - to - from + 1
+        }
         # necessary updates
-        private$hash("text")
+        private$hash("char")
         # return for piping
         invisible(self)
       },
@@ -253,8 +267,10 @@ rtext_base <-
       },
 
       #### [ char_data_set ] #### ................................................
-      char_data_set = function(x=NULL, i=NULL, val=NA, level = 0){
-        # prepare input
+      char_data_set = function(x=NULL, i=NULL, val=NA, hl = 0){
+        # check input
+        stopifnot(length(x)==1)
+        stopifnot( x!=c("i","char","hl") )
         if( is.null(x) | is.null(i) ){
           warning("char_data_set : no sufficient information passed for x, i - nothing coded")
           invisible(self)
@@ -262,59 +278,134 @@ rtext_base <-
         if( any( i > self$char_length() | any( i < 1)) ){
           stop("char_data_set : i out of bounds")
         }
+        # prepare input
         if( length(val)==1 ){
           val <- rep(val, length(i))
         }
-        stopifnot( length(i) == length(val) )
+        if( length(hl)==1 ){
+          hl <- rep(hl, length(i))
+        }
+        # check for coresponding lengths
+        stopifnot( length(i) == length(val) & length(val) == length(hl) )
+
+        # make sure there is a data frame to fill
+        if( is.null(private$char_data[[x]] ) ){
+          private$char_data[[x]] <-
+            subset(
+              data.frame(
+                i    = 1L,
+                hl   = 0
+              ),
+              FALSE
+            )
+        }
 
         # split data
-        i_in_char_data         <- i %in% private$char_data$i
-        i_not_in_char_data     <- !(i %in% private$char_data$i)
+        # - new i in old i and level is less or equal to new level
+        # -> already coded with lower level are discarded!
+        i_in_char_data  <-
+          merge(
+            data.frame(i=i),
+            subset(private$char_data[[x]], TRUE,  c("i", "hl")),
+            all.x = TRUE,
+            by="i"
+          )$hl <= hl
+        i_in_char_data[is.na(i_in_char_data)] <- FALSE
 
-        # assign data with i already in char_data$i
+
+        # - adding those not already coded
+        i_not_in_char_data     <- !(i %in% private$char_data[[x]]$i)
+
+        # assign data with i already in i
         input_to_data_matcher <-
-          match(i[i_in_char_data], private$char_data$i)
+          match(i[i_in_char_data], private$char_data[[x]]$i)
 
-        private$char_data[input_to_data_matcher, "i"] <-
+        private$char_data[[x]][input_to_data_matcher, "i"] <-
           i[i_in_char_data]
 
-        private$char_data[input_to_data_matcher, x]   <-
+        private$char_data[[x]][input_to_data_matcher, "hl"]   <-
+          hl[i_in_char_data]
+
+        private$char_data[[x]][input_to_data_matcher, x]   <-
           val[i_in_char_data]
 
         # code for i not already in char_data
-        add_df            <- data.frame(i=i[i_not_in_char_data])
-        add_df[[x]]       <- val[i_not_in_char_data]
-        private$char_data <- rbind_fill(private$char_data, add_df) %>% dp_arrange("i")
+        add_df <-
+          data.frame(
+            i  = i[i_not_in_char_data],
+            hl = hl[i_not_in_char_data]
+          )
+
+        add_df[[x]] <-
+          val[i_not_in_char_data]
+
+        private$char_data[[x]] <-
+          rbind_fill(
+            private$char_data[[x]],
+            add_df
+          ) %>%
+          dp_arrange("i")
 
         # necessary updates
-        private$hash("data")
+        private$hash("char_data")
 
         # return for piping
         invisible(self)
       },
 
       #### [ char_data_set_regex ] #### ..........................................
-      char_data_set_regex = function(x=NULL, regex=NULL, val=NA, ...){
+      char_data_set_regex = function(x=NULL, regex=NULL, val=NA, hl=0, ...){
         found_spans <- text_locate_all(private$text(), regex, ...)[[1]]
         found_is    <- unique(as.integer(unlist(mapply(seq, found_spans$start, found_spans$end))))
-        self$char_data_set(x, found_is, val)
+        self$char_data_set(x=x, i=found_is, val=val,  hl=hl)
       },
 
       #### [ char_data_get ] #### ................................................
-      char_data_get = function(from=1, to=Inf){
-        iffer  <- private$char_data$i >= from & private$char_data$i <= to
-        if( length(iffer) > 0 ){
-          tmp <-
-            data.frame(
-              char = private$char[private$char_data[iffer, "i"]],
-              private$char_data[iffer, ]
-            )
-          return(
-            tmp[order(tmp$i),]
-          )
-        }else{
+      char_data_get = function( from = 1, to = Inf, x = NULL, full=FALSE){
+        if( from > length(private$char) | to < 1 | to < from ){
           return(data.frame())
         }
+        # subset columns
+        if( is.null(x) ){
+          l_tbr <- private$char_data
+        }else{
+          l_tbr <- private$char_data[ x ]
+          l_tbr <- l_tbr[!vapply(l_tbr, is.null, TRUE)]
+        }
+        # something to return?
+        if( length(l_tbr) == 0 ){
+          res <- data.frame(i=seq(max(from, 1), min(to, length(private$char))))
+        }else{
+          # putting together data.frames
+          l_tbr <- lapply(l_tbr, function(x){x["hl"] <- NULL;x})
+          res <- Reduce(
+            function(x, y){
+              merge(x, y, by="i", all=TRUE)
+            },
+            l_tbr
+          )
+        }
+        # subset according to: from and to
+        res <- subset(res, res$i >= from & res$i <= to)
+        # adding char
+        char_i <- seq_along(private$char)
+        iffer <- char_i >= from & char_i <= to
+        char <- data.frame(char = private$char[iffer], i = char_i[iffer]  )
+        res <-
+          merge(
+            char,
+            subset(res, res$i >= from & res$i <=to),
+            by  = "i",
+            all.x = full,
+            all.y = TRUE
+          )
+        # adding xs not found
+        x_amiss <- x[!(x %in% names(res))]
+        for( i in seq_along(x_amiss) ){
+          res[x_amiss[i]] <- rep(NA, dim1(res))
+        }
+        # return
+        return( res )
       },
 
       #### [ save ] #### .........................................................
@@ -399,3 +490,8 @@ rtext_base <-
       }
     )
   )
+
+
+
+
+

@@ -2,11 +2,10 @@
 
 S3method(plot,rtext)
 S3method(text_tokenize,rtext)
+export("%>%")
 export(R6_rtext_extended)
 export(rtext)
 export(rtext_base)
-export(sub_class)
-export(super_class)
 import(hellno)
 import(stringb)
 importFrom(R6,R6Class)

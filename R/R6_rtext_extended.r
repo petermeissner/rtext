@@ -81,7 +81,7 @@ R6_rtext_extended <-
 
       #### [ get() ] #### ......................................................
       #      get stuff (private or public out of instance)
-      get = function(name){
+      get = function(name=NULL){
         # recursion
         if( length(name)>1 ){
           return(lapply(name, self$get))
@@ -103,6 +103,13 @@ R6_rtext_extended <-
           }
         }
         # else
+        return(NULL)
+      },
+
+      debug = function(){
+        assign("self", self, envir = globalenv())
+        assign("private", private, envir = globalenv())
+        self$message("[self] and [private] assigned to global environment")
         return(NULL)
       },
 

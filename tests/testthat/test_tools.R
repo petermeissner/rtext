@@ -1,6 +1,250 @@
 #### tools =====================================================================
 context("\ntools") # ===========================================================
 
+
+context("tools classes")
+
+test_that("classes works", {
+  expect_true({
+    all(rtext:::classes(hellno::data.frame(1,""))$class==c("numeric", "character"))
+  })
+})
+
+
+context("tools dp_arrange")
+
+test_that("dp_arrange works", {
+  expect_identical({
+    rtext:::dp_arrange(data.frame(i=10:9))
+  }, data.frame(i=10:9))
+  expect_identical({
+    rtext:::dp_arrange(data.frame(i=10:9), i)
+  }, data.frame(i=9:10))
+  expect_identical(
+    {
+      rtext:::dp_arrange(data.frame(i=10:9, b=1), i)
+    },
+    {
+      x <- data.frame(i=9:10, b=1)
+      row.names(x) <- 2:1
+      x
+    }
+  )
+})
+
+
+context("tools dim1 dim2 seq_dim1")
+
+test_that("dim1 dim2 seq_dim1 works", {
+  expect_error({
+    rtext:::dim1()
+  })
+  expect_true({
+    rtext:::dim1(1)==1
+  })
+  expect_true({
+    is.null(rtext:::dim2(1))
+  })
+  expect_true({
+    all(
+      rtext:::dim2(data.frame())==0,
+      rtext:::dim1(data.frame())==0
+    )
+  })
+  expect_true({
+    all(
+      rtext:::dim2(data.frame(1:10))==1,
+      rtext:::dim1(data.frame(1:10))==10
+    )
+  })
+  expect_true({
+    all(
+      length(rtext:::seq_dim1(data.frame(4:5)))==2,
+      length(rtext:::seq_dim1(4:5)) ==2
+    )
+  })
+})
+
+
+context("tools is_between")
+
+test_that("is_between works", {
+  expect_true({
+    !rtext:::is_between(1,2,3)
+  })
+  expect_true({
+    rtext:::is_between(2,2,3)
+  })
+  expect_true({
+    rtext:::is_between(3,2,3)
+  })
+  expect_true({
+    rtext:::is_between(-1,-2,3)
+  })
+  expect_true({
+    is.na(rtext:::is_between(NA,-2,3))
+  })
+})
+
+context("tools rbind_fill")
+
+test_that("rbind_fill works", {
+  expect_true({
+    df1 <- data.frame(x=1)
+    df2 <- data.frame(x=1)
+    all(
+      dim(rtext:::rbind_fill(df1, df2))==c(2,1)
+    )
+  })
+  expect_true({
+    df1 <- data.frame(x=1)
+    df2 <- data.frame(y=1)
+    all(
+      dim(rtext:::rbind_fill(df1, df2))==c(2,2)
+    )
+  })
+  expect_true({
+    df1 <- data.frame()
+    df2 <- data.frame(y=1)
+    all(
+      dim(
+        rtext:::rbind_fill(df1, df2)
+        )==c(1,1)
+    )
+  })
+  expect_true({
+    df1 <- data.frame(x=1)
+    df2 <- data.frame()
+    all(
+      dim(
+        rtext:::rbind_fill(df1, df2)
+      )==c(1,1)
+    )
+  })
+  expect_true({
+    df1 <- data.frame()
+    df2 <- data.frame()
+    all(
+      dim(
+        rtext:::rbind_fill(df1, df2)
+      )==c(0,0)
+    )
+  })
+})
+
+
+context("tools shift")
+
+test_that("shift works", {
+  expect_true({
+    x <- 1:3
+    all(
+      rtext:::shift(x) == x
+    )
+  })
+  expect_true({
+    x <- 1:3
+    all(
+      rtext:::shift(x) == x,
+      identical(rtext:::shift(x,1), c(NA,1L,2L)),
+      identical(rtext:::shift(x,"forward"), c(NA,1L,2L)),
+      identical(rtext:::shift(x,"lag"), c(NA,1L,2L)),
+      identical(rtext:::shift(x,"right"), c(NA,1L,2L))
+    )
+  })
+  expect_true({
+    x <- 1:3
+    all(
+      identical(rtext:::shift(x,-1), c(2L, 3L, NA)),
+      identical(rtext:::shift(x,"backward"), c(2L, 3L, NA)),
+      identical(rtext:::shift(x,"lead"), c(2L, 3L, NA)),
+      identical(rtext:::shift(x,"left"), c(2L, 3L, NA))
+    )
+  })
+  expect_true({
+    x <- 1:3
+    all(
+      identical(rtext:::shift(x, 1,  invert=TRUE), c(2L, 3L, NA) ),
+      identical(rtext:::shift(x, -1, invert=TRUE), c(NA,1L,2L)   )
+    )
+  })
+  expect_true({
+    x <- 1:3
+    all(
+      all(is.na(rtext:::shift(x, 3))),
+      length(is.na(rtext:::shift(x, 3)))==3,
+      all(is.na(rtext:::shift(x, 5))),
+      length(is.na(rtext:::shift(x, 5)))==3,
+      all(is.na(rtext:::shift(x, -5))),
+      length(is.na(rtext:::shift(x, -5)))==3,
+      all(is.na(rtext:::shift(x, -3))),
+      length(is.na(rtext:::shift(x, -3)))==3
+    )
+  })
+})
+
+
+
+context("tools load_into")
+
+test_that("load_into works", {
+  expect_true({
+    a <- list(a=1:10, b="a")
+    tmp <- tempfile()
+    save(a, file=tmp)
+    b <- rtext:::load_into(tmp)[[1]]
+    attr(b, "class") <- NULL
+    identical(a,b)
+  })
+})
+
+
+context("tools test_file")
+
+test_that("test_file works", {
+  expect_true({
+    all(
+      class(rtext:::test_file())=="character",
+      length(rtext:::test_file())>=9
+    )
+  })
+  expect_true({
+    all(
+      file.exists(rtext:::test_file(full.names = TRUE))
+    )
+  })
+  expect_true({
+    all(
+      file.exists(rtext:::test_file(1, full.names = TRUE))
+    )
+  })
+  expect_true({
+    all(
+      file.exists(rtext:::test_file(pattern = "test", full.names = TRUE))
+    )
+  })
+  expect_true({
+    all(
+      class(rtext:::test_file(""))=="character",
+      length(rtext:::test_file(""))>=9
+    )
+  })
+  expect_true({
+    all(
+      file.exists(rtext:::test_file("",full.names = TRUE))
+    )
+  })
+  expect_true({
+    all(
+      file.exists(rtext:::test_file("", pattern = "test", full.names = TRUE))
+    )
+  })
+})
+
+
+
+
+
 context("tools modus")
 
 test_that("easy examples work properly", {
@@ -9,6 +253,8 @@ test_that("easy examples work properly", {
   expect_true(  modus(1:10, warn = FALSE) == 1 )
   expect_true(  modus(10:1, warn = FALSE) ==10 )
   expect_warning( modus(c(1,1,2,2)) )
+  expect_true(  all(rtext:::modus(c(1,1,2,3,2), multimodal=TRUE)==c(1,2)) )
+  expect_warning(  all(rtext:::modus(c(1,1,2,3,2), multimodal=TRUE)==c(1,2)),NA )
 }
 )
 

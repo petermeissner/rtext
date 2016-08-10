@@ -95,7 +95,9 @@ vector_delete <- function(x, n=NULL, from=NULL, to=NULL){
 load_into <- function(save_file){
   tmp_env <- new.env(parent = emptyenv())
   load(save_file, envir = tmp_env)
-  lapply(tmp_env, I)
+  tmp <- lapply(tmp_env, I)
+  class(tmp) <- NULL
+  return(tmp)
 }
 
 
@@ -123,7 +125,13 @@ shift <- function(x, n=0, default=NA, invert=FALSE){
       lead     = -1,
       as.numeric(n)
     )
-  stopifnot(length(x)>=n)
+  if( length(x) <= abs(n) ){
+    if(n < 0){
+      n <- -1 * length(x)
+    }else{
+      n <- length(x)
+    }
+  }
   if(n==0){
     return(x)
   }
@@ -357,7 +365,12 @@ dp_arrange <- function(df, ...){
     sorters    <- sorters[-c(1:2)]
     sorters    <- paste0("df['",sorters,"']", collapse = ", ")
     order_call <- paste0("order(",sorters,")")
-    return(df[eval(parse(text=order_call)), ])
+    res        <- df[eval(parse(text=order_call)), ]
+    if( is.data.frame(df) & !is.data.frame(res) ){
+      res <- as.data.frame(res)
+      names(res) <- names(df)
+    }
+    return(res)
   }else{
     return(df)
   }

@@ -511,7 +511,7 @@ test_that("rtext_base tokenize_data_regex", {
   }, NA)
   expect_true({
     dings <- rtext$new("text toxt tuxt tack tock tick boom")
-    dings$char_data_set_regex("first", "Boom", ingore.case=TRUE)
+    dings$char_data_set_regex("first", "Boom", ignore.case=TRUE)
     all(dings$char_data_get()$char==c("b","o","o","m"))
   }, NA)
 })

@@ -125,11 +125,17 @@ quote$char_data_get()
 <br><br>*... data aggregation via regex ...*
 
 ``` r
-quote$tokenize_data_regex(regex="(dog)|(friend)", non_token = TRUE, join = "full")
+quote$tokenize_data_regex(split="(dog)|(friend)", non_token = TRUE, join = "full")
 ```
 
-    ## [1] from     to       token    is_token token_i 
-    ## <0 rows> (or 0-length row.names)
+    ##   token_i from  to                                   token is_token first last dog_friend
+    ## 1       1    1  13                           Outside of a      TRUE  TRUE   NA       <NA>
+    ## 2       2   14  16                                     dog    FALSE    NA   NA        dog
+    ## 3       3   17  39                 , a book is man's best      TRUE    NA   NA       <NA>
+    ## 4       4   40  45                                  friend    FALSE    NA   NA     friend
+    ## 5       5   46  83 . [this is an insertion] \nInside of a      TRUE    NA   NA       <NA>
+    ## 6       6   84  86                                     dog    FALSE    NA   NA        dog
+    ## 7       7   87 109                  it's too dark to read.     TRUE    NA TRUE       <NA>
 
 <br><br>*... data aggregation by words ...*
 
@@ -137,8 +143,57 @@ quote$tokenize_data_regex(regex="(dog)|(friend)", non_token = TRUE, join = "full
 quote$tokenize_data_words(non_token = TRUE, join="full")
 ```
 
-    ## [1] from     to       token    is_token token_i 
-    ## <0 rows> (or 0-length row.names)
+    ##    token_i from  to     token is_token first last dog_friend
+    ## 1        1    1   7   Outside     TRUE  TRUE   NA       <NA>
+    ## 2        2    8   8              FALSE    NA   NA       <NA>
+    ## 3        3    9  10        of     TRUE    NA   NA       <NA>
+    ## 4        4   11  11              FALSE    NA   NA       <NA>
+    ## 5        5   12  12         a     TRUE    NA   NA       <NA>
+    ## 6        6   13  13              FALSE    NA   NA       <NA>
+    ## 7        7   14  16       dog     TRUE    NA   NA        dog
+    ## 8        8   17  18        ,     FALSE    NA   NA       <NA>
+    ## 9        9   19  19         a     TRUE    NA   NA       <NA>
+    ## 10      10   20  20              FALSE    NA   NA       <NA>
+    ## 11      11   21  24      book     TRUE    NA   NA       <NA>
+    ## 12      12   25  25              FALSE    NA   NA       <NA>
+    ## 13      13   26  27        is     TRUE    NA   NA       <NA>
+    ## 14      14   28  28              FALSE    NA   NA       <NA>
+    ## 15      15   29  31       man     TRUE    NA   NA       <NA>
+    ## 16      16   32  32         '    FALSE    NA   NA       <NA>
+    ## 17      17   33  33         s     TRUE    NA   NA       <NA>
+    ## 18      18   34  34              FALSE    NA   NA       <NA>
+    ## 19      19   35  38      best     TRUE    NA   NA       <NA>
+    ## 20      20   39  39              FALSE    NA   NA       <NA>
+    ## 21      21   40  45    friend     TRUE    NA   NA     friend
+    ## 22      22   46  48       . [    FALSE    NA   NA       <NA>
+    ## 23      23   49  52      this     TRUE    NA   NA       <NA>
+    ## 24      24   53  53              FALSE    NA   NA       <NA>
+    ## 25      25   54  55        is     TRUE    NA   NA       <NA>
+    ## 26      26   56  56              FALSE    NA   NA       <NA>
+    ## 27      27   57  58        an     TRUE    NA   NA       <NA>
+    ## 28      28   59  59              FALSE    NA   NA       <NA>
+    ## 29      29   60  68 insertion     TRUE    NA   NA       <NA>
+    ## 30      30   69  71      ] \n    FALSE    NA   NA       <NA>
+    ## 31      31   72  77    Inside     TRUE    NA   NA       <NA>
+    ## 32      32   78  78              FALSE    NA   NA       <NA>
+    ## 33      33   79  80        of     TRUE    NA   NA       <NA>
+    ## 34      34   81  81              FALSE    NA   NA       <NA>
+    ## 35      35   82  82         a     TRUE    NA   NA       <NA>
+    ## 36      36   83  83              FALSE    NA   NA       <NA>
+    ## 37      37   84  86       dog     TRUE    NA   NA        dog
+    ## 38      38   87  87              FALSE    NA   NA       <NA>
+    ## 39      39   88  89        it     TRUE    NA   NA       <NA>
+    ## 40      40   90  90         '    FALSE    NA   NA       <NA>
+    ## 41      41   91  91         s     TRUE    NA   NA       <NA>
+    ## 42      42   92  92              FALSE    NA   NA       <NA>
+    ## 43      43   93  95       too     TRUE    NA   NA       <NA>
+    ## 44      44   96  96              FALSE    NA   NA       <NA>
+    ## 45      45   97 100      dark     TRUE    NA   NA       <NA>
+    ## 46      46  101 101              FALSE    NA   NA       <NA>
+    ## 47      47  102 103        to     TRUE    NA   NA       <NA>
+    ## 48      48  104 104              FALSE    NA   NA       <NA>
+    ## 49      49  105 108      read     TRUE    NA   NA       <NA>
+    ## 50      50  109 109         .    FALSE    NA TRUE       <NA>
 
 <br><br>*... data aggregation by lines ...*
 
@@ -146,5 +201,9 @@ quote$tokenize_data_words(non_token = TRUE, join="full")
 quote$tokenize_data_lines()
 ```
 
-    ## [1] from     to       token    is_token token_i 
-    ## <0 rows> (or 0-length row.names)
+    ##   token_i from  to                                                                  token is_token first
+    ## 1       1    1  70 Outside of a dog, a book is man's best friend. [this is an insertion]      TRUE    NA
+    ## 2       2   72 109                                 Inside of a dog it's too dark to read.     TRUE    NA
+    ##   last dog_friend
+    ## 1   NA     friend
+    ## 2   NA        dog

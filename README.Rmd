@@ -134,7 +134,7 @@ quote$char_data_get()
 
 <br><br>*... data aggregation via regex ...*
 ```{r}
-quote$tokenize_data_regex(regex="(dog)|(friend)", non_token = TRUE, join = "full")
+quote$tokenize_data_regex(split="(dog)|(friend)", non_token = TRUE, join = "full")
 ```
 
 <br><br>*... data aggregation by words ...*
@@ -149,7 +149,7 @@ quote$tokenize_data_lines()
 
    
 
-    
+
     
     
     

@@ -233,8 +233,17 @@ rtext_base <-
       #### [ char_data_set ] #### ................................................
       char_data_set = function(x=NULL, i=NULL, val=NA, hl = 0){
         # check input
-        stopifnot(length(x)==1)
-        stopifnot( x!=c("i","char","hl") )
+        if( length(i) == 0 ){
+          if( is.null(private$char_data[[x]]) ){
+              tmp <-
+                subset(data.frame(i=1, char="", x=val), FALSE)
+              names(tmp)[3] <- x
+              private$char_data[[x]]  <- tmp
+          }
+          return(invisible(self))
+        }
+        stopifnot( length(x) == 1 )
+        stopifnot( x != c("i", "char", "hl") )
         if( is.null(x) | is.null(i) ){
           warning("char_data_set : no sufficient information passed for x, i - nothing coded")
           invisible(self)
@@ -318,8 +327,9 @@ rtext_base <-
       },
 
       #### [ char_data_set_regex ] #### ..........................................
-      char_data_set_regex = function(x=NULL, regex=NULL, val=NA, hl=0, ...){
-        found_spans <- text_locate_all(private$text(), regex, ...)[[1]]
+      char_data_set_regex = function(x=NULL, pattern=NULL, val=NA, hl=0, ...){
+        found_spans <- text_locate_all(private$text(), pattern, ...)[[1]]
+        found_spans <- subset(found_spans, !is.na(start) & !is.na(end))
         found_is    <- unique(as.integer(unlist(mapply(seq, found_spans$start, found_spans$end))))
         self$char_data_set(x=x, i=found_is, val=val,  hl=hl)
       },
@@ -334,7 +344,18 @@ rtext_base <-
           l_tbr <- private$char_data
         }else{
           l_tbr <- private$char_data[ x ]
-          l_tbr <- l_tbr[!vapply(l_tbr, is.null, TRUE)]
+          iffer <-
+            vapply(
+              l_tbr,
+              function(x){
+                if( is.null(x) ){ return(TRUE) }else{
+                  if( dim1(x)==0 ){ return(TRUE) }else{
+                    return(FALSE)
+                }}
+              },
+              TRUE
+            )
+          l_tbr <- l_tbr[!iffer]
         }
         # something to return?
         if( length(l_tbr) == 0 ){

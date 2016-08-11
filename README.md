@@ -10,7 +10,7 @@ R6 Objects for Text and Data
 
 <br><br> **Version**
 
-0.1.14.90000 <br> 2016-08-10
+0.1.14.90000 <br> 2016-08-11
 
 <br><br> **Description**
 

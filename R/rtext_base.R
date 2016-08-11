@@ -1,47 +1,11 @@
-#' text class
-#'
+#' R6 class - basic workhorse methods for rtext
 #'
 #' @docType class
-#'
-#' @name rtext_base
-#'
+#' @name rtext
 #' @export
-#'
 #' @keywords data
-#'
 #' @return Object of \code{\link{R6Class}}
-#'
 #' @format \code{\link{R6Class}} object.
-#'
-#' @field text
-#'  a single character string / character vector of length one
-#'
-#'
-#' @field file
-#'  path to a file from which text was read in
-#'
-#' @field encoding
-#'  encoding to be assumed for the text (will always be UTF-8, because.)
-#'
-#' @field sourcetype
-#'  list of logicals that capture where the text came from when
-#'  initializing object: text or file.
-#'  (text=NULL, file=NULL) : "empty";
-#'  (text="", file=NULL | file="") : "text";
-#'  (text=NULL, file="") : "file"
-#'
-#'
-#'
-#' @examples
-#' mytext <- rtext$new("Hallo World")
-#' mytext$text_get(100)
-#' mytext$char_get()
-#' mytext$text_show()
-#'
-#' mytext <- rtext$new(c("Hallo","World"))
-#' mytext$text_get(100)
-#' mytext$text_show()
-#'
 #'
 rtext_base <-
   R6::R6Class(
@@ -406,82 +370,6 @@ rtext_base <-
         }
         # return
         return( res )
-      },
-
-      #### [ save ] #### .........................................................
-      save = function(file=NULL, id=c("self_id", "hash")){
-        # gather information
-        tb_saved <-
-          list(
-            id           = self$id,
-            char         = private$char,
-            char_data    = private$char_data,
-            text_file         = self$text_file,
-            encoding     = self$encoding,
-            save_file    = self$save_file,
-            sourcetype   = self$sourcetype,
-            session_info = list(
-              dp_version=packageVersion("diffrprojects"),
-              r_version=paste(version$major, version$minor, sep="."),
-              version=version
-            )
-          )
-        class(tb_saved) <- c("rtext_save","list")
-        # handle id option
-        if( id[1] == "self_id"){
-          id <- self$id
-        }else if( id[1] == "hash"){
-          id <- self$hash()
-        }else{
-          id <- id[1]
-        }
-        id <- paste0("rtext_", id, collapse = "_")
-        # handle file option
-        if( is.null(self$save_file) & is.null(file) ){
-          stop("rtext$save() : Neither file nor save_file given, do not know where to store file.")
-        }else if( !is.null(file) ){
-          file <- file
-        }else if( !is.null(self$save_file) ){
-          file <- self$save_file
-        }
-        # save to file
-        assign(id, tb_saved)
-        base::save(list = id, file = file)
-        # return for piping
-        invisible(self)
-      },
-
-      #### [ load ] ..............................................................
-      load = function(file=NULL){
-        # handle file option
-        if( is.null(file) ){
-          stop("rtext$load() : file is not given, do not know where to load file from.")
-        }else{
-          file <- file
-        }
-        tmp <- load_into(file)[[1]]
-
-        # setting public
-        self$id         <- tmp$id
-        self$text_file  <- tmp$text_file
-        self$encoding   <- tmp$encoding
-        self$sourcetype <- tmp$sourcetype
-        self$save_file  <- tmp$save_file
-
-        # setting private
-        private$char       <- tmp$char
-        private$char_data  <- tmp$char_data
-
-        # updating rest
-        private$hash()
-
-        # return for piping
-        invisible(self)
-      },
-
-      #### [ export ] #### .......................................................
-      export = function(){
-        message("TBD")
       },
 
       #### [ hash_get ] #### .....................................................

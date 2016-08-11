@@ -1,47 +1,11 @@
-#' text class
-#'
+#' R6 class - linking text and data
 #'
 #' @docType class
-#'
 #' @name rtext
-#'
 #' @export
-#'
 #' @keywords data
-#'
 #' @return Object of \code{\link{R6Class}}
-#'
 #' @format \code{\link{R6Class}} object.
-#'
-#' @field text
-#'  a single character string / character vector of length one
-#'
-#'
-#' @field file
-#'  path to a file from which text was read in
-#'
-#' @field encoding
-#'  encoding to be assumed for the text (will always be UTF-8, because.)
-#'
-#' @field sourcetype
-#'  list of logicals that capture where the text came from when
-#'  initializing object: text or file.
-#'  (text=NULL, file=NULL) : "empty";
-#'  (text="", file=NULL | file="") : "text";
-#'  (text=NULL, file="") : "file"
-#'
-#'
-#'
-#' @examples
-#' mytext <- rtext$new("Hallo World")
-#' mytext$text_get(100)
-#' mytext$char_get()
-#' mytext$text_show()
-#'
-#' mytext <- rtext$new(c("Hallo","World"))
-#' mytext$text_get(100)
-#' mytext$text_show()
-#'
 #'
 rtext <-
   R6::R6Class(
@@ -49,7 +13,7 @@ rtext <-
     #### misc ====================================================================
     classname    = "rtext",
     active       = NULL,
-    inherit      = rtext_base,
+    inherit      = rtext_loadsave,
     lock_objects = TRUE,
     class        = TRUE,
     portable     = TRUE,

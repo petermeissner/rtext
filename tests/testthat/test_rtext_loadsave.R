@@ -1,5 +1,6 @@
-context("rtext save and load") # ===============================================
+context("\nrtext_loadsave") # ===============================================
 
+context("rtext_loadsave save") # ===============================================
 if(!any(grepl("test-all.R", commandArgs()))){
 
     test_that("rtext save", {
@@ -38,7 +39,7 @@ if(!any(grepl("test-all.R", commandArgs()))){
 
 
 
-
+context("rtext_loadsave load") # ===============================================
 test_that("rtext load is same as save", {
   expect_error({
     save_file <- base::tempfile(fileext = "Rdata")

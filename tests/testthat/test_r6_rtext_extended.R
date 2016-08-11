@@ -1,4 +1,5 @@
-context("r6_rtext_extended") # =================================================================
+context("\nr6_rtext_extended") # =================================================================
+
 
 testclass <-
   R6::R6Class(
@@ -20,6 +21,9 @@ testclass <-
     )
   )
 
+
+
+context("R6_rtext_extended ls()") # =================================================================
 
 test_that("ls works", {
   expect_error({
@@ -59,6 +63,10 @@ test_that("ls works", {
 })
 
 
+
+
+context("R6_rtext_extended message()") # =================================================================
+
 test_that("message works", {
   expect_message({
     dings <- R6_rtext_extended$new()
@@ -82,6 +90,9 @@ test_that("message works", {
     is.function(dings$message)
   })
 })
+
+
+context("R6_rtext_extended get()") # =================================================================
 
 test_that("get works", {
   expect_true({
@@ -117,6 +128,9 @@ test_that("get works", {
     is.function(dings$get)
   })
 })
+
+
+context("R6_rtext_extended hash() hashed() hashes") # =================================================================
 
 test_that("hashing works", {
   expect_error({

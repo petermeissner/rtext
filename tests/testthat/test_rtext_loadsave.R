@@ -5,13 +5,13 @@ if(!any(grepl("test-all.R", commandArgs()))){
 
     test_that("rtext save", {
       expect_error({
-        dings <- rtext$new(
+        dings <- rtext_loadsave$new(
           text="1234567890"
         )
         dings$save()
       })
       expect_error({
-        dings <- rtext$new(
+        dings <- rtext_loadsave$new(
           text="1234567890",
           save_file=base::tempfile()
         )
@@ -19,7 +19,7 @@ if(!any(grepl("test-all.R", commandArgs()))){
       }, NA)
       expect_error({
         dings <-
-          rtext$new(
+          rtext_loadsave$new(
             text_file=test_file("test_utf8.txt"),
             save_file=base::tempfile()
           )
@@ -27,7 +27,7 @@ if(!any(grepl("test-all.R", commandArgs()))){
       }, NA)
       expect_error({
         dings <-
-          rtext$new(
+          rtext_loadsave$new(
             text="1234567890",
             text_file=test_file("rc_1.txt"),
             save_file=base::tempfile()
@@ -44,7 +44,7 @@ test_that("rtext load is same as save", {
   expect_error({
     save_file <- base::tempfile(fileext = "Rdata")
     dings <-
-      rtext$new( text="1234567890" )
+      rtext_loadsave$new( text="1234567890" )
     dings$save(file = save_file)
     dings$load()
   })
@@ -52,7 +52,7 @@ test_that("rtext load is same as save", {
   expect_error({
     save_file <- base::tempfile(fileext = "Rdata")
     dings <-
-      rtext$new( text="1234567890" )
+      rtext_loadsave$new( text="1234567890" )
     dings$save(file = save_file)
     dings$load(save_file)
   },NA)
@@ -60,7 +60,7 @@ test_that("rtext load is same as save", {
   expect_error({
     save_file <- base::tempfile(fileext = "Rdata")
     dings <-
-      rtext$new( text="1234567890" )
+      rtext_loadsave$new( text="1234567890" )
     dings$save(file = save_file)
     dings$load(file = save_file)
   },NA)
@@ -68,7 +68,7 @@ test_that("rtext load is same as save", {
   expect_true({
     save_file <- base::tempfile(fileext = "Rdata")
     dings <-
-      rtext$new(
+      rtext_loadsave$new(
         text      = "1234567890",
         text_file = test_file("test_utf8.txt"),
         encoding  = "latin1",
@@ -79,7 +79,7 @@ test_that("rtext load is same as save", {
     dongs <- dings$clone()
     dongs$save(file = save_file)
 
-    dings <- rtext$new( text="" )
+    dings <- rtext_loadsave$new( text="" )
     dings$load(save_file)
 
     all(
@@ -96,7 +96,7 @@ test_that("rtext load is same as save", {
 
   expect_true({
     save_file <- base::tempfile(fileext = "Rdata")
-    dings     <- rtext$new(save_file=save_file)
+    dings     <- rtext_loadsave$new(save_file=save_file)
     dings$save()
     tmp_env   <-  new.env(parent = emptyenv())
     tmp <- load_into(save_file)
@@ -108,9 +108,9 @@ test_that("rtext load is same as save", {
   })
   expect_true({
     save_file <- base::tempfile(fileext = "Rdata")
-    dings     <- rtext$new(text_file=test_file("test_latin1.txt"), encoding="latin1")
+    dings     <- rtext_loadsave$new(text_file=test_file("test_latin1.txt"), encoding="latin1")
     dings$save(save_file)
-    dongs <- rtext$new()$load(save_file)
+    dongs <- rtext_loadsave$new()$load(save_file)
 
     all(dings$text_get() == dongs$text_get())
   })

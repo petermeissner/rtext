@@ -4,19 +4,19 @@
 \alias{plot.rtext}
 \title{function for plotting rtext}
 \usage{
-\method{plot}{rtext}(x, y = NULL, lines = TRUE, what = NULL,
-  col = "#ED4C4CA0", ...)
+\method{plot}{rtext}(x, y = NULL, lines = TRUE, col = "#ED4C4CA0",
+  add = FALSE, ...)
 }
 \arguments{
 \item{x}{object of class rtext}
 
-\item{y}{not used}
+\item{y}{char_data to be plotted}
 
 \item{lines}{vector of integer listing the lines to be plottted}
 
-\item{what}{char_data to be plotted}
-
 \item{col}{color of the char_data variable to be highlighted}
+
+\item{add}{add data to an already existing plot?}
 
 \item{...}{further parameters passed through to initial plot}
 }

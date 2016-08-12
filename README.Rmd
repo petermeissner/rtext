@@ -15,7 +15,8 @@ output: github_document
 
 ```{r, include=FALSE}
 options("width"=108)
-tmp  <- packageDescription(basename(getwd()))
+pkg  <- basename(getwd())
+tmp  <- packageDescription(pkg)
 date <- as.Date(file.info("R")$mtime)
 ```
 
@@ -55,7 +56,7 @@ cat(tmp$Author)
 
 
 ```{r, results='asis', echo=FALSE}
-citation("rtext")
+citation(pkg)
 ```
 
 <br><br>
@@ -63,7 +64,7 @@ citation("rtext")
 
 <code style="white-space:normal;">
 ```{r, results='asis', echo=FALSE}
-toBibtex(citation("rtext"))
+toBibtex(citation(pkg))
 ```
 </code>
 
@@ -148,17 +149,16 @@ quote$tokenize_data_lines()
 ```
 
    
-
+<br><br>*... text plotting with data highlighting ...*
 ```{r}
-plot(quote, what="first")
+plot(quote, "dog_friend")
 ```
 
     
     
-    
-    
-    
-    
-    
-    
-    
+<br><br>*... adding further data to the plot ...*
+```{r}
+plot(quote, "dog_friend")
+plot(quote, "first", col="steelblue", add=TRUE)
+plot(quote, "last", col="steelblue", add=TRUE)
+```

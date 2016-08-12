@@ -80,21 +80,22 @@ rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
 #' function for plotting rtext
 #' @export
 #' @param x object of class rtext
-#' @param y not used
-#' @param what char_data to be plotted
+#' @param y char_data to be plotted
 #' @param lines vector of integer listing the lines to be plottted
 #' @param col color of the char_data variable to be highlighted
+#' @param add add data to an already existing plot?
 #' @param ... further parameters passed through to initial plot
 plot.rtext <-
   function(
     x,
     y         = NULL,
     lines     = TRUE,
-    what      = NULL,
     col       = "#ED4C4CA0",
+    add       = FALSE,
     ...
   ){
     # preparing data
+    what       <- y
     line_data  <- subset(x$text_get_lines(), lines)
     plot_x     <- line_data$n
     plot_y     <- line_data$line
@@ -102,29 +103,30 @@ plot.rtext <-
     plot_y     <- abs( plot_y - max_plot_y ) + 1
     max_plot_x <- max( plot_x )
 
-
     # plotting text lines
-    graphics::plot(
-      x    = plot_x,
-      y    = plot_y,
-      type = "n",
-      ylab = "line",
-      xlab = "char",
-      xlim      = c(0, (ceiling(max_plot_x)/10^nchar(max_plot_x)*10)*(10^nchar(max_plot_x)/10) ),
-      ylim      = c(0, max_plot_y + 1 ),
-      ...,
-      axes=FALSE
-    )
-    graphics::axis( 1 )
-    graphics::axis( 2, c(max_plot_y, 1), c(1, max_plot_y) )
-    graphics::box()
-    graphics::rect(
-      xleft   = 0,
-      xright  = plot_x,
-      ybottom = plot_y - 0.5,
-      ytop    = plot_y + 0.5,
-      col = "grey", border = "grey", lty=0
-    )
+    if(!add){
+      graphics::plot(
+        x    = plot_x,
+        y    = plot_y,
+        type = "n",
+        ylab = "line",
+        xlab = "char",
+        xlim      = c(0, (ceiling(max_plot_x)/10^nchar(max_plot_x)*10)*(10^nchar(max_plot_x)/10) ),
+        ylim      = c(0, max_plot_y + 1 ),
+        ...,
+        axes=FALSE
+      )
+      graphics::axis( 1 )
+      graphics::axis( 2, c(max_plot_y, 1), c(1, max_plot_y) )
+      graphics::box()
+      graphics::rect(
+        xleft   = 0,
+        xright  = plot_x,
+        ybottom = plot_y - 0.5,
+        ytop    = plot_y + 0.5,
+        col = "grey", border = "grey", lty=0
+      )
+    }
     # plotting char_data
     if ( !is.null(what) ){
       char_data <-

@@ -207,3 +207,21 @@ quote$tokenize_data_lines()
     ##   last dog_friend
     ## 1   NA     friend
     ## 2   NA        dog
+
+<br><br>*... text plotting with data highlighting ...*
+
+``` r
+plot(quote, "dog_friend")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-17-1.png)
+
+<br><br>*... adding further data to the plot ...*
+
+``` r
+plot(quote, "dog_friend")
+plot(quote, "first", col="steelblue", add=TRUE)
+plot(quote, "last", col="steelblue", add=TRUE)
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-18-1.png)

@@ -7,7 +7,7 @@ version 0.1.14 // 2016-08-10 ...
 --------------------------------------------------------------------------
 
 * BUGFIXES
-    
+    - minor fixes discovered by testing:
 
     
 * FEATURE
@@ -16,6 +16,7 @@ version 0.1.14 // 2016-08-10 ...
     
 * Development
     - testing testing testing
+    - restructuring plot.rtext()
       
       
       

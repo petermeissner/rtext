@@ -89,39 +89,73 @@ plot.rtext <-
   function(
     x,
     y         = NULL,
-    lines     = NULL,
-    char_data = y,
+    lines     = TRUE,
+    what      = NULL,
     col       = "#ED4C4CA0",
+    aggregate_function = function(x){ any(!is.na(x)) },
     ...
   ){
-    tmp <- x$text_get_lines()
-    x <- tmp$n
-    y <- tmp$line
-    maxy <- max(y)
-    y    <- abs(y-maxy)+1
+    # preparing data
+    line_data  <- subset(x$text_get_lines(), lines)
+    plot_x     <- line_data$n
+    plot_y     <- line_data$line
+    max_plot_y <- max( plot_y )
+    plot_y     <- abs( plot_y - max_plot_y ) + 1
+    max_plot_x <- max( plot_x )
+
+
+    # plotting text lines
     graphics::plot(
-      x    = x,
-      y    = y,
+      x    = plot_x,
+      y    = plot_y,
       type = "n",
       ylab = "line",
       xlab = "char",
-      xlim      = c(0, (ceiling(max(x)/10^nchar(max(x))*10))*(10^nchar(max(x))/10) ),
-      ylim      = c(0, max(y)+1 ),
+      xlim      = c(0, (ceiling(max_plot_x)/10^nchar(max_plot_x)*10)*(10^nchar(max_plot_x)/10) ),
+      ylim      = c(0, max_plot_y + 1 ),
       ...,
       axes=FALSE
     )
-    graphics::axis(1)
-    graphics::axis(2,c(max(y),1),c(1,max(y)))
+    graphics::axis( 1 )
+    graphics::axis( 2, c(max_plot_y, 1), c(1, max_plot_y) )
     graphics::box()
-    graphics::rect(xleft=0, xright=x, ybottom=y-0.5, ytop=y+0.5, col = "grey", border = "grey", lty=0)
-    if ( !is.null(char_data) ){
-      dat <- rtext$char_data_get()[, c("i",char_data)]
-      lin <- rtext$text_lines()
-      dat_extra <- lin[which_token(dat$i, lin$from, lin$to),]
-      x <- dat$i - dat_extra$from
-      y <- abs(dat_extra$line_i-maxy)+1
-      graphics::rect(xleft=x, xright=x+1, ybottom=y-0.5, ytop=y+0.5, col = col, border = col, lty=0)
+    graphics::rect(
+      xleft   = 0,
+      xright  = plot_x,
+      ybottom = plot_y - 0.5,
+      ytop    = plot_y + 0.5,
+      col = "grey", border = "grey", lty=0
+    )
+    # plotting char_data
+    if ( !is.null(what) ){
+      char_data <-
+        x$char_data_get(
+          x    = what,
+          from = min(line_data$from),
+          to   = max(line_data$to)
+        )
+
+      index <- which_token( char_data$i, line_data$from, line_data$to)
+      plot_what_x <- char_data$i - line_data[ index, ]$from
+      plot_what_y <- line_data[ index, ]$line
+      plot_what_y <- abs( plot_what_y - max_plot_y ) +1
+      graphics::rect(
+        xleft   = plot_what_x,
+        xright  = plot_what_x + 1,
+        ybottom = plot_what_y - 0.5,
+        ytop    = plot_what_y + 0.5,
+        col = col, border = col, lty=0
+      )
     }
+    # return
+    return(
+      invisible(
+        list(
+          line_data = line_data,
+          char_data = char_data
+          )
+        )
+      )
   }
 
 

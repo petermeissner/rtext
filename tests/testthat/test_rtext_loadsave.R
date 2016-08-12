@@ -1,7 +1,6 @@
 context("\nrtext_loadsave") # ===============================================
 
 context("rtext_loadsave save") # ===============================================
-if(TRUE | !any(grepl("test-all.R", commandArgs()))){
 
     test_that("rtext save", {
       expect_error({
@@ -116,7 +115,7 @@ test_that("rtext load is same as save", {
   })
 })
 
-}
+
 
 
 

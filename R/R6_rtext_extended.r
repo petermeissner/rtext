@@ -84,7 +84,13 @@ R6_rtext_extended <-
       get = function(name=NULL){
         # recursion
         if( length(name)>1 ){
-          return(lapply(name, self$get))
+          tmp <- lapply(name, self$get)
+          names(tmp) <- name
+          return(tmp)
+        }
+        if(is.null(name)){
+          self$message("no input, returning NULL")
+          return(NULL)
         }
         # self
         if(name=="self"){
@@ -103,6 +109,7 @@ R6_rtext_extended <-
           }
         }
         # else
+        self$message("name not found")
         return(NULL)
       },
 

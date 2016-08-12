@@ -2,6 +2,14 @@
 context("\ntools") # ===========================================================
 
 
+test_that("tools plot.rtext", {
+  expect_error({
+    text <- "meine mudder schneidet speck"
+    dings <- rtext$new(text)
+    plot(dings)
+  })
+})
+
 context("tools plot.rtext")
 
 test_that("tools plot.rtext", {

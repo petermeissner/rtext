@@ -2,9 +2,9 @@
 % Please edit documentation in R/imports.r
 \name{\%>\%}
 \alias{\%>\%}
-\title{Pipe operator}
+\title{magrittr pipe}
 \description{
-Pipe operator
+magrittr pipe
 }
 \keyword{internal}
 

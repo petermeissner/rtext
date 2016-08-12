@@ -23,6 +23,21 @@ testclass <-
 
 
 
+
+
+context("R6_rtext_extended ls()") # =================================================================
+
+test_that("debug works", {
+  expect_true({
+    dings <- R6_rtext_extended$new()
+    dings$debug()
+    exists("private") & exists("self")
+  })
+})
+
+
+
+
 context("R6_rtext_extended ls()") # =================================================================
 
 test_that("ls works", {
@@ -123,6 +138,14 @@ test_that("get works", {
     dings <- testclass$new()
     dings$get("find2")
   })
+  expect_true({
+    dings <- testclass$new()
+    all(unlist(dings$get(c("find2","find1")))==c(TRUE,TRUE))
+  })
+  expect_identical({
+    dings <- testclass$new()
+    names(dings$get(c("find2","find1")))
+  }, c("find2","find1"))
   expect_true({
     dings <- rtext$new()
     is.function(dings$get)

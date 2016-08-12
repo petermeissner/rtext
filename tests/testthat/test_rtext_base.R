@@ -530,6 +530,11 @@ test_that("rtext_base text_get_lines() works", {
     dings <- rtext$new(text_file=rtext:::test_file("rc_1_ch1.txt"))
     all(dim(dings$text_get_lines()) == c(424, 5))
   }, NA)
+  expect_true({
+    dings <- rtext$new("ulahlala uhlala tzzz tzzz tzzz")
+    !is.na(dings$text_get_lines()$n) &
+      !is.na(dings$text_get_lines()$text)
+  })
 })
 
 

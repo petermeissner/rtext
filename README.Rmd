@@ -150,7 +150,7 @@ quote$tokenize_data_lines()
    
 
 ```{r}
-plot(quote)
+plot(quote, what="first")
 ```
 
     

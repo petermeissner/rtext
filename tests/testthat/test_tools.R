@@ -2,13 +2,6 @@
 context("\ntools") # ===========================================================
 
 
-test_that("tools plot.rtext", {
-  expect_error({
-    text <- "meine mudder schneidet speck"
-    dings <- rtext$new(text)
-    plot(dings)
-  })
-})
 
 context("tools plot.rtext")
 
@@ -17,8 +10,22 @@ test_that("tools plot.rtext", {
     text <- "meine mudder schneidet speck"
     dings <- rtext$new(text)
     plot(dings)
-  })
+  }, NA)
+  expect_error({
+    text <- "meine\n mudder \nschneidet speck\n"
+    dings <- rtext$new(text)
+    plot(dings)
+  },NA)
+  expect_error({
+    text  <- "meine\n mudder \nschneidet speck\n"
+    dings <- rtext$new(text)
+    dings$char_data_set_regex("digger", "\\w+", TRUE)
+    dings$char_data_get()
+    plot(dings, what="digger")
+  },NA)
 })
+
+
 
 
 context("tools tokenize_text")
@@ -326,6 +333,49 @@ test_that("easy examples work properly", {
   expect_true(  is.na(which_token( x =     2001, y1 = c(1,3,7), y2 = c(2,6,2000) ))       )
 }
 )
+
+
+context("tools get_vector_element()")
+
+test_that("tools get_vector_element() works", {
+  x <- 1L:10L
+  a <- letters[1:10]
+  expect_identical( get_vector_element(a,1), a[1])
+  expect_identical( get_vector_element(a,2), a[1:2])
+  expect_identical( get_vector_element(a,2,3), a[3:4])
+  expect_identical(
+    get_vector_element(a,2,3),
+    a[3:4]
+  )
+  expect_identical(
+    get_vector_element(a,2,3,7),
+    a[3:7]
+  )
+  expect_identical(
+    get_vector_element(a,2,7,3),
+    a[7:3]
+  )
+  expect_identical(
+    get_vector_element(a,from=3,to=3),
+    a[3:3]
+  )
+  expect_identical(
+    get_vector_element(a,from=0,to=10),
+    a
+  )
+  expect_error(
+    get_vector_element(a)
+  )
+  expect_identical(
+    get_vector_element(a, length=1, from = 4),
+    a[4]
+  )
+  expect_identical(
+    get_vector_element(a, length=1, to = 4),
+    a[4]
+  )
+})
+
 
 
 

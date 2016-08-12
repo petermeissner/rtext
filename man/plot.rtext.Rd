@@ -5,21 +5,20 @@
 \title{function for plotting rtext}
 \usage{
 \method{plot}{rtext}(x, y = NULL, lines = TRUE, what = NULL,
-  col = "#ED4C4CA0", aggregate_function = function(x) {     any(!is.na(x))
-  }, ...)
+  col = "#ED4C4CA0", ...)
 }
 \arguments{
 \item{x}{object of class rtext}
 
-\item{y}{name of a variable/column to be marked}
+\item{y}{not used}
 
 \item{lines}{vector of integer listing the lines to be plottted}
+
+\item{what}{char_data to be plotted}
 
 \item{col}{color of the char_data variable to be highlighted}
 
 \item{...}{further parameters passed through to initial plot}
-
-\item{char_data}{name of a variable/column to be marked}
 }
 \description{
 function for plotting rtext

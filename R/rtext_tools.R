@@ -80,8 +80,8 @@ rtext_get_character <- function(chars, length=100, from=NULL, to=NULL){
 #' function for plotting rtext
 #' @export
 #' @param x object of class rtext
-#' @param y name of a variable/column to be marked
-#' @param char_data name of a variable/column to be marked
+#' @param y not used
+#' @param what char_data to be plotted
 #' @param lines vector of integer listing the lines to be plottted
 #' @param col color of the char_data variable to be highlighted
 #' @param ... further parameters passed through to initial plot
@@ -92,7 +92,6 @@ plot.rtext <-
     lines     = TRUE,
     what      = NULL,
     col       = "#ED4C4CA0",
-    aggregate_function = function(x){ any(!is.na(x)) },
     ...
   ){
     # preparing data
@@ -148,6 +147,7 @@ plot.rtext <-
       )
     }
     # return
+    if(!exists("char_data")){char_data<-NULL}
     return(
       invisible(
         list(

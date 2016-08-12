@@ -4,7 +4,7 @@
 \alias{get_vector_element}
 \title{function that extracts elements from vector}
 \usage{
-get_vector_element(vec, length = length(vec), from = NULL, to = NULL)
+get_vector_element(vec, length = NULL, from = NULL, to = NULL)
 }
 \arguments{
 \item{vec}{the chars field}

@@ -190,7 +190,6 @@ rbind_fill <- function(df1=data.frame(), df2=data.frame()){
 #' @param y lower bound
 #' @param z upper bound
 #' @keywords internal
-#' #' @export
 is_between <- function(x,y,z){
   return(x>=y & x<=z)
 }
@@ -202,11 +201,9 @@ is_between <- function(x,y,z){
 #' @param length number of elements to be returned
 #' @param from first element to be returned
 #' @param to last element to be returned
-#'
-
 #' @keywords internal
 get_vector_element <-
-  function(vec, length=length(vec) , from=NULL, to=NULL){
+  function(vec, length=NULL , from=NULL, to=NULL){
     # helper functions
     bind_to_vecrange <- function(x){bind_between(x, 1, length(vec))}
     bind_length       <- function(x){bind_between(x, 0, length(vec))}

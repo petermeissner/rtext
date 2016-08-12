@@ -104,6 +104,13 @@ test_that("message works", {
     dings <- rtext$new()
     is.function(dings$message)
   })
+  expect_true({
+    dings <- rtext$new()
+    a <- 1
+    dings$message(a)
+    dings$message("1")
+    TRUE
+  })
 })
 
 

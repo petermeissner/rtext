@@ -185,12 +185,12 @@ R6_rtext_extended <-
       #### [ message() ] #### ..................................................
       #      post a message (if verbose is set to TRUE)
       message = function(x, ...){
-        xname <- as.character(as.list(match.call()))[-1]
+        xname <- as.character(as.list(match.call()))[2]
         if(self$verbose){
           if(is.character(x)){
             message(class(self)[1], " : ", x, ...)
           }else{
-            message(class(self)[1], " : ", xname, " : \n", x, ...)
+            message(class(self)[1], " : ", xname, " : \n", x)
           }
         }
       }

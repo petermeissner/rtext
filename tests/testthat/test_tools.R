@@ -2,6 +2,52 @@
 context("\ntools") # ===========================================================
 
 
+context("tools plot.rtext")
+
+test_that("tools plot.rtext", {
+  expect_error({
+    text <- "meine mudder schneidet speck"
+    dings <- rtext$new(text)
+    plot(dings)
+  })
+})
+
+
+context("tools tokenize_text")
+
+test_that("tools tokenize text", {
+
+  text <- "meine mudder schneidet speck"
+  dings <- rtext$new(text)
+
+  expect_error({
+      text_tokenize(dings)
+  })
+  expect_true({
+    rtext:::dim1(text_tokenize(dings, "")) == nchar(text)
+  })
+  expect_true({
+    identical(
+      text_tokenize(dings, ""),
+      text_tokenize(dings$text_get(), "")
+    )
+  })
+  expect_true({
+    identical(
+      text_tokenize(dings, "\\W+"),
+      text_tokenize(dings$text_get(), "\\W+")
+    )
+  })
+  expect_true({
+    identical(
+      text_tokenize(dings, "M", ignore.case = TRUE),
+      text_tokenize(dings, "m", ignore.case = FALSE)
+    )
+  })
+})
+
+
+
 context("tools classes")
 
 test_that("classes works", {

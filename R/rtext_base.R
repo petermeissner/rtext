@@ -134,6 +134,22 @@ rtext_base <-
         return(res)
       },
 
+      #### [ text_get_lines ] ..........................................................
+      text_get_lines = function(length=Inf, from=NULL, to=NULL){
+          # get text
+          tmp_text  <- self$text_get(length=length, from=from, to=to)
+          # split/tokenize
+          tmp       <- text_tokenize(tmp_text, "\n")
+          # gather other data
+          tmp$is_token <- NULL
+          line <- seq_along(tmp$from)
+          n    <- nchar(tmp$token)
+          #return
+          return(
+            data.frame(line, n, from=tmp$from, to=tmp$to, text=tmp$token)
+          )
+      },
+
       #### [ char_get ] #### .....................................................
       char_get = function(length=Inf, from=NULL, to=NULL, raw=FALSE){
         if(raw | identical(length, TRUE) ){

@@ -94,15 +94,9 @@ plot.rtext <-
     col       = "#ED4C4CA0",
     ...
   ){
-    f <- function(name, lines){
-      if(is.null(lines)){
-        rtext$text_lines()[, name]
-      }else{
-        rtext$text_lines()[lines, name]
-      }
-    }
-    x <- f("nchar",  lines)
-    y <- f("line_i", lines)
+    tmp <- x$text_get_lines()
+    x <- tmp$n
+    y <- tmp$line
     maxy <- max(y)
     y    <- abs(y-maxy)+1
     graphics::plot(

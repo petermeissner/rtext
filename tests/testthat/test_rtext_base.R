@@ -523,6 +523,14 @@ test_that("rtext_base tokenize_data_regex", {
 
 
 
+context("rtext_base text_get_lines()") # =================================================================
+
+test_that("rtext_base text_get_lines() works", {
+  expect_true({
+    dings <- rtext$new(text_file=rtext:::test_file("rc_1_ch1.txt"))
+    all(dim(dings$text_get_lines()) == c(424, 5))
+  }, NA)
+})
 
 
 

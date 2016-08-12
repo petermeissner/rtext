@@ -149,6 +149,9 @@ quote$tokenize_data_lines()
 
    
 
+```{r}
+plot(quote)
+```
 
     
     

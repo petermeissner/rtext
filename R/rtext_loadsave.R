@@ -42,7 +42,7 @@ rtext_loadsave <-
           save_file    = self$save_file,
           sourcetype   = self$sourcetype,
           session_info = list(
-            dp_version=packageVersion("diffrprojects"),
+            dp_version=packageVersion("rtext"),
             r_version=paste(version$major, version$minor, sep="."),
             version=version
           )

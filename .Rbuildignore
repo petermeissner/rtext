@@ -8,4 +8,5 @@ todo.txt
 dev.R
 benchmarks/*
 meta.R
-
+^.*\.pdf$
+README_files

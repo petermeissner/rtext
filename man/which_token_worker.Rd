@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{which_token_worker}
 \alias{which_token_worker}
-\title{function to check which chars belong to which token
+\title{(function to check which chars belong to which token)
 takes a vector of xs to check if these lie between pairs of ys and if so
 returning their index; assumes xs and ys are sorted; returns only the first
 span index which enclosing the x}
@@ -10,16 +10,17 @@ span index which enclosing the x}
 which_token_worker(x, y1, y2)
 }
 \arguments{
-\item{x}{whatever}
+\item{x}{a vector of type numeric; a number to be placed into a span}
 
-\item{y1}{whatever}
+\item{y1}{a vector of type numeric; first element of span}
 
-\item{y2}{whatever}
+\item{y2}{a vector of type numeric; last element of span}
 }
 \description{
-function to check which chars belong to which token
+(function to check which chars belong to which token)
 takes a vector of xs to check if these lie between pairs of ys and if so
 returning their index; assumes xs and ys are sorted; returns only the first
 span index which enclosing the x
 }
+\keyword{internal}
 

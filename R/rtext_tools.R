@@ -1,18 +1,3 @@
-
-
-#' storage for internals
-dp_storage <- new.env(parent = emptyenv())
-
-
-# #' list of ready to use functions for rtext initialization and tokenization
-# #' @export
-# rtext_tokenizer_list <- list(
-#   words  = function(x){text_tokenize_words(x, non_token = TRUE )},
-#   words2 = function(x){text_tokenize_words(x, non_token = FALSE)},
-#   lines  = function(x){text_tokenize(x, "\n", non_token = TRUE)}
-# )
-
-
 #' function to get text from rtext object
 #'
 #' @param chars the chars field

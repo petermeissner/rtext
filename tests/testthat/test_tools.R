@@ -21,7 +21,7 @@ test_that("tools plot.rtext", {
     dings <- rtext$new(text)
     dings$char_data_set_regex("digger", "\\w+", TRUE)
     dings$char_data_get()
-    plot(dings, what="digger")
+    plot(dings, "digger")
   },NA)
 })
 

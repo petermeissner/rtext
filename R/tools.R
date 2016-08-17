@@ -1,3 +1,48 @@
+#' function to write csv files with UTF-8 characters (even under Windwos)
+#' @param df data frame to be written to file
+#' @param file file name / path where to put the data
+#' @keywords internal
+write_utf8_csv <-
+  function(df, file){
+    if ( is.null(df) ) df <- data.frame()
+    firstline <- paste(  '"', names(df), '"', sep = "", collapse = " , ")
+    char_columns <- seq_along(df[1,])[sapply(df, class)=="character"]
+    #for( i in  char_columns){
+    #  df[,i] <- toUTF8(df[,i])
+    #}
+    data <- apply(df, 1, function(x){paste('"', x,'"', sep = "",collapse = " , ")})
+    writeLines( text=c(firstline, data), con=file , useBytes = T)
+  }
+
+
+#' function to read csv file with UTF-8 characters (even under Windwos) that
+#' were created by write_U
+#' @param file file name / path where to get the data
+#' @keywords internal
+read_utf8_csv <- function(file){
+  if ( !file.exists(file) ) return( data.frame() )
+  # reading data from file
+  content <- readLines(file, encoding = "UTF-8")
+  if ( length(content) < 2 ) return( data.frame() )
+  # extracting data
+  content <- stringb::text_split(content, " , ")
+  content <- lapply(content, stringb::text_replace_all, '"', "")
+  content_names <- content[[1]][content[[1]]!=""]
+  content <- content[seq_along(content)[-1]]
+  # putting it into data.frame
+  df <- data.frame(dummy=seq_along(content), stringsAsFactors = F)
+  for(name in content_names){
+    tmp <- sapply(content, `[[`, dim(df)[2])
+    Encoding(tmp) <- "UTF-8"
+    df[,name] <- tmp
+  }
+  df <- df[,-1]
+  # return
+  return(df)
+}
+
+
+
 #' function to get hash for R objects
 #' @param x the thing to hash
 #' @keywords internal
@@ -9,9 +54,9 @@ rtext_hash <- function(x){
 #' @param x name of the file
 #' @param pattern pattern of file name
 #' @keywords internal
-test_file <- function(x=NULL, pattern=NULL, full.names=FALSE){
+testfile <- function(x=NULL, pattern=NULL, full.names=FALSE){
   if(is.numeric(x)){
-    return(test_file(test_file()[(x-1) %% length(test_file()) +1 ]))
+    return(testfile(testfile()[(x-1) %% length(testfile()) +1 ]))
   }
   if(is.null(x)){
     return(

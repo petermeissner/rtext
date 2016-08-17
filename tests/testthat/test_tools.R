@@ -260,44 +260,44 @@ test_that("load_into works", {
 })
 
 
-context("tools test_file")
+context("tools testfile")
 
-test_that("test_file works", {
+test_that("testfile works", {
   expect_true({
     all(
-      class(rtext:::test_file())=="character",
-      length(rtext:::test_file())>=9
+      class(testfile())=="character",
+      length(testfile())>=9
     )
   })
   expect_true({
     all(
-      file.exists(rtext:::test_file(full.names = TRUE))
+      file.exists(testfile(full.names = TRUE))
     )
   })
   expect_true({
     all(
-      file.exists(rtext:::test_file(1, full.names = TRUE))
+      file.exists(testfile(1, full.names = TRUE))
     )
   })
   expect_true({
     all(
-      file.exists(rtext:::test_file(pattern = "test", full.names = TRUE))
+      file.exists(testfile(pattern = "test", full.names = TRUE))
     )
   })
   expect_true({
     all(
-      class(rtext:::test_file(""))=="character",
-      length(rtext:::test_file(""))>=9
+      class(testfile(""))=="character",
+      length(testfile(""))>=9
     )
   })
   expect_true({
     all(
-      file.exists(rtext:::test_file("",full.names = TRUE))
+      file.exists(testfile("",full.names = TRUE))
     )
   })
   expect_true({
     all(
-      file.exists(rtext:::test_file("", pattern = "test", full.names = TRUE))
+      file.exists(testfile("", pattern = "test", full.names = TRUE))
     )
   })
 })

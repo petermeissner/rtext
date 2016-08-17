@@ -409,9 +409,9 @@ test_that("rtext_base initialization", {
   expect_error( rtext$new(), NA)
   expect_error( rtext$new(NULL), NA)
   expect_error( rtext$new(""), NA)
-  expect_error( rtext$new(text_file=test_file("rc_1_ch1.txt")), NA)
-  expect_error( rtext$new(text="", text_file=test_file("rc_1_ch1.txt")), NA)
-  expect_error( rtext$new(text=readLines(test_file("rc_1_ch1.txt"))), NA)
+  expect_error( rtext$new(text_file=testfile("rc_1_ch1.txt")), NA)
+  expect_error( rtext$new(text="", text_file=testfile("rc_1_ch1.txt")), NA)
+  expect_error( rtext$new(text=readLines(testfile("rc_1_ch1.txt"))), NA)
   expect_true({
     !is.null(rtext$new("")$id)
   })
@@ -421,7 +421,7 @@ test_that("rtext_base initialization", {
   expect_true({
     all(
       nchar(
-        rtext$new(text_file=test_file("test_init1.txt"))$char_get()
+        rtext$new(text_file=testfile("test_init1.txt"))$char_get()
       )==1
     )
   })
@@ -527,7 +527,7 @@ context("rtext_base text_get_lines()") # =======================================
 
 test_that("rtext_base text_get_lines() works", {
   expect_true({
-    dings <- rtext$new(text_file=rtext:::test_file("rc_1_ch1.txt"))
+    dings <- rtext$new(text_file=testfile("rc_1_ch1.txt"))
     all(dim(dings$text_get_lines()) == c(424, 5))
   }, NA)
   expect_true({

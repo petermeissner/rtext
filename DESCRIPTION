@@ -1,7 +1,7 @@
 Package: rtext
 Title: R6 Objects for Text and Data
-Date: 2016-08-10
-Version: 0.1.14.90000
+Date: 2016-08-15
+Version: 0.1.15.90000
 Authors@R: c(
   person(
     "Peter", "Meissner",
@@ -21,14 +21,14 @@ Authors@R: c(
     comment = ""
   )
   )
-Description: For natural language procesing and analysis or qualitative text
+Description: For natural language processing and analysis of qualitative text
     coding structures which provide a way to bind together text and text data
     are fundamental. The package provides such a structure and accompanying
     methods in form of R6 objects. The 'rtext' class allows for text handling
     and text coding (character or regex based) including data updates on
     text transformations as well as aggregation on various levels.
     Furthermore, the usage of R6 enables inheritance and passing by reference
-    which should enable 'rtext' instances to be used as backend for R based
+    which should enable 'rtext' instances to be used as back-end for R based
     graphical text editors or text coding GUIs.
 Depends:
     R (>= 3.0.0),

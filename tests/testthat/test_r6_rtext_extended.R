@@ -173,7 +173,7 @@ test_that("hashing works", {
   })
   expect_true({
     dings <- testclass$new()
-    is.null(dings$hash_get("find"))
+    dings$hash_get("foob")==dings$hash_get("find")
   })
   expect_true({
     dings <- testclass$new()

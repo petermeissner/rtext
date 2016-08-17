@@ -59,11 +59,7 @@ R6_rtext_extended <-
           }
           # doing-duty-to-do
           tmp <- self$get(name)
-          if( is.null(tmp) ){
-            tmp <- NULL
-          }else{
-            tmp <- rtext_hash(tmp)
-          }
+          tmp <- rtext_hash(tmp)
           private$hashes[[name]] <- tmp
           # return
           return(tmp)

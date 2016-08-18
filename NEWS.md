@@ -9,11 +9,11 @@ version 0.1.15 // 2016-08-10 ...
 
     
 * FEATURE
-    - adding export functionality
+    - adding export functionality to SQLite databases
     
     
 * Development
-    
+    - rtext_loadsave : restructuring
     
     
 

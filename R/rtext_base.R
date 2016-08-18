@@ -44,7 +44,7 @@ rtext_base <-
       encoding   = as.character(NA),
       sourcetype = as.character(NA),
       id         = NULL,
-      save_file  = NULL,
+      save_file  = {a <- NA; a <- as.character(a); a},
 
       #### [ initialize ] #### ...................................................
       initialize =

@@ -1,20 +1,19 @@
 library(rtext)
 
-dings     <- rtext$new("meine mudder schneidet speck du spack")
+# original
+dings_original <-
+  rtext$new(
+    text_file = rtext:::testfile("test_utf8.txt"),
+    id        = "bollocks"
+  )
+# saving
+test_db <- tempfile()
+dings_original$export_sqlite(test_db)
 
 
-dings$char_data_set("x1", 1:3, 1)
-dings$char_data_set("x1", 1)
-dings$char_data_set("x2", 1:5, 2)
-dings$char_data_set("x3", 10:5, 3)
-dings$char_data_set("x4", 10:5, 4)
-dings$char_data_set("x5", 17, 5)
 
+library(RSQLite)
 
-dings$char_data_get()
-
-
-##
-
-dings$debug()
-private$prepare_save()
+con <- dbConnect(SQLite(), test_db)
+dbGetInfo(con)
+dbListTables(con)

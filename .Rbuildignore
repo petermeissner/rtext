@@ -10,3 +10,4 @@ benchmarks/*
 meta.R
 ^.*\.pdf$
 README_files
+test.db

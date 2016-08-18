@@ -8,7 +8,7 @@ context("rtext_loadsave save") # ===============================================
           text="1234567890"
         )
         dings$save()
-      })
+      }, NA)
       expect_error({
         dings <- rtext_loadsave$new(
           text="1234567890",

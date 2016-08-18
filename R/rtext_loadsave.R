@@ -44,7 +44,7 @@ rtext_loadsave <-
               encoding     = self$encoding,
               save_file    = ifelse(is.null(self$save_file), NA, self$save_file),
               sourcetype   = self$sourcetype,
-              dp_version   = packageVersion("rtext"),
+              dp_version   = as.character(packageVersion("rtext")),
               r_version    = paste(version$major, version$minor, sep="."),
               save_format_version = 1
             ),

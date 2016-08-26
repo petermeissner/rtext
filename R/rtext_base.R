@@ -59,7 +59,7 @@ rtext_base <-
         {
 
           ##### Saving verbose option
-          self$verbose <- verbose
+          self$options$verbose <- verbose
 
           ##### Stating what is done
           self$message("initializing")

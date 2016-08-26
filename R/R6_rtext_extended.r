@@ -71,9 +71,12 @@ R6_rtext_extended <-
     #### public ================================================================
     public = list(
 
-      #### [ verbose ] #### ....................................................
-      #      should message method print messages or not
-      verbose = TRUE,
+      #### [ options ] #### ....................................................
+
+      options =
+        list(
+          verbose = TRUE # should message method print messages or not
+        ),
 
       #### [ get() ] #### ......................................................
       #      get stuff (private or public out of instance)
@@ -182,7 +185,7 @@ R6_rtext_extended <-
       #      post a message (if verbose is set to TRUE)
       message = function(x, ...){
         xname <- as.character(as.list(match.call()))[2]
-        if(self$verbose){
+        if(self$options$verbose){
           if(is.character(x)){
             message(class(self)[1], " : ", x, ...)
           }else{

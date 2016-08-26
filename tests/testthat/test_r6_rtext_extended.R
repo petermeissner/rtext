@@ -89,7 +89,7 @@ test_that("message works", {
   })
   expect_message({
     dings <- R6_rtext_extended$new()
-    dings$verbose <- FALSE
+    dings$options$verbose <- FALSE
     dings$message("tatah")
   }, NA)
   expect_true({
@@ -123,7 +123,7 @@ test_that("get works", {
   })
   expect_true({
     dings <- R6_rtext_extended$new()
-    !is.null(dings$get("verbose"))
+    !is.null(dings$get("options"))
   })
   expect_error({
     dings <- R6_rtext_extended$new()
@@ -181,28 +181,28 @@ test_that("hashing works", {
   })
   expect_true({
     dings <- testclass$new()
-    hash1 <- dings$hash_get("verbose")
-    dings$verbose <- FALSE
-    hash2 <- dings$hash_get("verbose")
+    hash1 <- dings$hash_get("options")
+    dings$options$verbose <- FALSE
+    hash2 <- dings$hash_get("options")
     hash1 == hash2
   })
   expect_true({
     dings <- testclass$new()
-    hash1 <- dings$hash_get("verbose")
-    dings$verbose <- FALSE
-    dings$hash_do("verbose")
-    hash2 <- dings$hash_get("verbose")
+    hash1 <- dings$hash_get("options")
+    dings$options$verbose <- FALSE
+    dings$hash_do("options")
+    hash2 <- dings$hash_get("options")
     hash1 != hash2
   })
   expect_true({
     dings <- testclass$new()
-    hash1 <- dings$hash_get("verbose")
-    dings$verbose <- FALSE
-    dings$hash_do("verbose")
-    hash2 <- dings$hash_get("verbose")
-    dings$verbose <- TRUE
-    dings$hash_do("verbose")
-    hash3 <- dings$hash_get("verbose")
+    hash1 <- dings$hash_get("options")
+    dings$options$verbose <- FALSE
+    dings$hash_do("options")
+    hash2 <- dings$hash_get("options")
+    dings$options$verbose <- TRUE
+    dings$hash_do("options")
+    hash3 <- dings$hash_get("options")
     hash1 == hash3
   })
   expect_error({

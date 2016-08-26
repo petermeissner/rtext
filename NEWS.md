@@ -9,6 +9,22 @@ version 0.1.15 // 2016-08-10 ...
 
     
 * FEATURE
+    
+    
+    
+* Development
+    - rtext_extended : moving verbose to self$options
+    - introducing self$options as general place to put options
+    
+    
+
+version 0.1.15 // 2016-08-10 ... 
+--------------------------------------------------------------------------
+
+* BUGFIXES
+
+    
+* FEATURE
     - adding export functionality to SQLite databases
     
     

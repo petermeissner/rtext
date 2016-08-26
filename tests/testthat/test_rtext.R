@@ -28,7 +28,7 @@ test_that("rtext all data fields are present", {
     ls_list <- subset(dings$ls(), !grepl("function", class) )$name
     all(
       c("char", "char_data", "hashes", "encoding", "id", "sourcetype",
-        "text_file", "verbose", "save_file") %in%
+        "text_file", "options", "save_file") %in%
       ls_list
     )
   })

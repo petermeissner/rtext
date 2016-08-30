@@ -112,11 +112,12 @@ R6_rtext_extended <-
         return(NULL)
       },
 
-      debug = function(){
-        assign("self", self, envir = globalenv())
-        assign("private", private, envir = globalenv())
+      debug = function(pos=1){
+        assign("self", self, envir = as.environment(pos))
+        assign("private", private, envir = as.environment(pos))
         self$message("[self] and [private] assigned to global environment")
-        return(NULL)
+        # return self for piping
+        return(invisible(self))
       },
 
       #### [ ls() ] #### ......................................................

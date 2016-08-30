@@ -75,7 +75,8 @@ R6_rtext_extended <-
 
       options =
         list(
-          verbose = TRUE # should message method print messages or not
+          verbose = TRUE, # should message method print messages or not
+          warning = TRUE  # should warnings pushed via self$warning() be reported
         ),
 
       #### [ get() ] #### ......................................................
@@ -191,6 +192,19 @@ R6_rtext_extended <-
             message(class(self)[1], " : ", x, ...)
           }else{
             message(class(self)[1], " : ", xname, " : \n", x)
+          }
+        }
+      },
+
+      #### [ warning() ] #### ..................................................
+      #      post a warning (if vwarning is set to TRUE)
+      warning = function(x, ...){
+        xname <- as.character(as.list(match.call()))[2]
+        if(self$options$warning){
+          if(is.character(x)){
+            warning(class(self)[1], " : ", x, ...)
+          }else{
+            warning(class(self)[1], " : ", xname, " : \n", x)
           }
         }
       }

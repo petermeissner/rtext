@@ -114,6 +114,40 @@ test_that("message works", {
 })
 
 
+context("R6_rtext_extended warning()") # =================================================================
+
+test_that("warning works", {
+  expect_warning({
+    dings <- R6_rtext_extended$new()
+    dings$warning("tatah")
+  })
+  expect_warning({
+    dings <- R6_rtext_extended$new()
+    dings$options$warning <- FALSE
+    dings$warning("tatah")
+  }, NA)
+  expect_true({
+    dings <- testclass$new()
+    is.function(dings$warning)
+  })
+  expect_warning({
+    dings <- testclass$new()
+    dings$warning("")
+  },"testclass :")
+  expect_true({
+    dings <- rtext$new()
+    is.function(dings$warning)
+  })
+  expect_true({
+    dings <- rtext$new()
+    a <- 1
+    suppressWarnings(dings$warning(a))
+    suppressWarnings(dings$warning("1"))
+    TRUE
+  })
+})
+
+
 context("R6_rtext_extended get()") # =================================================================
 
 test_that("get works", {

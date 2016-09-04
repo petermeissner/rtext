@@ -136,7 +136,7 @@ R6_rtext_extended <-
               X         = tmp_names,
               FUN       =
                 function(x){
-                  paste(class(self[[x]]), sep = ", ")
+                  paste(class(self[[x]]), sep = ", ", collapse = ", ")
                 },
               FUN.VALUE = character(1)
             )
@@ -159,7 +159,7 @@ R6_rtext_extended <-
               X         = tmp_names,
               FUN       =
                 function(x){
-                  paste(class(private[[x]]), sep = ", ")
+                  paste(class(private[[x]]), sep = ", ", collapse = ", ")
                 },
               FUN.VALUE = character(1)
             )

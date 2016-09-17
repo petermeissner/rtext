@@ -17,3 +17,11 @@ library(RSQLite)
 con <- dbConnect(SQLite(), test_db)
 dbGetInfo(con)
 dbListTables(con)
+
+
+##################
+
+dings  <- rtext$new(text="aakdfhg.kadfsgkl.dasdfgasdfgasdfgsagsdfgsdgsd")
+dings$char_data_set_regex("a", "a", 1)
+dings$char_data_get()
+dings$debug()

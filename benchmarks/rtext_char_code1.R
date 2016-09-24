@@ -321,7 +321,7 @@ rtext_char_chode1 <-
             token        = private$token,
             token_data   = private$token_data,
             session_info = list(
-              dp_version=packageVersion("diffrprojects"),
+              rtext_version=packageVersion("rtext"),
               r_version=paste(version$major, version$minor, sep="."),
               version=version
             )

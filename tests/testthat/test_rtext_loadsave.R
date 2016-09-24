@@ -100,7 +100,7 @@ test_that("rtext load is same as save", {
     tmp <- rtext:::load_into(save_file)
 
     all(
-      !is.null(tmp$meta$dp_version),
+      !is.null(tmp$meta$rtext_version),
       !is.null(tmp$meta$r_version)
     )
   })

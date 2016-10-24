@@ -361,7 +361,7 @@ which_token <- function(x, y1, y2){
 #' @param x vector to get mode for
 #' @param multimodal wether or not all modes should be returned in case of more than one
 #' @param warn should the function warn about multimodal outcomes?
-#' @keywords internal
+#' @export
 modus <- function(x, multimodal=FALSE, warn=TRUE) {
   x_unique <- unique(x)
   tab_x    <- tabulate(match(x, x_unique))

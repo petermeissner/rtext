@@ -30,12 +30,12 @@ Description: For natural language processing and analysis of qualitative text
     Furthermore, the usage of R6 enables inheritance and passing by reference
     which should enable 'rtext' instances to be used as back-end for R based
     graphical text editors or text coding GUIs.
-Depends:
+Depends: 
     R (>= 3.0.0),
     stringb (>= 0.1.0)
 License: MIT + file LICENSE
 LazyData: TRUE
-Imports:
+Imports: 
     R6 (>= 2.1.2),
     hellno (>= 0.0.1),
     magrittr (>= 1.5),
@@ -44,12 +44,12 @@ Imports:
     RSQLite (>= 1.0.0),
     stats,
     graphics
-Suggests:
+Suggests: 
     testthat,
     knitr,
     rmarkdown
 BugReports: https://github.com/petermeissner/rtext/issues
 URL: https://github.com/petermeissner/rtext
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.1.9000
 VignetteBuilder: knitr
 LinkingTo: Rcpp

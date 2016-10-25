@@ -70,5 +70,5 @@ Und dein nicht zu achten,
 Wie ich!
 
 
-source: https://de.wikisource.org/w/index.php?title=Prometheus_(Gedicht,_fr%C3%BChe_Fassung)&oldid=2105646
+source: https://de.wikisource.org
 "

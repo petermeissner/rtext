@@ -9,7 +9,7 @@ Mit Wolkendunst,
 Und \u00FCbe, dem Knaben gleich,
 Der Disteln k\u00F6pft,
 An Eichen dich und Bergesh\u00F6hn;
-M\u00FC\u00DFt1 mir meine Erde
+M\u00FC\u00DFt mir meine Erde
 Doch lassen stehn,
 Und meine H\u00FCtte, die du nicht gebaut,
 Und meinen Herd,
@@ -68,5 +68,5 @@ Zu genie\u00DFen und zu freuen sich,
 Und dein nicht zu achten,
 Wie ich!
 
-source: https://de.wikisource.org/w/index.php?title=Prometheus_(Gedicht,_sp%C3%A4te_Fassung)&oldid=1479587
+source: https://de.wikisource.org
 "

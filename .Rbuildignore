@@ -12,3 +12,4 @@ meta.R
 README_files
 test.db
 ^CONDUCT\.md$
+^cran-comments\.md$

@@ -4,6 +4,20 @@ NEWS rtext
 
 
 
+version 0.1.20 // 2016-11-01 ...
+
+* BUGFIXES
+
+
+* FEATURE
+    - adding some examples 
+
+* DEV
+    
+
+
+
+
 version 0.1.19 // 2016-11-01 ...
 
 * BUGFIXES

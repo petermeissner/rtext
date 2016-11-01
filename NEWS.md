@@ -2,6 +2,22 @@ NEWS rtext
 ==========================================================================
 
 
+
+
+version 0.1.19 // 2016-11-01 ...
+
+* BUGFIXES
+
+
+* FEATURE
+    
+
+* DEV
+    - documentation
+    - CRAN publication polishing
+
+
+
 version 0.1.18 // 2016-10-24 ...
 
 * BUGFIXES

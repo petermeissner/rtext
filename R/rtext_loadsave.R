@@ -6,6 +6,7 @@
 #' @keywords data
 #' @return Object of \code{\link{R6Class}}
 #' @format \code{\link{R6Class}} object.
+#' @seealso \code{\link{rtext}}
 #'
 rtext_loadsave <-
   R6::R6Class(

@@ -11,3 +11,4 @@ meta.R
 ^.*\.pdf$
 README_files
 test.db
+^CONDUCT\.md$

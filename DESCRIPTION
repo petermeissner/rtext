@@ -1,7 +1,7 @@
 Package: rtext
 Title: R6 Objects for Text and Data
-Date: 2016-10-24
-Version: 0.1.18.90000
+Date: 2016-11-01
+Version: 0.1.19
 Authors@R: c(
   person(
     "Peter", "Meissner",
@@ -30,12 +30,12 @@ Description: For natural language processing and analysis of qualitative text
     Furthermore, the usage of R6 enables inheritance and passing by reference
     which should enable 'rtext' instances to be used as back-end for R based
     graphical text editors or text coding GUIs.
-Depends: 
+Depends:
     R (>= 3.0.0),
     stringb (>= 0.1.0)
 License: MIT + file LICENSE
 LazyData: TRUE
-Imports: 
+Imports:
     R6 (>= 2.1.2),
     hellno (>= 0.0.1),
     magrittr (>= 1.5),
@@ -44,7 +44,7 @@ Imports:
     RSQLite (>= 1.0.0),
     stats,
     graphics
-Suggests: 
+Suggests:
     testthat,
     knitr,
     rmarkdown

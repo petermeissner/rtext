@@ -1,11 +1,18 @@
-#' R6 class - basic workhorse methods for rtext
+#' rtext_base : basic workhorse for rtext
 #'
 #' @docType class
-#' @name rtext
+#'
+#' @name rtext_base
+#'
 #' @export
+#'
 #' @keywords data
+#'
 #' @return Object of \code{\link{R6Class}}
+#'
 #' @format \code{\link{R6Class}} object.
+#'
+#' @seealso \code{\link{rtext}}
 #'
 rtext_base <-
   R6::R6Class(

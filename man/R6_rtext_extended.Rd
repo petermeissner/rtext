@@ -14,5 +14,8 @@ Object of \code{\link{R6Class}}
 \description{
 extended R6 class
 }
+\seealso{
+\code{\link{rtext}}
+}
 \keyword{data}
 

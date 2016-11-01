@@ -13,6 +13,8 @@
 #'
 #' @format \code{\link{R6Class}} object.
 #'
+#' @seealso \code{\link{rtext}}
+#'
 R6_rtext_extended <-
   R6::R6Class(
 

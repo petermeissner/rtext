@@ -1,16 +1,14 @@
 
 <br><br> **Status**
 
-*getting stable*
-
-[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext) [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R) [![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
+[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext) [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R) [![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
 
 R6 Objects for Text and Data
 ============================
 
 <br><br> **Version**
 
-0.1.19 <br> 2016-10-24 (last change to R folder)
+0.1.20 <br> 2016-11-01 (last change to R folder)
 
 <br><br> **Description**
 
@@ -22,13 +20,13 @@ MIT + file LICENSE <br>Peter Meissner \[aut, cre\], Ulrich Sieberer \[cph\], Uni
 
 <br><br> **Citation**
 
-Meißner P (2016). *rtext*. R package version 0.1.19, &lt;URL: <https://github.com/petermeissner/rtext>&gt;.
+Meißner P (2016). *rtext*. R package version 0.1.20, &lt;URL: <https://github.com/petermeissner/rtext>&gt;.
 
 Sieberer U, Meißner P, Keh J and Müller W (2016). "Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program." *Legislative Studies Quarterly*, *41*(1), pp. 61-88. ISSN 1939-9162, doi: 10.1111/lsq.12106 (URL: <http://doi.org/10.1111/lsq.12106>), &lt;URL: <http://dx.doi.org/10.1111/lsq.12106>&gt;.
 
 <br><br> **BibTex for citing**
 
-<code style="white-space:normal;"> @Manual{Meissner2016, title = {rtext}, author = {Peter Meißner}, year = {2016}, note = {R package version 0.1.19}, url = {<https://github.com/petermeissner/rtext>}, }
+<code style="white-space:normal;"> @Manual{Meissner2016, title = {rtext}, author = {Peter Meißner}, year = {2016}, note = {R package version 0.1.20}, url = {<https://github.com/petermeissner/rtext>}, }
 
 @Article{Sieberer2016, title = {Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer and Peter Meißner and Julia F. Keh and Wolfgang C. Müller}, journal = {Legislative Studies Quarterly}, volume = {41}, number = {1}, issn = {1939-9162}, url = {<http://dx.doi.org/10.1111/lsq.12106>}, doi = {10.1111/lsq.12106}, pages = {61--88}, year = {2016}, } </code>
 

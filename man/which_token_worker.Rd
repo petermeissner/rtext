@@ -23,4 +23,3 @@ returning their index; assumes xs and ys are sorted; returns only the first
 span index which enclosing the x
 }
 \keyword{internal}
-

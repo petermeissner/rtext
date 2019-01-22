@@ -19,4 +19,3 @@ vector_delete(x, n = NULL, from = NULL, to = NULL)
 function used to delete parts from a vector
 }
 \keyword{internal}
-

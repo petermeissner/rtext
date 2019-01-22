@@ -17,4 +17,3 @@ is_between(x, y, z)
 function that checks is values are in between values
 }
 \keyword{internal}
-

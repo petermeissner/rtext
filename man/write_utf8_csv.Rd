@@ -15,4 +15,3 @@ write_utf8_csv(df, file)
 function to write csv files with UTF-8 characters (even under Windwos)
 }
 \keyword{internal}
-

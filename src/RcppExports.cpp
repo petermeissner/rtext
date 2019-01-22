@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // which_token_worker
 IntegerVector which_token_worker(NumericVector x, NumericVector y1, NumericVector y2);
-RcppExport SEXP rtext_which_token_worker(SEXP xSEXP, SEXP y1SEXP, SEXP y2SEXP) {
+RcppExport SEXP _rtext_which_token_worker(SEXP xSEXP, SEXP y1SEXP, SEXP y2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -17,4 +17,14 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(which_token_worker(x, y1, y2));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_rtext_which_token_worker", (DL_FUNC) &_rtext_which_token_worker, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_rtext(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

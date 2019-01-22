@@ -88,7 +88,10 @@ rtext_loadsave <-
     save = function(file=NULL, id=NULL){
       rtext_save <- as.environment(private$prepare_save(id=id))
       # handle file option
-      if( is.null(rtext_save$meta$save_file) & is.null(file) ){
+      if(
+        (is.na(rtext_save$meta$save_file) | is.null(rtext_save$meta$save_file)) &
+        is.null(file)
+      ){
         stop("rtext$save() : Neither file nor save_file given, do not know where to store file.")
       }else if( !is.null(file) ){
         file <- file

@@ -18,4 +18,3 @@ extended R6 class
 \code{\link{rtext}}
 }
 \keyword{data}
-

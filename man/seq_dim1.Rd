@@ -13,4 +13,3 @@ seq_dim1(x)
 seq along first dimension / length
 }
 \keyword{internal}
-

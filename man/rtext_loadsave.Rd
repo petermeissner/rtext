@@ -18,4 +18,3 @@ R6 class - load and save methods for rtext
 \code{\link{rtext}}
 }
 \keyword{data}
-

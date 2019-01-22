@@ -7,4 +7,3 @@
 magrittr pipe
 }
 \keyword{internal}
-

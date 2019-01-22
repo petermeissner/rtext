@@ -13,4 +13,3 @@ load_into(save_file)
 function that loads saved rtext
 }
 \keyword{internal}
-

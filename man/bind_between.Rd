@@ -17,4 +17,3 @@ bind_between(x, min, max)
 function forcing value to fall between min and max
 }
 \keyword{internal}
-

@@ -1,7 +1,7 @@
 Package: rtext
 Title: R6 Objects for Text and Data
-Date: 2016-11-01
-Version: 0.1.20
+Date: 2019-01-21
+Version: 0.1.21
 Authors@R: c(
   person(
     "Peter", "Meissner",
@@ -50,5 +50,5 @@ Suggests:
     rmarkdown
 BugReports: https://github.com/petermeissner/rtext/issues
 URL: https://github.com/petermeissner/rtext
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 6.1.1
 LinkingTo: Rcpp

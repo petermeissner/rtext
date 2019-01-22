@@ -23,4 +23,3 @@
 \description{
 function for plotting rtext
 }
-

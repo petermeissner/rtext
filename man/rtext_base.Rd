@@ -18,4 +18,3 @@ rtext_base : basic workhorse for rtext
 \code{\link{rtext}}
 }
 \keyword{data}
-

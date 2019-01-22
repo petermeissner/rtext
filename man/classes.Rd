@@ -13,4 +13,3 @@ classes(x)
 function to get classes from e.g. lists
 }
 \keyword{internal}
-

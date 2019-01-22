@@ -19,4 +19,3 @@ rtext_get_character(chars, length = 100, from = NULL, to = NULL)
 function to get text from rtext object
 }
 \keyword{internal}
-

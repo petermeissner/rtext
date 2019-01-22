@@ -4,8 +4,9 @@
 \alias{text_tokenize.rtext}
 \title{function tokenizing rtext objects}
 \usage{
-\method{text_tokenize}{rtext}(string, regex = NULL, ignore.case = FALSE,
-  fixed = FALSE, perl = FALSE, useBytes = FALSE, non_token = FALSE)
+\method{text_tokenize}{rtext}(string, regex = NULL,
+  ignore.case = FALSE, fixed = FALSE, perl = FALSE,
+  useBytes = FALSE, non_token = FALSE)
 }
 \arguments{
 \item{string}{text to be tokenized}
@@ -30,4 +31,3 @@ which the text was splitted, be returned as well}
 \description{
 function tokenizing rtext objects
 }
-

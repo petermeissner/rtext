@@ -15,4 +15,3 @@ testfile(x = NULL, pattern = NULL, full.names = FALSE)
 text function: wrapper for system.file() to access test files
 }
 \keyword{internal}
-

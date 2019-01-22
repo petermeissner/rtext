@@ -15,4 +15,3 @@ dp_arrange(df, ...)
 function to sort df by variables
 }
 \keyword{internal}
-

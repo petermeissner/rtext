@@ -7,10 +7,8 @@ output: github_document
 **Status**
 
 
-[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
-[![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
-[![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext) 
-[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
+[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext) [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R) [![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext) ![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
+
 
 
 ```{r, include=FALSE}
@@ -197,15 +195,19 @@ quote$tokenize_data_lines()
 
    
 <br><br>*... text plotting with data highlighting ...*
-```{r}
+```{r, eval=FALSE}
 plot(quote, "dog_friend")
 ```
+
+![plot 1](https://raw.githubusercontent.com/petermeissner/rtext/master/README_files/figure-markdown_github/unnamed-chunk-19-1.png)
 
     
     
 <br><br>*... adding further data to the plot ...*
-```{r}
+```{r, eval=FALSE}
 plot(quote, "dog_friend")
 plot(quote, "first", col="steelblue", add=TRUE)
 plot(quote, "last", col="steelblue", add=TRUE)
 ```
+
+![plot 2](https://raw.githubusercontent.com/petermeissner/rtext/master/README_files/figure-markdown_github/unnamed-chunk-20-1.png)

@@ -1,10 +1,14 @@
 
 <br><br> **Status**
 
-[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext) [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R) [![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
+[![Travis-CI Build
+Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
+[![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
+[![CRAN
+version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
 
-R6 Objects for Text and Data
-============================
+# R6 Objects for Text and Data
 
 <br><br> **Version**
 
@@ -12,27 +16,56 @@ R6 Objects for Text and Data
 
 <br><br> **Description**
 
-For natural language processing and analysis of qualitative text coding structures which provide a way to bind together text and text data are fundamental. The package provides such a structure and accompanying methods in form of R6 objects. The 'rtext' class allows for text handling and text coding (character or regex based) including data updates on text transformations as well as aggregation on various levels. Furthermore, the usage of R6 enables inheritance and passing by reference which should enable 'rtext' instances to be used as back-end for R based graphical text editors or text coding GUIs.
+For natural language processing and analysis of qualitative text coding
+structures which provide a way to bind together text and text data are
+fundamental. The package provides such a structure and accompanying
+methods in form of R6 objects. The ‘rtext’ class allows for text
+handling and text coding (character or regex based) including data
+updates on text transformations as well as aggregation on various
+levels. Furthermore, the usage of R6 enables inheritance and passing by
+reference which should enable ‘rtext’ instances to be used as back-end
+for R based graphical text editors or text coding GUIs.
 
 <br><br> **Funding**
 
-This software was created as part of the "Institutional Design in Western European Democracies" research project, funded by [DFG (Deutsche Forschungsgemeinschaft)](http://gepris.dfg.de/gepris/projekt/146229116), lead by [Ulrich Sieberer](https://scholar.google.com/citations?user=Q_ImhbkAAAAJ) and based at [University Konstanz](https://www.uni-konstanz.de/).
+This software was created as part of the “Institutional Design in
+Western European Democracies” research project, funded by [DFG (Deutsche
+Forschungsgemeinschaft)](http://gepris.dfg.de/gepris/projekt/146229116),
+lead by [Ulrich
+Sieberer](https://scholar.google.com/citations?user=Q_ImhbkAAAAJ) and
+based at [University Konstanz](https://www.uni-konstanz.de/).
 
 <br><br> **License**
 
-MIT + file LICENSE <br>Peter Meissner \[aut, cre\], Ulrich Sieberer \[cph\], University of Konstanz \[cph\]
+MIT + file LICENSE <br>Peter Meissner \[aut, cre\], Ulrich Sieberer
+\[cph\], University of Konstanz \[cph\]
 
 <br><br> **Citation**
 
-Meißner P (2016). *rtext*. R package version 0.1.20, &lt;URL: <https://github.com/petermeissner/rtext>&gt;.
+Meißner P (2016). *rtext*. R package version 0.1.20, \<URL:
+<https://github.com/petermeissner/rtext>\>.
 
-Sieberer U, Meißner P, Keh J and Müller W (2016). "Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program." *Legislative Studies Quarterly*, *41*(1), pp. 61-88. ISSN 1939-9162, doi: 10.1111/lsq.12106 (URL: <http://doi.org/10.1111/lsq.12106>), &lt;URL: <http://dx.doi.org/10.1111/lsq.12106>&gt;.
+Sieberer U, Meißner P, Keh J, Müller W (2016). “Mapping and Explaining
+Parliamentary Rule Changes in Europe: A Research Program.” *Legislative
+Studies Quarterly*, *41*(1), 61-88. ISSN 1939-9162, doi:
+10.1111/lsq.12106 (URL: <http://doi.org/10.1111/lsq.12106>), \<URL:
+<http://dx.doi.org/10.1111/lsq.12106>\>.
+
+To see these entries in BibTeX format, use ‘print(<citation>,
+bibtex=TRUE)’, ‘toBibtex(.)’, or set ‘options(citation.bibtex.max=999)’.
 
 <br><br> **BibTex for citing**
 
-<code style="white-space:normal;"> @Manual{Meissner2016, title = {rtext}, author = {Peter Meißner}, year = {2016}, note = {R package version 0.1.20}, url = {<https://github.com/petermeissner/rtext>}, }
+<code style="white-space:normal;"> @Manual{Meissner2016, title =
+{rtext}, author = {Peter Meißner}, year = {2016}, note = {R package
+version 0.1.20}, url = {<https://github.com/petermeissner/rtext>}, }
 
-@Article{Sieberer2016, title = {Mapping and Explaining Parliamentary Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer and Peter Meißner and Julia F. Keh and Wolfgang C. Müller}, journal = {Legislative Studies Quarterly}, volume = {41}, number = {1}, issn = {1939-9162}, url = {<http://dx.doi.org/10.1111/lsq.12106>}, doi = {10.1111/lsq.12106}, pages = {61--88}, year = {2016}, } </code>
+@Article{Sieberer2016, title = {Mapping and Explaining Parliamentary
+Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer
+and Peter Meißner and Julia F. Keh and Wolfgang C. Müller}, journal =
+{Legislative Studies Quarterly}, volume = {41}, number = {1}, issn =
+{1939-9162}, url = {<http://dx.doi.org/10.1111/lsq.12106>}, doi =
+{10.1111/lsq.12106}, pages = {61–88}, year = {2016}, } </code>
 
 <br><br> **Installation**
 
@@ -51,7 +84,8 @@ install.packages( "rtext", repos = c(standard_repos, "https://petermeissner.gith
 library(rtext)
 ```
 
-<br><br> **Package Contents**
+<br><br> **Package
+    Contents**
 
 ``` r
 library(rtext)
@@ -68,29 +102,68 @@ objects("package:rtext")
 
 <br><br> **Contribution**
 
-Note, that this package uses a Contributor Code of Conduct. By participating in this project you agree to abide by its terms: <http://contributor-covenant.org/version/1/0/0/> (basically this should be a place were people get along with each other respectful and nice because it's simply more fun that way for everybody)
+Note, that this package uses a Contributor Code of Conduct. By
+participating in this project you agree to abide by its terms:
+<http://contributor-covenant.org/version/1/0/0/> (basically this should
+be a place were people get along with each other respectful and nice
+because it’s simply more fun that way for everybody)
 
-Contributions are very much welcome, e.g. in the form of:
+Contributions are very much welcome, e.g. in the form of:
 
--   **typo fixing** ([edit file directly on Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/))
--   **bug reporting** (file an [issue](https://guides.github.com/features/issues/) - after having searched if the issue came up before - as - if possible - [minimal reproducable example](http://stackoverflow.com/help/mcve))
--   **extending help files** (e.g. [edit the respective files directly on Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/) or [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/); note, that the package use [roxygen2](http://r-pkgs.had.co.nz/man.html) for easing documentation)
--   **writing example** (e.g. [edit the respective files directly on Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/) or [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/); note, that the package use [roxygen2](http://r-pkgs.had.co.nz/man.html) for easing documentation)
--   **vignette writing** (file an [issue](https://guides.github.com/features/issues/) first so that we can discuss htings than [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/))
--   **test writing** (have a look at the [test coverage](https://codecov.io/gh/petermeissner/stringb/tree/master/R) than [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/))
--   **feature suggestions** (file an [issue](https://guides.github.com/features/issues/) describing the idea, why this is important, possible alternative solutions and an example)
--   **general discussion** of approach and or implementation (file an [issue](https://guides.github.com/features/issues/))
--   implementation **improvements** (file an [issue](https://guides.github.com/features/issues/) naming whats to be improved, why and how)
+  - **typo fixing** ([edit file directly on
+    Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/))
+  - **bug reporting** (file an
+    [issue](https://guides.github.com/features/issues/) - after having
+    searched if the issue came up before - as - if possible - [minimal
+    reproducable example](http://stackoverflow.com/help/mcve))
+  - **extending help files** (e.g. [edit the respective files directly
+    on
+    Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/)
+    or [fork the package](https://help.github.com/articles/fork-a-repo/)
+    and later on make a [pull
+    request](https://help.github.com/articles/using-pull-requests/);
+    note, that the package use
+    [roxygen2](http://r-pkgs.had.co.nz/man.html) for easing
+    documentation)
+  - **writing example** (e.g. [edit the respective files directly on
+    Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/)
+    or [fork the package](https://help.github.com/articles/fork-a-repo/)
+    and later on make a [pull
+    request](https://help.github.com/articles/using-pull-requests/);
+    note, that the package use
+    [roxygen2](http://r-pkgs.had.co.nz/man.html) for easing
+    documentation)
+  - **vignette writing** (file an
+    [issue](https://guides.github.com/features/issues/) first so that we
+    can discuss htings than [fork the
+    package](https://help.github.com/articles/fork-a-repo/) and later on
+    make a [pull
+    request](https://help.github.com/articles/using-pull-requests/))
+  - **test writing** (have a look at the [test
+    coverage](https://codecov.io/gh/petermeissner/stringb/tree/master/R)
+    than [fork the
+    package](https://help.github.com/articles/fork-a-repo/) and later on
+    make a [pull
+    request](https://help.github.com/articles/using-pull-requests/))
+  - **feature suggestions** (file an
+    [issue](https://guides.github.com/features/issues/) describing the
+    idea, why this is important, possible alternative solutions and an
+    example)
+  - **general discussion** of approach and or implementation (file an
+    [issue](https://guides.github.com/features/issues/))
+  - implementation **improvements** (file an
+    [issue](https://guides.github.com/features/issues/) naming whats to
+    be improved, why and how)
 
 <br><br> **Example Usage**
 
-<br><br> *... starting up ...*
+<br><br> *… starting up …*
 
 ``` r
 library(rtext)
 ```
 
-<br><br>*... creating a text object ...*
+<br><br>*… creating a text object …*
 
 ``` r
 # initialize (with text or file)
@@ -100,7 +173,7 @@ quote <- rtext$new(text = quote_text)
 
     ## rtext : initializing
 
-<br><br>*... setting and getting data ...*
+<br><br>*… setting and getting data …*
 
 ``` r
 # add some data
@@ -115,7 +188,7 @@ quote$char_data_get()
     ## 1  1    O  TRUE   NA
     ## 2 85    .    NA TRUE
 
-<br><br>*... text transformation and data update ...*
+<br><br>*… text transformation and data update …*
 
 ``` r
 # transform text
@@ -135,7 +208,7 @@ quote$char_data_get()
     ## 1   1    O  TRUE   NA
     ## 2 109    .    NA TRUE
 
-<br><br>*... using regular expression for setting data ...*
+<br><br>*… using regular expression for setting data …*
 
 ``` r
 # do some convenience coding (via regular expressions)
@@ -160,7 +233,8 @@ quote$char_data_get()
     ## 13  86    g    NA   NA        dog
     ## 14 109    .    NA TRUE       <NA>
 
-<br><br>*... data aggregation via regex ...*
+<br><br>*… data aggregation via regex
+…*
 
 ``` r
 quote$tokenize_data_regex(split="(dog)|(friend)", non_token = TRUE, join = "full")
@@ -175,7 +249,7 @@ quote$tokenize_data_regex(split="(dog)|(friend)", non_token = TRUE, join = "full
     ## 6       6   84  86                                     dog    FALSE    NA   NA        dog
     ## 7       7   87 109                  it's too dark to read.     TRUE    NA TRUE       <NA>
 
-<br><br>*... data aggregation by words ...*
+<br><br>*… data aggregation by words …*
 
 ``` r
 quote$tokenize_data_words(non_token = TRUE, join="full")
@@ -233,7 +307,8 @@ quote$tokenize_data_words(non_token = TRUE, join="full")
     ## 49      49  105 108      read     TRUE    NA   NA       <NA>
     ## 50      50  109 109         .    FALSE    NA TRUE       <NA>
 
-<br><br>*... data aggregation by lines ...*
+<br><br>*… data aggregation by lines
+    …*
 
 ``` r
 quote$tokenize_data_lines()
@@ -246,15 +321,16 @@ quote$tokenize_data_lines()
     ## 1   NA     friend
     ## 2   NA        dog
 
-<br><br>*... text plotting with data highlighting ...*
+<br><br>*… text plotting with data highlighting …*
 
 ``` r
 plot(quote, "dog_friend")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-19-1.png)
+![plot
+1](https://raw.githubusercontent.com/petermeissner/rtext/master/README_files/figure-markdown_github/unnamed-chunk-19-1.png)
 
-<br><br>*... adding further data to the plot ...*
+<br><br>*… adding further data to the plot …*
 
 ``` r
 plot(quote, "dog_friend")
@@ -262,4 +338,5 @@ plot(quote, "first", col="steelblue", add=TRUE)
 plot(quote, "last", col="steelblue", add=TRUE)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-20-1.png)
+![plot
+2](https://raw.githubusercontent.com/petermeissner/rtext/master/README_files/figure-markdown_github/unnamed-chunk-20-1.png)

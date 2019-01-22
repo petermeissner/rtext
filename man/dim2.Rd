@@ -13,4 +13,3 @@ dim2(x)
 get first dimension or length of object
 }
 \keyword{internal}
-

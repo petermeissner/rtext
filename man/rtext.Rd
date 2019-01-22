@@ -57,6 +57,7 @@ needing the data structure provided by rtext_base - independent.
    }
 }
 }
+
 \examples{
 
 # initialize (with text or file)
@@ -102,4 +103,3 @@ plot(quote, "last", col="steelblue", add=TRUE)
 
 }
 \keyword{data}
-

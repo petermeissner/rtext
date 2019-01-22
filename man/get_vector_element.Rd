@@ -19,4 +19,3 @@ get_vector_element(vec, length = NULL, from = NULL, to = NULL)
 function that extracts elements from vector
 }
 \keyword{internal}
-

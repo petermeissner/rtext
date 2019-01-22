@@ -16,4 +16,3 @@ modus(x, multimodal = FALSE, warn = TRUE)
 \description{
 function giving back the mode
 }
-

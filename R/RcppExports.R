@@ -10,6 +10,6 @@
 #' @param y2 a vector of type numeric; last element of span
 #' @keywords internal
 which_token_worker <- function(x, y1, y2) {
-    .Call('rtext_which_token_worker', PACKAGE = 'rtext', x, y1, y2)
+    .Call('_rtext_which_token_worker', PACKAGE = 'rtext', x, y1, y2)
 }
 

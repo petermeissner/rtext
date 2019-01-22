@@ -23,4 +23,3 @@ should be inverted.}
 function that shifts vector values to right or left
 }
 \keyword{internal}
-

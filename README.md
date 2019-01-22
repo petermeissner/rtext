@@ -12,7 +12,7 @@ version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/
 
 <br><br> **Version**
 
-0.1.20 <br> 2016-11-01 (last change to R folder)
+0.1.21 <br> 2019-01-20 (last change to R folder)
 
 <br><br> **Description**
 
@@ -42,7 +42,7 @@ MIT + file LICENSE <br>Peter Meissner \[aut, cre\], Ulrich Sieberer
 
 <br><br> **Citation**
 
-Meißner P (2016). *rtext*. R package version 0.1.20, \<URL:
+Meißner P (2019). *rtext*. R package version 0.1.21, \<URL:
 <https://github.com/petermeissner/rtext>\>.
 
 Sieberer U, Meißner P, Keh J, Müller W (2016). “Mapping and Explaining
@@ -56,9 +56,9 @@ bibtex=TRUE)’, ‘toBibtex(.)’, or set ‘options(citation.bibtex.max=999)�
 
 <br><br> **BibTex for citing**
 
-<code style="white-space:normal;"> @Manual{Meissner2016, title =
-{rtext}, author = {Peter Meißner}, year = {2016}, note = {R package
-version 0.1.20}, url = {<https://github.com/petermeissner/rtext>}, }
+<code style="white-space:normal;"> @Manual{Meissner2019, title =
+{rtext}, author = {Peter Meißner}, year = {2019}, note = {R package
+version 0.1.21}, url = {<https://github.com/petermeissner/rtext>}, }
 
 @Article{Sieberer2016, title = {Mapping and Explaining Parliamentary
 Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer

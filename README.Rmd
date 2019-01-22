@@ -11,11 +11,11 @@ output: github_document
 
 
 
-```{r, include=FALSE}
+```{r, include=FALSE, cache=FALSE}
 options("width"=108)
 pkg  <- basename(getwd())
 tmp  <- packageDescription(pkg)
-date <- as.Date(file.info("R")$mtime)
+date <- max(as.Date(file.info(list.files("R/", full.names = TRUE))$mtime) )
 ```
 
 ```{r, results='asis', echo=FALSE}

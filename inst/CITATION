@@ -9,7 +9,7 @@ c(
     year = year,
     note = note,
     url = "https://github.com/petermeissner/rtext",
-    key = "Meissner2016"
+    key = "Meissner2019"
   ),
   bibentry(
     bibtype = "Article",

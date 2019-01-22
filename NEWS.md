@@ -4,6 +4,21 @@ NEWS rtext
 
 
 
+version 0.1.21 // 2019-01-21 ...
+
+* BUGFIXES
+    - if no file was given saving text object would result in saving to a file named "NA"
+
+* FEATURE
+    
+
+* DEV
+    - CRAN compliance: minor adjustemnts in README.md to allow CRAN rendering it 
+    
+    
+    
+
+
 version 0.1.20 // 2016-11-01 ...
 
 * BUGFIXES

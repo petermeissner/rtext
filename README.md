@@ -140,7 +140,7 @@ Contributions are very much welcome, e.g. in the form of:
     make a [pull
     request](https://help.github.com/articles/using-pull-requests/))
   - **test writing** (have a look at the [test
-    coverage](https://codecov.io/gh/petermeissner/stringb/tree/master/R)
+    coverage](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
     than [fork the
     package](https://help.github.com/articles/fork-a-repo/) and later on
     make a [pull

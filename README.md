@@ -7,6 +7,8 @@ Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://tr
 [![CRAN
 version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/petermeissner/rtext?branch=master&svg=true)](https://ci.appveyor.com/project/petermeissner/rtext)
 
 # R6 Objects for Text and Data
 

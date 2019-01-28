@@ -7,7 +7,12 @@ output: github_document
 **Status**
 
 
-[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext) [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R) [![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext) ![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
+[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/petermeissner/rtext?branch=master&svg=true)](https://ci.appveyor.com/project/petermeissner/rtext)
+[![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
+[![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/rtext)
 
 
 

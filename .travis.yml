@@ -2,11 +2,19 @@
 
 language: r
 warnings_are_errors: true
-sudo: required
-
-r_github_packages:
-  - jimhester/covr
+sudo: false
+cache: packages
 
 after_success:
   - Rscript -e 'covr::codecov()'
 
+notifications:
+  email:
+    on_success: retep.meissner@gmail.com
+    on_failure: retep.meissner@gmail.com
+
+env:
+  matrix:
+    - RVERSION=oldrel
+    - RVERSION=release
+    - RVERSION=devel

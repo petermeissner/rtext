@@ -199,7 +199,7 @@ R6_rtext_extended <-
       },
 
       #### [ warning() ] #### ..................................................
-      #      post a warning (if vwarning is set to TRUE)
+      #      post a warning (if warning is set to TRUE)
       warning = function(x, ...){
         xname <- as.character(as.list(match.call()))[2]
         if(self$options$warning){

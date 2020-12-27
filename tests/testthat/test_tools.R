@@ -75,12 +75,20 @@ test_that("classes works", {
 context("tools dp_arrange")
 
 test_that("dp_arrange works", {
+
   expect_identical({
     rtext:::dp_arrange(data.frame(i=10:9))
   }, data.frame(i=10:9))
+
   expect_identical({
     rtext:::dp_arrange(data.frame(i=10:9), i)
-  }, data.frame(i=9:10))
+  }, {
+    x <- data.frame(i=9:10);
+    row.names(x) <- 2:1;
+    x
+    }
+  )
+
   expect_identical(
     {
       rtext:::dp_arrange(data.frame(i=10:9, b=1), i)

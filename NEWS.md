@@ -4,6 +4,13 @@ NEWS rtext
 
 
 
+version 0.1.21 // 2020-12-27 ...
+
+* BUGFIXES
+  - dp_arrange() used undefined behaviour of order() when used on data.frames
+
+
+
 version 0.1.21 // 2019-01-21 ...
 
 * BUGFIXES

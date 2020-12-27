@@ -1,4 +1,16 @@
-#' function to write csv files with UTF-8 characters (even under Windwos)
+order <- function(...){
+
+  if ( "data.frame" %in% unlist(lapply(list(...), class)) ) {
+    warning("order called");
+    print(traceback())
+  }
+
+
+  base::order(...)
+}
+
+
+#' function to write csv files with UTF-8 characters (even under Windows)
 #' @param df data frame to be written to file
 #' @param file file name / path where to put the data
 #' @keywords internal
@@ -404,15 +416,10 @@ classes <- function(x){
 dp_arrange <- function(df, ...){
   sorters    <- as.character(as.list(match.call()))
   if( length(sorters)>2 ){
-    sorters    <- sorters[-c(1:2)]
-    sorters    <- paste0("df['",sorters,"']", collapse = ", ")
-    order_call <- paste0("order(",sorters,")")
-    res        <- df[eval(parse(text=order_call)), ]
-    if( is.data.frame(df) & !is.data.frame(res) ){
-      res <- as.data.frame(res)
-      names(res) <- names(df)
-    }
-    return(res)
+    sorters     <- sorters[-c(1:2)]
+    sort_list   <- unname(as.list(df[, sorters, drop=FALSE]))
+    order_index <- do.call(order, sort_list)
+    return(df[order_index, , drop=FALSE])
   }else{
     return(df)
   }

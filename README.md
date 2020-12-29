@@ -124,9 +124,8 @@ Contributions are very much welcome, e.g. in the form of:
     or [fork the package](https://help.github.com/articles/fork-a-repo/)
     and later on make a [pull
     request](https://help.github.com/articles/using-pull-requests/);
-    note, that the package use
-    [roxygen2](https://r-pkgs.had.co.nz/man.html) for easing
-    documentation)
+    note, that the package use [roxygen2](https://r-pkgs.org/man.html)
+    for easing documentation)
   - **writing example** (e.g. [edit the respective files directly on
     Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/)
     or [fork the package](https://help.github.com/articles/fork-a-repo/)

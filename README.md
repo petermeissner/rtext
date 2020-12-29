@@ -2,7 +2,7 @@
 <br><br> **Status**
 
 [![Travis-CI Build
-Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
+Status](https://api.travis-ci.com/petermeissner/rtext.svg?branch=master)](https://www.travis-ci.com/github/petermeissner/rtext)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/petermeissner/rtext?branch=master&svg=true)](https://ci.appveyor.com/project/petermeissner/rtext)
 [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
@@ -15,7 +15,7 @@ version](https://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org
 
 <br><br> **Version**
 
-0.1.22 <br> 2020-12-27 (last change to R folder)
+0.1.22 <br> 2020-12-29 (last change to R folder)
 
 <br><br> **Description**
 
@@ -52,7 +52,7 @@ Sieberer U, Meißner P, Keh J, Müller W (2016). “Mapping and Explaining
 Parliamentary Rule Changes in Europe: A Research Program.” *Legislative
 Studies Quarterly*, *41*(1), 61-88. ISSN 1939-9162, doi:
 10.1111/lsq.12106 (URL: <https://doi.org/10.1111/lsq.12106>), \<URL:
-<http://dx.doi.org/10.1111/lsq.12106>\>.
+<https://doi.org/10.1111/lsq.12106>\>.
 
 To see these entries in BibTeX format, use ‘print(<citation>,
 bibtex=TRUE)’, ‘toBibtex(.)’, or set ‘options(citation.bibtex.max=999)’.
@@ -67,7 +67,7 @@ version 0.1.22}, url = {<https://github.com/petermeissner/rtext>}, }
 Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer
 and Peter Meißner and Julia F. Keh and Wolfgang C. Müller}, journal =
 {Legislative Studies Quarterly}, volume = {41}, number = {1}, issn =
-{1939-9162}, url = {<http://dx.doi.org/10.1111/lsq.12106>}, doi =
+{1939-9162}, url = {<https://doi.org/10.1111/lsq.12106>}, doi =
 {10.1111/lsq.12106}, pages = {61–88}, year = {2016}, } </code>
 
 <br><br> **Installation**
@@ -132,9 +132,8 @@ Contributions are very much welcome, e.g. in the form of:
     or [fork the package](https://help.github.com/articles/fork-a-repo/)
     and later on make a [pull
     request](https://help.github.com/articles/using-pull-requests/);
-    note, that the package use
-    [roxygen2](http://r-pkgs.had.co.nz/man.html) for easing
-    documentation)
+    note, that the package use [roxygen2](https://r-pkgs.org/man.html)
+    for easing documentation)
   - **vignette writing** (file an
     [issue](https://guides.github.com/features/issues/) first so that we
     can discuss htings than [fork the

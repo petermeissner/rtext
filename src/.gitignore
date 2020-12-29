@@ -2,3 +2,4 @@ RcppExports.o
 rtext.dll
 rtext.so
 which_token_worker.o
+init.o

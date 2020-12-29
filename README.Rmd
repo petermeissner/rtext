@@ -7,10 +7,10 @@ output: github_document
 **Status**
 
 
-[![Travis-CI Build Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
+[![Travis-CI Build Status](https://api.travis-ci.com/petermeissner/rtext.svg?branch=master)](https://www.travis-ci.com/github/petermeissner/rtext)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/petermeissner/rtext?branch=master&svg=true)](https://ci.appveyor.com/project/petermeissner/rtext)
 [![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
-[![CRAN version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
+[![CRAN version](https://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/rtext)
 
@@ -49,7 +49,7 @@ cat(tmp$Description)
 <br><br>
 **Funding**
 
-This software was created as part of the "Institutional Design in Western European Democracies" research project, funded by [DFG (Deutsche Forschungsgemeinschaft)](http://gepris.dfg.de/gepris/projekt/146229116), lead by [Ulrich Sieberer](https://scholar.google.com/citations?user=Q_ImhbkAAAAJ) and based at [University Konstanz](https://www.uni-konstanz.de/). 
+This software was created as part of the "Institutional Design in Western European Democracies" research project, funded by [DFG (Deutsche Forschungsgemeinschaft)](https://gepris.dfg.de/gepris/projekt/146229116), lead by [Ulrich Sieberer](https://scholar.google.com/citations?user=Q_ImhbkAAAAJ) and based at [University Konstanz](https://www.uni-konstanz.de/). 
 
 <br><br>
 **License**
@@ -118,14 +118,14 @@ objects("package:rtext")
 <br><br>
 **Contribution**
 
-Note, that this package uses a Contributor Code of Conduct. By participating in this project you agree to abide by its terms: http://contributor-covenant.org/version/1/0/0/ (basically this should be a place were people get along with each other respectful and nice because it's simply more fun that way for everybody)
+Note, that this package uses a Contributor Code of Conduct. By participating in this project you agree to abide by its terms: https://contributor-covenant.org/version/1/0/0/ (basically this should be a place were people get along with each other respectful and nice because it's simply more fun that way for everybody)
 
 
 Contributions are very much welcome, e.g. in the form of:
 
 - **typo fixing** ([edit file directly on Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/))
-- **bug reporting** (file an [issue](https://guides.github.com/features/issues/) - after having searched if the issue came up before - as - if possible - [minimal reproducable example](http://stackoverflow.com/help/mcve))
-- **extending help files** (e.g. [edit the respective files directly on Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/) or [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/); note, that the package use [roxygen2](http://r-pkgs.had.co.nz/man.html) for easing documentation)
+- **bug reporting** (file an [issue](https://guides.github.com/features/issues/) - after having searched if the issue came up before - as - if possible - [minimal reproducable example](https://stackoverflow.com/help/mcve))
+- **extending help files** (e.g. [edit the respective files directly on Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/) or [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/); note, that the package use [roxygen2](https://r-pkgs.had.co.nz/man.html) for easing documentation)
 - **writing example** (e.g. [edit the respective files directly on Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/) or [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/); note, that the package use [roxygen2](http://r-pkgs.had.co.nz/man.html) for easing documentation)
 - **vignette writing** (file an [issue](https://guides.github.com/features/issues/) first so that we can discuss htings than [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/))
 - **test writing** (have a look at the [test coverage](https://codecov.io/gh/petermeissner/rtext/tree/master/R) than [fork the package](https://help.github.com/articles/fork-a-repo/) and later on make a [pull request](https://help.github.com/articles/using-pull-requests/))

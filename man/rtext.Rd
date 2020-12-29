@@ -4,14 +4,15 @@
 \name{rtext}
 \alias{rtext}
 \title{R6 class - linking text and data}
-\format{An \code{\link{R6Class}} generator object.}
-\usage{
-rtext
+\format{
+An \code{\link{R6Class}} generator object.
 }
 \value{
 Object of \code{\link{R6Class}}
 }
 \description{
+R6 class - linking text and data
+
 R6 class - linking text and data
 }
 \section{The rtext class family}{
@@ -73,7 +74,7 @@ quote$char_data_set("last", quote$char_length(), TRUE)
 quote$char_data_get()
 
 # transform text
-quote$char_add("[this is an insertion] \\n", 47)
+quote$char_add("[this is an insertion] \n", 47)
 
 # get the data again (see, the data moved along with the text)
 quote$text_get()
@@ -103,3 +104,65 @@ plot(quote, "last", col="steelblue", add=TRUE)
 
 }
 \keyword{data}
+\section{Super classes}{
+\code{\link[rtext:R6_rtext_extended]{rtext::R6_rtext_extended}} -> \code{\link[rtext:rtext_base]{rtext::rtext_base}} -> \code{\link[rtext:rtext_loadsave]{rtext::rtext_loadsave}} -> \code{\link[rtext:rtext_export]{rtext::rtext_export}} -> \code{\link[rtext:rtext_tokenize]{rtext::rtext_tokenize}} -> \code{rtext}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-clone}{\code{rtext$clone()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="R6_rtext_extended" data-id="debug">}\href{../../rtext/html/R6_rtext_extended.html#method-debug}{\code{rtext::R6_rtext_extended$debug()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="R6_rtext_extended" data-id="get">}\href{../../rtext/html/R6_rtext_extended.html#method-get}{\code{rtext::R6_rtext_extended$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="R6_rtext_extended" data-id="ls">}\href{../../rtext/html/R6_rtext_extended.html#method-ls}{\code{rtext::R6_rtext_extended$ls()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="R6_rtext_extended" data-id="message">}\href{../../rtext/html/R6_rtext_extended.html#method-message}{\code{rtext::R6_rtext_extended$message()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="R6_rtext_extended" data-id="warning">}\href{../../rtext/html/R6_rtext_extended.html#method-warning}{\code{rtext::R6_rtext_extended$warning()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="char_add">}\href{../../rtext/html/rtext_base.html#method-char_add}{\code{rtext::rtext_base$char_add()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="char_data_get">}\href{../../rtext/html/rtext_base.html#method-char_data_get}{\code{rtext::rtext_base$char_data_get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="char_data_set">}\href{../../rtext/html/rtext_base.html#method-char_data_set}{\code{rtext::rtext_base$char_data_set()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="char_data_set_regex">}\href{../../rtext/html/rtext_base.html#method-char_data_set_regex}{\code{rtext::rtext_base$char_data_set_regex()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="char_delete">}\href{../../rtext/html/rtext_base.html#method-char_delete}{\code{rtext::rtext_base$char_delete()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="char_get">}\href{../../rtext/html/rtext_base.html#method-char_get}{\code{rtext::rtext_base$char_get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="char_length">}\href{../../rtext/html/rtext_base.html#method-char_length}{\code{rtext::rtext_base$char_length()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="char_replace">}\href{../../rtext/html/rtext_base.html#method-char_replace}{\code{rtext::rtext_base$char_replace()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="hash_get">}\href{../../rtext/html/rtext_base.html#method-hash_get}{\code{rtext::rtext_base$hash_get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="info">}\href{../../rtext/html/rtext_base.html#method-info}{\code{rtext::rtext_base$info()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="initialize">}\href{../../rtext/html/rtext_base.html#method-initialize}{\code{rtext::rtext_base$initialize()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="text_get">}\href{../../rtext/html/rtext_base.html#method-text_get}{\code{rtext::rtext_base$text_get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="text_get_lines">}\href{../../rtext/html/rtext_base.html#method-text_get_lines}{\code{rtext::rtext_base$text_get_lines()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_base" data-id="text_show">}\href{../../rtext/html/rtext_base.html#method-text_show}{\code{rtext::rtext_base$text_show()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_loadsave" data-id="load">}\href{../../rtext/html/rtext_loadsave.html#method-load}{\code{rtext::rtext_loadsave$load()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_loadsave" data-id="save">}\href{../../rtext/html/rtext_loadsave.html#method-save}{\code{rtext::rtext_loadsave$save()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_export" data-id="export_csv">}\href{../../rtext/html/rtext_export.html#method-export_csv}{\code{rtext::rtext_export$export_csv()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_export" data-id="export_sqlite">}\href{../../rtext/html/rtext_export.html#method-export_sqlite}{\code{rtext::rtext_export$export_sqlite()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_export" data-id="import_csv">}\href{../../rtext/html/rtext_export.html#method-import_csv}{\code{rtext::rtext_export$import_csv()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_export" data-id="import_sqlite">}\href{../../rtext/html/rtext_export.html#method-import_sqlite}{\code{rtext::rtext_export$import_sqlite()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_tokenize" data-id="tokenize_data_lines">}\href{../../rtext/html/rtext_tokenize.html#method-tokenize_data_lines}{\code{rtext::rtext_tokenize$tokenize_data_lines()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_tokenize" data-id="tokenize_data_regex">}\href{../../rtext/html/rtext_tokenize.html#method-tokenize_data_regex}{\code{rtext::rtext_tokenize$tokenize_data_regex()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_tokenize" data-id="tokenize_data_sequences">}\href{../../rtext/html/rtext_tokenize.html#method-tokenize_data_sequences}{\code{rtext::rtext_tokenize$tokenize_data_sequences()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="rtext" data-topic="rtext_tokenize" data-id="tokenize_data_words">}\href{../../rtext/html/rtext_tokenize.html#method-tokenize_data_words}{\code{rtext::rtext_tokenize$tokenize_data_words()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{rtext$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

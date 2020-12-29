@@ -1,33 +1,36 @@
 
 ## Your complaints 
 
-- Please see the problems shown on <https://cran.r-project.org/web/checks/check_results_rtext.html>.
-- Dear Peter,
 
-I found that rtext package contains file named NA (in 
-rtext/tests/testthat/NA). The file is accidentally created by test 
-test_rtext_loadsave.R#6, this part
+You may have seen that when running your package code with current
+r-devel, one gets warnings about
 
-context("rtext_loadsave save") # 
-===============================================
+  cannot xtfrm data frames
 
-     test_that("rtext save", {
-       expect_error({
-         dings <- rtext_loadsave$new(
-           text="1234567890"  <============ no save_file given, the 
-default is NA
-         )
-         dings$save()
+This is because you call order() on a data frame with k rows and 1
+column which (currently) returns something of length k.
 
-which calls later into save(file=NA_character_), which creates the file 
-named "NA". This behavior of base R is accidental (and indeed 
-undocumented) and I am now changing it to report an error, so your 
-package will start failing the tests.
+Now,
 
-I've run all CRAN+BIOC package checks to see which packages fail with 
-the change, and yours is the only one. Could you please remove the test 
-(and possibly also the accidentally left NA file) from the package?
+? sort says
 
+     Sort (or _order_) a vector or factor (partially) into ascending or
+     descending order.  For ordering along more than one variable,
+     e.g., for sorting data frames, see ‘order’
+
+where in turn ? order says
+
+     ‘order’ returns a permutation which rearranges its first argument
+     into ascending or descending order, breaking ties by further
+     arguments.  ‘sort.list’ does the same, using only one argument.
+     See the examples for how to use these functions to sort data
+     frames, etc.
+
+and then the examples clearly explain to use do.call() for data
+frames, ideally also unnaming to avoid name clashes.
+
+Can you please change your package code to no longer call order() on
+data frames?
 
 
 ## My Actions
@@ -37,17 +40,7 @@ the change, and yours is the only one. Could you please remove the test
 
 ## Test environments
 
-- Win devel: https://win-builder.r-project.org/nJ623V568zUF/00check.log
-- ok
+- Win devel, release via WinBuilder
 
-- Win release: https://win-builder.r-project.org/35fxSv3a2foF/00check.log
-- I get errors from time to time - every second build, one of two different errors - but not always and not always the same error
-- According to Email-conversation with Kurt Hornik I should fix the bug that was caused by a change in R-devel and submit and later on fix those other bugs
-
-
-- Win old: https://win-builder.r-project.org/AM3vOgT542Mq/00check.log
-- ok
-
-- Ubuntu Linux 16.04 LTS, R-release, GCC: https://travis-ci.org/petermeissner/rtext/builds
-- ok
+- Ubuntu Linux 18.04 LTS, R-release, https://www.travis-ci.com/github/petermeissner/rtext
 

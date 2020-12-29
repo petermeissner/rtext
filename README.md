@@ -3,18 +3,19 @@
 
 [![Travis-CI Build
 Status](https://travis-ci.org/petermeissner/rtext.svg?branch=master)](https://travis-ci.org/petermeissner/rtext)
-[![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
-[![CRAN
-version](http://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
-![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/petermeissner/rtext?branch=master&svg=true)](https://ci.appveyor.com/project/petermeissner/rtext)
+[![codecov](https://codecov.io/gh/petermeissner/rtext/branch/master/graph/badge.svg)](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
+[![CRAN
+version](https://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org/package=rtext)
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rtext)
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/rtext)
 
 # R6 Objects for Text and Data
 
 <br><br> **Version**
 
-0.1.21 <br> 2019-01-20 (last change to R folder)
+0.1.22 <br> 2020-12-27 (last change to R folder)
 
 <br><br> **Description**
 
@@ -32,7 +33,7 @@ for R based graphical text editors or text coding GUIs.
 
 This software was created as part of the “Institutional Design in
 Western European Democracies” research project, funded by [DFG (Deutsche
-Forschungsgemeinschaft)](http://gepris.dfg.de/gepris/projekt/146229116),
+Forschungsgemeinschaft)](https://gepris.dfg.de/gepris/projekt/146229116),
 lead by [Ulrich
 Sieberer](https://scholar.google.com/citations?user=Q_ImhbkAAAAJ) and
 based at [University Konstanz](https://www.uni-konstanz.de/).
@@ -44,13 +45,13 @@ MIT + file LICENSE <br>Peter Meissner \[aut, cre\], Ulrich Sieberer
 
 <br><br> **Citation**
 
-Meißner P (2019). *rtext*. R package version 0.1.21, \<URL:
+Meißner P (2020). *rtext*. R package version 0.1.22, \<URL:
 <https://github.com/petermeissner/rtext>\>.
 
 Sieberer U, Meißner P, Keh J, Müller W (2016). “Mapping and Explaining
 Parliamentary Rule Changes in Europe: A Research Program.” *Legislative
 Studies Quarterly*, *41*(1), 61-88. ISSN 1939-9162, doi:
-10.1111/lsq.12106 (URL: <http://doi.org/10.1111/lsq.12106>), \<URL:
+10.1111/lsq.12106 (URL: <https://doi.org/10.1111/lsq.12106>), \<URL:
 <http://dx.doi.org/10.1111/lsq.12106>\>.
 
 To see these entries in BibTeX format, use ‘print(<citation>,
@@ -59,8 +60,8 @@ bibtex=TRUE)’, ‘toBibtex(.)’, or set ‘options(citation.bibtex.max=999)�
 <br><br> **BibTex for citing**
 
 <code style="white-space:normal;"> @Manual{Meissner2019, title =
-{rtext}, author = {Peter Meißner}, year = {2019}, note = {R package
-version 0.1.21}, url = {<https://github.com/petermeissner/rtext>}, }
+{rtext}, author = {Peter Meißner}, year = {2020}, note = {R package
+version 0.1.22}, url = {<https://github.com/petermeissner/rtext>}, }
 
 @Article{Sieberer2016, title = {Mapping and Explaining Parliamentary
 Rule Changes in Europe: A Research Program}, author = {Ulrich Sieberer
@@ -86,8 +87,7 @@ install.packages( "rtext", repos = c(standard_repos, "https://petermeissner.gith
 library(rtext)
 ```
 
-<br><br> **Package
-    Contents**
+<br><br> **Package Contents**
 
 ``` r
 library(rtext)
@@ -106,7 +106,7 @@ objects("package:rtext")
 
 Note, that this package uses a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms:
-<http://contributor-covenant.org/version/1/0/0/> (basically this should
+<https://contributor-covenant.org/version/1/0/0/> (basically this should
 be a place were people get along with each other respectful and nice
 because it’s simply more fun that way for everybody)
 
@@ -117,7 +117,7 @@ Contributions are very much welcome, e.g. in the form of:
   - **bug reporting** (file an
     [issue](https://guides.github.com/features/issues/) - after having
     searched if the issue came up before - as - if possible - [minimal
-    reproducable example](http://stackoverflow.com/help/mcve))
+    reproducable example](https://stackoverflow.com/help/mcve))
   - **extending help files** (e.g. [edit the respective files directly
     on
     Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/)
@@ -125,7 +125,7 @@ Contributions are very much welcome, e.g. in the form of:
     and later on make a [pull
     request](https://help.github.com/articles/using-pull-requests/);
     note, that the package use
-    [roxygen2](http://r-pkgs.had.co.nz/man.html) for easing
+    [roxygen2](https://r-pkgs.had.co.nz/man.html) for easing
     documentation)
   - **writing example** (e.g. [edit the respective files directly on
     Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/)
@@ -235,8 +235,7 @@ quote$char_data_get()
     ## 13  86    g    NA   NA        dog
     ## 14 109    .    NA TRUE       <NA>
 
-<br><br>*… data aggregation via regex
-…*
+<br><br>*… data aggregation via regex …*
 
 ``` r
 quote$tokenize_data_regex(split="(dog)|(friend)", non_token = TRUE, join = "full")
@@ -309,8 +308,7 @@ quote$tokenize_data_words(non_token = TRUE, join="full")
     ## 49      49  105 108      read     TRUE    NA   NA       <NA>
     ## 50      50  109 109         .    FALSE    NA TRUE       <NA>
 
-<br><br>*… data aggregation by lines
-    …*
+<br><br>*… data aggregation by lines …*
 
 ``` r
 quote$tokenize_data_lines()

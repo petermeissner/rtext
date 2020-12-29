@@ -2,7 +2,7 @@
 % Please edit documentation in R/tools.R
 \name{write_utf8_csv}
 \alias{write_utf8_csv}
-\title{function to write csv files with UTF-8 characters (even under Windwos)}
+\title{function to write csv files with UTF-8 characters (even under Windows)}
 \usage{
 write_utf8_csv(df, file)
 }
@@ -12,6 +12,6 @@ write_utf8_csv(df, file)
 \item{file}{file name / path where to put the data}
 }
 \description{
-function to write csv files with UTF-8 characters (even under Windwos)
+function to write csv files with UTF-8 characters (even under Windows)
 }
 \keyword{internal}

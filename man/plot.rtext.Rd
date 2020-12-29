@@ -4,8 +4,7 @@
 \alias{plot.rtext}
 \title{function for plotting rtext}
 \usage{
-\method{plot}{rtext}(x, y = NULL, lines = TRUE, col = "#ED4C4CA0",
-  add = FALSE, ...)
+\method{plot}{rtext}(x, y = NULL, lines = TRUE, col = "#ED4C4CA0", add = FALSE, ...)
 }
 \arguments{
 \item{x}{object of class rtext}

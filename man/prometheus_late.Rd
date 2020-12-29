@@ -4,7 +4,9 @@
 \name{prometheus_late}
 \alias{prometheus_late}
 \title{prometheus late version}
-\format{An object of class \code{character} of length 1.}
+\format{
+An object of class \code{character} of length 1.
+}
 \source{
 https://de.wikisource.org/w/index.php?title=Prometheus_(Gedicht,_sp%C3%A4te_Fassung)&oldid=1479587
 }

@@ -1,0 +1,17 @@
+^appveyor\.yml$
+^CRAN-RELEASE$
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.travis\.yml$
+autotest.Rexec
+README.html
+README.Rmd
+todo.txt
+dev.R
+benchmarks/*
+meta.R
+^.*\.pdf$
+README_files
+test.db
+^CONDUCT\.md$
+^cran-comments\.md$

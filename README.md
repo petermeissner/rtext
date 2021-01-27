@@ -15,7 +15,7 @@ version](https://www.r-pkg.org/badges/version/rtext)](https://cran.r-project.org
 
 <br><br> **Version**
 
-0.1.22 <br> 2020-12-29 (last change to R folder)
+0.1.22 <br> 2021-01-27 (last change to R folder)
 
 <br><br> **Description**
 
@@ -45,14 +45,14 @@ MIT + file LICENSE <br>Peter Meissner \[aut, cre\], Ulrich Sieberer
 
 <br><br> **Citation**
 
-Meißner P (2020). *rtext*. R package version 0.1.22, \<URL:
-<https://github.com/petermeissner/rtext>\>.
+Meißner P (2020). *rtext*. R package version 0.1.22, &lt;URL:
+<https://github.com/petermeissner/rtext>&gt;.
 
 Sieberer U, Meißner P, Keh J, Müller W (2016). “Mapping and Explaining
 Parliamentary Rule Changes in Europe: A Research Program.” *Legislative
 Studies Quarterly*, *41*(1), 61-88. ISSN 1939-9162, doi:
-10.1111/lsq.12106 (URL: <https://doi.org/10.1111/lsq.12106>), \<URL:
-<https://doi.org/10.1111/lsq.12106>\>.
+10.1111/lsq.12106 (URL: <https://doi.org/10.1111/lsq.12106>), &lt;URL:
+<https://doi.org/10.1111/lsq.12106>&gt;.
 
 To see these entries in BibTeX format, use ‘print(<citation>,
 bibtex=TRUE)’, ‘toBibtex(.)’, or set ‘options(citation.bibtex.max=999)’.
@@ -112,13 +112,13 @@ because it’s simply more fun that way for everybody)
 
 Contributions are very much welcome, e.g. in the form of:
 
-  - **typo fixing** ([edit file directly on
+-   **typo fixing** ([edit file directly on
     Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/))
-  - **bug reporting** (file an
+-   **bug reporting** (file an
     [issue](https://guides.github.com/features/issues/) - after having
     searched if the issue came up before - as - if possible - [minimal
     reproducable example](https://stackoverflow.com/help/mcve))
-  - **extending help files** (e.g. [edit the respective files directly
+-   **extending help files** (e.g. [edit the respective files directly
     on
     Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/)
     or [fork the package](https://help.github.com/articles/fork-a-repo/)
@@ -126,32 +126,32 @@ Contributions are very much welcome, e.g. in the form of:
     request](https://help.github.com/articles/using-pull-requests/);
     note, that the package use [roxygen2](https://r-pkgs.org/man.html)
     for easing documentation)
-  - **writing example** (e.g. [edit the respective files directly on
+-   **writing example** (e.g. [edit the respective files directly on
     Github](https://help.github.com/articles/editing-files-in-another-user-s-repository/)
     or [fork the package](https://help.github.com/articles/fork-a-repo/)
     and later on make a [pull
     request](https://help.github.com/articles/using-pull-requests/);
     note, that the package use [roxygen2](https://r-pkgs.org/man.html)
     for easing documentation)
-  - **vignette writing** (file an
+-   **vignette writing** (file an
     [issue](https://guides.github.com/features/issues/) first so that we
     can discuss htings than [fork the
     package](https://help.github.com/articles/fork-a-repo/) and later on
     make a [pull
     request](https://help.github.com/articles/using-pull-requests/))
-  - **test writing** (have a look at the [test
+-   **test writing** (have a look at the [test
     coverage](https://codecov.io/gh/petermeissner/rtext/tree/master/R)
     than [fork the
     package](https://help.github.com/articles/fork-a-repo/) and later on
     make a [pull
     request](https://help.github.com/articles/using-pull-requests/))
-  - **feature suggestions** (file an
+-   **feature suggestions** (file an
     [issue](https://guides.github.com/features/issues/) describing the
     idea, why this is important, possible alternative solutions and an
     example)
-  - **general discussion** of approach and or implementation (file an
+-   **general discussion** of approach and or implementation (file an
     [issue](https://guides.github.com/features/issues/))
-  - implementation **improvements** (file an
+-   implementation **improvements** (file an
     [issue](https://guides.github.com/features/issues/) naming whats to
     be improved, why and how)
 

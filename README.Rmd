@@ -20,7 +20,7 @@ output: github_document
 options("width"=108)
 pkg  <- basename(getwd())
 tmp  <- packageDescription(pkg)
-date <- max(as.Date(file.info(list.files("R/", full.names = TRUE))$mtime) )
+date <- max(as.Date(file.info(list.files("r_package/R/", full.names = TRUE))$mtime) )
 ```
 
 ```{r, results='asis', echo=FALSE}

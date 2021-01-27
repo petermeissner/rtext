@@ -5,6 +5,8 @@ warnings_are_errors: true
 sudo: false
 cache: packages
 
+before_script: cd r_project
+
 after_success:
   - Rscript -e 'covr::codecov()'
 

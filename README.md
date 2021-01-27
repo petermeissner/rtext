@@ -79,14 +79,6 @@ install.packages("rtext")
 library(rtext)
 ```
 
-(stable) development version
-
-``` r
-standard_repos <- options("repos")$repos
-install.packages( "rtext", repos = c(standard_repos, "https://petermeissner.github.io/drat/"))
-library(rtext)
-```
-
 <br><br> **Package Contents**
 
 ``` r

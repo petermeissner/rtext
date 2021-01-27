@@ -91,14 +91,6 @@ library(rtext)
 
 
 
-(stable) development version
-
-```{r, eval=FALSE}
-standard_repos <- options("repos")$repos
-install.packages( "rtext", repos = c(standard_repos, "https://petermeissner.github.io/drat/"))
-library(rtext)
-```
-
 
 
 
